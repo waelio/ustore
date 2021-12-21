@@ -1,0 +1,38 @@
+{
+  "name": "universal-store",
+  "version": "1.0.0",
+  "description": "Universal Storage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waelio/universal-store.git"
+  },
+  "keywords": [
+    "Store",
+    "localStorage",
+    "cookies",
+    "vuex",
+    "redux",
+    "pinia",
+    "gun",
+    "store2"
+  ],
+  "author": "Peace Marshal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/waelio/universal-store/issues"
+  },
+  "homepage": "https://github.com/waelio/universal-store#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.1.1",
+    "rollup-plugin-bundle-size": "^1.0.3",
+    "rollup-plugin-ts": "^2.0.4",
+    "rollup-plugin-ts-treeshaking": "^1.0.2",
+    "rollup-plugin-typescript2": "^0.31.1"
+  }
+}
