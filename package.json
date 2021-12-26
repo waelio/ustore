@@ -33,6 +33,10 @@
     "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-ts": "^2.0.4",
     "rollup-plugin-ts-treeshaking": "^1.0.2",
-    "rollup-plugin-typescript2": "^0.31.1"
+    "rollup-plugin-typescript2": "^0.31.1",
+    "waelio-utils": "^3.1.30"
+  },
+  "dependencies": {
+    "gun": "^0.2020.1235"
   }
 }

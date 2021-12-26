@@ -1,40 +1,21 @@
-enum StoreTypes {
-  localStorage = 'localStorage',
-  sessionStorage = 'sessionStorage',
-  memory = 'memory',
-  vuex = 'vuex',
-  pinia = 'pinia',
-  gun = 'gun'
-}
-interface StoreOptions {
-  type: string;
-}
-interface GetItem {
-  (key: string): string | object | string[] | object[] | null;
-}
-interface SetItem {
-  (key: string, value: string | object | string[] | object[]): void;
-}
-interface IStoreClass {
-  StoreType: string;
-  get: GetItem;
-  set: SetItem;
-}
+import { localStorage } from "./vendors/localStorage";
+import { memoryStorage } from "./vendors/memoryStorage";
+import { sessionStorage } from "./vendors/sessionStorage";
 
 class IStore implements IStoreClass {
-  StoreType: string = 'localStorage';
+  public StoreType: string = 'localStorage';
   constructor(options: StoreOptions) {
-    this.getAssociatedStoreTypeFromAny(options);
+    console.log(this.getAssociatedStoreTypeFromAny(options)); /*?*/
   }
 
   getAssociatedStoreTypeFromString(store_type: string): StoreTypes {
     switch (true) {
       case store_type === StoreTypes.localStorage:
-        return StoreTypes.localStorage;
+        return localStorage
       case store_type === StoreTypes.sessionStorage:
-        return StoreTypes.sessionStorage;
+        return sessionStorage
       case store_type === StoreTypes.memory:
-        return StoreTypes.memory;
+        return memoryStorage
       case store_type === StoreTypes.vuex:
         return StoreTypes.vuex;
       case store_type === StoreTypes.pinia:
@@ -45,6 +26,7 @@ class IStore implements IStoreClass {
         return StoreTypes.localStorage;
     }
   }
+
   getAssociatedStoreTypeFromAny(storeType: any): StoreTypes {
     switch (typeof storeType) {
       case 'string':
@@ -70,4 +52,6 @@ class IStore implements IStoreClass {
     return;
   }
 }
-export class Store extends IStore { }
+var test = new IStore({ type: 'localStorage' });
+test; /*?*/
+export class Store extends IStore {}
