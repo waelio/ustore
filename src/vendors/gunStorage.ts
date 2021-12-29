@@ -9,12 +9,13 @@ const options: IGunConstructorOptions = {
 };
 
 // initialize gun
-export const gun = Gun(options);
+const gun = Gun(options);
+
 // gunStorage
-export const gunStorage: UniversalStoreClass = {
-  get: async (key: string) => {
+const gunStorage: UniversalStoreClass = {
+  get: (key: string) => {
     try {
-      gun.get(key).on((data, key) => {
+      return gun.get(key).on((data, key) => {
         console.log('data', data.key, data.value);
         console.log('key', key);
         return data;
@@ -43,3 +44,6 @@ export const gunStorage: UniversalStoreClass = {
       );
   }
 };
+
+export default gunStorage;
+export { gunStorage, gun };

@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "rollup -c",
-    "test": "jasmine-browser-runner runSpecs"
+    "test:jasmine": "jasmine-browser-runner runSpecs",
+    "test:jest": "jest"
   },
   "repository": {
     "type": "git",
@@ -37,16 +38,28 @@
   "bugs": {
     "url": "https://github.com/waelio/universal-store/issues"
   },
+  "jest": {
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ]
+  },
   "homepage": "https://github.com/waelio/universal-store#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.16.5",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.1.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-transform-require-context": "^0.1.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "jasmine": "^3.10.0",
     "jasmine-browser-runner": "^0.10.0",
     "jasmine-core": "^3.10.1",
+    "jest": "^27.4.5",
     "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-ts": "^2.0.4",
     "rollup-plugin-ts-treeshaking": "^1.0.2",
@@ -54,6 +67,8 @@
     "waelio-utils": "^3.1.30"
   },
   "dependencies": {
-    "gun": "^0.2020.1235"
+    "gun": "^0.2020.1235",
+    "pinia": "^2.0.9",
+    "vuex": "^3.6.2"
   }
 }

@@ -1,6 +1,7 @@
 /* globals describe, expect, it */
+import path from 'path';
 
-const { UniversalStore } = require('../src/index')
+import UniversalStore from `${path.dirname}/../src/index`
 
 console.log('UniversalStore', UniversalStore)
 
