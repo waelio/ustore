@@ -1,4 +1,4 @@
-import { UniversalStoreClass } from '../types';
+import { UniversalStoreClass } from '../.d';
 
 export const sessionStorage: UniversalStoreClass = {
   get: (key: string) => window.sessionStorage.getItem(key),

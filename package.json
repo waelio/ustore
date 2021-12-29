@@ -2,9 +2,11 @@
   "name": "universal-store",
   "version": "1.0.0",
   "description": "Universal Storage",
-  "main": "index.js",
+  "main": "src/index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c",
+    "test": "jasmine-browser-runner runSpecs"
   },
   "repository": {
     "type": "git",
@@ -20,16 +22,31 @@
     "gun",
     "store2"
   ],
-  "author": "Peace Marshal",
+  "directories": {
+    "src": "src",
+    "dist": "dist",
+    "test": "spec"
+  },
+  "sideEffects": false,
+  "author": {
+    "name": "Peace Marshals",
+    "email": "wahbehw@gmail.com",
+    "url": "https://github.com/waelio/universal-store#readme"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/waelio/universal-store/issues"
   },
   "homepage": "https://github.com/waelio/universal-store#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.16.5",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.1.1",
+    "babel-register": "^6.26.0",
+    "jasmine": "^3.10.0",
+    "jasmine-browser-runner": "^0.10.0",
+    "jasmine-core": "^3.10.1",
     "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-ts": "^2.0.4",
     "rollup-plugin-ts-treeshaking": "^1.0.2",

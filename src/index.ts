@@ -1,20 +1,41 @@
-import { localStorage } from './vendors/localStorage';
-import { sessionStorage } from './vendors/sessionStorage';
-import { memoryStorage } from './vendors/memoryStorage';
-import { vuexStorage } from './vendors/vuexStorage';
-import { piniaStorage } from './vendors/piniaStorage';
-import { gunStorage } from './vendors/gunStorage';
-import { StoreTypes, StorePluginTypes, UniversalStoreClass } from './.d';
 
-const initialStore = StoreTypes.localStorage;
+import { UniversalStoreClass } from './.d'
+import { StoreTypes } from './types'
+import {
+  localStorage,
+  sessionStorage,
+  cookieStorage,
+  memoryStorage,
+  vuexStorage,
+  gunStorage,
+  piniaStorage
+} from './vendors';
+
+export {
+  localStorage,
+  sessionStorage,
+  cookieStorage,
+  memoryStorage,
+  vuexStorage,
+  piniaStorage,
+  gunStorage
+};
+
+export { StoreTypes };
+
+const initialStore = StoreTypes.local;
+
 export const UniversalStore = (
   storePluginType: Partial<StoreTypes> = initialStore
 ): UniversalStoreClass => {
   switch (storePluginType) {
-    case StoreTypes.localStorage:
+    case StoreTypes.local:
       return localStorage;
-    case StoreTypes.sessionStorage:
+    case StoreTypes.session:
       return sessionStorage;
+    case StoreTypes.cookie:
+      return cookieStorage;
+
     case StoreTypes.memory:
       return memoryStorage;
     case StoreTypes.vuex:
@@ -27,5 +48,4 @@ export const UniversalStore = (
       return localStorage;
   }
 };
-var test = UniversalStore(StoreTypes.localStorage);
-test; /*?*/
+export default UniversalStore;

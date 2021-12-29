@@ -1,6 +1,6 @@
-import { UniversalStoreClass } from '../types';
+import { UniversalStoreClass } from '../.d';
 
 export const piniaStorage: UniversalStoreClass = {
   get: (key: string) => window.localStorage.getItem(key),
-  set: (key: string, value: any) => window.localStorage.setItem(key, value),
-}
+  set: (key: string, value: any) => window.localStorage.setItem(key, value)
+};

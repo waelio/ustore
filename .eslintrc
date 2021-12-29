@@ -1,0 +1,6 @@
+{
+  "parser": "@babel/eslint-parser",
+  "env": {
+    "jest": true
+  }
+}

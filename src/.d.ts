@@ -1,19 +1,14 @@
+import { cookieStorage } from './vendors/cookieStorage';
 export enum StorePluginTypes {
-  'localStorage' = 'localStorage',
-  'sessionStorage' = 'sessionStorage',
+  'local' = 'localStorage',
+  'session' = 'sessionStorage',
+  'cookie' = 'cookieStorage',
   'memory' = 'memory',
   'vuex' = 'vuex',
   'pinia' = 'pinia',
   'gun' = 'gun'
 }
-export enum StoreTypes {
-  localStorage = 'localStorage',
-  sessionStorage = 'sessionStorage',
-  memory = 'memoryStorage',
-  vuex = 'vuexStorage',
-  pinia = 'piniaStorage',
-  gun = 'gunStorage'
-}
+
 export interface StoreOptions {
   type: string;
 }
@@ -21,10 +16,10 @@ export interface GetItem {
   (key: string): string | object | string[] | object[] | null | boolean;
 }
 export interface SetItem {
-  (key: string, value: string | object | string[] | object[]): void | boolean;
+  (key: string, value: string | object | string[] | object[]): void | any;
 }
 export interface RemoveItem {
-  (key: string): void | boolean;
+  (key: string): void | any;
 }
 export interface UniversalStoreClass {
   type?: string;

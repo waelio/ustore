@@ -1,4 +1,4 @@
-import { UniversalStoreClass } from '../types';
+import { UniversalStoreClass } from '../.d';
 let memoryStore = {};
 
 export const memoryStorage: UniversalStoreClass = {

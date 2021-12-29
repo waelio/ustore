@@ -1,11 +1,16 @@
-import { UniversalStoreClass } from '../types';
-import Gun from 'gun/gun';
+import { UniversalStoreClass } from '../.d';
+import { default as Gun } from 'gun/gun';
 import { _To } from 'waelio-utils';
+import { IGunConstructorOptions } from 'gun/types/options';
+
+
 const options: IGunConstructorOptions = {
   peers: ['localhost:8765/gun']
 };
-const gun = Gun(options);
 
+// initialize gun
+export const gun = Gun(options);
+// gunStorage
 export const gunStorage: UniversalStoreClass = {
   get: async (key: string) => {
     try {
@@ -14,13 +19,27 @@ export const gunStorage: UniversalStoreClass = {
         console.log('key', key);
         return data;
       });
-    } catch (error) {
-      return error.message ? error.message : error;
+    } catch (error: any) {
+      const { message } = error;
+      return message && error;
     }
   },
   set: async (key: string, value: any) => {
     const test = await _To(gun.get(key).put({ key: value }));
     const [reject, resolve] = test;
-    return reject ? reject.message : resolve.on((data, key) => data);
+    return reject
+      ? reject.message
+      : resolve.on(
+        (data: { [x: string]: any }, key: string | number) => data[key]
+      );
+  },
+  remove: async (key: string) => {
+    const test = await _To(gun.get(key).put({ key: null }));
+    const [reject, resolve] = test;
+    return reject
+      ? reject.message
+      : resolve.on(
+        (data: { [x: string]: any }, key: string | number) => data[key]
+      );
   }
 };
