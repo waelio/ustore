@@ -56,19 +56,22 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
+    "core-js": "^3.20.1",
     "jasmine": "^3.10.0",
     "jasmine-browser-runner": "^0.10.0",
     "jasmine-core": "^3.10.1",
     "jest": "^27.4.5",
+    "regenerator-runtime": "^0.13.9",
     "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-ts": "^2.0.4",
     "rollup-plugin-ts-treeshaking": "^1.0.2",
     "rollup-plugin-typescript2": "^0.31.1",
+    "vue": "^3.2.26",
     "waelio-utils": "^3.1.30"
   },
   "dependencies": {
     "gun": "^0.2020.1235",
     "pinia": "^2.0.9",
-    "vuex": "^3.6.2"
+    "vuex": "^4.0.2"
   }
 }

@@ -2,27 +2,33 @@ import { UniversalStoreClass } from '../.d';
 import { default as Gun } from 'gun/gun';
 import { _To } from 'waelio-utils';
 import { IGunConstructorOptions } from 'gun/types/options';
-
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
 
 const options: IGunConstructorOptions = {
   peers: ['localhost:8765/gun']
 };
 
 // initialize gun
-const gun = Gun(options);
+const gun = Gun({ options });
 
 // gunStorage
 const gunStorage: UniversalStoreClass = {
   get: (key: string) => {
     try {
-      return gun.get(key).on((data, key) => {
-        console.log('data', data.key, data.value);
-        console.log('key', key);
-        return data;
-      });
+      gun.get(key)
+        .once(async(node) => {
+          if (node === undefined) {
+            gun.get(key).put({ key: "Write the text here" })
+            return gun.get(key).on((node) => node.key)
+          } else {
+            console.log("Found Node")
+            return await node[key]
+          }
+        })
     } catch (error: any) {
       const { message } = error;
-      return message && error;
+      return message ? message : error;
     }
   },
   set: async (key: string, value: any) => {

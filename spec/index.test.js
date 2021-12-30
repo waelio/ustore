@@ -6,7 +6,7 @@ import {
   vuexStorage,
   gunStorage,
   piniaStorage
-} from './index'
+} from '../src/stores/index'
 
 const testStores = [
   localStorage.default,

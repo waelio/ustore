@@ -3,7 +3,7 @@ import { UniversalStoreClass } from '../.d';
 export const localStorage: UniversalStoreClass = {
   get: (key: string) => {
     try {
-      return window.localStorage.getItem(key) || null;
+      return window.localStorage.getItem(key);
     } catch (error: any) {
       return error.message ? error.message : error;
     }

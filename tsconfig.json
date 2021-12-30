@@ -1,5 +1,5 @@
 {
-  "compileOnSave": false,
+  "compileOnSave": true,
   "compilerOptions": {
     "pretty": true,
     "newLine": "LF",
@@ -19,7 +19,7 @@
     "noImplicitThis": true,
     "noImplicitReturns": false,
     "strict": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "lib": [
@@ -27,7 +27,7 @@
       "dom"
     ],
     "types": [
-      "node"
+      "node","jest"
     ],
     "forceConsistentCasingInFileNames": true,
     "typeRoots": [
@@ -40,14 +40,13 @@
     }
   },
   "include": [
-    "src/**/*"
+    "src/**/*.ts"
   ],
   "exclude": [
     "./r_n_d",
     "./spec",
     "./example",
     "node_modules",
-    "./src/utils/meta",
     "./dist/**/*"
   ]
 }

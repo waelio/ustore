@@ -9,7 +9,7 @@ import {
   vuexStorage,
   gunStorage,
   piniaStorage
-} from './vendors';
+} from './stores/'
 
 export {
   localStorage,

@@ -6,7 +6,7 @@ export const cookieStorage: UniversalStoreClass = {
       return (
         window.document.cookie
           .split('; ')
-          .find((item) => item.split('=')[0] === key) || null
+          .find((item) => item.split('=')[0] === key)
       );
     } catch (error: any) {
       return error.message ? error.message : error;

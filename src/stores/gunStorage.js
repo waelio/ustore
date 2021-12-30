@@ -1,23 +1,31 @@
 import { default as Gun } from 'gun/gun';
 import { _To } from 'waelio-utils';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 const options = {
     peers: ['localhost:8765/gun']
 };
 // initialize gun
-export const gun = Gun(options);
+const gun = Gun({ options });
 // gunStorage
-export const gunStorage = {
-    get: async (key) => {
+const gunStorage = {
+    get: (key) => {
         try {
-            gun.get(key).on((data, key) => {
-                console.log('data', data.key, data.value);
-                console.log('key', key);
-                return data;
+            gun.get(key)
+                .once((node) => {
+                if (node === undefined) {
+                    gun.get(key).put({ key: "Write the text here" });
+                    return gun.get(key).on((node) => node.key);
+                }
+                else {
+                    console.log("Found Node");
+                    return node[key];
+                }
             });
         }
         catch (error) {
             const { message } = error;
-            return message && error;
+            return message ? message : error;
         }
     },
     set: async (key, value) => {
@@ -35,4 +43,6 @@ export const gunStorage = {
             : resolve.on((data, key) => data[key]);
     }
 };
+export default gunStorage;
+export { gunStorage, gun };
 //# sourceMappingURL=gunStorage.js.map

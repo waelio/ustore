@@ -1,7 +1,9 @@
-export const localStorage = {
+export const cookieStorage = {
     get: (key) => {
         try {
-            return window.localStorage.getItem(key) || null;
+            return (window.document.cookie
+                .split('; ')
+                .find((item) => item.split('=')[0] === key));
         }
         catch (error) {
             return error.message ? error.message : error;
@@ -9,7 +11,7 @@ export const localStorage = {
     },
     set: (key, value) => {
         try {
-            window.localStorage.setItem(key, value);
+            window.document.cookie = `${key}=${value}`;
             return true;
         }
         catch (error) {
@@ -18,7 +20,7 @@ export const localStorage = {
     },
     remove: (key) => {
         try {
-            window.localStorage.removeItem(key);
+            window.document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
             return true;
         }
         catch (error) {
@@ -26,4 +28,4 @@ export const localStorage = {
         }
     }
 };
-//# sourceMappingURL=localStorage.js.map
+//# sourceMappingURL=cookieStorage.js.map
