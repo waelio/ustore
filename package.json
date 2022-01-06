@@ -71,12 +71,12 @@
     "rollup-plugin-ts": "^2.0.4",
     "rollup-plugin-ts-treeshaking": "^1.0.2",
     "rollup-plugin-typescript2": "^0.31.1",
-    "vue": "^3.2.26",
     "waelio-utils": "^3.1.30"
   },
   "dependencies": {
     "gun": "^0.2020.1235",
     "pinia": "^2.0.9",
+    "vue": "^3.2.26",
     "vuex": "^4.0.2"
   }
 }

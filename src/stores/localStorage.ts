@@ -5,7 +5,7 @@ export const localStorage: UniversalStoreClass = {
     try {
       return window.localStorage.getItem(key);
     } catch (error: any) {
-      return error.message ? error.message : error;
+      return error || null;
     }
   },
   set: (key: string, value: any) => {
@@ -13,7 +13,7 @@ export const localStorage: UniversalStoreClass = {
       window.localStorage.setItem(key, value);
       return true;
     } catch (error: any) {
-      return error.message ? error.message : error;
+      return error || null;
     }
   },
   remove: (key: string) => {
@@ -21,7 +21,7 @@ export const localStorage: UniversalStoreClass = {
       window.localStorage.removeItem(key);
       return true;
     } catch (error: any) {
-      return error.message ? error.message : error;
+      return error || null;
     }
   }
 };

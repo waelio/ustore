@@ -8,7 +8,7 @@ import {
   vuexStorage,
   gunStorage,
   piniaStorage
-} from './stores/';
+} from './stores/index';
 
 export {
   localStorage,
@@ -22,8 +22,10 @@ export {
 
 export { StoreTypes };
 
-const initialStore = StoreTypes.local;
-
+export const initialStore = StoreTypes.local;
+interface _storeOptions {
+  plugin?: StoreTypes;
+}
 export const uStore = (options: _storeOptions): UniversalStoreClass => {
   const { plugin } = options;
   if (!plugin) options.plugin = initialStore;
@@ -43,4 +45,28 @@ export const uStore = (options: _storeOptions): UniversalStoreClass => {
     ? gunStorage
     : cookieStorage;
 };
+
+// export function uStore(
+//   storePluginType: Partial<StoreTypes> = initialStore
+// ): UniversalStoreClass {
+//   switch (storePluginType) {
+//     case StoreTypes.local:
+//       return localStorage;
+//     case StoreTypes.session:
+//       return sessionStorage;
+//     case StoreTypes.cookie:
+//       return cookieStorage;
+
+//     case StoreTypes.memory:
+//       return memoryStorage;
+//     case StoreTypes.vuex:
+//       return vuexStorage;
+//     case StoreTypes.pinia:
+//       return piniaStorage;
+//     case StoreTypes.gun:
+//       return gunStorage;
+//     default:
+//       return localStorage;
+//   }
+// }
 export default uStore;

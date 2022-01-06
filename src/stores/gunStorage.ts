@@ -28,7 +28,7 @@ const gunStorage: UniversalStoreClass = {
           : { id: key, data: null };
       });
     } catch (error: any) {
-      return error && error.message ? error.message : error;
+      return error || null;
     }
   },
   set: async function (
@@ -39,7 +39,7 @@ const gunStorage: UniversalStoreClass = {
       uStoreGunDB.get(key).put({ key: value });
       return true;
     } catch (error: any) {
-      return error && error.message ? error.message : error;
+      return error || null;
     }
   },
   remove: async (key: string) => {
@@ -53,14 +53,14 @@ const gunStorage: UniversalStoreClass = {
   }
 };
 
-const k = 'someKey';
-const v = { try: 'some text testing' };
+// const k = 'someKey';
+// const v = { try: 'some text testing' };
 
-const scv = gunStorage.set(k, v);
-const rcv = gunStorage.get(k);
+// const scv = gunStorage.set(k, v);
+// const rcv = gunStorage.get(k);
 
-scv /*?*/;
-rcv; /*?*/
+// scv /*?*/;
+// rcv; /*?*/
 
 export default gunStorage;
 export { gunStorage };
