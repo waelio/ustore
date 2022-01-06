@@ -1,15 +1,15 @@
 import ts from 'rollup-plugin-ts'
-import path from 'path'
+// import path from 'path'
 import resolve from '@rollup/plugin-node-resolve'
 import json from '@rollup/plugin-json'
 import typescript from 'rollup-plugin-typescript2'
 import tsTreeshaking from 'rollup-plugin-ts-treeshaking'
 import bundleSize from 'rollup-plugin-bundle-size'
-import { default as pkg } from './package.json'
+import * as pkg from './package.json'
 
 export default [
   {
-    input: './src/index.ts',
+    input: './src/universalStore.ts',
     external: Object.keys(pkg.devDependencies),
     plugins: [
       resolve(),
@@ -27,22 +27,22 @@ export default [
     },
     output: [
       {
-        file: 'dist/Store.ejs',
-        name: 'Store',
+        file: 'dist/UniversalStore.ejs',
+        name: 'UniversalStore',
         format: 'es',
         exports: 'named',
         sourcemap: true
       },
       {
-        file: 'dist/Store.js',
-        name: 'Store',
+        file: 'dist/UniversalStore.js',
+        name: 'UniversalStore',
         format: 'umd',
         exports: 'named',
         sourcemap: true
       },
       {
-        file: 'dist/Store.ts',
-        name: 'Store',
+        file: 'dist/UniversalStore.ts',
+        name: 'UniversalStore',
         format: 'es',
         exports: 'auto',
         sourcemap: true

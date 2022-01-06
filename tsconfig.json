@@ -21,13 +21,15 @@
     "strict": true,
     "isolatedModules": false,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
+    // "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "lib": [
       "esnext",
       "dom"
     ],
     "types": [
-      "node","jest"
+      "node",
+      "jest"
     ],
     "forceConsistentCasingInFileNames": true,
     "typeRoots": [

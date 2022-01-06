@@ -1,48 +1,53 @@
-import { default as Gun } from 'gun/gun';
+const GUN = require('gun/gun');
 import { _To } from 'waelio-utils';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 const options = {
-    peers: ['localhost:8765/gun']
+    peers: ['https://gunjs-mtl.herokuapp.com/gun']
 };
 // initialize gun
-const gun = Gun({ options });
+const storeName = 'uStoreGunDB';
+export const db = GUN({ options });
+export const uStoreGunDB = db.get(storeName);
+// export const user = db.user().recall({ sessionStorage: true });
 // gunStorage
 const gunStorage = {
-    get: (key) => {
+    get: function (key) {
         try {
-            gun.get(key)
-                .once((node) => {
-                if (node === undefined) {
-                    gun.get(key).put({ key: "Write the text here" });
-                    return gun.get(key).on((node) => node.key);
-                }
-                else {
-                    console.log("Found Node");
-                    return node[key];
-                }
+            const check = uStoreGunDB.get(key);
+            return check.once(function (data, id) {
+                return data && id
+                    ? { id: id, key, data: data }
+                    : { id: key, data: null };
             });
         }
         catch (error) {
-            const { message } = error;
-            return message ? message : error;
+            return error && error.message ? error.message : error;
         }
     },
-    set: async (key, value) => {
-        const test = await _To(gun.get(key).put({ key: value }));
-        const [reject, resolve] = test;
-        return reject
-            ? reject.message
-            : resolve.on((data, key) => data[key]);
+    set: async function (key, value) {
+        try {
+            uStoreGunDB.get(key).put({ key: value });
+            return true;
+        }
+        catch (error) {
+            return error && error.message ? error.message : error;
+        }
     },
     remove: async (key) => {
-        const test = await _To(gun.get(key).put({ key: null }));
+        const test = await _To(uStoreGunDB.get(key).put({ _: '#' }));
         const [reject, resolve] = test;
         return reject
             ? reject.message
             : resolve.on((data, key) => data[key]);
     }
 };
+const k = 'someKey';
+const v = { try: 'some text testing' };
+const scv = gunStorage.set(k, v);
+const rcv = gunStorage.get(k);
+scv /*?*/;
+rcv; /*?*/
 export default gunStorage;
-export { gunStorage, gun };
+export { gunStorage };
 //# sourceMappingURL=gunStorage.js.map

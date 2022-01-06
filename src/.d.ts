@@ -1,4 +1,10 @@
-import { cookieStorage } from './vendors/cookieStorage';
+import { piniaStorage } from './stores/piniaStorage';
+import { vuexStorage } from './stores/vuexStorage';
+import { memoryStorage } from './stores/memoryStorage';
+import { sessionStorage } from './stores/sessionStorage';
+import { localStorage } from './stores/localStorage';
+import { gunStorage } from './stores/gunStorage';
+import { cookieStorage } from './stores/cookieStorage';
 export enum StorePluginTypes {
   'local' = 'localStorage',
   'session' = 'sessionStorage',
@@ -24,6 +30,7 @@ export interface RemoveItem {
 export interface UniversalStoreClass {
   type?: string;
   _storage?: Storage;
+  getItem?: GetItem;
   get: GetItem;
   set: SetItem;
   remove?: RemoveItem;
@@ -31,11 +38,11 @@ export interface UniversalStoreClass {
 
 export namespace globalThis {
   interface Window {
-    localStorage: UniversalStoreClass;
-    sessionStorage: UniversalStoreClass;
-    memoryStorage: UniversalStoreClass;
-    vuexStorage: UniversalStoreClass;
-    piniaStorage: UniversalStoreClass;
-    gunStorage: UniversalStoreClass;
+    localStorage: localStorage;
+    sessionStorage: sessionStorage;
+    memoryStorage: memoryStorage;
+    vuexStorage: vuexStorage;
+    piniaStorage: piniaStorage;
+    gunStorage: gunStorage;
   }
 }

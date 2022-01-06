@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "rollup -c",
-    "test:jasmine": "jasmine-browser-runner runSpecs",
-    "test:jest": "jest"
+    "test:jasmine": "tsc && jasmine-browser-runner runSpecs",
+    "test:jest": "tsc && jest"
   },
   "repository": {
     "type": "git",
@@ -45,11 +45,15 @@
   },
   "homepage": "https://github.com/waelio/universal-store#readme",
   "devDependencies": {
-    "@babel/preset-env": "^7.16.5",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.1.1",
+    "@types/jest": "^27.4.0",
     "babel-core": "^6.26.3",
+    "babel-jest": "^27.4.5",
     "babel-loader": "^8.2.3",
     "babel-plugin-transform-require-context": "^0.1.1",
     "babel-polyfill": "^6.26.0",
@@ -57,9 +61,10 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "core-js": "^3.20.1",
+    "gulp": "^4.0.2",
     "jasmine": "^3.10.0",
     "jasmine-browser-runner": "^0.10.0",
-    "jasmine-core": "^3.10.1",
+    "jasmine-core": "^4.0.0",
     "jest": "^27.4.5",
     "regenerator-runtime": "^0.13.9",
     "rollup-plugin-bundle-size": "^1.0.3",

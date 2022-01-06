@@ -1,0 +1,28 @@
+{
+  "uStoreGunDB": {
+    "\u001bsomeKey": {
+      "": {
+        ":": {
+          "#": "uStoreGunDB/someKey"
+        },
+        ">": 1641311665787
+      }
+    },
+    "/someKey": {
+      "\u001bkey": {
+        "": {
+          ":": {
+            "#": "uStoreGunDB/someKey/key"
+          },
+          ">": 1641311665787
+        }
+      },
+      "/key\u001btry": {
+        "": {
+          ":": "some text testing",
+          ">": 1641311665787
+        }
+      }
+    }
+  }
+}
