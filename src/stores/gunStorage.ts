@@ -66,7 +66,7 @@ export const gunStorage:UStoreClass = ({
         const payload = { [key]: value }
         console.log(payload);
         
-         user.auth(storeName, storeName, async function (ack) {
+         user.auth(storeName, storeName, async function (ack:any) {
            if (!ack.err) {
              console.log(`Authorized`);
               username = "pub/"+ ack.sea.pub;
