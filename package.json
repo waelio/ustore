@@ -1,6 +1,6 @@
 {
   "name": "universal-store",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha-0",
   "description": "Universal Storage",
   "main": "lib/cjs/index.js",
   "module": "lib/index.js",
@@ -32,8 +32,7 @@
     "vuex",
     "redux",
     "pinia",
-    "gun",
-    "store2"
+    "gun"
   ],
   "sideEffects": false,
   "author": {
