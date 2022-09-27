@@ -1,46 +1,29 @@
-import { UniversalStoreClass } from './.d';
-import { StoreTypes } from './types';
-import {
-  localStorage,
-  sessionStorage,
-  cookieStorage,
-  memoryStorage,
-  vuexStorage,
-  gunStorage,
-  piniaStorage
-} from './stores/';
+import { localStorage } from './stores/localStorage';
+import { sessionStorage } from './stores/sessionStorage';
+import { cookieStorage } from './stores/cookieStorage';
+import { memoryStorage } from './stores/memoryStorage';
+import { vuexStorage } from './stores/vuexStorage';
+import { piniaStorage } from './stores/piniaStorage';
+import { gunStorage } from './stores/gunStorage';
+// import { StorePlugins } from './types';
 
-export {
-  localStorage,
-  sessionStorage,
-  cookieStorage,
-  memoryStorage,
-  vuexStorage,
-  piniaStorage,
-  gunStorage
-};
+const uStore = () => ({
+  local: localStorage,
+  session: sessionStorage,
+  cookie: cookieStorage,
+  memory: memoryStorage,
+  vuex: vuexStorage,
+  pinia: piniaStorage,
+  gun: gunStorage
+});
 
-export { StoreTypes };
-
-const initialStore = StoreTypes.local;
-
-export const uStore = (options: _storeOptions): UniversalStoreClass => {
-  const { plugin } = options;
-  if (!plugin) options.plugin = initialStore;
-  return plugin === 'cookieStorage'
-    ? cookieStorage
-    : localStorage
-    ? localStorage
-    : sessionStorage
-    ? sessionStorage
-    : memoryStorage
-    ? memoryStorage
-    : vuexStorage
-    ? vuexStorage
-    : piniaStorage
-    ? piniaStorage
-    : gunStorage
-    ? gunStorage
-    : cookieStorage;
-};
+export { uStore };
 export default uStore;
+
+try {
+  if (window && !window['uStore']) {
+    window['uStore'] = uStore;
+  }
+} catch (err) {
+  console.log('Oops, `window` is not defined');
+}

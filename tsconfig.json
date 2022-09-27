@@ -1,54 +1,41 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "pretty": true,
-    "newLine": "LF",
-    "baseUrl": "./",
-    "module": "esnext",
+    "allowJs": true,
     "declaration": true,
-    "alwaysStrict": true,
-    "sourceMap": true,
-    "noEmit": false,
-    "target": "esnext",
-    "importHelpers": true,
-    "noImplicitAny": false,
-    "noUnusedLocals": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
-    "strictNullChecks": true,
-    "noImplicitThis": true,
-    "noImplicitReturns": false,
-    "strict": true,
-    "isolatedModules": false,
-    "experimentalDecorators": true,
-    // "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
+    "declarationDir": "./lib/types",
+    "declarationMap": true,
+    "esModuleInterop": true, /* Enables intero between CommonJS and ES */
+    "forceConsistentCasingInFileNames": true, /* Disallow inconsistently */
+    "incremental": true, /* Enable incremental compilation */
     "lib": [
-      "esnext",
+      "es2017",
+      "es7",
+      "es6",
       "dom"
     ],
-    "types": [
-      "node",
-      "jest"
-    ],
-    "forceConsistentCasingInFileNames": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "paths": {
-      "~/*": [
-        "src/*"
-      ]
-    }
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "outDir": "lib",
+    "pretty": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es5",
+    "skipLibCheck": true /* Skip type checking of declaration files. */
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*/"
   ],
   "exclude": [
+    "./tsconfig.json",
+    "./tools",
     "./r_n_d",
     "./spec",
     "./example",
     "node_modules",
+    "./src/utils/meta",
     "./dist/**/*"
   ]
 }

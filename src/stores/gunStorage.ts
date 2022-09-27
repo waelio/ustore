@@ -1,66 +1,106 @@
-const GUN = require('gun/gun');
-// import 'gun/sea';
-// import 'gun/axe';
-import { UniversalStoreClass } from '../.d';
-import { _To } from 'waelio-utils';
-import { IGunConstructorOptions } from 'gun/types/options';
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+import GUN from 'gun';
+import 'gun/sea'
+import 'gun/axe';
 
-const options: IGunConstructorOptions = {
-  peers: ['https://gunjs-mtl.herokuapp.com/gun']
+
+import { UStoreClass } from "../.d";
+import { _to, _reParseString } from "waelio-utils";
+
+const options = {
+  peers: ["https://gunjs-mtl.herokuapp.com/gun"],
 };
-
+const storeName = "uStoreGunDB";
+let username = '';/*?*/
+type p = string | string[] | object | number | boolean | null
+type ACK = {
+  ok: number;
+  pub: string;
+  err?: string;
+}
 // initialize gun
-const storeName = 'uStoreGunDB';
-export const db = GUN({ options });
-export const uStoreGunDB = db.get(storeName);
-// export const user = db.user().recall({ sessionStorage: true });
+const db = GUN(options);
+const user = db.user();
+const isLoggedIn = !!(user.is) 
 
-// gunStorage
-const gunStorage: UniversalStoreClass = {
-  get: function (key: string) {
-    try {
-      const check = uStoreGunDB.get(key);
-      return check.once(function (data: any, id) {
-        return data && id
-          ? { id: id, key, data: data }
-          : { id: key, data: null };
-      });
-    } catch (error: any) {
-      return error || null;
-    }
-  },
-  set: async function (
-    key: string,
-    value: string | string[] | object | number | boolean | null
-  ) {
-    try {
-      uStoreGunDB.get(key).put({ key: value });
-      return true;
-    } catch (error: any) {
-      return error || null;
-    }
-  },
-  remove: async (key: string) => {
-    const test = await _To(uStoreGunDB.get(key).put({ _: '#' }));
-    const [reject, resolve] = test;
-    return reject
-      ? reject.message
-      : resolve.on(
-          (data: { [x: string]: any }, key: string | number) => data[key]
-        );
+user.get(storeName).once(function (ack: ACK) {
+  console.log(ack);
+  
+  if (!ack.err) {
+    username =ack.pub
   }
-};
+  else {
+    user.create(storeName, storeName, (something) => {
+      console.log(`Created new user ${storeName}`);
+      console.log(something);
+      
+      
+    })     
+  }
+})
 
-// const k = 'someKey';
-// const v = { try: 'some text testing' };
-
-// const scv = gunStorage.set(k, v);
-// const rcv = gunStorage.get(k);
-
-// scv /*?*/;
-// rcv; /*?*/
+export const gunStorage = ({
+  // get: async function (key: string) {
+  //   return new Promise((resolve, reject) => {
+  //     try {           
+  //       if (isLoggedIn) {
+  //         db.get("pub/" + username).get(key).once(function (v:any) {
+  //              resolve(v)
+  //         })
+  //       } else {
+  //         user.auth(storeName, storeName, function () {
+  //           console.log(`Authorized ${storeName}`)
+  //           db.get("pub/" + username).get(key).once(function (v:any) {
+  //              resolve(v)
+  //            })
+  //         })                                
+  //       }
+  //     } catch (error: any) {
+  //       reject(error);
+  //     }
+  //   })
+  
+  // },
+  set: (key: string, value: p) => {
+     return new Promise((resolve, reject) => {
+       try {
+        const payload = { [key]: value }
+        console.log(payload);
+        
+         user.auth(storeName, storeName, async function (ack) {
+           if (!ack.err) {
+             console.log(`Authorized`);
+              username = "pub/"+ ack.sea.pub;
+             console.log('username');
+             console.log(username);
+             resolve(db.get(username).get(key).put(payload));            
+           }
+          reject(ack.err);
+        })        
+       } catch (error: any) {
+        console.log(error);
+        
+        reject('error');
+      }
+    })
+  },
+  // remove: (key: string) => {
+  //   return new Promise((resolve, reject) => {
+  //     try {
+  //       user.auth(storeName, storeName, function () {
+  //         console.log('Authorized')
+  //         resolve(db.get("pub/" + username).get(key).put(null))
+  //       })
+  //     } catch (error) {
+  //       reject(error);
+  //     }
+  //   });
+  // }
+});
 
 export default gunStorage;
-export { gunStorage };
+
+const key = 'test';
+const v = 'test Payload';
+
+const r = gunStorage.set(key, v)
+r; /*?*/

@@ -1,0 +1,1 @@
+{"version":3,"file":"piniaStorage.js","sourceRoot":"","sources":["../../src/stores/piniaStorage.ts"],"names":[],"mappings":";;;AAEa,QAAA,YAAY,GAAgB,CAAC;IACxC,GAAG,EAAE,UAAC,GAAW,IAAK,OAAA,MAAM,CAAC,YAAY,CAAC,OAAO,CAAC,GAAG,CAAC,EAAhC,CAAgC;IACtD,GAAG,EAAE,UAAC,GAAW,EAAE,KAAU,IAAK,OAAA,MAAM,CAAC,YAAY,CAAC,OAAO,CAAC,GAAG,EAAE,KAAK,CAAC,EAAvC,CAAuC;CAC1E,CAAC,CAAC"}

@@ -1,14 +1,15 @@
-import { UniversalStoreClass } from '../.d';
+import { UStoreClass } from "../.d";
 let memoryStore = {};
 
-export const memoryStorage: UniversalStoreClass = {
-  get: (key: string) => memoryStore[key],
+export const memoryStorage: UStoreClass = ({
+  get: (key: string) => memoryStore[key] ? memoryStore[key] : key,
   set: (key: string, value: any) => {
     memoryStore[key] = value;
     return true;
   },
   remove: (key: string) => {
-    delete memoryStore[key];
+    memoryStore[key] ? delete memoryStore[key]: null;
     return true;
-  }
-};
+  },
+});
+export default memoryStorage

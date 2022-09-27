@@ -1,13 +1,11 @@
-import { UniversalStoreClass } from '../.d';
+import { UStoreClass } from "../.d";
 
-export const cookieStorage: UniversalStoreClass = {
+export const cookieStorage: UStoreClass = ({
   get: (key: string) => {
     try {
-      return (
-        window.document.cookie
-          .split('; ')
-          .find((item) => item.split('=')[0] === key)
-      );
+      return window.document.cookie
+        .split(";")
+        .find((item: string) => item.split("=")[0] === key);
     } catch (error: any) {
       return error || null;
     }
@@ -27,5 +25,6 @@ export const cookieStorage: UniversalStoreClass = {
     } catch (error: any) {
       return error || null;
     }
-  }
-};
+  },
+});
+export default cookieStorage

@@ -1,7 +1,8 @@
-import { UniversalStoreClass } from '../.d';
+import { UStoreClass } from "../.d";
 
-export const sessionStorage: UniversalStoreClass = {
+export const sessionStorage: UStoreClass = ({
   get: (key: string) => window.sessionStorage.getItem(key),
   set: (key: string, value: any) => window.sessionStorage.setItem(key, value),
-  remove: (key: string) => window.sessionStorage.removeItem(key)
-};
+  remove: (key: string) => window.sessionStorage.removeItem(key),
+});
+export default sessionStorage
