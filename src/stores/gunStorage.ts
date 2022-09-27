@@ -38,28 +38,28 @@ user.get(storeName).once(function (ack: ACK) {
   }
 })
 
-export const gunStorage = ({
-  // get: async function (key: string) {
-  //   return new Promise((resolve, reject) => {
-  //     try {           
-  //       if (isLoggedIn) {
-  //         db.get("pub/" + username).get(key).once(function (v:any) {
-  //              resolve(v)
-  //         })
-  //       } else {
-  //         user.auth(storeName, storeName, function () {
-  //           console.log(`Authorized ${storeName}`)
-  //           db.get("pub/" + username).get(key).once(function (v:any) {
-  //              resolve(v)
-  //            })
-  //         })                                
-  //       }
-  //     } catch (error: any) {
-  //       reject(error);
-  //     }
-  //   })
+export const gunStorage:UStoreClass = ({
+  get: async function (key: string) {
+    return new Promise((resolve, reject) => {
+      try {           
+        if (isLoggedIn) {
+          db.get("pub/" + username).get(key).once(function (v:any) {
+               resolve(v)
+          })
+        } else {
+          user.auth(storeName, storeName, function () {
+            console.log(`Authorized ${storeName}`)
+            db.get("pub/" + username).get(key).once(function (v:any) {
+               resolve(v)
+             })
+          })                                
+        }
+      } catch (error: any) {
+        reject(error);
+      }
+    })
   
-  // },
+  },
   set: (key: string, value: p) => {
      return new Promise((resolve, reject) => {
        try {
@@ -83,24 +83,24 @@ export const gunStorage = ({
       }
     })
   },
-  // remove: (key: string) => {
-  //   return new Promise((resolve, reject) => {
-  //     try {
-  //       user.auth(storeName, storeName, function () {
-  //         console.log('Authorized')
-  //         resolve(db.get("pub/" + username).get(key).put(null))
-  //       })
-  //     } catch (error) {
-  //       reject(error);
-  //     }
-  //   });
-  // }
+  remove: (key: string) => {
+    return new Promise((resolve, reject) => {
+      try {
+        user.auth(storeName, storeName, function () {
+          console.log('Authorized')
+          resolve(db.get("pub/" + username).get(key).put(null))
+        })
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
 });
 
 export default gunStorage;
 
-const key = 'test';
-const v = 'test Payload';
+// const key = 'test';
+// const v = 'test Payload';
 
-const r = gunStorage.set(key, v)
-r; /*?*/
+// const r = gunStorage.set(key, v)
+// r; /*?*/
