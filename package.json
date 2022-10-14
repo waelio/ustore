@@ -21,6 +21,14 @@
   "bin": {
     "uStore": "lib/index.js"
   },
+  "directories": {
+    "lib": "/lib",
+    "types": "types/index.d.ts"
+  },
+  "files": [
+    "lib/",
+    "types/"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/waelio/universal-store.git"
@@ -36,18 +44,14 @@
   ],
   "sideEffects": false,
   "author": {
-    "name": "Peace Marshal",
-    "email": "wahbehw@gmail.com",
+    "name": "Wael Wahbeh",
+    "email": "wahbehw@me.com",
     "url": "https://github.com/waelio/universal-store#readme"
   },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/waelio/universal-store/issues"
   },
-  "files": [
-        "lib/**/*",
-        "types/**/*"
-  ],
   "homepage": "https://github.com/waelio/universal-store#readme",
   "devDependencies": {
     "@babel/parser": "^7.19.0",

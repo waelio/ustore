@@ -1,5 +1,3 @@
 # universal-store
 
-Universal Storage built on 
-
-store2[https://www.npmjs.com/package/store2]
+[universal-store](https://github.com/waelio/universal-store) on gitHub.

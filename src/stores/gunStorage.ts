@@ -14,12 +14,11 @@ type p = string | any
 
 // initialize gun
 const db = GUN(options);
-const localInstancse = db.get(storeName)
 export const gunStorage:UStoreClass = ({
   get: async function (key: string) {
     return new Promise((resolve, reject) => {
       try {           
-        resolve(localInstancse.get(key))
+        resolve(db.get(storeName).get(key))
       } catch (error: any) {
         reject(error);
       }
@@ -30,7 +29,8 @@ export const gunStorage:UStoreClass = ({
      return new Promise((resolve, reject) => {
        try {
         
-        resolve(localInstancse.get(key).set(value))
+         resolve(
+           db.get(storeName).get(key).set(value))
         
         
        } catch (error: any) {
@@ -43,7 +43,7 @@ export const gunStorage:UStoreClass = ({
   remove: (key: string) => {
     return new Promise((resolve, reject) => {
       try {
-        resolve(localInstancse.get(key).set(null as any))
+        resolve(db.get(storeName).get(key).set(null as any))
       } catch (error) {
         reject(error);
       }
