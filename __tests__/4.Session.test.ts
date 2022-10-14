@@ -1,6 +1,6 @@
 import { uStore } from '../index'
 
-describe('uStore', () => {
+test('uStore', () => {
   const payload = 'Test Payload1'
   const label = "test"
   uStore().session.set(label, payload)

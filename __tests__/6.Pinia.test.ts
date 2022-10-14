@@ -1,6 +1,6 @@
 import { uStore } from '../index'
 
-describe('Pinia Stotage', () => {
+test('Pinia Stotage', () => {
   const payload = 'Test Payload1'
   const label = "test"
   uStore().pinia.set(label, payload)

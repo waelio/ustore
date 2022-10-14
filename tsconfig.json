@@ -3,7 +3,8 @@
   "compilerOptions": {
     "allowJs": true,
     "declaration": true,
-    "declarationDir": "./lib/types",
+    "outDir": "./lib",
+    "declarationDir": "./types",
     "declarationMap": true,
     "esModuleInterop": true, /* Enables intero between CommonJS and ES */
     "forceConsistentCasingInFileNames": true, /* Disallow inconsistently */
@@ -17,7 +18,6 @@
     "module": "commonjs",
     "noImplicitAny": false,
     "noImplicitThis": true,
-    "outDir": "lib",
     "pretty": true,
     "removeComments": true,
     "sourceMap": true,
@@ -26,16 +26,13 @@
     "skipLibCheck": true /* Skip type checking of declaration files. */
   },
   "include": [
-    "src/**/*/"
+    "src/**/*"
   ],
   "exclude": [
-    "./tsconfig.json",
-    "./tools",
-    "./r_n_d",
-    "./spec",
-    "./example",
+    "tsconfig.json",
+    "lib",
     "node_modules",
-    "./src/utils/meta",
-    "./dist/**/*"
+    "radata",
+    "example"
   ]
 }

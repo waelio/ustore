@@ -1,5 +1,4 @@
-import { UStoreClass } from "../.d";
-
+import { UStoreClass } from "../.d"; 
 export const cookieStorage: UStoreClass = ({
   get: (key: string) => {
     try {

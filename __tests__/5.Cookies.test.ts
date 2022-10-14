@@ -1,6 +1,6 @@
 import { uStore } from '../index'
 
-describe('Cookie Storage', () => {
+test('Cookie Storage', () => {
   const payload = 'Test Payload1'
   const label = "test"
   uStore().cookie.set(label, payload)

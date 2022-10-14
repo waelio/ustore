@@ -1,46 +1,48 @@
-export { localStorage } from './localStorage';
-export { sessionStorage } from './sessionStorage';
-export { cookieStorage } from './cookieStorage';
-export { memoryStorage } from './memoryStorage';
-export { vuexStorage } from './vuexStorage';
-export { piniaStorage } from './piniaStorage';
-export { gunStorage } from './gunStorage';
-
-export enum StoreTypes {
-  local = 'localStorage',
-  session = 'sessionStorage',
-  cookie = 'cookieStorage',
-  memory = 'memoryStorage',
-  vuex = 'vuexStorage',
-  pinia = 'piniaStorage',
-  gun = 'gunStorage'
-}
-export interface StoreOptions {
-  type?: string;
-}
-export enum StorePlugins {
-  local = 'localStorage',
-  session = 'sessionStorage',
-  cookie = 'cookieStorage',
-  memory = 'memoryStorage',
-  vuex = 'vuexStorage',
-  pinia = 'piniaStorage',
-  gun = 'gunStorage'
-}
-export interface GetItem {
-  (key: string): string | object | string[] | object[] | null | boolean;
-}
-export interface SetItem {
-  (key: string, value: string | object | string[] | object[]): void | any;
-}
-export interface RemoveItem {
-  (key: string): void | any;
-}
-export interface UStoreClass {
-  type?: string;
-  _storage?: Storage;
-  getItem?: GetItem;
-  get: GetItem;
-  set: SetItem;
-  remove?: RemoveItem;
-}
+import { localStorage } from './stores/localStorage';
+import { sessionStorage } from './stores/sessionStorage';
+import { cookieStorage } from './stores/cookieStorage';
+import { memoryStorage } from './stores/memoryStorage';
+import { vuexStorage } from './stores/vuexStorage';
+import { piniaStorage } from './stores/piniaStorage';
+import { gunStorage } from './stores/gunStorage';
+import { configStorage } from './stores/configStorage';
+declare const uStore: () => {
+    local: import("./").UStoreClass;
+    session: import("./").UStoreClass;
+    cookie: import("./").UStoreClass;
+    memory: import("./").UStoreClass;
+    vuex: import("./").UStoreClass;
+    pinia: import("./").UStoreClass;
+    gun: import("./").UStoreClass;
+    config: {
+        [x: string]: any;
+        _store: import("./").UStoreClass;
+        set(key: string, value: any): void;
+        getAll(): import("./").UStoreClass;
+        getItem(key: string): any;
+        get(key: string): any;
+        client(): any;
+        dev(): any;
+        server(): any;
+        store(): import("./").UStoreClass;
+        has(key: string): boolean;
+        setEnvironment(): void;
+        getServerVars(): {};
+        getClientVars(): {
+            [key: string]: any;
+        };
+        getUrgentOverrides(): any;
+        buildNestedKey(nestedKey: string): import("./").UStoreClass;
+    };
+};
+export { uStore };
+export default uStore;
+export { localStorage };
+export { sessionStorage };
+export { cookieStorage };
+export { memoryStorage };
+export { vuexStorage };
+export { piniaStorage };
+export { gunStorage };
+export { configStorage };
+//# sourceMappingURL=index.d.ts.map

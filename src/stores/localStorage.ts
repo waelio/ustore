@@ -5,14 +5,14 @@ const local = store.local.namespace('uStore')
 export const localStorage: UStoreClass = {
   get: (key: string) => {
     try {
-      return local(key);
+      return local.get(key);
     } catch (error: any) {
       return error || null;
     }
   },
   set: (key: string, value: any) => {
     try {
-      return local(key, value);
+      return local.set(key, value);
     } catch (error: any) {
       return error || null;
     }

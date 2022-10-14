@@ -5,7 +5,8 @@ import { memoryStorage } from './stores/memoryStorage';
 import { vuexStorage } from './stores/vuexStorage';
 import { piniaStorage } from './stores/piniaStorage';
 import { gunStorage } from './stores/gunStorage';
-// import { StorePlugins } from './types';
+import { configStorage } from './stores/configStorage';
+
 
 const uStore = () => ({
   local: localStorage,
@@ -14,11 +15,21 @@ const uStore = () => ({
   memory: memoryStorage,
   vuex: vuexStorage,
   pinia: piniaStorage,
-  gun: gunStorage
+  gun: gunStorage,
+  config: configStorage
 });
 
 export { uStore };
 export default uStore;
+
+export { localStorage };
+export { sessionStorage };
+export { cookieStorage };
+export { memoryStorage };
+export { vuexStorage };
+export { piniaStorage };
+export { gunStorage };
+export { configStorage };
 
 try {
   if (window && !window['uStore']) {

@@ -1,6 +1,6 @@
 import { uStore } from '../index'
 
-describe('Vuex Storage', () => {
+test('Vuex Storage', () => {
   const payload = 'Test Payload1'
   const label = "test"
   uStore().vuex.set(label, payload)

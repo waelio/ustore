@@ -4,7 +4,7 @@
   "description": "Universal Storage",
   "main": "lib/cjs/index.js",
   "module": "lib/index.js",
-  "types": "lib/types/uStore.d.ts",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "rm -rf lib/ && npm run build:esm && npm run build:cjs",
@@ -36,7 +36,7 @@
   ],
   "sideEffects": false,
   "author": {
-    "name": "Peace Marshals",
+    "name": "Peace Marshal",
     "email": "wahbehw@gmail.com",
     "url": "https://github.com/waelio/universal-store#readme"
   },
@@ -45,7 +45,8 @@
     "url": "https://github.com/waelio/universal-store/issues"
   },
   "files": [
-    "lib"
+        "lib/**/*",
+        "types/**/*"
   ],
   "homepage": "https://github.com/waelio/universal-store#readme",
   "devDependencies": {
