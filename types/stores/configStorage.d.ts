@@ -20,6 +20,7 @@ declare class Config {
     getUrgentOverrides(): any;
     buildNestedKey(nestedKey: string): UStoreClass;
 }
-export declare const configStorage: Config;
+declare const configStorage: Config;
+export { configStorage };
 export default configStorage;
 //# sourceMappingURL=configStorage.d.ts.map

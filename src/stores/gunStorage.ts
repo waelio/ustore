@@ -16,9 +16,10 @@ type p = string | any
 const db = GUN(options);
 export const gunStorage:UStoreClass = ({
   get: async function (key: string) {
-    return new Promise((resolve, reject) => {
-      try {           
-        resolve(db.get(storeName).get(key))
+    return new Promise(async(resolve, reject) => {
+      try {
+        const res = db.get(storeName).get(key)          
+        resolve(res)
       } catch (error: any) {
         reject(error);
       }
@@ -41,9 +42,10 @@ export const gunStorage:UStoreClass = ({
     })
   },
   remove: (key: string) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
       try {
-        resolve(db.get(storeName).get(key).set(null as any))
+        const res = db.get(storeName).get(key).set(null as any)
+        resolve(res)
       } catch (error) {
         reject(error);
       }

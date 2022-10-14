@@ -153,7 +153,8 @@ class Config {
 }
 /**
  * Waelio Universal Storage config
+ * See README for documentations.
  */
-export const configStorage = new Config();
-
+const configStorage = new Config();
+export { configStorage };
 export default configStorage;
