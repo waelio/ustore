@@ -1,6 +1,6 @@
 {
   "name": "@waelio/ustore",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Universal Storage",
   "main": "lib/cjs/index.js",
   "module": "lib/index.js",
@@ -10,7 +10,7 @@
     "build": "rm -rf lib/ && npm run build:esm && npm run build:cjs",
     "build:esm": "tsc",
     "build:cjs": "tsc --module CommonJS --outDir lib/cjs",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",

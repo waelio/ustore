@@ -1,5 +1,5 @@
-import { UStoreClass } from "../.d"; 
-export const cookieStorage: UStoreClass = ({
+import { UStoreClass } from "../.d";
+export const cookieStorage: UStoreClass = {
   get: (key: string) => {
     try {
       return window.document.cookie
@@ -25,5 +25,5 @@ export const cookieStorage: UStoreClass = ({
       return error || null;
     }
   },
-});
-export default cookieStorage
+};
+export default cookieStorage;

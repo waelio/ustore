@@ -1,6 +1,6 @@
-import store from 'store2'
-import { UStoreClass } from '../.d';
-const local = store.local.namespace('uStore')
+import store from "store2";
+import { UStoreClass } from "../.d";
+const local = store.local.namespace("uStore");
 
 export const localStorage: UStoreClass = {
   get: (key: string) => {
@@ -23,6 +23,6 @@ export const localStorage: UStoreClass = {
     } catch (error: any) {
       return error || null;
     }
-  }
+  },
 };
-export default localStorage
+export default localStorage;

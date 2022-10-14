@@ -11,13 +11,13 @@ export interface StoreOptions {
   type?: string;
 }
 export enum StorePlugins {
-  local = 'localStorage',
-  session = 'sessionStorage',
-  cookie = 'cookieStorage',
-  memory = 'memoryStorage',
-  vuex = 'vuexStorage',
-  pinia = 'piniaStorage',
-  gun = 'gunStorage'
+  local = "localStorage",
+  session = "sessionStorage",
+  cookie = "cookieStorage",
+  memory = "memoryStorage",
+  vuex = "vuexStorage",
+  pinia = "piniaStorage",
+  gun = "gunStorage",
 }
 export interface GetItem {
   (key: string): string | object | string[] | object[] | null | boolean;

@@ -54,11 +54,10 @@ app.use(vuexStore);
 export const vuexStorage: UStoreClass = {
   get: (key: string) => vuexStore.getters.getMyValue[key],
   set: (key: string, value: any) => {
-         const payload = new Object();
-        payload[key] = value
+    const payload = new Object();
+    payload[key] = value;
     return vuexStore.commit("setMyValue", payload);
   },
 };
 
-
-export default vuexStorage
+export default vuexStorage;

@@ -1,10 +1,10 @@
-import { UStoreClass } from '../.d';
+import { UStoreClass } from "../.d";
 class Config {
   [x: string]: any;
   _store: UStoreClass;
   constructor() {
     this.setEnvironment();
-    const _ = this
+    const _ = this;
     this._server = _.getServerVars();
     this._client = _.getClientVars();
     this._dev = _.getUrgentOverrides();
@@ -22,7 +22,7 @@ class Config {
 
   set(key: string, value: any) {
     if (key.match(/:/)) {
-      const keys = key.split(':');
+      const keys = key.split(":");
       let storeKey = this._store;
 
       keys.forEach(function (k, i) {
@@ -60,15 +60,15 @@ class Config {
   }
 
   client() {
-    return this.getItem('client');
+    return this.getItem("client");
   }
 
   dev() {
-    return this.getItem('dev');
+    return this.getItem("dev");
   }
 
   server() {
-    return this.getItem('server');
+    return this.getItem("server");
   }
 
   store() {
@@ -80,21 +80,21 @@ class Config {
   }
 
   setEnvironment() {
-    if (process && process['browser']) {
-      this._env = 'client';
+    if (process && process["browser"]) {
+      this._env = "client";
     } else {
-      this._env = 'server';
+      this._env = "server";
     }
   }
 
   getServerVars() {
     let serverVars = {};
 
-    if (this._env === 'server') {
+    if (this._env === "server") {
       try {
-        serverVars = require('../config/server');
+        serverVars = require("../config/server");
       } catch (e: any) {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === "development") {
           console.warn("Didn't find a server config in `./config`.");
         }
       }
@@ -107,11 +107,11 @@ class Config {
     let clientVars: { [key: string]: any };
 
     try {
-      clientVars = require('../config/client');
+      clientVars = require("../config/client");
     } catch (e) {
       clientVars = {};
 
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === "development") {
         console.warn("Didn't find a client config in `./config`.");
       }
     }
@@ -121,12 +121,12 @@ class Config {
 
   getUrgentOverrides() {
     let overrides;
-    const filename = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
+    const filename = process.env.NODE_ENV === "production" ? "prod" : "dev";
     try {
       overrides =
-        process.env.NODE_ENV === 'production'
-          ? require('../config/prod')
-          : require('../config/dev');
+        process.env.NODE_ENV === "production"
+          ? require("../config/prod")
+          : require("../config/dev");
 
       // console.log(`FYI: data in \`./config/${filename}.js\` file will override Server & Client equal data/values.`);
     } catch (e) {
@@ -137,7 +137,7 @@ class Config {
   }
 
   buildNestedKey(nestedKey: string) {
-    const keys = nestedKey.split(':');
+    const keys = nestedKey.split(":");
     let storeKey = this._store;
 
     keys.forEach(function (k: string) {
