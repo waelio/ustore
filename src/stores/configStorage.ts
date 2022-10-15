@@ -157,4 +157,4 @@ class Config {
  */
 const configStorage = new Config();
 export { configStorage };
-export default configStorage;
+export default {configStorage};

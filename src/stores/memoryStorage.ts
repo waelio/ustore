@@ -1,7 +1,7 @@
 import { UStoreClass } from "../.d";
 let memoryStore = {};
 
-export const memoryStorage: UStoreClass = {
+export const memoryStorage: UStoreClass = ({
   get: (key: string) => (memoryStore[key] ? memoryStore[key] : key),
   set: (key: string, value: any) => {
     memoryStore[key] = value;
@@ -11,5 +11,5 @@ export const memoryStorage: UStoreClass = {
     memoryStore[key] ? delete memoryStore[key] : null;
     return true;
   },
-};
+});
 export default memoryStorage;

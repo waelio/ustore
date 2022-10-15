@@ -10,7 +10,7 @@
     "forceConsistentCasingInFileNames": true, /* Disallow inconsistently */
     "incremental": true, /* Enable incremental compilation */
     "lib": [
-      "es2017",
+      "ES2022",
       "es7",
       "es6",
       "dom"

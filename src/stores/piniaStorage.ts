@@ -21,9 +21,9 @@ const useStore = defineStore("piniaStorage", {
   },
 });
 const pn_storage = useStore();
-export const piniaStorage: UStoreClass = {
+export const piniaStorage: UStoreClass = ({
   get: () => pn_storage.get ?? "undefined",
   set: (value: any) => pn_storage.add(value),
   remove: () => pn_storage.remove,
-};
+});
 export default piniaStorage;

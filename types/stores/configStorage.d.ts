@@ -22,5 +22,8 @@ declare class Config {
 }
 declare const configStorage: Config;
 export { configStorage };
-export default configStorage;
+declare const _default: {
+    configStorage: Config;
+};
+export default _default;
 //# sourceMappingURL=configStorage.d.ts.map
