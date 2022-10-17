@@ -1,17 +1,29 @@
-import Gun from "gun";
-// import { SEA } from "gun";
 
-import { UStoreClass } from "../.d";
-import { _to, _reParseString } from "waelio-utils";
+import { UStoreClass } from '../.d';
+import { _to } from "waelio-utils";
+import Gun from 'gun/gun';
 
-const options = { peers: ["https://gunjs-mtl.herokuapp.com/gun"] }
+const peers: string[] = ['https://gunjs-mtl.herokuapp.com/gun'];
+const options = JSON.stringify(peers);
 
-const storeName = "uStoreGunDB";
+export const storeName = 'uStoreGunDB';
+
+
 type p = string | any;
 
 // initialize gun
-const db = Gun(options);
-export const gunStorage: UStoreClass = ({
+export const db = new Gun(options);
+export const gunStorage: UStoreClass = {
+  getItem: async function (key: string) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = db.get(storeName).get(key);
+        resolve(res);
+      } catch (error: any) {
+        reject(error);
+      }
+    });
+  },
   get: async function (key: string) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -25,11 +37,12 @@ export const gunStorage: UStoreClass = ({
   set: (key: string, value: p) => {
     return new Promise((resolve, reject) => {
       try {
-        resolve(db.get(storeName).get(key).set(value));
+        const res = db.get(storeName).get(key).set(value);
+        resolve(res);
       } catch (error: any) {
         console.log(error);
 
-        reject("error");
+        reject('error');
       }
     });
   },
@@ -45,7 +58,7 @@ export const gunStorage: UStoreClass = ({
         reject(error);
       }
     });
-  },
-});
+  }
+};
 
 export default gunStorage;

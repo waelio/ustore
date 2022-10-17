@@ -4,27 +4,27 @@ export var memoryStore = {};
 export const cookieStorage: UStoreClass = ({
   get: (key: string) => {
     try {
-      return isReady ?
+      return !isReady ? memoryStore[key] :
         window.document.cookie
         .split(";")
-          .find((item: string) => item.split("=")[0] === key) :
-        memoryStore[key]
+          .find((item: string) => item.split("=")[0] === key) 
+        
     } catch (error: any) {
       return error || null;
     }
   },
   set: (key: string, value: any) => {
     try {
-      isReady ? window.document.cookie = `${key}=${value}` : memoryStore = { ... { key: value } };
-      return true;
+      const payload = {}
+      payload[key] = value
+      return !isReady ? memoryStore = payload : window.document.cookie = `${key}=${value}`;      
     } catch (error: any) {
       return error || null;
     }
   },
   remove: (key: string) => {
     try {
-      isReady ? window.document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:01 GMT;`: memoryStore = { ... { key: null } };
-      return true;
+      return !isReady ? memoryStore = { ... { key: null } } : window.document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:01 GMT;`;      
     } catch (error: any) {
       return error || null;
     }

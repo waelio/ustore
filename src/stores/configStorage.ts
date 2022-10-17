@@ -1,4 +1,6 @@
-import { UStoreClass } from "../.d";
+import { UStoreClass } from '../.d';
+import type client from '../config/client'
+
 class Config {
   [x: string]: any;
   _store: UStoreClass;
@@ -20,9 +22,14 @@ class Config {
     );
   }
 
+  /**
+   *
+   * @param key
+   * @param value
+   */
   set(key: string, value: any) {
     if (key.match(/:/)) {
-      const keys = key.split(":");
+      const keys = key.split(':');
       let storeKey = this._store;
 
       keys.forEach(function (k, i) {
@@ -40,15 +47,24 @@ class Config {
       this._store[key] = value;
     }
   }
-
+  /**
+   * Get all store values
+   */
   getAll() {
     return this._store;
   }
 
+  /**
+   * Gte a single value
+   * @param key
+   */
   getItem(key: string) {
     return this._store[key];
   }
-
+  /**
+   * Get key from nestedKey :
+   * @param key
+   */
   get(key: string) {
     if (key.match(/:/)) {
       const storeKey = this.buildNestedKey(key);
@@ -59,76 +75,102 @@ class Config {
     return this._store[key];
   }
 
+  /**
+   * get all client store
+   */
   client() {
-    return this.getItem("client");
+    return this.getItem('client');
   }
 
+  /**
+   * get all dev store
+   */
   dev() {
-    return this.getItem("dev");
+    return this.getItem('dev');
   }
 
+  /**
+   * get all server store
+   */
   server() {
-    return this.getItem("server");
+    return this.getItem('server');
   }
 
+  /**
+   * got all values from store
+   */
   store() {
     return this._store;
   }
 
+  /**
+   * Check if a key exists
+   * @param key
+   * @return Boolean
+   */
   has(key: string) {
     return Boolean(this.get(key));
   }
 
+  /**
+   * Internal inistializalion
+   */
   setEnvironment() {
-    if (process && process["browser"]) {
-      this._env = "client";
+    if (process && process['browser']) {
+      this._env = 'client';
     } else {
-      this._env = "server";
+      this._env = 'server';
     }
   }
 
+  /**
+   * Internal inistializalion
+   */
   getServerVars() {
     let serverVars = {};
 
-    if (this._env === "server") {
+    if (this._env === 'server') {
       try {
-        serverVars = require("../config/server");
+        serverVars = import('../config/server');
       } catch (e: any) {
-        if (process.env.NODE_ENV === "development") {
-          console.warn("Didn't find a server config in `./config`.");
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('Could not find a server.js config in `./config`.');
         }
       }
     }
-
     return serverVars;
   }
-
+  /**
+   * Internal inistializalion
+   */
   getClientVars() {
-    let clientVars: { [key: string]: any };
+    
 
     try {
-      clientVars = require("../config/client");
-    } catch (e) {
-      clientVars = {};
-
-      if (process.env.NODE_ENV === "development") {
+      return import('../config/client')
+    } catch (e) {      
+      if (process.env.NODE_ENV === 'development') {
         console.warn("Didn't find a client config in `./config`.");
+        console.log(e);
+        
       }
-    }
-
-    return clientVars;
+    }    
   }
-
+  /**
+   * Internal inistializalion
+   */
   getUrgentOverrides() {
-    let overrides;
-    const filename = process.env.NODE_ENV === "production" ? "prod" : "dev";
+    let overrides: {};
+    const filename = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
     try {
       overrides =
-        process.env.NODE_ENV === "production"
-          ? require("../config/prod")
-          : require("../config/dev");
+        process.env.NODE_ENV === 'production'
+          ? import('../config/prod')
+          : import('../config/dev');
 
-      // console.log(`FYI: data in \`./config/${filename}.js\` file will override Server & Client equal data/values.`);
+      console.log(
+        `FYI: data in \`./config/${filename}.js\` file will override Server & Client equal data/values.`
+      );
     } catch (e) {
       overrides = {};
     }
@@ -136,8 +178,12 @@ class Config {
     return overrides;
   }
 
+  /**
+   * Build nested pairs
+   * @param nestedKey 
+   */
   buildNestedKey(nestedKey: string) {
-    const keys = nestedKey.split(":");
+    const keys = nestedKey.split(':');
     let storeKey = this._store;
 
     keys.forEach(function (k: string) {
@@ -151,10 +197,8 @@ class Config {
     return storeKey;
   }
 }
-/**
- * Waelio Universal Storage config
- * See README for documentations.
- */
-const configStorage = new Config();
-export { configStorage };
-export default {configStorage};
+
+
+export type ConfigStorage = typeof configStorage
+export const configStorage =  new Config();
+export default configStorage as ConfigStorage ;

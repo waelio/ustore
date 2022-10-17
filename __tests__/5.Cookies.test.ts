@@ -1,10 +1,10 @@
 import { uStore } from '../index'
 if (window && typeof window !== undefined) {
+  const payload = 'Test Payload1'
+  const label = "label"
   test('Cookie Storage', () => {
-    const payload = 'Test Payload1'
-    const label = "test"
-    uStore().cookie.set(label, payload)  
-    expect(uStore().cookie.get(label)).toEqual(payload);  
+    uStore.cookie().set('label', payload)  
+    expect(uStore.cookie().get('label')).toEqual(`${label}=${payload}`)
   })
   
 }

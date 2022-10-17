@@ -1,4 +1,4 @@
-import { UStoreClass } from "../.d";
+import { UStoreClass } from '../.d';
 declare class Config {
     [x: string]: any;
     _store: UStoreClass;
@@ -14,16 +14,12 @@ declare class Config {
     has(key: string): boolean;
     setEnvironment(): void;
     getServerVars(): {};
-    getClientVars(): {
-        [key: string]: any;
-    };
-    getUrgentOverrides(): any;
+    getClientVars(): Promise<typeof import("../config/client")> | undefined;
+    getUrgentOverrides(): {};
     buildNestedKey(nestedKey: string): UStoreClass;
 }
-declare const configStorage: Config;
-export { configStorage };
-declare const _default: {
-    configStorage: Config;
-};
+export declare type ConfigStorage = typeof configStorage;
+export declare const configStorage: Config;
+declare const _default: Config;
 export default _default;
 //# sourceMappingURL=configStorage.d.ts.map

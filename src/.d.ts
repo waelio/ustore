@@ -26,4 +26,8 @@ export interface UStoreClass {
   get: GetItem;
   set: SetItem;
   remove?: RemoveItem;
+  has?: boolean;
+}
+export interface uStore {
+  [key: StorePlugins]: Partial<StorePlugins<UStoreClass>>
 }

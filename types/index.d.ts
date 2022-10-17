@@ -6,14 +6,28 @@ import { vuexStorage } from "./stores/vuexStorage";
 import { piniaStorage } from "./stores/piniaStorage";
 import { gunStorage } from "./stores/gunStorage";
 import { configStorage } from "./stores/configStorage";
-declare const uStore: () => {
-    local: import("./").UStoreClass;
-    session: import("./").UStoreClass;
-    cookie: import("./").UStoreClass;
-    memory: import("./").UStoreClass;
-    vuex: import("./").UStoreClass;
-    pinia: import("./").UStoreClass;
-    gun: import("./").UStoreClass;
+export declare type uStore = {
+    local: typeof localStorage;
+    session: typeof sessionStorage;
+    cookie: typeof cookieStorage;
+    memory: typeof memoryStorage;
+    vuex: typeof vuexStorage;
+    pinia: typeof piniaStorage;
+    gun: typeof gunStorage;
+    config: typeof configStorage;
+};
+export declare const uStore: {
+    local: () => import("./").UStoreClass;
+    session: () => import("./").UStoreClass;
+    cookie: () => import("./").UStoreClass;
+    memory: () => import("./").UStoreClass;
+    vuex: () => {
+        get: () => (state: import("./stores/vuexStorage")._possibleStateValues) => import("./stores/vuexStorage")._possibleStateValues;
+        add: (key: string, value: any) => any;
+        set: (key: string, value: any) => any;
+    };
+    pinia: () => import("./").UStoreClass;
+    gun: () => import("./").UStoreClass;
     config: {
         [x: string]: any;
         _store: import("./").UStoreClass;
@@ -28,14 +42,11 @@ declare const uStore: () => {
         has(key: string): boolean;
         setEnvironment(): void;
         getServerVars(): {};
-        getClientVars(): {
-            [key: string]: any;
-        };
-        getUrgentOverrides(): any;
+        getClientVars(): Promise<typeof import("./config/client")> | undefined;
+        getUrgentOverrides(): {};
         buildNestedKey(nestedKey: string): import("./").UStoreClass;
     };
 };
-export { uStore };
 export default uStore;
 export { localStorage };
 export { sessionStorage };

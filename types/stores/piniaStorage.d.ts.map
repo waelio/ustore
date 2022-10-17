@@ -1,1 +1,1 @@
-{"version":3,"file":"piniaStorage.d.ts","sourceRoot":"","sources":["../../src/stores/piniaStorage.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,WAAW,EAAE,MAAM,OAAO,CAAC;AAGpC,eAAO,MAAM,GAAG,4BAAgB,CAAC;AAoBjC,eAAO,MAAM,YAAY,EAAE,WAIzB,CAAC;AACH,eAAe,YAAY,CAAC"}
+{"version":3,"file":"piniaStorage.d.ts","sourceRoot":"","sources":["../../src/stores/piniaStorage.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,WAAW,EAAE,MAAM,OAAO,CAAC;AAKpC,eAAO,MAAM,GAAG,4BAAgB,CAAC;AAGjC,oBAAY,MAAM,GAAG;IACnB,GAAG,EAAE,GAAG,CAAC;CACV,CAAA;AA2BD,eAAO,MAAM,YAAY,EAAE,WAQzB,CAAC;AACH,eAAe,YAAY,CAAC"}

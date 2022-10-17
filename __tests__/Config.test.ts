@@ -1,17 +1,17 @@
 import { configStorage } from '../index';
+const config = configStorage
 
 test('testing config', () => {
-  const dummys = ['test1', 'hot_cold', 'test1 test 2'];
   const envvs = ['client', 'dev', 'server'];
+  const dummys = ['test1', 'hot_cold', 'test1 test 2'];
 
   for (let index = 0; index < dummys.length; index++) {
     for (let indexx = 0; indexx < envvs.length; indexx++) {
-      let tst = configStorage.set(
-        `${envvs[indexx]}:${dummys[index]}`,
-        dummys[index]
-      );
-      expect(configStorage.get(`${envvs[indexx]}:${dummys[index]}`)).toEqual(
-        dummys[index]
+      let KEY = `${envvs[indexx]}:CONFIG`;
+      let VALUE = dummys[index]
+      config.set(KEY, VALUE );
+      expect(config.get(KEY)).toEqual(
+        VALUE
       );
     }
   }

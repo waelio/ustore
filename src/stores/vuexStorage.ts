@@ -4,35 +4,32 @@ import { createStore } from "vuex";
 export const app = createApp({});
 
 export interface _possibleStateValues {
-  [key: string]: () =>
-    | string
-    | number
-    | boolean
-    | object
-    | []
-    | null
-    | undefined;
+  [key:string]: any  
+
+    
 }
 export interface _state {
-  [key: string]:
-    | _possibleStateValues
-    | string
-    | number
-    | boolean
-    | object
-    | []
-    | null
-    | undefined;
+  [key: string]: any
+  
 }
-const vuexStore = createStore({
-  state: (): _state => ({
-    myValue: "",
+export interface _actions {
+  set: (contetx?: any, value?: any) => void;
+}
+export interface _getters {
+  getMyValue: (state: _possibleStateValues) => _possibleStateValues;
+}
+type VuexStore = {
+[x: string]: any;
+  state: _state;
+  actions?: _actions;
+  getters: _getters;
+}
+const vuexStore:VuexStore = createStore({
+  state: () => ({
+    myValue: '',
   }),
   mutations: {
-    setMyValue(
-      state: typeof vuexStore.state,
-      value: string | { [key: string]: string }
-    ): void {
+    setMyValue(state: any, value: string | { [key: string]: string }): void {
       if (typeof value === "string") {
         state.myValue = value;
       } else if (typeof value === "object") {
@@ -42,17 +39,26 @@ const vuexStore = createStore({
       }
     },
   },
+  actions: {
+    set(context, value) {
+      context.commit('setMyValue', value)
+      
+    }
+  },
   getters: {
-    getMyValue(state: typeof vuexStore.state) {
-      return state.myValue;
-    },
+    getMyValue: (state: any) => state.myValue    
   },
   strict: true,
 });
-app.use(vuexStore);
 
-export const vuexStorage: UStoreClass = {
-  get: (key: string) => vuexStore.getters.getMyValue[key],
+
+export const vuexStorage = {
+  get: () => vuexStore.getters.getMyValue,
+  add: (key: string, value: any)=>{
+    const payload = new Object();
+    payload[key] = value;
+    return vuexStore.commit("setMyValue", payload);
+  },
   set: (key: string, value: any) => {
     const payload = new Object();
     payload[key] = value;
