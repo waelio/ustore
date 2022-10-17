@@ -5,6 +5,7 @@
   "main": "lib/cjs/index.js",
   "module": "lib/index.js",
   "types": "types/index.d.ts",
+  "public": "true",
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "rm -rf lib/ && npm run build:esm && npm run build:cjs",

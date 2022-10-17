@@ -1,4 +1,4 @@
-import { UStoreClass } from '../.d';
+import { UStoreClass } from "../.d";
 declare class Config {
     [x: string]: any;
     _store: UStoreClass;
