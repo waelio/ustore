@@ -2,7 +2,7 @@ import store from "store2";
 import { UStoreClass } from "../.d";
 const local = store.local.namespace("uStore");
 
-export const localStorage: UStoreClass = ({
+export const localStorage: UStoreClass = {
   get: (key: string) => {
     try {
       return local.get(key);
@@ -24,5 +24,5 @@ export const localStorage: UStoreClass = ({
       return error || null;
     }
   },
-});
+};
 export default localStorage;

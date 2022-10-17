@@ -1,6 +1,6 @@
 {
   "name": "@waelio/ustore",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Universal Storage",
   "main": "lib/cjs/index.js",
   "module": "lib/index.js",

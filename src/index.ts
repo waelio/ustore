@@ -8,17 +8,17 @@ import { gunStorage } from "./stores/gunStorage";
 import { configStorage } from "./stores/configStorage";
 
 export type uStore = {
-  local: typeof localStorage
-  session: typeof sessionStorage
-  cookie: typeof cookieStorage
-  memory: typeof memoryStorage
-  vuex: typeof vuexStorage
-  pinia: typeof piniaStorage
-  gun: typeof  gunStorage
-  config: typeof  configStorage  
-}
+  local: typeof localStorage;
+  session: typeof sessionStorage;
+  cookie: typeof cookieStorage;
+  memory: typeof memoryStorage;
+  vuex: typeof vuexStorage;
+  pinia: typeof piniaStorage;
+  gun: typeof gunStorage;
+  config: typeof configStorage;
+};
 
-export const uStore = ({
+export const uStore = {
   local: () => localStorage,
   session: () => sessionStorage,
   cookie: () => cookieStorage,
@@ -27,8 +27,7 @@ export const uStore = ({
   pinia: () => piniaStorage,
   gun: () => gunStorage,
   config: configStorage,
-})
-
+};
 
 export default uStore;
 

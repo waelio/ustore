@@ -29,5 +29,5 @@ export interface UStoreClass {
   has?: boolean;
 }
 export interface uStore {
-  [key: StorePlugins]: Partial<StorePlugins<UStoreClass>>
+  [key: StorePlugins]: Partial<StorePlugins<UStoreClass>>;
 }
