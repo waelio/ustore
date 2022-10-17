@@ -6,6 +6,10 @@
   "module": "lib/index.js",
   "types": "types/index.d.ts",
   "public": "true",
+  "private": "false",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "rm -rf lib/ && npm run build:esm && npm run build:cjs",
