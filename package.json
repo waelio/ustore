@@ -368,9 +368,9 @@
   },
   "dependencies": {
     "gun": "0.2020.1238",
+    "vue-demi": "^0.13.11",
     "pinia": "2.0.22",
     "store2": "^2.14.2",
-    "vue-demi": "^0.13.11",
     "vue": "3.2.39",
     "vuex": "4.0.2",
     "waelio-utils": "4.0.2"
