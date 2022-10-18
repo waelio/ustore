@@ -1,6 +1,6 @@
 {
   "name": "@waelio/ustore",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Universal Storage",
   "main": "lib/cjs/index.js",
   "module": "lib/index.js",
@@ -373,7 +373,5 @@
     "vuex": "4.0.2",
     "waelio-utils": "4.0.2"
   },
-  "dependencies": {
-   
-  }
+  "dependencies": {}
 }
