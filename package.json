@@ -327,7 +327,6 @@
     "update-browserslist-db": "^1.0.9",
     "url-parse": "^1.5.10",
     "v8-to-istanbul": "^9.0.1",
-    "vue-demi": "^0.13.11",
     "w3c-xmlserializer": "^3.0.0",
     "source-map-js": "^1.0.2",
     "walker": "^1.0.8",
@@ -371,6 +370,7 @@
     "gun": "0.2020.1238",
     "pinia": "2.0.22",
     "store2": "^2.14.2",
+    "vue-demi": "^0.13.11",
     "vue": "3.2.39",
     "vuex": "4.0.2",
     "waelio-utils": "4.0.2"
