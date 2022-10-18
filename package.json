@@ -67,17 +67,7 @@
     "gun": "0.2020.1238",
     "pinia": "2.0.23",
     "store2": "^2.14.2",
-    "vue-demi": "latest",
     "vuex": "4.1.0",
     "waelio-utils": "4.4.2"
-  },
-  "peerDependencies": {
-    "@vue/composition-api": "^1.0.0-rc.1",
-    "vue": "^2.0.0 || >=3.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@vue/composition-api": {
-      "optional": true
-    }
   }
 }
