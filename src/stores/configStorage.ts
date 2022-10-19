@@ -1,7 +1,5 @@
 import { UStoreClass } from "../.d";
-import type client from "../config/client";
-
-class Config {
+export class Config {
   [x: string]: any;
   _store: UStoreClass;
   constructor() {

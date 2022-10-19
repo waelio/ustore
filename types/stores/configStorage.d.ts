@@ -1,5 +1,5 @@
 import { UStoreClass } from "../.d";
-declare class Config {
+export declare class Config {
     [x: string]: any;
     _store: UStoreClass;
     constructor();

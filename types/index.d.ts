@@ -28,24 +28,7 @@ export declare const uStore: {
     };
     pinia: () => import("./").UStoreClass;
     gun: () => import("./").UStoreClass;
-    config: {
-        [x: string]: any;
-        _store: import("./").UStoreClass;
-        set(key: string, value: any): void;
-        getAll(): import("./").UStoreClass;
-        getItem(key: string): any;
-        get(key: string): any;
-        client(): any;
-        dev(): any;
-        server(): any;
-        store(): import("./").UStoreClass;
-        has(key: string): boolean;
-        setEnvironment(): void;
-        getServerVars(): {};
-        getClientVars(): Promise<typeof import("./config/client")> | undefined;
-        getUrgentOverrides(): {};
-        buildNestedKey(nestedKey: string): import("./").UStoreClass;
-    };
+    config: import("./stores/configStorage").Config;
 };
 export default uStore;
 export { localStorage };
