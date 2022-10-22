@@ -17,17 +17,17 @@ export declare type uStore = {
     config: typeof configStorage;
 };
 export declare const uStore: {
-    local: () => import("./").UStoreClass;
-    session: () => import("./").UStoreClass;
-    cookie: () => import("./").UStoreClass;
-    memory: () => import("./").UStoreClass;
-    vuex: () => {
+    local: import("./").UStoreClass;
+    session: import("./").UStoreClass;
+    cookie: import("./").UStoreClass;
+    memory: import("./").UStoreClass;
+    vuex: {
         get: () => (state: import("./stores/vuexStorage")._possibleStateValues) => import("./stores/vuexStorage")._possibleStateValues;
         add: (key: string, value: any) => any;
         set: (key: string, value: any) => any;
     };
-    pinia: () => import("./").UStoreClass;
-    gun: () => import("./").UStoreClass;
+    pinia: import("./").UStoreClass;
+    gun: import("./").UStoreClass;
     config: import("./stores/configStorage").Config;
 };
 export default uStore;

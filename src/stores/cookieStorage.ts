@@ -1,5 +1,5 @@
 import { UStoreClass } from "../.d";
-const isReady = Boolean(typeof window !== undefined);
+const isReady = Boolean(typeof window !== 'undefined');
 export var memoryStore = {};
 export const cookieStorage: UStoreClass = {
   get: (key: string) => {

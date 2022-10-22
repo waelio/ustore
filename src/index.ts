@@ -19,13 +19,13 @@ export type uStore = {
 };
 
 export const uStore = {
-  local: () => localStorage,
-  session: () => sessionStorage,
-  cookie: () => cookieStorage,
-  memory: () => memoryStorage,
-  vuex: () => vuexStorage,
-  pinia: () => piniaStorage,
-  gun: () => gunStorage,
+  local: localStorage,
+  session: sessionStorage,
+  cookie: cookieStorage,
+  memory: memoryStorage,
+  vuex: vuexStorage,
+  pinia: piniaStorage,
+  gun: gunStorage,
   config: configStorage,
 };
 
@@ -40,10 +40,9 @@ export { piniaStorage };
 export { gunStorage };
 export { configStorage };
 
-try {
-  if (window && !window["uStore"]) {
+
+  if (typeof window !== 'undefined') {
     window["uStore"] = uStore;
+  } else {
+    globalThis["uStore"] = uStore;
   }
-} catch (err) {
-  console.log("Oops, `window` is not defined");
-}
