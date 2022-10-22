@@ -40,9 +40,8 @@ export { piniaStorage };
 export { gunStorage };
 export { configStorage };
 
-
-  if (typeof window !== 'undefined') {
-    window["uStore"] = uStore;
-  } else {
-    globalThis["uStore"] = uStore;
-  }
+if (typeof window !== "undefined") {
+  window["uStore"] = uStore;
+} else {
+  globalThis["uStore"] = uStore;
+}
