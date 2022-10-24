@@ -147,7 +147,6 @@ export class Config {
     } catch (e) {
       if (process.env.NODE_ENV === "development") {
         console.warn("Didn't find a client config in `./config`.");
-        console.log(e);
       }
     }
   }
