@@ -23,71 +23,80 @@ Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
 <li>config: <a href="#config">config</a></li>
 </ol>
 
-#
+<hr>
 
 # local
+Window local Storage,<a href="#references"><i> see docs below</i></a>
 ```js
 import { uStore } from '@waelio/ustore'
 ustore.local.set('testName', 'test Payload')
 ustore.local.get('testName') === 'test Payload'
 ```
+[Back to TOP](#)
 # session
+Window session Storage,<a href="#references"><i> see docs below</i></a>
 ```js
 import { uStore } from '@waelio/ustore'
 uStore.session.set('testName', 'test Payload')
 uStore.session.get('testName') === 'test Payload'
-
 ```
+[Back to TOP](#)
 # cookie
+Document Cookies,<a href="#references"><i> see docs below</i></a>
 ```js
 import { uStore } from '@waelio/ustore'
 uStore.cookie.set('testName', 'test Payload')
 uStore.cookie.get('testName') === 'test Payload'
-
 ```
+[Back to TOP](#)
 # vuex
+Vue state management,<a href="#references"><i> see docs below</i></a>
 ```js
 import { uStore } from '@waelio/ustore'
 uStore.vuex.set('testName', 'test Payload')
 uStore.vuex.get('testName') === 'test Payload'
-
 ```
+[Back to TOP](#)
 # pinia
+Pinia State Management,<a href="#references"><i> see docs below</i></a>
 ```js
 import { uStore } from '@waelio/ustore'
 uStore.pinia.set('testName', 'test Payload')
 uStore.pinia.get('testName') === 'test Payload'
-
-
-
 ```
+[Back to TOP](#)
 # gun
+Gun DB, ,<a href="#references"><i> see docs below</i></a>
 ```js
 import { uStore } from '@waelio/ustore'
 uStore.gun.set('testName', 'test Payload')
 uStore.gun.get('testName') === 'test Payload'
-
-
 ```
+[Back to TOP](#)
 # memory
+In memory storage
 ```js
 import { uStore } from '@waelio/ustore'
 uStore.memory.set('testName', 'test Payload')
 uStore.memory.get('testName') === 'test Payload'
-
 ```
-
+[Back to TOP](#)
 # config 
+Config is home-brewed solution, more documentations coming soon.
 ```js
 import { uStore } from '@waelio/ustore'
 uStore.config.set('client:testName', 'test Payload')
 uStore.config.get('client:testName') === 'test Payload'
 ```
+[Back to TOP](#)
 #
-# References:
+# References
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">Window Local storage</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage" target="_blank">Window Session Storage</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie" target="_blank">Document Cookie storage</a></li>
 <li><a href="https://vuex.vuejs.org/" target="_blank">Vuex state management</a></li>
 <li><a href="https://pinia.vuejs.org/" target="_blank">Pinia state management</a></li>
 <li><a href="https://gun.eco/" target="_blank">Gun DB</a></li>
+<hr/>
+
+[Back to TOP](#)
