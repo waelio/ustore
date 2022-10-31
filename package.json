@@ -1,13 +1,13 @@
 {
   "name": "@waelio/ustore",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "Universal Storage",
   "main": "root/lib/index.js",
   "types": "root/types/index.d.ts",
   "public": "true",
   "publishConfig": {
     "access": "public"
-  },    
+  },
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "rm -rf root/lib && npm run build:esm && npm run build:cjs",
