@@ -1,10 +1,10 @@
 import { UStoreClass } from "../.d";
-export declare const isProcess: () => unknown | boolean;
 export declare class Config {
     configPath: string;
     [x: string]: {} | Promise<unknown> | Promise<string> | Promise<Function>;
     _store: Partial<UStoreClass>;
     constructor();
+    isProcess(): unknown;
     set(key: string, value: unknown): void;
     getAll(): Partial<UStoreClass>;
     getItem(key: string): any;
