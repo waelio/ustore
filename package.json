@@ -2,13 +2,13 @@
   "name": "@waelio/ustore",
   "version": "0.0.24",
   "description": "Universal Storage",
-  "main": "lib/cjs/index.js",
+  "main": "lib/index.js",
   "module": "commonjs",
   "types": "lib/types.js",
   "exports": {
     ".": {
       "browser": {
-        "default": "./lib/cjs/index.js"
+        "default": "./lib/index.js"
       }
     }
   },
@@ -30,7 +30,7 @@
     "postversion": "git push && git push --tags"
   },
   "bin": {
-    "uStore": "lib/cjs/index.js"
+    "uStore": "lib/index.js"
   },
   "directories": {
     "lib": "lib",
