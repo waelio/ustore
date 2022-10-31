@@ -1,11 +1,11 @@
-import { configStorage }  from "./stores/configStorage";
-import { localStorage }   from "./stores/localStorage";
+import { configStorage } from "./stores/configStorage";
+import { localStorage } from "./stores/localStorage";
 import { sessionStorage } from "./stores/sessionStorage";
-import { cookieStorage }  from "./stores/cookieStorage";
-import { memoryStorage }  from "./stores/memoryStorage";
-import { vuexStorage }    from "./stores/vuexStorage";
-import { piniaStorage }   from "./stores/piniaStorage";
-import { gunStorage }     from "./stores/gunStorage";
+import { cookieStorage } from "./stores/cookieStorage";
+import { memoryStorage } from "./stores/memoryStorage";
+import { vuexStorage } from "./stores/vuexStorage";
+import { piniaStorage } from "./stores/piniaStorage";
+import { gunStorage } from "./stores/gunStorage";
 
 export type uStore = {
   local: typeof localStorage;
