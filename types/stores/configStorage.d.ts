@@ -1,22 +1,23 @@
-import { UStoreClass } from "../.d";
+import { UStoreClass } from '../.d';
+export declare const isProcess: () => unknown | boolean;
 export declare class Config {
-    [x: string]: any;
-    _store: UStoreClass;
+    [x: string]: {};
+    _store: Partial<UStoreClass>;
     constructor();
-    set(key: string, value: any): void;
-    getAll(): UStoreClass;
+    set(key: string, value: unknown): void;
+    getAll(): Partial<UStoreClass>;
     getItem(key: string): any;
     get(key: string): any;
     client(): any;
     dev(): any;
     server(): any;
-    store(): UStoreClass;
+    store(): Partial<UStoreClass>;
     has(key: string): boolean;
     setEnvironment(): void;
     getServerVars(): {};
-    getClientVars(): Promise<typeof import("../config/client")> | undefined;
+    getClientVars(): any;
     getUrgentOverrides(): {};
-    buildNestedKey(nestedKey: string): UStoreClass;
+    buildNestedKey(nestedKey: string): Partial<UStoreClass>;
 }
 export declare type ConfigStorage = typeof configStorage;
 export declare const configStorage: Config;

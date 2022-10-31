@@ -1,22 +1,36 @@
-import { UStoreClass } from "../.d";
+/* eslint-disable @typescript-eslint/ban-types */
+import { UStoreClass } from '../.d';
+import path from 'path';
+
+// path.exists('/config', function (exists) { console.log("Does the file exist?", exists) })
+
+export const isProcess = (): unknown | boolean => {
+  try {
+    return process['browser'] as unknown;
+  } catch (error) {
+    return false;
+  }
+};
 export class Config {
-  [x: string]: any;
-  _store: UStoreClass;
+  [x: string]: {};
+  _store: Partial<UStoreClass>;
   constructor() {
+    this.configPath = path.join(path.dirname(__dirname), "../../lib/config")
     this.setEnvironment();
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const _ = this;
-    this._server = _.getServerVars();
-    this._client = _.getClientVars();
-    this._dev = _.getUrgentOverrides();
+    this._server = _.getServerVars(); /**? */
+    this._client = _.getClientVars(); /**? */
+    this._dev = _.getUrgentOverrides(); /**? */
 
     this._store = Object.assign(
       {},
-      { ..._._client.default },
-      { ..._._server.default },
-      { ..._._dev.default },
-      { client: _._client.default },
-      { server: _._server.default },
-      { dev: _._dev.default }
+      { ..._._client },
+      { ..._._server },
+      { ..._._dev },
+      { client: _._client },
+      { server: _._server },
+      { dev: _._dev }
     );
   }
 
@@ -25,9 +39,9 @@ export class Config {
    * @param key
    * @param value
    */
-  set(key: string, value: any) {
+  set(key: string, value: unknown) {
     if (key.match(/:/)) {
-      const keys = key.split(":");
+      const keys = key.split(':');
       let storeKey = this._store;
 
       keys.forEach(function (k, i) {
@@ -77,21 +91,21 @@ export class Config {
    * get all client store
    */
   client() {
-    return this.getItem("client");
+    return this.getItem('client');
   }
 
   /**
    * get all dev store
    */
   dev() {
-    return this.getItem("dev");
+    return this.getItem('dev');
   }
 
   /**
    * get all server store
    */
   server() {
-    return this.getItem("server");
+    return this.getItem('server');
   }
 
   /**
@@ -114,10 +128,10 @@ export class Config {
    * Internal inistializalion
    */
   setEnvironment() {
-    if (process && process["browser"]) {
-      this._env = "client";
+    if (process && process['browser']) {
+      this._env = 'client';
     } else {
-      this._env = "server";
+      this._env = 'server';
     }
   }
 
@@ -127,12 +141,13 @@ export class Config {
   getServerVars() {
     let serverVars = {};
 
-    if (this._env === "server") {
+    if (this._env === 'server') {
       try {
-        serverVars = import("../config/server");
-      } catch (e: any) {
-        if (process.env.NODE_ENV === "development") {
-          console.warn("Could not find a server.js config in `./config`.");
+        const serverPath = path.join(__dirname, '/config/server.ts');
+        serverVars = require(serverPath);
+      } catch (e: unknown) {
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('Could not find a server.js config in `./config`.');
         }
       }
     }
@@ -143,9 +158,9 @@ export class Config {
    */
   getClientVars() {
     try {
-      return import("../config/client");
+      return require(this.configPath+'/client');
     } catch (e) {
-      if (process.env.NODE_ENV === "development") {
+      if (process.env.NODE_ENV === 'development') {
         console.warn("Didn't find a client config in `./config`.");
       }
     }
@@ -155,12 +170,9 @@ export class Config {
    */
   getUrgentOverrides() {
     let overrides: {};
-    const filename = process.env.NODE_ENV === "production" ? "prod" : "dev";
+    const filename = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
     try {
-      overrides =
-        process.env.NODE_ENV === "production"
-          ? import("../config/prod")
-          : import("../config/dev");
+      overrides = require(`${this.configPath}/${filename}`)/**? */
 
       console.log(
         `FYI: data in \`./config/${filename}.js\` file will override Server & Client equal data/values.`
@@ -177,7 +189,7 @@ export class Config {
    * @param nestedKey
    */
   buildNestedKey(nestedKey: string) {
-    const keys = nestedKey.split(":");
+    const keys = nestedKey.split(':');
     let storeKey = this._store;
 
     keys.forEach(function (k: string) {
@@ -194,4 +206,5 @@ export class Config {
 
 export type ConfigStorage = typeof configStorage;
 export const configStorage = new Config();
+
 export default configStorage as ConfigStorage;
