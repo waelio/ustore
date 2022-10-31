@@ -21,6 +21,7 @@
     ],
     "noImplicitAny": false,
     "noImplicitThis": true,
+    "moduleResolution": "node",
     "pretty": true,
     "removeComments": true,
     "sourceMap": true,

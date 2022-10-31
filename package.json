@@ -1,25 +1,26 @@
 {
   "name": "@waelio/ustore",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "description": "Universal Storage",
   "main": "root/lib/index.js",
   "types": "root/types/index.d.ts",
   "public": "true",
+  "module": "node",
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
     "test": "jest --config jestconfig.json",
-    "build": "rm -rf root/lib && npm run build:esm && npm run build:cjs",
+    "build": "rm -rf root/lib && npm run build:esm && npm run build:cjs && npm run build:umd",
     "build:esm": "tsc",
     "build:cjs": "tsc  --module CommonJS --outDir root/lib/cjs",
-    "build:umd": "tsc  --module  --outDir root/lib/umd",
+    "build:umd": "tsc  --module  umd --outDir root/lib/umd",
     "format": "prettier --write \".//root/src/**/*.ts\"",
     "lint": "npx eslint",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
+    "version": "npm run format && git add -A root/src",
     "postversion": "git push && git push --tags"
   },
   "files": [
