@@ -33,9 +33,11 @@
     "uStore": "lib/cjs/index.js"
   },
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "src": "src"
   },
   "files": [
+    "src/",
     "lib/",
     "types/"
   ],
