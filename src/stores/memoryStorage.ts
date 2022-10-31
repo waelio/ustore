@@ -1,9 +1,9 @@
 import { UStoreClass } from "../.d";
-let memoryStore = {};
+const memoryStore = {};
 
 export const memoryStorage: UStoreClass = {
   get: (key: string) => (memoryStore[key] ? memoryStore[key] : key),
-  set: (key: string, value: any) => {
+  set: (key: string, value: unknown) => {
     memoryStore[key] = value;
     return true;
   },
