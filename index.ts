@@ -6,7 +6,6 @@ import { vuexStorage } from './src/stores/vuexStorage';
 import { piniaStorage } from './src/stores/piniaStorage';
 import { gunStorage } from './src/stores/gunStorage';
 
-
 import uStore from './src';
 
 export { uStore };
@@ -19,3 +18,10 @@ export { memoryStorage };
 export { vuexStorage };
 export { piniaStorage };
 export { gunStorage };
+
+
+if (typeof window !== 'undefined') {
+  window['uStore'] = uStore;
+} else {
+  globalThis['uStore'] = uStore;
+}
