@@ -1,4 +1,3 @@
-import { configStorage } from "./stores/configStorage";
 import { localStorage } from "./stores/localStorage";
 import { sessionStorage } from "./stores/sessionStorage";
 import { cookieStorage } from "./stores/cookieStorage";
@@ -14,7 +13,6 @@ export declare type uStore = {
     vuex: typeof vuexStorage;
     pinia: typeof piniaStorage;
     gun: typeof gunStorage;
-    config: typeof configStorage;
 };
 export declare const uStore: {
     local: import("./").UStoreClass;
@@ -28,7 +26,6 @@ export declare const uStore: {
     };
     pinia: import("./").UStoreClass;
     gun: import("./").UStoreClass;
-    config: import("./stores/configStorage").Config;
 };
 export default uStore;
 export { localStorage };
@@ -38,5 +35,4 @@ export { memoryStorage };
 export { vuexStorage };
 export { piniaStorage };
 export { gunStorage };
-export { configStorage };
 //# sourceMappingURL=index.d.ts.map

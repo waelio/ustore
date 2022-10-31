@@ -5,5 +5,4 @@ export { memoryStorage } from "./memoryStorage";
 export { vuexStorage } from "./vuexStorage";
 export { piniaStorage } from "./piniaStorage";
 export { gunStorage } from "./gunStorage";
-export { configStorage } from "./configStorage";
 //# sourceMappingURL=index.d.ts.map

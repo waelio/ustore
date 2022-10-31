@@ -5,7 +5,7 @@ import { memoryStorage } from './src/stores/memoryStorage';
 import { vuexStorage } from './src/stores/vuexStorage';
 import { piniaStorage } from './src/stores/piniaStorage';
 import { gunStorage } from './src/stores/gunStorage';
-import { configStorage } from './src/stores/configStorage';
+
 
 import uStore from './src';
 
@@ -19,4 +19,3 @@ export { memoryStorage };
 export { vuexStorage };
 export { piniaStorage };
 export { gunStorage };
-export { configStorage };

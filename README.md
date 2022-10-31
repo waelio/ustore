@@ -20,7 +20,7 @@ Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
 <li>pinia: <a href="#pinia">pinia</a></li>
 <li>gun: <a href="#gun">gun</a></li>
 <li>memory: <a href="#memory">memory</a></li>
-<li>config: <a href="#config">config</a></li>
+<li>config: <a href="#config">config - underconstruction </a></li>
 </ol>
 
 <hr>
@@ -82,6 +82,8 @@ uStore.memory.get('testName') === 'test Payload'
 ```
 [Back to TOP](#)
 # config 
+## REMOVED temporily
+
 Config is home-brewed solution, more documentations coming soon.
 ```js
 import { uStore } from '@waelio/ustore'
