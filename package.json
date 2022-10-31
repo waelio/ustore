@@ -1,6 +1,6 @@
 {
   "name": "@waelio/ustore",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "description": "Universal Storage",
   "main": "root/lib/index.js",
   "types": "root/types/index.d.ts",
@@ -14,7 +14,7 @@
     "build:esm": "tsc",
     "build:cjs": "tsc  --module CommonJS --outDir root/lib/cjs",
     "build:umd": "tsc  --module  --outDir root/lib/umd",
-    "format": "prettier --write \"//root/src/**/*.ts\"",
+    "format": "prettier --write \".//root/src/**/*.ts\"",
     "lint": "npx eslint",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
