@@ -1,7 +1,8 @@
 import { UStoreClass } from "../.d";
 export declare const isProcess: () => unknown | boolean;
 export declare class Config {
-    [x: string]: {};
+    configPath: string;
+    [x: string]: {} | Promise<unknown> | Promise<string> | Promise<Function>;
     _store: Partial<UStoreClass>;
     constructor();
     set(key: string, value: unknown): void;
@@ -14,8 +15,8 @@ export declare class Config {
     store(): Partial<UStoreClass>;
     has(key: string): boolean;
     setEnvironment(): void;
-    getServerVars(): {};
-    getClientVars(): any;
+    getServerVars(): Promise<string[] | undefined>;
+    getClientVars(): Promise<any>;
     getUrgentOverrides(): {};
     buildNestedKey(nestedKey: string): Partial<UStoreClass>;
 }

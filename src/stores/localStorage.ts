@@ -6,21 +6,21 @@ export const localStorage: UStoreClass = {
   get: (key: string) => {
     try {
       return local.get(key);
-    } catch (error: any) {
+    } catch (error: unknown) {
       return error || null;
     }
   },
-  set: (key: string, value: any) => {
+  set: (key: string, value: unknown) => {
     try {
       return local.set(key, value);
-    } catch (error: any) {
+    } catch (error: unknown) {
       return error || null;
     }
   },
   remove: (key: string) => {
     try {
       return local.remove(key);
-    } catch (error: any) {
+    } catch (error: unknown) {
       return error || null;
     }
   },

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { UStoreClass } from "../.d";
 import path from "path";
+import { _to } from "waelio-utils";
 const __dirname = path.resolve();
 
 // path.exists('/config', function (exists) { console.log("Does the file exist?", exists) })
@@ -13,10 +14,12 @@ export const isProcess = (): unknown | boolean => {
   }
 };
 export class Config {
-  [x: string]: {};
+  configPath: string;
+  [x: string]: {} | Promise<unknown> | Promise<string> | Promise<Function>;
   _store: Partial<UStoreClass>;
   constructor() {
-    this.configPath = path.join(path.dirname(__dirname), "../../lib/config");
+    const ConfigPath = path.join(path.dirname(__dirname), '/ustore/lib/config');
+    this.configPath = ConfigPath;
     this.setEnvironment();
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const _ = this;
@@ -42,7 +45,7 @@ export class Config {
    */
   set(key: string, value: unknown) {
     if (key.match(/:/)) {
-      const keys = key.split(":");
+      const keys = key.split(':');
       let storeKey = this._store;
 
       keys.forEach(function (k, i) {
@@ -92,21 +95,21 @@ export class Config {
    * get all client store
    */
   client() {
-    return this.getItem("client");
+    return this.getItem('client');
   }
 
   /**
    * get all dev store
    */
   dev() {
-    return this.getItem("dev");
+    return this.getItem('dev');
   }
 
   /**
    * get all server store
    */
   server() {
-    return this.getItem("server");
+    return this.getItem('server');
   }
 
   /**
@@ -129,39 +132,48 @@ export class Config {
    * Internal inistializalion
    */
   setEnvironment() {
-    if (process && process["browser"]) {
-      this._env = "client";
+    if (process && process['browser']) {
+      this._env = 'client';
     } else {
-      this._env = "server";
+      this._env = 'server';
     }
   }
 
   /**
    * Internal inistializalion
    */
-  getServerVars() {
-    let serverVars = {};
+  async getServerVars() {
 
-    if (this._env === "server") {
+    if (this._env === 'server') {
       try {
-        const serverPath = path.join(__dirname, "/config/server.ts");
-        serverVars = require(serverPath);
+        const serverPath = this.configPath + '/server.js';
+        const serverVars = await import(serverPath);
+        const [error, success] = await _to(serverVars);
+        if (error) {
+          throw error;
+        }
+        return success as unknown as string[];
       } catch (e: unknown) {
-        if (process.env.NODE_ENV === "development") {
-          console.warn("Could not find a server.js config in `./config`.");
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('Could not find a server.js config in `./config`.');
         }
       }
     }
-    return serverVars;
   }
   /**
    * Internal inistializalion
    */
-  getClientVars() {
+  async getClientVars() {
     try {
-      return require(this.configPath + "/client");
+      const newPathName = this.configPath + '/client.js';
+      const myClient = await import(newPathName);
+      const [error, success] = await _to(myClient);
+      if (error) {
+        throw error;
+      }
+      return success;
     } catch (e) {
-      if (process.env.NODE_ENV === "development") {
+      if (process.env.NODE_ENV === 'development') {
         console.warn("Didn't find a client config in `./config`.");
       }
     }
@@ -170,14 +182,15 @@ export class Config {
    * Internal inistializalion
    */
   getUrgentOverrides() {
+    const SV = this;
     let overrides: {};
-    const filename = process.env.NODE_ENV === "production" ? "prod" : "dev";
+    function fixName(name: string):string { 
+      const res = SV.configPath + '/' + name + '.js';
+      return res
+    }
+    const filename = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
     try {
-      overrides = require(`${this.configPath}/${filename}`); /**? */
-
-      console.log(
-        `FYI: data in \`./config/${filename}.js\` file will override Server & Client equal data/values.`
-      );
+      overrides = import(fixName(filename)); /**? */
     } catch (e) {
       overrides = {};
     }
@@ -190,7 +203,7 @@ export class Config {
    * @param nestedKey
    */
   buildNestedKey(nestedKey: string) {
-    const keys = nestedKey.split(":");
+    const keys = nestedKey.split(':');
     let storeKey = this._store;
 
     keys.forEach(function (k: string) {

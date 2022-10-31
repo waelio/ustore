@@ -3,8 +3,15 @@
   "version": "0.0.22",
   "description": "Universal Storage",
   "main": "lib/cjs/index.js",
-  "module": "lib/index.js",
-  "types": "types/index.d.ts",
+  "module": "commonjs",
+  "types": "lib/types.js",
+  "exports": {
+    ".": {
+      "browser": {
+        "default": "./lib/cjs/index.js"
+      }
+    }
+  },
   "public": "true",
   "publishConfig": {
     "access": "public"
@@ -23,7 +30,7 @@
     "postversion": "git push && git push --tags"
   },
   "bin": {
-    "uStore": "lib/index.js"
+    "uStore": "lib/cjs/index.js"
   },
   "directories": {
     "lib": "lib"
