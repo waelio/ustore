@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { UStoreClass } from "../.d";
 import path from "path";
+const __dirname = path.resolve();
 
 // path.exists('/config', function (exists) { console.log("Does the file exist?", exists) })
 
