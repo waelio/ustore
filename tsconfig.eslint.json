@@ -2,8 +2,8 @@
   // extend your base config so you don't have to redefine your compilerOptions
   "extends": "./tsconfig.json",
   "include": [
-    "src/**/*.ts",
-    "__tests__/*.ts",
-    "types/**/*.ts"
+    "root/src/**/*.ts",
+    "root/__tests__/*.ts",
+    "root/types/**/*.ts"
   ]
 }

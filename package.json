@@ -2,25 +2,19 @@
   "name": "@waelio/ustore",
   "version": "0.0.30",
   "description": "Universal Storage",
-  "main": "lib/index.js",
-  "module": "commonjs",
-  "types": "types/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./lib/index.js",
-      "require": "./lib/cjs/index.js"
-    }
-  },
+  "main": "root/lib/index.js",
+  "types": "root/types/index.d.ts",
   "public": "true",
   "publishConfig": {
     "access": "public"
-  },
+  },    
   "scripts": {
     "test": "jest --config jestconfig.json",
-    "build": "rm -rf lib/ && npm run build:esm && npm run build:cjs",
+    "build": "rm -rf root/lib && npm run build:esm && npm run build:cjs",
     "build:esm": "tsc",
-    "build:cjs": "tsc --module CommonJS --outDir lib/cjs",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "build:cjs": "tsc  --module CommonJS --outDir root/lib/cjs",
+    "build:umd": "tsc  --module  --outDir root/lib/umd",
+    "format": "prettier --write \"/root/src/**/*.ts\"",
     "lint": "npx eslint",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
@@ -28,17 +22,10 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
-  "bin": {
-    "uStore": "lib/index.js"
-  },
-  "directories": {
-    "lib": "lib",
-    "src": "src"
-  },
   "files": [
-    "src/",
-    "lib/",
-    "types/"
+    "root/src/",
+    "root/lib/",
+    "root/types/"
   ],
   "repository": {
     "type": "git",

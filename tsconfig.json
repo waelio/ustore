@@ -1,31 +1,35 @@
 {
   "compilerOptions": {
+    "alwaysStrict": true,
+    "noEmitOnError": true,
+    "module": "CommonJS",
+    "charset": "utf8",
     "allowJs": true,
     "declaration": true,
-    "outDir": "./lib",
-    "declarationDir": "./types",
+    "outDir": "root/lib",
+    "declarationDir": "root/types",
     "declarationMap": true,
     "esModuleInterop": true, /* Enables intero between CommonJS and ES */
     "forceConsistentCasingInFileNames": true, /* Disallow inconsistently */
     "incremental": true, /* Enable incremental compilation */
     "lib": [
-      "es2021",
-      "es7",
-      "es6",
+      "ESNext",
+      "ES7",
+      "ES6",
+      "ES5",
       "dom"
     ],
-    "module": "commonjs",
     "noImplicitAny": false,
     "noImplicitThis": true,
     "pretty": true,
     "removeComments": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es5",
+    "target": "ES2015",
     "skipLibCheck": true /* Skip type checking of declaration files. */
   },
   "include": [
-    "src/**/*"
+    "./root/src/index.ts"
   ],
   "exclude": [
     "tsconfig.json",
