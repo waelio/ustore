@@ -4,7 +4,7 @@
   "description": "Universal Storage",
   "main": "lib/index.js",
   "module": "commonjs",
-  "types": "lib/types.js",
+  "types": "types/index.d.ts",
   "exports": {
     ".": {
       "browser": {
