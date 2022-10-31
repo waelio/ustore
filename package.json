@@ -1,6 +1,6 @@
 {
   "name": "@waelio/ustore",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "description": "Universal Storage",
   "main": "root/lib/index.js",
   "types": "root/types/index.d.ts",
@@ -23,8 +23,8 @@
     "postversion": "git push && git push --tags"
   },
   "files": [
-    "./root/src/",
-    "./root/lib/",
+    "./root/src/**/*.ts",
+    "./root/lib/**/*.js",
     "./root/types/"
   ],
   "repository": {
