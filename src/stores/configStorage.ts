@@ -6,9 +6,6 @@ const __dirname = path.resolve();
 
 // path.exists('/config', function (exists) { console.log("Does the file exist?", exists) })
 
-
-  
-
 export class Config {
   configPath: string;
   [x: string]: {} | Promise<unknown> | Promise<string> | Promise<Function>;
@@ -21,23 +18,23 @@ export class Config {
     const _ = this;
     this._server = _.getServerVars(); /**? */
     this._client = _.getClientVars(); /**? */
-    this._dev = _.getUrgentOverrides(); /**? */    
+    this._dev = _.getUrgentOverrides(); /**? */
     this._store = Object.assign(
-        {},
-        { ..._._client },
-        { ..._._server },
-        { ..._._dev },
-        { client: _._client },
-        { server: _._server },
-        { dev: _._dev }
-      );
+      {},
+      { ..._._client },
+      { ..._._server },
+      { ..._._dev },
+      { client: _._client },
+      { server: _._server },
+      { dev: _._dev }
+    );
   }
   isProcess() {
     try {
-        return process['browser'] as unknown;
-      } catch (error) {
-        return false;
-      }
+      return process["browser"] as unknown;
+    } catch (error) {
+      return false;
+    }
   }
   /**
    *
