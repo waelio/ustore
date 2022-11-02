@@ -27,6 +27,7 @@ dependencies:
   browserify: 17.0.0
   gun: 0.2020.1238
   pinia: 2.0.23_l7r24p6nevbtlimqmqcwa3ouhu
+  store2: 2.14.2
   vue: 3.2.41
   vue-demi: 0.13.11_vue@3.2.41
   vuex: 4.1.0_vue@3.2.41
@@ -40,7 +41,6 @@ devDependencies:
   jest: 29.2.2_odkjkoia5xunhxkdrka32ib6vi
   jest-environment-jsdom: 29.2.2
   prettier: 2.7.1
-  store2: 2.14.2
   ts-jest: 29.0.3_fxe5mizohawh6cjruma5lyyrna
   ts-node: 10.9.1_cbe7ovvae6zqfnmtgctpgpys54
   typescript: 4.8.4
@@ -736,8 +736,8 @@ packages:
     dev: false
     optional: true
 
-  /@peculiar/webcrypto/1.4.0:
-    resolution: {integrity: sha512-U58N44b2m3OuTgpmKgf0LPDOmP3bhwNz01vAnj1mBwxBASRhptWYK+M3zG+HBkDqGQM+bFsoIihTW8MdmPXEqg==}
+  /@peculiar/webcrypto/1.4.1:
+    resolution: {integrity: sha512-eK4C6WTNYxoI7JOabMoZICiyqRRtJB220bh0Mbj5RwRycleZf9BPyZoxsTvpP0FpmVS2aS13NKOuh5/tN3sIRw==}
     engines: {node: '>=10.12.0'}
     requiresBuild: true
     dependencies:
@@ -2430,7 +2430,7 @@ packages:
     dependencies:
       ws: 7.5.9
     optionalDependencies:
-      '@peculiar/webcrypto': 1.4.0
+      '@peculiar/webcrypto': 1.4.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -4169,7 +4169,7 @@ packages:
 
   /store2/2.14.2:
     resolution: {integrity: sha512-siT1RiqlfQnGqgT/YzXVUNsom9S0H1OX+dpdGN1xkyYATo4I6sep5NmsRD/40s3IIOvlCq6akxkqG82urIZW1w==}
-    dev: true
+    dev: false
 
   /stream-browserify/3.0.0:
     resolution: {integrity: sha512-H73RAHsVBapbim0tU2JwwOiXUj+fikfiaoYAKHF3VJfA0pe2BCzkhAHBlLG6REzE+2WNZcxOXjK7lkso+9euLA==}

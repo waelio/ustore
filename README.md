@@ -14,9 +14,9 @@ Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
 
 #### Next is Indexed DB & maybe Web SQL.
 
+***New- added secureStorage***
 #### Crurrent stores:
 
-$${\color{orange} New- added secureStorage }$$
 
 <ol>
 <li>local: <a href="#local">local</a></li>
