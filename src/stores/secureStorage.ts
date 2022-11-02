@@ -1,5 +1,5 @@
-import { _encrypt, _decrypt } from "waelio-utils";
-import { uStore } from "../.d";
+import { _encrypt, _decrypt } from 'waelio-utils';
+import { uStore } from '../.d';
 const memoryStore = {};
 
 const secureStorage: uStore = {
@@ -7,11 +7,11 @@ const secureStorage: uStore = {
     return memoryStore;
   },
   getItem: function (key: string) {
-    const test = memoryStore[key];
-    return test ? _decrypt(test) : key;
+    return _decrypt(memoryStore[key])
   },
   set: function (key, value) {
     memoryStore[key] = _encrypt(value);
+    return { [key]: memoryStore[key] };
   },
   has(key: string): string | boolean {
     return memoryStore[key] ?? false;
@@ -19,18 +19,18 @@ const secureStorage: uStore = {
   remove(key: string) {
     delete memoryStore[key];
     return this.has(key);
-  },
+  }
 };
 
 const descriptor = Object.create({});
-descriptor.value = "readonly";
+descriptor.value = 'readonly';
 
-Object.defineProperty(secureStorage, "myStore", descriptor);
+Object.defineProperty(secureStorage, 'myStore', descriptor);
 
-Object.defineProperty(secureStorage, "_data", {
+Object.defineProperty(secureStorage, '_data', {
   enumerable: false,
   configurable: false,
-  writable: false,
+  writable: false
 });
 export { secureStorage };
 export default secureStorage;
