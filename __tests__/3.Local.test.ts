@@ -1,10 +1,16 @@
-import { uStore } from '../index';
+import { uStore, localStorage } from '../index';
 
-test.only('Local Storage', () => {
+
+describe('Local Stotage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
   uStore.local.set(label, payload);
-  if (typeof window !== 'undefined') {
+
+  test('uStore set & get', () => {
     expect(uStore.local.get(label)).toEqual(payload);
-  }
+  });
+  localStorage.set(label, payload);
+  test('localStorage set & get', () => {
+    expect(localStorage.get(label)).toEqual(payload);
+  });
 });

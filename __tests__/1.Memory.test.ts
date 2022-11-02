@@ -1,10 +1,15 @@
-import { uStore } from '../index';
+import { uStore, memoryStorage } from '../index';
 
 describe('Memory Stotage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
   uStore.memory.set(label, payload);
-  test('set & get', () => {
+
+  test('uStore set & get', () => {
     expect(uStore.memory.get(label)).toEqual(payload);
-  })
+  });
+  memoryStorage.set(label, payload);
+  test('memoryStorage set & get', () => {
+    expect(memoryStorage.get(label)).toEqual(payload);
+  });
 });

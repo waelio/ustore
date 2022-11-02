@@ -5,10 +5,10 @@ describe('Memory Stotage', () => {
   const label = 'test';
   uStore.secure.set(label, payload);
   test('uStore set & get', () => {
-    expect(uStore.secure.get(label)).toEqual(payload);
+    expect(uStore.secure.getItem(label)).toEqual(payload);
   });
   secureStorage.set(label, payload);
   test('secureStorage set & get', () => {
-    expect(secureStorage.get(label)).toEqual(payload);
+    expect(secureStorage.getItem(label)).toEqual(payload);
   });
 });

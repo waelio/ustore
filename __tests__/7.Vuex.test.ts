@@ -1,8 +1,14 @@
-import { uStore } from '../index';
+import { uStore , vuexStorage} from '../index';
 
-test('Vuex Storage', () => {
+describe('Vuex Stotage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
   uStore.vuex.set(label, payload);
-  expect(uStore.vuex.get()).toEqual(payload);
+  test('uStore set & get', () => {
+    expect(uStore.vuex.get()).toEqual(payload);
+  });
+  vuexStorage.set(label, payload);
+  test('vuexStorage set & get', () => {
+    expect(vuexStorage.get()).toEqual(payload);
+  });
 });
