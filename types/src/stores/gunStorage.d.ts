@@ -1,4 +1,4 @@
-import { UStoreClass } from '../.d';
+import { UStoreClass } from "../.d";
 export declare const storeName = "uStoreGunDB";
 export declare const db: import("gun/types").IGunInstance<any>;
 export declare const gunStorage: UStoreClass;

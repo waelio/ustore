@@ -1,4 +1,4 @@
-import { uStore } from '../.d';
+import { uStore } from "../.d";
 declare const secureStorage: uStore;
 export { secureStorage };
 export default secureStorage;
