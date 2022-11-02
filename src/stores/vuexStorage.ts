@@ -53,13 +53,13 @@ export const vuexStorage = {
   add: (key: string, value: any) => {
     const payload = new Object();
     payload[key] = value;
-    return vuexStore.commit('setMyValue', payload);
+    return vuexStore.commit("setMyValue", payload);
   },
   set: (key: string, value: any) => {
     const payload = new Object();
     payload[key] = value;
-    return vuexStore.commit('setMyValue', payload);
-  }
+    return vuexStore.commit("setMyValue", payload);
+  },
 };
 
 export default vuexStorage;

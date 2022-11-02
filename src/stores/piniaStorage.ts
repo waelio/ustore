@@ -1,8 +1,7 @@
-import type {  uStore } from '../.d';
+import type { uStore } from "../.d";
 import { createPinia, defineStore } from "pinia";
 import { createApp } from "vue";
 import { _reParseString } from "waelio-utils";
-
 
 export const app = createApp({});
 const pinia = createPinia();
@@ -37,11 +36,11 @@ const useStore = defineStore("piniaStorage", {
 });
 const pn_storage = useStore();
 
-export const piniaStorage = ({
+export const piniaStorage = {
   get: () => pn_storage.get,
   set: (value: any) => {
     pn_storage.add(value);
   },
-  remove: () => pn_storage.remove
-});
+  remove: () => pn_storage.remove,
+};
 export default piniaStorage;
