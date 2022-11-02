@@ -5,5 +5,5 @@ export { memoryStorage } from "./memoryStorage";
 export { vuexStorage } from "./vuexStorage";
 export { piniaStorage } from "./piniaStorage";
 export { gunStorage } from "./gunStorage";
-export { secureStorage } from './secureStorage';
+export { secureStorage } from "./secureStorage";
 // export { configStorage } from "./configStorage";

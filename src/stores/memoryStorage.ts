@@ -1,4 +1,4 @@
-import { UStoreClass } from '../.d';
+import { UStoreClass } from "../.d";
 const memoryStore = {};
 
 export const memoryStorage: UStoreClass = {
@@ -12,6 +12,6 @@ export const memoryStorage: UStoreClass = {
   remove: (key: string) => {
     memoryStore[key] ? delete memoryStore[key] : null;
     return true;
-  }
+  },
 };
 export default memoryStorage;

@@ -28,7 +28,7 @@ export const uStore: TuStore = {
   vuex: vuexStorage,
   pinia: piniaStorage,
   gun: gunStorage,
-  secure: secureStorage
+  secure: secureStorage,
   // config: configStorage,
 };
 

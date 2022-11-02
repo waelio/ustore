@@ -1,6 +1,6 @@
 import storeTwo from "store2";
 import { UStoreClass } from "../.d";
-const local = storeTwo.namespace('uStore');
+const local = storeTwo.namespace("uStore");
 
 export const localStorage: UStoreClass = {
   get: (key: string) => {

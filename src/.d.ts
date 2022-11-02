@@ -14,13 +14,18 @@ export interface GetItem {
   (key: string): string | object | string[] | object[] | null | boolean;
 }
 export interface GetAll {
-  (key: string): object
+  (key: string): object;
 }
 export interface HasItem {
-  (key: string): boolean|string
+  (key: string): boolean | string;
 }
 export interface SetItem {
-  (key: string, value: string | object | string[] | object[]): void |string| Promise<unknown> |unknown | [];
+  (key: string, value: string | object | string[] | object[]):
+    | void
+    | string
+    | Promise<unknown>
+    | unknown
+    | [];
 }
 export interface RemoveItem {
   (key: string): void | any;
@@ -28,14 +33,12 @@ export interface RemoveItem {
 export interface UStoreClass {
   type?: string;
   _storage?: Storage;
-  get: GetItem;  
+  get: GetItem;
   set: SetItem;
   remove?: RemoveItem;
   has?: boolean;
 }
-type ValueType = {
-
-}
+type ValueType = {};
 type OptionsFlags<Type> = {
   [Property in keyof Type]: Property;
 };

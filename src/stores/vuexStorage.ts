@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import { uStore, UStoreClass } from '../.d';
-import { createApp } from 'vue';
-import { createStore } from 'vuex';
+import { createApp } from "vue";
+import { createStore } from "vuex";
 export const app = createApp({});
 
 //  interface _possibleStateValues {
@@ -24,28 +24,28 @@ export const app = createApp({});
 // };
 const vuexStore = createStore({
   state: () => ({
-    myValue: ''
+    myValue: "",
   }),
   mutations: {
     setMyValue(state: any, value: string | { [key: string]: string }): void {
-      if (typeof value === 'string') {
+      if (typeof value === "string") {
         state.myValue = value;
-      } else if (typeof value === 'object') {
+      } else if (typeof value === "object") {
         Object.keys(value).forEach((key: string) => {
           state.myValue = value[key];
         });
       }
-    }
+    },
   },
   actions: {
     set(context, value) {
-      context.commit('setMyValue', value);
-    }
+      context.commit("setMyValue", value);
+    },
   },
   getters: {
-    getMyValue: (state: any) => state.myValue
+    getMyValue: (state: any) => state.myValue,
   },
-  strict: true
+  strict: true,
 });
 
 export const vuexStorage = {
@@ -53,13 +53,13 @@ export const vuexStorage = {
   add: (key: string, value: any) => {
     const payload = new Object();
     payload[key] = value;
-    return vuexStore.commit('setMyValue', payload);
+    return vuexStore.commit("setMyValue", payload);
   },
   set: (key: string, value: any) => {
     const payload = new Object();
     payload[key] = value;
-    return vuexStore.commit('setMyValue', payload);
-  }
+    return vuexStore.commit("setMyValue", payload);
+  },
 };
 
 export default vuexStorage;

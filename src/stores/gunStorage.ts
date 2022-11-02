@@ -1,11 +1,11 @@
-import { UStoreClass } from '../.d';
-import { _to } from 'waelio-utils';
-import Gun from 'gun/gun';
+import { UStoreClass } from "../.d";
+import { _to } from "waelio-utils";
+import Gun from "gun/gun";
 
-const peers: string[] = ['https://gunjs-mtl.herokuapp.com/gun'];
+const peers: string[] = ["https://gunjs-mtl.herokuapp.com/gun"];
 const options = JSON.stringify(peers);
 
-export const storeName = 'uStoreGunDB';
+export const storeName = "uStoreGunDB";
 
 type p = string | any;
 
@@ -14,7 +14,7 @@ export const db = new Gun(options);
 export const gunStorage: UStoreClass = {
   get: function (key: string) {
     return new Promise((resolve, reject) => {
-      try {        
+      try {
         resolve(db.get(storeName).get(key));
       } catch (error: any) {
         reject(error);
@@ -26,7 +26,7 @@ export const gunStorage: UStoreClass = {
       try {
         resolve(db.get(storeName).get(key).put(value));
       } catch (error: any) {
-        reject('error');
+        reject("error");
       }
     });
   },
@@ -42,7 +42,7 @@ export const gunStorage: UStoreClass = {
         reject(error);
       }
     });
-  }
+  },
 };
 
 export default gunStorage;
