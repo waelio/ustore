@@ -11,7 +11,7 @@ export enum StorePlugins {
   gun = "gunStorage",
 }
 export interface GetItem {
-  (key: string): string | object | string[] | object[] | null | boolean;
+  (key: string): string | object | string[] | object[]  | boolean;
 }
 export interface GetAll {
   (key: string): object;
@@ -43,6 +43,7 @@ type OptionsFlags<Type> = {
   [Property in keyof Type]: Property;
 };
 export interface uStore {
+[x: string]: unknown;
   type?: string;
   _storage?: Storage;
   getItem: GetItem;

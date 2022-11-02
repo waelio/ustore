@@ -1,7 +1,8 @@
-import { UStoreClass } from "../.d";
+import type {  uStore } from '../.d';
 import { createPinia, defineStore } from "pinia";
 import { createApp } from "vue";
 import { _reParseString } from "waelio-utils";
+
 
 export const app = createApp({});
 const pinia = createPinia();
@@ -10,14 +11,14 @@ export type _State = {
   raw: any;
 };
 
-type Getters = {
-  get: (state?: _State) => string;
-};
+// type Getters = {
+//   get: (state?: _State) => string;
+// };
 
-type Actions = {
-  add: (k: string) => void;
-  remove: () => undefined;
-};
+// type Actions = {
+//   add: (k: string) => void;
+//   remove: () => undefined;
+// };
 const useStore = defineStore("piniaStorage", {
   state: () => ({
     raw: "",
@@ -35,13 +36,12 @@ const useStore = defineStore("piniaStorage", {
   },
 });
 const pn_storage = useStore();
-export const piniaStorage: UStoreClass = {
+
+export const piniaStorage = ({
   get: () => pn_storage.get,
-  set: (key: string, value: any) => {
-    const payload = {};
-    payload[key] = value;
-    pn_storage.add(payload);
+  set: (value: any) => {
+    pn_storage.add(value);
   },
-  remove: () => pn_storage.remove,
-};
+  remove: () => pn_storage.remove
+});
 export default piniaStorage;

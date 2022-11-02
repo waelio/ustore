@@ -25,8 +25,8 @@ Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
 <li>vuex: <a href="#vuex">vuex</a></li>
 <li>pinia: <a href="#pinia">pinia</a></li>
 <li>gun: <a href="#gun">gun</a></li>
-<li>memory: <a href="#secure">secure</a></li>
-<li>secure: <a href="#memory">memory</a></li>
+<li>memory: <a href="#memory">memory</a></li>
+<li>secure: <a href="#secure">secure</a></li>
 <li>config: <a href="#config">config - underconstruction </a></li>
 </ol>
 
