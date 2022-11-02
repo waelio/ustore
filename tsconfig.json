@@ -1,42 +1,43 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
-    "alwaysStrict": true,
-    "noEmitOnError": true,
-    "module": "CommonJS",
-    "charset": "utf8",
     "allowJs": true,
+    "alwaysStrict": false,
     "declaration": true,
-    "outDir": "root/lib",
-    "declarationDir": "root/types",
-    "declarationMap": true,
-    "esModuleInterop": true, /* Enables intero between CommonJS and ES */
-    "forceConsistentCasingInFileNames": true, /* Disallow inconsistently */
-    "incremental": true, /* Enable incremental compilation */
-    "lib": [
-      "ESNext",
-      "ES7",
-      "ES6",
-      "ES5",
-      "dom"
-    ],
+    "noEmitOnError": true,
     "noImplicitAny": false,
     "noImplicitThis": true,
-    "moduleResolution": "node",
+    "declarationMap": true,
+    "rootDir": ".",
+    "outDir": "lib",
+    "moduleResolution": "Node",
+    "target": "es6",
+    "module": "commonjs",
+
+    "esModuleInterop": true, /* Enables intero between CommonJS and ES */
+    "lib": [
+      "dom",
+      "es6"
+    ],
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "declarationDir": "./types",
+    "charset": "utf8",
+    "strict": true,
     "pretty": true,
     "removeComments": true,
     "sourceMap": true,
-    "strict": true,
-    "target": "ES2015",
-    "skipLibCheck": true /* Skip type checking of declaration files. */
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
+  "transformIgnorePatterns": "true",
   "include": [
-    "./root/src/index.ts"
+    "index",
+    "src/**/*"
   ],
   "exclude": [
-    "tsconfig.json",
     "lib",
-    "node_modules",
-    "radata",
-    "example"
+    "node_modules"
   ]
 }

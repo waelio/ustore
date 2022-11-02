@@ -2,36 +2,7 @@
   "name": "@waelio/ustore",
   "version": "0.0.37",
   "description": "Universal Storage",
-  "main": "root/lib/index.js",
-  "types": "root/types/index.d.ts",
-  "public": "true",
-  "module": "node",
-  "publishConfig": {
-    "access": "public"
-  },
-  "scripts": {
-    "test": "jest --config jestconfig.json",
-    "build": "rm -rf root/lib && npm run build:esm && npm run build:cjs && npm run build:umd",
-    "build:esm": "tsc",
-    "build:cjs": "tsc  --module CommonJS --outDir root/lib/cjs",
-    "build:umd": "tsc  --module  umd --outDir root/lib/umd",
-    "format": "prettier --write \".//root/src/**/*.ts\"",
-    "lint": "npx eslint",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A root/src",
-    "postversion": "git push && git push --tags"
-  },
-  "files": [
-    "./root/src/**/*.ts",
-    "./root/lib/**/*.js",
-    "./root/types/"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/waelio/ustore.git"
-  },
+  "homepage": "https://github.com/waelio/uStore#readme",
   "keywords": [
     "Store",
     "localStorage",
@@ -41,32 +12,69 @@
     "pinia",
     "gun"
   ],
-  "sideEffects": false,
-  "author": "Wael Wahbeh <wahbehw@me.com> (https://github.com/waelio/universal-store#readme)",
+  "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
+  "public": "true",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "build": "rm -rf lib && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc  --module CommonJS --outDir lib/cjs",
+    "build:umd": "tsc  --module  umd --outDir lib/umd",
+    "format": "prettier --write \".//src/**/*.ts\"",
+    "lint": "npx eslint",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "files": [
+    "src/**/*",
+    "lib/**/*",
+    "types/**/*"
+  ],
+  "bin": {
+    "uStore": "lib/index.js"
+  },
+  "author": {
+    "name": "Wael Wahbeh",
+    "email": "wahbehw@me.com",
+    "url": "https://waelio.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waelio/ustore.git"
+  },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/waelio/universal-store/issues"
+    "url": "https://github.com/waelio/uStore/issues"
   },
-  "homepage": "https://github.com/waelio/universal-store#readme",
   "devDependencies": {
-    "@types/jest": "^29.2.0",
-    "@types/node": "^18.11.8",
-    "@typescript-eslint/eslint-plugin": "^5.41.0",
-    "@typescript-eslint/parser": "^5.41.0",
+    "@types/jest": "^29.2.1",
+    "@types/node": "^18.11.9",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
     "eslint": "^8.26.0",
     "jest": "^29.2.2",
     "jest-environment-jsdom": "^29.2.2",
     "prettier": "^2.7.1",
+    "store2": "^2.14.2",
     "ts-jest": "^29.0.3",
-    "typescript": "^4.8.4"
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4",
+    "waelio-utils": "5.0.1"
   },
   "dependencies": {
+    "babel-plugin-transform-require-context": "^0.1.1",
+    "browserify": "^17.0.0",
     "gun": "0.2020.1238",
     "pinia": "2.0.23",
-    "store2": "^2.14.2",
     "vue": "3.2.41",
     "vue-demi": "^0.13.11",
-    "vuex": "4.1.0",
-    "waelio-utils": "5.0.0"
+    "vuex": "4.1.0"
   }
 }
