@@ -39,7 +39,7 @@ Window local Storage,<a href="#references"><i> see docs below</i></a>
 ```js
 import { uStore, localStorage } from '@waelio/ustore';
 
-describe('Local Stotage', () => {
+describe('Local storage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
   uStore.local.set(label, payload);
@@ -62,7 +62,7 @@ Window session Storage,<a href="#references"><i> see docs below</i></a>
 ```js
 import { uStore, sessionStorage } from '@waelio/ustore';
 
-describe('Session Stotage', () => {
+describe('Session storage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
   uStore.session.set(label, payload);
@@ -85,7 +85,7 @@ Document Cookies,<a href="#references"><i> see docs below</i></a>
 ```js
 import { uStore, cookieStorage } from '@waelio/ustore';
 
-describe('Cookie Stotage', () => {
+describe('Cookie storage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
   uStore.cookie.set(label, payload);
@@ -108,7 +108,7 @@ Vue state management,<a href="#references"><i> see docs below</i></a>
 ```js
 import { uStore, vuexStorage } from '@waelio/ustore';
 
-describe('Vuex Stotage', () => {
+describe('Vuex storage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
   uStore.vuex.set(label, payload);
@@ -131,7 +131,7 @@ Pinia State Management,<a href="#references"><i> see docs below</i></a>
 ```js
 import { uStore, piniaStorage } from '@waelio/ustore';
 
-describe('Pinia Stotage', () => {
+describe('Pinia storage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
   uStore.pinia.set( payload);
@@ -167,7 +167,7 @@ In memory storage
 ```js
 import { uStore, memoryStorage } from '@waelio/ustore';
 
-describe('Memory Stotage', () => {
+describe('Memory storage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
   uStore.memory.set(label, payload);
@@ -190,7 +190,7 @@ Enctypted and Decrypted storage
 
 ```js
 import { uStore, secureStorage } from '@waelio/ustore';
-describe('Secure Stotage', () => {
+describe('Secure storage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
   uStore.secure.set(label, payload);
