@@ -8,13 +8,12 @@ Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
 
 <hr />
 
-## uStore is a project is a plugin I'v wanted for a while, the ability to have my own state-management in my projects.
+## uStore project is a plugin I'v wanted for a while, the ability to have my own state-management in my projects.
 
 ### As this is a pilot, please feel free to join the discussion. All are welcomed.
 
 #### Next is Indexed DB & maybe Web SQL.
 
-***New- added secureStorage***
 #### Crurrent stores:
 
 
@@ -153,6 +152,7 @@ Gun DB, ,<a href="#references"><i> see docs below</i></a>
 
 ```js
 import { uStore } from '@waelio/ustore';
+
 // Did not pass testing yet
 uStore.gun.set('testName', 'test Payload');
 uStore.gun.get('testName') === 'test Payload';
@@ -190,6 +190,7 @@ Enctypted and Decrypted storage
 
 ```js
 import { uStore, secureStorage } from '@waelio/ustore';
+
 describe('Secure storage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
@@ -215,6 +216,7 @@ Config is home-brewed solution, more documentations coming soon.
 
 ```js
 import { uStore } from '@waelio/ustore';
+
 uStore.config.set('client:testName', 'test Payload');
 uStore.config.get('client:testName') === 'test Payload';
 ```
