@@ -37,9 +37,20 @@ Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
 Window local Storage,<a href="#references"><i> see docs below</i></a>
 
 ```js
-import { uStore } from '@waelio/ustore';
-ustore.local.set('testName', 'test Payload');
-ustore.local.get('testName') === 'test Payload';
+import { uStore, localStorage } from '@waelio/ustore';
+
+describe('Local Stotage', () => {
+  const payload = 'Test Payload1';
+  const label = 'test';
+  uStore.local.set(label, payload);
+  test('uStore set & get', () => {
+    expect(uStore.local.get(label)).toEqual(payload);
+  });
+  localStorage.set(label, payload);
+  test('localStorage set & get', () => {
+    expect(localStorage.get(label)).toEqual(payload);
+  });
+});
 ```
 
 [Back to TOP](#)
@@ -49,9 +60,20 @@ ustore.local.get('testName') === 'test Payload';
 Window session Storage,<a href="#references"><i> see docs below</i></a>
 
 ```js
-import { uStore } from '@waelio/ustore';
-uStore.session.set('testName', 'test Payload');
-uStore.session.get('testName') === 'test Payload';
+import { uStore, sessionStorage } from '@waelio/ustore';
+
+describe('Session Stotage', () => {
+  const payload = 'Test Payload1';
+  const label = 'test';
+  uStore.session.set(label, payload);
+  test('uStore set & get', () => {
+    expect(uStore.session.get(label)).toEqual(payload);
+  });
+  sessionStorage.set(label, payload);
+  test('sessionStorage set & get', () => {
+    expect(sessionStorage.get(label)).toEqual(payload);
+  });
+});
 ```
 
 [Back to TOP](#)
@@ -61,9 +83,20 @@ uStore.session.get('testName') === 'test Payload';
 Document Cookies,<a href="#references"><i> see docs below</i></a>
 
 ```js
-import { uStore } from '@waelio/ustore';
-uStore.cookie.set('testName', 'test Payload');
-uStore.cookie.get('testName') === 'test Payload';
+import { uStore, cookieStorage } from '@waelio/ustore';
+
+describe('Cookie Stotage', () => {
+  const payload = 'Test Payload1';
+  const label = 'test';
+  uStore.cookie.set(label, payload);
+  test('uStore set & get', () => {
+    expect(uStore.cookie.get(label)).toEqual(`${label}=${payload}`);
+  });
+  cookieStorage.set(label, payload);
+  test('cookieStorage set & get', () => {
+    expect(cookieStorage.get(label)).toEqual(`${label}=${payload}`);
+  });
+});
 ```
 
 [Back to TOP](#)
@@ -73,9 +106,20 @@ uStore.cookie.get('testName') === 'test Payload';
 Vue state management,<a href="#references"><i> see docs below</i></a>
 
 ```js
-import { uStore } from '@waelio/ustore';
-uStore.vuex.set('testName', 'test Payload');
-uStore.vuex.get('testName') === 'test Payload';
+import { uStore, vuexStorage } from '@waelio/ustore';
+
+describe('Vuex Stotage', () => {
+  const payload = 'Test Payload1';
+  const label = 'test';
+  uStore.vuex.set(label, payload);
+  test('uStore set & get', () => {
+    expect(uStore.vuex.get()).toEqual(payload);
+  });
+  vuexStorage.set(label, payload);
+  test('vuexStorage set & get', () => {
+    expect(vuexStorage.get()).toEqual(payload);
+  });
+});
 ```
 
 [Back to TOP](#)
@@ -85,9 +129,20 @@ uStore.vuex.get('testName') === 'test Payload';
 Pinia State Management,<a href="#references"><i> see docs below</i></a>
 
 ```js
-import { uStore } from '@waelio/ustore';
-uStore.pinia.set('testName', 'test Payload');
-uStore.pinia.get('testName') === 'test Payload';
+import { uStore, piniaStorage } from '@waelio/ustore';
+
+describe('Pinia Stotage', () => {
+  const payload = 'Test Payload1';
+  const label = 'test';
+  uStore.pinia.set( payload);
+  test('pinia set & get', () => {
+    expect(uStore.pinia.get()).toEqual(payload);
+  });
+  piniaStorage.set(payload);
+  test('piniaStorage set & get', () => {
+    expect(piniaStorage.get()).toEqual(payload);
+  });
+});
 ```
 
 [Back to TOP](#)
@@ -110,9 +165,21 @@ uStore.gun.get('testName') === 'test Payload';
 In memory storage
 
 ```js
-import { uStore } from '@waelio/ustore';
-uStore.memory.set('testName', 'test Payload');
-uStore.memory.get('testName') === 'test Payload';
+import { uStore, memoryStorage } from '@waelio/ustore';
+
+describe('Memory Stotage', () => {
+  const payload = 'Test Payload1';
+  const label = 'test';
+  uStore.memory.set(label, payload);
+
+  test('uStore set & get', () => {
+    expect(uStore.memory.get(label)).toEqual(payload);
+  });
+  memoryStorage.set(label, payload);
+  test('memoryStorage set & get', () => {
+    expect(memoryStorage.get(label)).toEqual(payload);
+  });
+});
 ```
 
 [Back to TOP](#)
@@ -122,16 +189,27 @@ uStore.memory.get('testName') === 'test Payload';
 Enctypted and Decrypted storage
 
 ```js
-import { uStore } from '@waelio/ustore';
-uStore.secure.set('testName', 'test Payload');
-uStore.secure.get('testName') === 'test Payload';
+import { uStore, secureStorage } from '@waelio/ustore';
+describe('Secure Stotage', () => {
+  const payload = 'Test Payload1';
+  const label = 'test';
+  uStore.secure.set(label, payload);
+  test('uStore set & get', () => {
+    expect(uStore.secure.getItem(label)).toEqual(payload);
+  });
+  secureStorage.set(label, payload);
+  test('secureStorage set & get', () => {
+    expect(secureStorage.getItem(label)).toEqual(payload);
+  });
+});
+
 ```
 
 [Back to TOP](#)
 
 # config
 
-## REMOVED temporily
+## REMOVED temporarily
 
 Config is home-brewed solution, more documentations coming soon.
 

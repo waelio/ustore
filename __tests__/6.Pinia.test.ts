@@ -1,6 +1,6 @@
 import { uStore, piniaStorage } from '../index';
 
-describe('Vuex Stotage', () => {
+describe('Pinia Stotage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
   uStore.pinia.set( payload);

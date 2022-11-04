@@ -1,6 +1,6 @@
 import { uStore, secureStorage } from '../index';
 
-describe('Memory Stotage', () => {
+describe('Secure Stotage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
   uStore.secure.set(label, payload);

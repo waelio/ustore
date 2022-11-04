@@ -1,9 +1,15 @@
-import { uStore } from '../index';
-if (typeof window !== undefined) {
+import { uStore, cookieStorage } from '../index';
+
+describe('Cookie Stotage', () => {
   const payload = 'Test Payload1';
-  const label = 'label';
-  test.only('Cookie Storage', () => {
-    uStore.cookie.set('label', payload);
-    expect(uStore.cookie.get('label')).toEqual(`${label}=${payload}`);
+  const label = 'test';
+  uStore.cookie.set(label, payload);
+
+  test('uStore set & get', () => {
+    expect(uStore.cookie.get(label)).toEqual(`${label}=${payload}`);
   });
-}
+  cookieStorage.set(label, payload);
+  test('cookieStorage set & get', () => {
+    expect(cookieStorage.get(label)).toEqual(`${label}=${payload}`);
+  });
+});
