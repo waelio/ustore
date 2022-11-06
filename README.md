@@ -184,7 +184,7 @@ describe('Memory storage', () => {
 
 [Back to TOP](#)
 
-# seure
+# secure
 
 Enctypted and Decrypted storage
 
