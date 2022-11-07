@@ -18,6 +18,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "resolutions": {
+    "@vueuse/**/vue-demi": "0.11.4"
+  },
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "rm -rf lib && npm run build:esm && npm run build:cjs",
