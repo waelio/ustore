@@ -19,7 +19,7 @@
     "access": "public"
   },
   "resolutions": {
-    "@vueuse/**/vue-demi": "0.11.4"
+    "@vueuse/**/vue-demi": "0.13.11"
   },
   "scripts": {
     "test": "jest --config jestconfig.json",
