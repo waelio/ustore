@@ -19,7 +19,7 @@
     "access": "public"
   },
   "resolutions": {
-    "@vueuse/**/vue-demi": "0.13.11"
+    "vue-demi": "0.13.11"
   },
   "scripts": {
     "test": "jest --config jestconfig.json",
@@ -58,13 +58,14 @@
     "url": "https://github.com/waelio/uStore/issues"
   },
   "devDependencies": {
-    "@types/jest": "^29.2.1",
+    "@jest/globals": "^29.3.0",
+    "@types/jest": "^29.2.2",
     "@types/node": "^18.11.9",
-    "@typescript-eslint/eslint-plugin": "^5.42.0",
-    "@typescript-eslint/parser": "^5.42.0",
-    "eslint": "^8.26.0",
-    "jest": "^29.2.2",
-    "jest-environment-jsdom": "^29.2.2",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "eslint": "^8.27.0",
+    "jest": "^29.3.0",
+    "jest-environment-jsdom": "^29.3.0",
     "prettier": "^2.7.1",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
@@ -77,8 +78,8 @@
     "pinia": "2.0.23",
     "store2": "^2.14.2",
     "vue": "3.2.41",
-    "vue-demi": "^0.13.11",
-    "waelio-utils": "5.0.1",
-    "vuex": "4.1.0"
+    "vue-demi": "0.13.11",
+    "vuex": "4.1.0",
+    "waelio-utils": "5.0.1"
   }
 }
