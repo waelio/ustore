@@ -1,5 +1,5 @@
 import { UStoreClass } from "../.d";
-export declare const isProcess: () => unknown | boolean;
+export declare const isProcess: () => boolean;
 export declare class Config {
     [x: string]: {};
     _store: Partial<UStoreClass>;
