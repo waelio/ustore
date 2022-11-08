@@ -1,4 +1,3 @@
-import { configStorage } from "./stores/configStorage";
 import { localStorage } from "./stores/localStorage";
 import { sessionStorage } from "./stores/sessionStorage";
 import { cookieStorage } from "./stores/cookieStorage";
@@ -16,7 +15,6 @@ export declare type TuStore = {
     pinia: typeof piniaStorage;
     gun: typeof gunStorage;
     secure: typeof secureStorage;
-    config: typeof configStorage;
 };
 export declare const uStore: TuStore;
 export default uStore;
@@ -28,5 +26,4 @@ export { vuexStorage };
 export { piniaStorage };
 export { gunStorage };
 export { secureStorage };
-export { configStorage };
 //# sourceMappingURL=index.d.ts.map
