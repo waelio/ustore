@@ -35,8 +35,9 @@
   "include": [
     "index",
     "src/**/*"
-  ],
+, "temp/configStorage.ts"  ],
   "exclude": [
+    "temp",
     "lib",
     "node_modules"
   ]

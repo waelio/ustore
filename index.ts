@@ -6,7 +6,7 @@ import { vuexStorage } from './src/stores/vuexStorage';
 import { piniaStorage } from './src/stores/piniaStorage';
 import { gunStorage } from './src/stores/gunStorage';
 import { secureStorage } from './src/stores/secureStorage';
-import { configStorage } from './src/stores/configStorage';
+// import { configStorage } from './src/stores/configStorage';
 
 import uStore from './src';
 
@@ -21,7 +21,7 @@ export { vuexStorage };
 export { piniaStorage };
 export { gunStorage };
 export { secureStorage };
-export { configStorage };
+// export { configStorage };
 
 
 if (typeof window !== 'undefined') {

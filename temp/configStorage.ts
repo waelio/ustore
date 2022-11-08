@@ -1,4 +1,4 @@
-import { UStoreClass } from "../.d";
+import { UStoreClass } from "../src/";
 
 export const isProcess = (): boolean => {
   try {
