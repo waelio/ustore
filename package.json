@@ -41,7 +41,7 @@
     "types/**/*"
   ],
   "bin": {
-    "uStore": "lib/index.js"
+    "uStore": "./lib/src/index.js"
   },
   "author": {
     "name": "Wael Wahbeh",
