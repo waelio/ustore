@@ -1,4 +1,4 @@
-import { UStoreClass } from '../.d';
+import { UStoreClass } from "../.d";
 export declare const isProcess: () => unknown | boolean;
 export declare class Config {
     [x: string]: {};

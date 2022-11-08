@@ -18,6 +18,12 @@
   "publishConfig": {
     "access": "public"
   },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    }
+  },
   "resolutions": {
     "vue-demi": "0.13.11"
   },
