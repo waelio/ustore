@@ -1,10 +1,11 @@
+import { describe, expect, test } from '@jest/globals';
 import { uStore, cookieStorage } from '../index';
 
-describe('Cookie Stotage', () => {
-  const payload = 'Test Payload1';
-  const label = 'test';
-  uStore.cookie.set(label, payload);
+const payload = 'Test Payload1';
+const label = 'test';
 
+describe('Cookie Storage', () => {
+  uStore.cookie.set(label, payload);
   test('uStore set & get', () => {
     expect(uStore.cookie.get(label)).toEqual(`${label}=${payload}`);
   });

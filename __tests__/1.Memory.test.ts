@@ -1,10 +1,11 @@
+import { describe, expect, test } from '@jest/globals';
 import { uStore, memoryStorage } from '../index';
 
-describe('Memory Stotage', () => {
-  const payload = 'Test Payload1';
-  const label = 'test';
-  uStore.memory.set(label, payload);
+const payload = 'Test Payload1';
+const label = 'test';
 
+describe('Memory Storage', () => {
+  uStore.memory.set(label, payload);
   test('uStore set & get', () => {
     expect(uStore.memory.get(label)).toEqual(payload);
   });
