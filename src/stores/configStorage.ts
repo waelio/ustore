@@ -1,9 +1,8 @@
-import { UStoreClass } from '../.d';
-
+import { UStoreClass } from "../.d";
 
 export const isProcess = (): boolean => {
   try {
-    return !!process && !!process['browser'];
+    return !!process && !!process["browser"];
   } catch (error) {
     return false;
   }
@@ -37,7 +36,7 @@ export class Config {
    */
   set(key: string, value: unknown) {
     if (key.match(/:/)) {
-      const keys = key.split(':');
+      const keys = key.split(":");
       let storeKey = this._store;
 
       keys.forEach(function (k, i) {
@@ -87,21 +86,21 @@ export class Config {
    * get all client store
    */
   client() {
-    return this.getItem('client');
+    return this.getItem("client");
   }
 
   /**
    * get all dev store
    */
   dev() {
-    return this.getItem('dev');
+    return this.getItem("dev");
   }
 
   /**
    * get all server store
    */
   server() {
-    return this.getItem('server');
+    return this.getItem("server");
   }
 
   /**
@@ -124,10 +123,10 @@ export class Config {
    * Internal inistializalion
    */
   setEnvironment() {
-    if (!!process && process['browser']) {
-      this._env = 'client';
+    if (!!process && process["browser"]) {
+      this._env = "client";
     } else {
-      this._env = 'server';
+      this._env = "server";
     }
   }
 
@@ -137,13 +136,13 @@ export class Config {
   getServerVars() {
     let serverVars = {};
 
-    if (this._env === 'server') {
+    if (this._env === "server") {
       try {
-        const serverPath = '../../config/server.ts';
+        const serverPath = "../../config/server.ts";
         serverVars = require(serverPath);
       } catch (e: unknown) {
-        if (!!process && process.env.NODE_ENV === 'development') {
-          console.warn('Could not find a server.js config in `./config`.');
+        if (!!process && process.env.NODE_ENV === "development") {
+          console.warn("Could not find a server.js config in `./config`.");
         }
       }
     }
@@ -154,10 +153,10 @@ export class Config {
    */
   getClientVars() {
     try {
-      const client = require('../../config/client');
+      const client = require("../../config/client");
       return client; /*? */
     } catch (e) {
-      if (!!process && process.env.NODE_ENV === 'development') {
+      if (!!process && process.env.NODE_ENV === "development") {
         console.warn("Didn't find a client config in `./config`.");
       }
     }
@@ -168,7 +167,7 @@ export class Config {
   getUrgentOverrides() {
     let overrides: {};
     const filename =
-      !!process && process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
+      !!process && process.env.NODE_ENV === "production" ? "prod" : "dev";
     try {
       overrides = require(`../../config/${filename}`); /**? */
 
@@ -187,7 +186,7 @@ export class Config {
    * @param nestedKey
    */
   buildNestedKey(nestedKey: string) {
-    const keys = nestedKey.split(':');
+    const keys = nestedKey.split(":");
     let storeKey = this._store;
 
     keys.forEach(function (k: string) {
