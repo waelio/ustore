@@ -5,7 +5,7 @@ import { createRequire } from "module";
 
 export const isProcess = (): unknown | boolean => {
   try {
-    return !!process && process['browser'] as unknown;
+    return !!process && (process["browser"] as unknown);
   } catch (error) {
     return false;
   }
@@ -169,7 +169,8 @@ export class Config {
    */
   getUrgentOverrides() {
     let overrides: {};
-    const filename =  !!process && process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
+    const filename =
+      !!process && process.env.NODE_ENV === "production" ? "prod" : "dev";
     try {
       overrides = require(`../../config/${filename}`); /**? */
 
