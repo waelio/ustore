@@ -12,10 +12,13 @@ Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
 
 ### As this is a pilot, please feel free to join the discussion. All are welcomed.
 
-#### Next is Indexed DB & maybe Web SQL.
+<hr />
+
+### For more examples, please vitit [testing-ustore](https://github.com/waelio/testing-ustore) for help.
+
+<hr />
 
 #### Crurrent stores:
-
 
 <ol>
 <li>local: <a href="#local">local</a></li>
@@ -26,7 +29,9 @@ Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
 <li>gun: <a href="#gun">gun</a></li>
 <li>memory: <a href="#memory">memory</a></li>
 <li>secure: <a href="#secure">secure</a></li>
-<li>config: <a href="#config">config - underconstruction </a></li>
+<li>config: <a href="#config">config</a></li>
+<li>idb: <a href="#idb">index Db -pending</a></li>
+<li>webql: <a href="#webql">wb sql -pending</a></li>
 </ol>
 
 <hr>
@@ -133,7 +138,7 @@ import { uStore, piniaStorage } from '@waelio/ustore';
 describe('Pinia storage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
-  uStore.pinia.set( payload);
+  uStore.pinia.set(payload);
   test('pinia set & get', () => {
     expect(uStore.pinia.get()).toEqual(payload);
   });
@@ -203,22 +208,79 @@ describe('Secure storage', () => {
     expect(secureStorage.getItem(label)).toEqual(payload);
   });
 });
-
 ```
 
 [Back to TOP](#)
 
 # config
 
-## REMOVED temporarily
-
 Config is home-brewed solution, more documentations coming soon.
 
 ```js
-import { uStore } from '@waelio/ustore';
+import { uStore, configStorage } from '@waelio/ustore';
 
-uStore.config.set('client:testName', 'test Payload');
-uStore.config.get('client:testName') === 'test Payload';
+const payload = 'Test Payload1';
+const label = 'test';
+
+describe('uStore Storage', () => {
+  uStore.config.set(label, payload);
+  test('uStore set & get', () => {
+    expect(uStore.config.getItem(label)).toEqual(payload);
+  });
+  configStorage.set(label, payload);
+  test('configStorage set & get', () => {
+    expect(configStorage.getItem(label)).toEqual(payload);
+  });
+});
+```
+
+[Back to TOP](#)
+
+# idb
+
+Not implemented yet
+
+```js
+/*
+import { uStore, idbStorage } from '@waelio/ustore';
+
+describe('Idb storage', () => {
+  const payload = 'Test Payload1';
+  const label = 'test';
+  uStore.idb.set(label, payload);
+  test('uStore set & get', () => {
+    expect(uStore.idb.getItem(label)).toEqual(payload);
+  });
+  idbStorage.set(label, payload);
+  test('idbStorage set & get', () => {
+    expect(idbStorage.getItem(label)).toEqual(payload);
+  });
+});*/
+```
+
+[Back to TOP](#)
+
+# webql
+
+Not implemented yet
+
+```js
+/**
+import { uStore, webqlStorage } from '@waelio/ustore';
+
+describe('webqlStorage storage', () => {
+  const payload = 'Test Payload1';
+  const label = 'test';
+  uStore.webql.set(label, payload);
+  test('uStore set & get', () => {
+    expect(uStore.webql.getItem(label)).toEqual(payload);
+  });
+  webqlStorage.set(label, payload);
+  test('webqlStorage set & get', () => {
+    expect(webqlStorage.getItem(label)).toEqual(payload);
+  });
+});
+*/
 ```
 
 [Back to TOP](#)
