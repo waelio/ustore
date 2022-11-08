@@ -144,8 +144,8 @@ export class Config {
         const serverPath = "../../config/server.ts";
         serverVars = require(serverPath);
       } catch (e: unknown) {
-        if (!!process && process.env.NODE_ENV === 'development') {
-          console.warn('Could not find a server.js config in `./config`.');
+        if (!!process && process.env.NODE_ENV === "development") {
+          console.warn("Could not find a server.js config in `./config`.");
         }
       }
     }
@@ -159,7 +159,7 @@ export class Config {
       const client = require("../../config/client");
       return client; /*? */
     } catch (e) {
-      if (!!process && process.env.NODE_ENV === 'development') {
+      if (!!process && process.env.NODE_ENV === "development") {
         console.warn("Didn't find a client config in `./config`.");
       }
     }
