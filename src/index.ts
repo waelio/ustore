@@ -1,4 +1,4 @@
-// import { configStorage } from "./stores/configStorage";
+import { configStorage } from "./stores/configStorage";
 import { localStorage } from "./stores/localStorage";
 import { sessionStorage } from "./stores/sessionStorage";
 import { cookieStorage } from "./stores/cookieStorage";
@@ -17,7 +17,7 @@ export type TuStore = {
   pinia: typeof piniaStorage;
   gun: typeof gunStorage;
   secure: typeof secureStorage;
-  // config: typeof configStorage;
+  config: typeof configStorage;
 };
 
 export const uStore: TuStore = {
@@ -29,7 +29,7 @@ export const uStore: TuStore = {
   pinia: piniaStorage,
   gun: gunStorage,
   secure: secureStorage,
-  // config: configStorage,
+  config: configStorage,
 };
 
 export default uStore;
@@ -42,7 +42,7 @@ export { vuexStorage };
 export { piniaStorage };
 export { gunStorage };
 export { secureStorage };
-// export { configStorage };
+export { configStorage };
 
 if (typeof window !== "undefined") {
   window["uStore"] = uStore;

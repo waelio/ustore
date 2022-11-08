@@ -23,10 +23,10 @@
   },
   "scripts": {
     "test": "jest --config jestconfig.json",
-    "build": "rm -rf lib && npm run build:esm && npm run build:cjs",
+    "build": "rm -rf lib && npm run build:esm && npm run build:cjs && npm run build:umd",
     "build:esm": "tsc",
-    "build:cjs": "tsc  --module CommonJS --outDir lib/cjs",
-    "build:umd": "tsc  --module  umd --outDir lib/umd",
+    "build:cjs": "tsc --module CommonJS --outDir lib/cjs",
+    "build:umd": "tsc --module umd --outDir lib/umd",
     "format": "prettier --write \".//src/**/*.ts\"",
     "lint": "npx eslint",
     "prepare": "npm run build",
@@ -36,6 +36,7 @@
     "postversion": "git push && git push --tags"
   },
   "files": [
+    "/config/*",
     "src/**/*",
     "lib/**/*",
     "types/**/*"

@@ -6,4 +6,4 @@ export { vuexStorage } from "./vuexStorage";
 export { piniaStorage } from "./piniaStorage";
 export { gunStorage } from "./gunStorage";
 export { secureStorage } from "./secureStorage";
-// export { configStorage } from "./configStorage";
+export { configStorage } from "./configStorage";
