@@ -1,31 +1,19 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { UStoreClass } from "../.d";
-import path from "path";
+import { createRequire } from 'module';
+// const require = createRequire(import.meta.url);
 
-// path.exists('/config', function (exists) { console.log("Does the file exist?", exists) })
 
-export const isProcess = (): unknown | boolean => {
-  try {
-    return process["browser"] as unknown;
-  } catch (error) {
-    return false;
-  }
-};
 export class Config {
   [x: string]: {};
   _store: Partial<UStoreClass>;
   constructor() {
-    this.configPath = path.join(
-      path.dirname(__dirname),
-      "..",
-      "config/"
-    ); /*? */
     this.setEnvironment();
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const _ = this;
     this._server = _.getServerVars(); /**?*/
-    this._client = _.getClientVars(); /**?*/
-    this._dev = _.getUrgentOverrides(); /**?*/
+    this._client = _.getClientVars(); /*?*/
+    this._dev = _.getUrgentOverrides(); /*?*/
 
     this._store = Object.assign(
       {},
@@ -147,7 +135,7 @@ export class Config {
 
     if (this._env === "server") {
       try {
-        const serverPath = this.configPath + "server.ts";
+        const serverPath = "../../config/server.ts";
         serverVars = require(serverPath);
       } catch (e: unknown) {
         if (process.env.NODE_ENV === "development") {
@@ -162,7 +150,7 @@ export class Config {
    */
   getClientVars() {
     try {
-      const client = require(this.configPath + "client");
+      const client = require('../../config/client');
       return client; /*? */
     } catch (e) {
       if (process.env.NODE_ENV === "development") {
@@ -177,7 +165,7 @@ export class Config {
     let overrides: {};
     const filename = process.env.NODE_ENV === "production" ? "prod" : "dev";
     try {
-      overrides = require(`${this.configPath}${filename}`); /**? */
+      overrides = require(`../../config/${filename}`); /**? */
 
       console.log(
         `FYI: data in \`./config/${filename}.js\` file will override Server & Client equal data/values.`
