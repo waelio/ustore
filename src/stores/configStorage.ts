@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { UStoreClass } from "../.d";
-import { createRequire } from 'module';
+import { createRequire } from "module";
 // const require = createRequire(import.meta.url);
-
 
 export class Config {
   [x: string]: {};
@@ -150,7 +149,7 @@ export class Config {
    */
   getClientVars() {
     try {
-      const client = require('../../config/client');
+      const client = require("../../config/client");
       return client; /*? */
     } catch (e) {
       if (process.env.NODE_ENV === "development") {
