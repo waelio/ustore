@@ -1,4 +1,4 @@
-import { UStoreClass } from "../.d";
+import { UStoreClass } from '../.d';
 export declare const isProcess: () => boolean;
 export declare class Config {
     [x: string]: {};
@@ -15,7 +15,6 @@ export declare class Config {
     has(key: string): boolean;
     setEnvironment(): void;
     getServerVars(): {};
-    getClientVars(): any;
     getUrgentOverrides(): {};
     buildNestedKey(nestedKey: string): Partial<UStoreClass>;
 }

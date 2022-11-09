@@ -14,7 +14,7 @@ Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
 
 <hr />
 
-### For more examples, please vitit [testing-ustore](https://github.com/waelio/testing-ustore) for help.
+### For more examples, please visit [testing-ustore](https://github.com/waelio/testing-ustore) for help.
 
 <hr />
 
