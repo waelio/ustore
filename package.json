@@ -64,14 +64,14 @@
     "url": "https://github.com/waelio/uStore/issues"
   },
   "devDependencies": {
-    "@jest/globals": "^29.3.0",
+    "@jest/globals": "^29.3.1",
     "@types/jest": "^29.2.2",
     "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
     "eslint": "^8.27.0",
-    "jest": "^29.3.0",
-    "jest-environment-jsdom": "^29.3.0",
+    "jest": "^29.3.1",
+    "jest-environment-jsdom": "^29.3.1",
     "prettier": "^2.7.1",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
@@ -83,7 +83,7 @@
     "gun": "0.2020.1238",
     "pinia": "2.0.23",
     "store2": "^2.14.2",
-    "vue": "3.2.41",
+    "vue": "3.2.42",
     "vue-demi": "0.13.11",
     "vuex": "4.1.0",
     "waelio-utils": "5.0.1"

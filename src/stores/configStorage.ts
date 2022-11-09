@@ -1,16 +1,9 @@
-import { UStoreClass } from "../.d";
-import server from "../../config/server";
-import client from "../../config/client";
-import dev from "../../config/dev";
-import prod from "../../config/prod";
+import { UStoreClass } from '../.d';
+import server from '../../config/server';
+import client from '../../config/client';
+import dev from '../../config/dev';
+import prod from '../../config/prod';
 
-export const isProcess = (): boolean => {
-  try {
-    return !!process && !!process["browser"];
-  } catch (error) {
-    return false;
-  }
-};
 export class Config {
   [x: string]: {};
   _store: Partial<UStoreClass>;
@@ -39,7 +32,7 @@ export class Config {
    */
   set(key: string, value: unknown) {
     if (key.match(/:/)) {
-      const keys = key.split(":");
+      const keys = key.split(':');
       let storeKey = this._store;
 
       keys.forEach(function (k, i) {
@@ -89,21 +82,21 @@ export class Config {
    * get all client store
    */
   client() {
-    return this.getItem("client");
+    return this.getItem('client');
   }
 
   /**
    * get all dev store
    */
   dev() {
-    return this.getItem("dev");
+    return this.getItem('dev');
   }
 
   /**
    * get all server store
    */
   server() {
-    return this.getItem("server");
+    return this.getItem('server');
   }
 
   /**
@@ -126,10 +119,10 @@ export class Config {
    * Internal inistializalion
    */
   setEnvironment() {
-    if (!!process && process["browser"]) {
-      this._env = "client";
+    if (typeof process !== 'undefined' && process['browser']) {
+      this._env = 'client';
     } else {
-      this._env = "server";
+      this._env = 'server';
     }
   }
 
@@ -139,12 +132,15 @@ export class Config {
   getServerVars() {
     let serverVars = {};
 
-    if (this._env === "server") {
+    if (this._env === 'server') {
       try {
         serverVars = server;
       } catch (e: unknown) {
-        if (!!process && process.env.NODE_ENV === "development") {
-          console.warn("Could not find a server.js config in `./config`.");
+        if (
+          typeof process !== 'undefined' &&
+          process.env.NODE_ENV === 'development'
+        ) {
+          console.warn('Could not find a server.js config in `./config`.');
         }
       }
     }
@@ -153,24 +149,16 @@ export class Config {
   /**
    * Internal inistializalion
    */
-  // getClientVars() {
-  //   try {
-  //     return client; /*? */
-  //   } catch (e) {
-  //     if (!!process && process.env.NODE_ENV === 'development') {
-  //       console.warn("Didn't find a client config in `./config`.");
-  //     }
-  //   }
-  // }
-  /**
-   * Internal inistializalion
-   */
   getUrgentOverrides() {
     let overrides: {};
     const filename =
-      !!process && process.env.NODE_ENV === "production" ? prod : dev;
+      typeof process !== 'undefined' && process.env.NODE_ENV === 'production'
+        ? prod
+        : dev;
     const info =
-      !!process && process.env.NODE_ENV === "production" ? "prod" : "dev";
+      typeof process !== 'undefined' && process.env.NODE_ENV === 'production'
+        ? 'prod'
+        : 'dev';
     try {
       overrides = filename; /**? */
 
@@ -189,7 +177,7 @@ export class Config {
    * @param nestedKey
    */
   buildNestedKey(nestedKey: string) {
-    const keys = nestedKey.split(":");
+    const keys = nestedKey.split(':');
     let storeKey = this._store;
 
     keys.forEach(function (k: string) {
