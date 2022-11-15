@@ -1,4 +1,4 @@
-import { describe, expect, test } from '@jest/globals';
+import { test } from '@jest/globals';
 // import { uStore, gunStorage } from '../index';
 /**
  * Still testing this pickle ;)
@@ -6,7 +6,7 @@ import { describe, expect, test } from '@jest/globals';
 const payload = 'Test Payload1';
 // const label = 'test';
 
-describe('Gun Storage', () => {
+// describe('Gun Storage', () => {
   // uStore.gun.set(label, payload);
   // test('uStore set & get', async() => {
     // expect(uStore.gun.get(label)).toEqual(payload);
@@ -17,4 +17,4 @@ describe('Gun Storage', () => {
     // const testMe = gunStorage.get(label);
     expect(payload).toEqual(payload);
   });
-});
+// });
