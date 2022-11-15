@@ -30,7 +30,7 @@ Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
 <li>memory: <a href="#memory">memory</a></li>
 <li>secure: <a href="#secure">secure</a></li>
 <li>config: <a href="#config">config</a></li>
-<li>idb: <a href="#idb">index Db -pending</a></li>
+<li>idb: <a href="#idb">idb</a></li>
 <li>webql: <a href="#webql">wb sql -pending</a></li>
 </ol>
 
@@ -241,10 +241,11 @@ describe('uStore Storage', () => {
 Not implemented yet
 
 ```js
-/*
+
+// Did not pass testing yet
 import { uStore, idbStorage } from '@waelio/ustore';
 
-describe('Idb storage', () => {
+describe('Idb Storage', () => {
   const payload = 'Test Payload1';
   const label = 'test';
   uStore.idb.set(label, payload);
@@ -255,7 +256,7 @@ describe('Idb storage', () => {
   test('idbStorage set & get', () => {
     expect(idbStorage.getItem(label)).toEqual(payload);
   });
-});*/
+});
 ```
 
 [Back to TOP](#)
@@ -265,7 +266,8 @@ describe('Idb storage', () => {
 Not implemented yet
 
 ```js
-/**
+
+// Did not pass testing yet
 import { uStore, webqlStorage } from '@waelio/ustore';
 
 describe('webqlStorage storage', () => {
@@ -280,7 +282,6 @@ describe('webqlStorage storage', () => {
     expect(webqlStorage.getItem(label)).toEqual(payload);
   });
 });
-*/
 ```
 
 [Back to TOP](#)
@@ -295,6 +296,7 @@ describe('webqlStorage storage', () => {
 <li><a href="https://vuex.vuejs.org/" target="_blank">Vuex state management</a></li>
 <li><a href="https://pinia.vuejs.org/" target="_blank">Pinia state management</a></li>
 <li><a href="https://gun.eco/" target="_blank">Gun DB</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API" target="_blank">IndexedDB </a>: Powered by:<a href="https://github.com/dannyconnell/localbase#readme" target="_blank">Localbase</a></li>
 <hr/>
 
 [Back to TOP](#)
