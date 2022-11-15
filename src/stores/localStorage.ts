@@ -1,25 +1,33 @@
 import storeTwo from "store2";
 import { UStoreClass } from "../.d";
-const local = storeTwo.namespace("uStore");
+const store = storeTwo.namespace("uStore:localStorage");
 
 export const localStorage: UStoreClass = {
   get: (key: string) => {
     try {
-      return local.get(key);
+      return store.get(key);
     } catch (error: unknown) {
       return error || null;
     }
   },
   set: (key: string, value: unknown) => {
     try {
-      return local.set(key, value);
+      return store.set(key, value);
     } catch (error: unknown) {
       return error || null;
     }
   },
+  //@ts-ignore
+  has: (key: string): Boolean => {
+    try {
+      return Boolean(store.has(key));
+    } catch (error: unknown) {
+      return false
+    }
+  },
   remove: (key: string) => {
     try {
-      return local.remove(key);
+      return store.remove(key);
     } catch (error: unknown) {
       return error || null;
     }
