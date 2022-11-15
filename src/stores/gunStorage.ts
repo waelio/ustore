@@ -12,21 +12,29 @@ type p = string | any;
 // initialize gun
 export const db = new Gun(options);
 export const gunStorage: UStoreClass = {
-  get: function (key: string) {
-    return new Promise((resolve, reject) => {
+  get: function (key: string, callBack?: Function) {
+    return new Promise(async (resolve, reject) => {
       try {
-        resolve(db.get(storeName).get(key));
+        const test = await db.get(storeName).get(key).once();
+        // @ts-ignore
+        const [error, success] = await _to(test);
+        reject(await error);
+        if (callBack) {
+          callBack(success);
+        }
+        resolve(await success);
       } catch (error: any) {
         reject(error);
       }
     });
   },
-  set: (key: string, value: p) => {
+  set: (newKey: string, newValue: p) => {
     return new Promise((resolve, reject) => {
       try {
-        resolve(db.get(storeName).get(key).put(value));
+        db.get(storeName).put({ [newKey]: newValue });
+        resolve(true);
       } catch (error: any) {
-        reject("error");
+        reject(error);
       }
     });
   },
