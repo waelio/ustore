@@ -13,6 +13,20 @@ export const cookieStorage: UStoreClass = {
       return error || null;
     }
   },
+  // @ts-ignore
+  has: (key: string) => {
+    try {
+      return !isReady
+        ? Boolean(memoryStore[key])
+        : Boolean(
+            window.document.cookie
+              .split(";")
+              .find((item: string) => item.split("=")[0] === key)
+          );
+    } catch (error: unknown) {
+      return error || null;
+    }
+  },
   set: (key: string, value: unknown) => {
     try {
       const payload = {};
