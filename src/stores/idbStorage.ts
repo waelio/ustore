@@ -1,19 +1,19 @@
 import { UStoreClass } from "../types";
 import LocalForage from "localforage";
-const NAME = 'idbStorage';
+const NAME = "idbStorage";
 LocalForage.config({
   driver: LocalForage.INDEXEDDB,
   name: NAME,
   version: 1.0,
   size: 4980736,
   storeName: NAME,
-  description: 'uStore.idbStorage'
+  description: "uStore.idbStorage",
 });
-let store: LocalForage
+let store: LocalForage;
 
 try {
   store = LocalForage.createInstance({
-    name: NAME
+    name: NAME,
   });
 } catch (error) {
   console.log(error);
@@ -26,11 +26,11 @@ export const idbStorage: UStoreClass = {
       //@ts-ignore
       const [error, success] = await _to(store.getItem(key));
       if (error) {
-        throw "Error getting item"
+        throw "Error getting item";
       }
-      return success
+      return success;
     } catch (error: unknown) {
-      alert(error)
+      alert(error);
       return error;
     }
   },
@@ -39,11 +39,11 @@ export const idbStorage: UStoreClass = {
       //@ts-ignore
       const [error, success] = await _to(store.getItem(key));
       if (error) {
-        return "Error getting item"
+        return "Error getting item";
       }
-      return success
+      return success;
     } catch (error: unknown) {
-      alert(error)
+      alert(error);
       return error;
     }
   },
@@ -51,11 +51,11 @@ export const idbStorage: UStoreClass = {
     try {
       const [error, success] = await _to(store.setItem(key, value));
       if (error) {
-        return "Error getting item"
+        return "Error getting item";
       }
-      return success
+      return success;
     } catch (error: unknown) {
-      alert(error)
+      alert(error);
       return error;
     }
   },
@@ -64,20 +64,20 @@ export const idbStorage: UStoreClass = {
     try {
       return Boolean(store.getItem(key));
     } catch (_) {
-      alert(_)
+      alert(_);
       return false;
     }
   },
   remove: async (key: string) => {
     try {
       //@ts-ignore
-      const [error, _] = await _to(store.removeItem(key))
+      const [error, _] = await _to(store.removeItem(key));
       if (error) {
-        return "Error getting item"
+        return "Error getting item";
       }
-      return await store.getItem(key) as string | boolean;
+      return (await store.getItem(key)) as string | boolean;
     } catch (error) {
-      alert(error)
+      alert(error);
       return error;
     }
   },

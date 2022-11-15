@@ -22,7 +22,7 @@ export const localStorage: UStoreClass = {
     try {
       return Boolean(store.has(key));
     } catch (error: unknown) {
-      return false
+      return false;
     }
   },
   remove: (key: string) => {

@@ -21,7 +21,7 @@ export type TuStore = {
   secure: typeof secureStorage;
   config: typeof configStorage;
   idb: typeof idbStorage;
-  wsbl: typeof webqlStorage
+  wsbl: typeof webqlStorage;
 };
 
 export const uStore: TuStore = {
@@ -35,7 +35,7 @@ export const uStore: TuStore = {
   secure: secureStorage,
   config: configStorage,
   idb: idbStorage,
-  wsbl:webqlStorage
+  wsbl: webqlStorage,
 };
 
 export default uStore;
@@ -50,7 +50,7 @@ export { gunStorage };
 export { secureStorage };
 export { configStorage };
 export { idbStorage };
-export { webqlStorage }
+export { webqlStorage };
 
 if (typeof window !== "undefined") {
   window["uStore"] = uStore;
