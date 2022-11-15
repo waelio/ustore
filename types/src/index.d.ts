@@ -7,6 +7,8 @@ import { piniaStorage } from "./stores/piniaStorage";
 import { gunStorage } from "./stores/gunStorage";
 import { secureStorage } from "./stores";
 import { configStorage } from "./stores";
+import { idbStorage } from "./stores";
+import { webqlStorage } from "./stores";
 export declare type TuStore = {
     local: typeof localStorage;
     session: typeof sessionStorage;
@@ -17,6 +19,8 @@ export declare type TuStore = {
     gun: typeof gunStorage;
     secure: typeof secureStorage;
     config: typeof configStorage;
+    idb: typeof idbStorage;
+    wsbl: typeof webqlStorage;
 };
 export declare const uStore: TuStore;
 export default uStore;
@@ -29,4 +33,6 @@ export { piniaStorage };
 export { gunStorage };
 export { secureStorage };
 export { configStorage };
+export { idbStorage };
+export { webqlStorage };
 //# sourceMappingURL=index.d.ts.map
