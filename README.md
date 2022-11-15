@@ -31,7 +31,7 @@ Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
 <li>secure: <a href="#secure">secure</a></li>
 <li>config: <a href="#config">config</a></li>
 <li>idb: <a href="#idb">idb</a></li>
-<li>webql: <a href="#webql">wb sql -pending</a></li>
+<li>webql: <a href="#webql">wb sql</a></li>
 </ol>
 
 <hr>
