@@ -14,7 +14,7 @@
   ],
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
-  "type": "commonjs",
+  "type": "module",
   "public": "true",
   "publishConfig": {
     "access": "public"
@@ -27,6 +27,9 @@
   },
   "resolutions": {
     "vue-demi": "0.13.11"
+  },
+  "jest": {
+    "transform": {}
   },
   "transform": [
     [
