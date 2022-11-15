@@ -1,14 +1,22 @@
-import { localStorage } from './src/stores/localStorage';
-import { sessionStorage } from './src/stores/sessionStorage';
-import { cookieStorage } from './src/stores/cookieStorage';
-import { memoryStorage } from './src/stores/memoryStorage';
-import { vuexStorage } from './src/stores/vuexStorage';
-import { piniaStorage } from './src/stores/piniaStorage';
-import { gunStorage } from './src/stores/gunStorage';
-import { secureStorage } from './src/stores/secureStorage';
-import { configStorage } from './src/stores/configStorage';
+import { localStorage } from './src/stores';
+import { sessionStorage } from './src/stores';
+import { cookieStorage } from './src/stores';
+import { memoryStorage } from './src/stores';
+import { vuexStorage } from './src/stores';
+import { piniaStorage } from './src/stores';
+import { gunStorage } from './src/stores';
+import { secureStorage } from './src/stores';
+import { configStorage } from './src/stores';
+import { idbStorage } from './src/stores';
+import { webqlStorage } from './src/stores';
 
 import uStore from './src';
+import * as store from 'store2';
+import * as vue from "vue"
+import * as vuex from "vuex"
+import * as pinia from "pinia"
+import * as gun from "gun"
+import { _decrypt, _encrypt } from 'waelio-utils';
 
 export { uStore };
 export default uStore;
@@ -22,6 +30,18 @@ export { piniaStorage };
 export { gunStorage };
 export { secureStorage };
 export { configStorage };
+export { idbStorage }
+export { webqlStorage }
+// Externals
+export { store }
+export { vue }
+export { vuex }
+export { pinia }
+export { gun }
+export { _encrypt }
+export { _decrypt }
+
+
 
 
 if (typeof window !== 'undefined') {
