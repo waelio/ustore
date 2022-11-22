@@ -13,7 +13,7 @@ export enum StorePlugins {
   wsql = "wsqlStorage",
 }
 export interface IGet {
-  (): () => string | object | string[] | object[]
+  (): () => string | object | string[] | object[];
 }
 export interface GetItem {
   (key: string): string | object | string[] | object[] | boolean;
@@ -44,7 +44,7 @@ export interface IUStoreClassInterface {
   getItem: GetItem;
   getAll: GetAll;
   hasItem: HasItem;
-  removeItem: RemoveItem;  
+  removeItem: RemoveItem;
   remove: RemoveItem;
   has: HasItem;
 }
@@ -65,9 +65,9 @@ export interface uStore {
   hasItem?: HasItem;
 }
 
-declare module 'pinia' {
+declare module "pinia" {
   export interface MapStoresCustomization {
     // set it to the same value as above
-    suffix: ''
+    suffix: "";
   }
 }

@@ -1,9 +1,7 @@
-
 import LocalForage from "localforage";
 const NAME = "idbStorage";
 
 let store: LocalForage;
-
 
 try {
   LocalForage.config({
@@ -17,13 +15,11 @@ try {
   store = LocalForage.createInstance({
     name: NAME,
   });
-
 } catch (error) {
-
   LocalForage.dropInstance({
-    name: NAME
+    name: NAME,
   }).then(function () {
-    console.log(`Dropped ${NAME} database`)
+    console.log(`Dropped ${NAME} database`);
   });
 }
 
@@ -84,11 +80,10 @@ export const idbStorage = {
   remove: async (key: string) => {
     try {
       store.removeItem(key).then(function () {
-        console.log('Key is cleared!');
+        console.log("Key is cleared!");
         store.getItem(key).then(function (value) {
           return value;
-        }
-        );
+        });
       });
     } catch (error) {
       return error;

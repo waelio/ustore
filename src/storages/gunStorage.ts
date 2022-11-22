@@ -1,4 +1,4 @@
-import { IUStoreClassInterface } from '../.d';
+import { IUStoreClassInterface } from "../.d";
 import Gun from "gun/gun";
 
 const peers: string[] = ["https://gunjs-mtl.herokuapp.com/gun"];

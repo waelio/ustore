@@ -1,19 +1,22 @@
-import configStorage, { Config } from './storages/configStorage'
-import cookieStorage from './storages/cookieStorage'
-import gunStorage from './storages/gunStorage'
-import idbStorage from './storages/idbStorage'
-import memoryStorage from './storages/memoryStorage'
-import piniaStorage, {  createPinia, defineStore } from './storages/piniaStorage'
-import secureStorage from './storages/secureStorage'
-import {vuexStorage} from './storages/index'
-import webqlStorage from './storages/webqlStorage'
+import configStorage, { Config } from "./storages/configStorage";
+import cookieStorage from "./storages/cookieStorage";
+import gunStorage from "./storages/gunStorage";
+import idbStorage from "./storages/idbStorage";
+import memoryStorage from "./storages/memoryStorage";
+import piniaStorage, {
+  createPinia,
+  defineStore,
+} from "./storages/piniaStorage";
+import secureStorage from "./storages/secureStorage";
+import { vuexStorage } from "./storages/index";
+import webqlStorage from "./storages/webqlStorage";
 import { localStorage } from "./storages/localStorage";
 import { sessionStorage } from "./storages/sessionStorage";
 
-import { app, createApp } from './storages/uStoreStorage'
+import { app, createApp } from "./storages/uStoreStorage";
 export { Config };
 export { app };
-export  {localStorage} ;
+export { localStorage };
 export { sessionStorage };
 export { cookieStorage };
 export { memoryStorage };
@@ -36,7 +39,7 @@ export type TuStore = {
   pinia: typeof piniaStorage;
   gun: typeof gunStorage;
   secure: typeof secureStorage;
-  config: typeof configStorage
+  config: typeof configStorage;
   idb: typeof idbStorage;
   wsbl: typeof webqlStorage;
 };
@@ -56,7 +59,6 @@ export const uStore: TuStore = {
 };
 
 export default uStore;
-
 
 if (typeof window !== "undefined") {
   window["uStore"] = uStore;

@@ -1,4 +1,4 @@
-import { IUStoreClassInterface } from '../.d';
+import { IUStoreClassInterface } from "../.d";
 import { server, client, dev, prod } from "../../config/index";
 
 export class Config {
@@ -7,10 +7,12 @@ export class Config {
   constructor(plugin?: Partial<IUStoreClassInterface>, options?: any) {
     const _ = this;
     this.setEnvironment();
-    this._server = options?.server as object ? options.server : _.getServerVars();
-    this._client = options?.client as object ? options.client : client;
-    this._dev = options?.dev as object ? options.dev : _.getUrgentOverrides();
-    this._prod = options?.prod as object ? options.prod : prod;
+    this._server = (options?.server as object)
+      ? options.server
+      : _.getServerVars();
+    this._client = (options?.client as object) ? options.client : client;
+    this._dev = (options?.dev as object) ? options.dev : _.getUrgentOverrides();
+    this._prod = (options?.prod as object) ? options.prod : prod;
     this._plugin = plugin || {};
 
     this._store = Object.assign(
@@ -26,7 +28,7 @@ export class Config {
   }
   /**
    * get Environment (client or server)
-  */
+   */
   getENV() {
     return this._env;
   }
@@ -200,4 +202,4 @@ export class Config {
 export const configStorage = new Config();
 export type ConfigStorage = typeof configStorage;
 
-export default configStorage
+export default configStorage;

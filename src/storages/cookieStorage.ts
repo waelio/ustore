@@ -1,4 +1,4 @@
-import { IUStoreClassInterface } from '../.d';
+import { IUStoreClassInterface } from "../.d";
 const isReady = Boolean(typeof window !== "undefined");
 export let memoryStore = {};
 export const cookieStorage: IUStoreClassInterface = {
@@ -7,8 +7,8 @@ export const cookieStorage: IUStoreClassInterface = {
       return !isReady
         ? memoryStore[key]
         : window.document.cookie
-          .split(";")
-          .find((item: string) => item.split("=")[0] === key);
+            .split(";")
+            .find((item: string) => item.split("=")[0] === key);
     } catch (error: unknown) {
       return error || null;
     }
@@ -19,10 +19,10 @@ export const cookieStorage: IUStoreClassInterface = {
       return !isReady
         ? Boolean(memoryStore[key])
         : Boolean(
-          window.document.cookie
-            .split(";")
-            .find((item: string) => item.split("=")[0] === key)
-        );
+            window.document.cookie
+              .split(";")
+              .find((item: string) => item.split("=")[0] === key)
+          );
     } catch (error: unknown) {
       return error || null;
     }

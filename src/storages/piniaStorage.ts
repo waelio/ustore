@@ -2,9 +2,9 @@ import { createPinia, defineStore, setMapStoreSuffix } from "pinia";
 
 import { IUStoreClassInterface } from "../.d";
 import { StorePlugins } from "../types";
-import { app, IUStoreClass } from './uStoreStorage'
+import { app, IUStoreClass } from "./uStoreStorage";
 const pinia = createPinia();
-setMapStoreSuffix('')
+setMapStoreSuffix("");
 
 app.use(pinia);
 
@@ -12,8 +12,8 @@ export const usePiniaStore = defineStore("data", {
   state: () => ({
     raw: {
       type: StorePlugins,
-      value: {}
-    }
+      value: {},
+    },
   }),
   getters: {
     store: function () {
@@ -21,14 +21,14 @@ export const usePiniaStore = defineStore("data", {
     },
     type: function () {
       return () => this.raw.type;
-    }
+    },
   },
   actions: {
     get() {
-      return this.raw.value
+      return this.raw.value;
     },
     getIem(key: string) {
-      return this.raw.value[key]
+      return this.raw.value[key];
     },
     addItem(key: string, value: any): void {
       const raw = this.raw.value;
@@ -39,18 +39,18 @@ export const usePiniaStore = defineStore("data", {
       this.raw.value[key] = value;
     },
     removeItem(key: string) {
-      delete this.raw.value[key]
+      delete this.raw.value[key];
     },
   },
-})
-const temp_store = usePiniaStore()
+});
+const temp_store = usePiniaStore();
 const options = {
   client: true,
   server: true,
   dev: true,
   prod: true,
   plugin: true,
-}
+};
 
 export const piniaStorage = new IUStoreClass(temp_store?.store, options);
 export default piniaStorage as IUStoreClassInterface;

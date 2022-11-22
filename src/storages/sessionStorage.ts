@@ -8,10 +8,11 @@ const options = {
   dev: true,
   prod: true,
   plugin: true,
-}
+};
 
-
-export const sessionStorage: IUStoreClass = new IUStoreClass(session?.session, options);
+export const sessionStorage: IUStoreClass = new IUStoreClass(
+  session?.session,
+  options
+);
 
 export default sessionStorage;
-
