@@ -1,0 +1,1 @@
+{"version":3,"file":"webqlStorage.d.ts","sourceRoot":"","sources":["../../../src/storages/webqlStorage.ts"],"names":[],"mappings":"AA0BA,eAAO,MAAM,YAAY;eACN,MAAM;mBAaF,MAAM;eAaV,GAAG,SAAS,GAAG,KAAG,QAAQ,GAAG,CAAC;eAmBpC,MAAM,KAAG,OAAO;kBAQP,MAAM;CAa3B,CAAC;AAEF,eAAe,YAAY,CAAC"}

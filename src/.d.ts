@@ -9,12 +9,17 @@ export enum StorePlugins {
   vuex = "vuexStorage",
   pinia = "piniaStorage",
   gun = "gunStorage",
+  idb = "idbStorage",
+  wsql = "wsqlStorage",
+}
+export interface IGet {
+  (): () => string | object | string[] | object[]
 }
 export interface GetItem {
   (key: string): string | object | string[] | object[] | boolean;
 }
 export interface GetAll {
-  (key: string): object;
+  (): object;
 }
 export interface HasItem {
   (key: string): boolean | string;
@@ -30,13 +35,18 @@ export interface SetItem {
 export interface RemoveItem {
   (key: string): void | any;
 }
-export interface UStoreClass {
-  type?: string;
+export interface IUStoreClassInterface {
+  type?: IUStoreClassInterface;
   _storage?: Storage;
   get: GetItem;
   set: SetItem;
-  remove?: RemoveItem;
-  has?: boolean;
+  setItem: SetItem;
+  getItem: GetItem;
+  getAll: GetAll;
+  hasItem: HasItem;
+  removeItem: RemoveItem;  
+  remove: RemoveItem;
+  has: HasItem;
 }
 type ValueType = {};
 type OptionsFlags<Type> = {
@@ -53,4 +63,11 @@ export interface uStore {
   remove?: RemoveItem;
   has: HasItem;
   hasItem?: HasItem;
+}
+
+declare module 'pinia' {
+  export interface MapStoresCustomization {
+    // set it to the same value as above
+    suffix: ''
+  }
 }
