@@ -1,11 +1,4 @@
-import { StorePlugins } from "../types";
-import { IUStoreClass } from './uStoreStorage';
-export type STATE1 = () => {
-    raw: {
-        type: StorePlugins;
-        value: {};
-    };
-};
-export declare const vuexStorage: Partial<IUStoreClass>;
+import { uStore } from "../.d";
+export declare const vuexStorage: uStore;
 export default vuexStorage;
 //# sourceMappingURL=vuexStorage.d.ts.map
