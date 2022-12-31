@@ -1,4 +1,4 @@
-import { IUStoreClassInterface } from '../.d';
+import { IUStoreClassInterface } from "../.d";
 export declare class Config {
     [x: string]: {};
     _store: Partial<IUStoreClassInterface>;

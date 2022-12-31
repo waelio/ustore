@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import { IUStoreClassInterface } from '../.d';
+import { IUStoreClassInterface } from "../.d";
 export declare const app: import("vue").App<Element>;
 export { createApp };
 export declare enum STATCSTORESNAMES {

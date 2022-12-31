@@ -1,6 +1,8 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
+    "target": "ES6",
+    "experimentalDecorators": true,
     "allowJs": true,
     "alwaysStrict": true,
     "declaration": true,
@@ -11,7 +13,6 @@
     "rootDir": ".",
     "outDir": "lib",
     "moduleResolution": "Node",
-    "target": "ES6",
     "esModuleInterop": true,
     "lib": [
       "dom",

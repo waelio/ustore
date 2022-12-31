@@ -1,1 +1,1 @@
-{"version":3,"file":"vuexStorage.d.ts","sourceRoot":"","sources":["../../../src/storages/vuexStorage.ts"],"names":[],"mappings":"AAEA,OAAO,EAAG,MAAM,EAAE,MAAM,OAAO,CAAC;AAoDhC,eAAO,MAAM,WAAW,EAAE,MAgBxB,CAAC;AAEH,eAAe,WAAW,CAAC"}
+{"version":3,"file":"vuexStorage.d.ts","sourceRoot":"","sources":["../../../src/storages/vuexStorage.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,MAAM,EAAE,MAAM,OAAO,CAAC;AAkD/B,eAAO,MAAM,WAAW,EAAE,MAiBzB,CAAC;AAEF,eAAe,WAAW,CAAC"}

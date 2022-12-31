@@ -1,19 +1,19 @@
-import configStorage, { Config } from "./storages/configStorage";
-import cookieStorage from "./storages/cookieStorage";
-import gunStorage from "./storages/gunStorage";
-import idbStorage from "./storages/idbStorage";
-import memoryStorage from "./storages/memoryStorage";
+import configStorage, { Config } from "../src/storages/configStorage";
+import {cookieStorage} from "../src/storages/cookieStorage";
+import gunStorage from "../src/storages/gunStorage";
+import idbStorage from "../src/storages/idbStorage";
+import memoryStorage from "../src/storages/memoryStorage";
 import piniaStorage, {
   createPinia,
   defineStore,
-} from "./storages/piniaStorage";
-import secureStorage from "./storages/secureStorage";
-import { vuexStorage } from "./storages/index";
-import webqlStorage from "./storages/webqlStorage";
-import { localStorage } from "./storages/localStorage";
-import { sessionStorage } from "./storages/sessionStorage";
+} from "../src/storages/piniaStorage";
+import secureStorage from "../src/storages/secureStorage";
+import { vuexStorage } from "../src/storages/index";
+import webqlStorage from "../src/storages/webqlStorage";
+import { localStorage } from "../src/storages/localStorage";
+import { sessionStorage } from "../src/storages/sessionStorage";
 
-import { app, createApp } from "./storages/uStoreStorage";
+import { app, createApp } from "../src/storages/uStoreStorage";
 export { Config };
 export { app };
 export { localStorage };

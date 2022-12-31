@@ -1,7 +1,7 @@
 import { createPinia, defineStore } from "pinia";
 import { IUStoreClassInterface } from "../.d";
 import { StorePlugins } from "../types";
-import { IUStoreClass } from './uStoreStorage';
+import { IUStoreClass } from "./uStoreStorage";
 export declare const usePiniaStore: import("pinia").StoreDefinition<"data", {
     raw: {
         type: typeof StorePlugins;

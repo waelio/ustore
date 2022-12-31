@@ -6,6 +6,7 @@ const payload = 'Test Payload1';
 const label = 'test';
 
 test('uStore set & get', () => {
+  expect(idbStorage).toBeTruthy()
   uStore.idb.set(label, payload)
   idbStorage.get(label)
     .then((value) => {
