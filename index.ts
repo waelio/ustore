@@ -1,14 +1,14 @@
-import { localStorage } from './src/storages/';
-import { sessionStorage } from './src/storages/';
-import { cookieStorage } from './src/storages/';
-import { memoryStorage } from './src/storages/';
-import { vuexStorage } from './src/storages/';
-import { piniaStorage } from './src/storages/';
-import { gunStorage } from './src/storages/';
-import { secureStorage } from './src/storages/';
-import { configStorage } from './src/storages/';
-import { idbStorage } from './src/storages/';
-import { webqlStorage } from './src/storages/';
+import { localStorage } from './src/index';
+import { sessionStorage } from './src/index';
+import { cookieStorage } from './src/index';
+import { memoryStorage } from './src/index';
+import { vuexStorage } from './src/index';
+import { piniaStorage } from './src/index';
+import { gunStorage } from './src/index';
+import { secureStorage } from './src/index';
+import { configStorage } from './src/index';
+import { idbStorage } from './src/index';
+import { webqlStorage } from './src/index';
 
 import uStore from './src';
 import * as store from 'store2';
