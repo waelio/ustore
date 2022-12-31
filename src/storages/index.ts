@@ -16,21 +16,18 @@ import { webqlStorage } from "./webqlStorage"; // WebQL storage
 
 export const app = createApp({});
 
-
 export { createPinia };
 export { defineStore };
 export { createApp };
 export { Config };
 
-
-
-import uStore from './uStoreStorage';
-import * as store from 'store2';
-import * as vue from "vue"
-import * as vuex from "vuex"
-import * as pinia from "pinia"
-import * as gun from "gun"
-import { _decrypt, _encrypt } from 'waelio-utils';
+import uStore from "./uStoreStorage";
+import * as store from "store2";
+import * as vue from "vue";
+import * as vuex from "vuex";
+import * as pinia from "pinia";
+import * as gun from "gun";
+import { _decrypt, _encrypt } from "waelio-utils";
 
 export { uStore };
 export default uStore;
@@ -44,22 +41,19 @@ export { piniaStorage };
 export { gunStorage };
 export { secureStorage };
 export { configStorage };
-export { idbStorage }
-export { webqlStorage }
+export { idbStorage };
+export { webqlStorage };
 // Externals
-export { store }
-export { vue }
-export { vuex }
-export { pinia }
-export { gun }
-export { _encrypt }
-export { _decrypt }
+export { store };
+export { vue };
+export { vuex };
+export { pinia };
+export { gun };
+export { _encrypt };
+export { _decrypt };
 
-
-
-
-if (typeof window !== 'undefined') {
-  window['uStore'] = uStore;
+if (typeof window !== "undefined") {
+  window["uStore"] = uStore;
 } else {
-  globalThis['uStore'] = uStore;
+  globalThis["uStore"] = uStore;
 }
