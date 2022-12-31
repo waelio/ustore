@@ -1,6 +1,6 @@
 import LocalForage from "localforage";
 const NAME = "idbStorage";
-jest.mock('localforage')
+jest.mock("localforage");
 
 let store: LocalForage;
 
@@ -24,7 +24,7 @@ try {
   });
 }
 
-export const idbStorage = ({
+export const idbStorage = {
   get: async (key: string) => {
     try {
       store.getItem(key, function (err: any, value) {
@@ -33,7 +33,7 @@ export const idbStorage = ({
         }
         return value;
       });
-    } catch (error: unknown) {      
+    } catch (error: unknown) {
       return error;
     }
   },
@@ -45,7 +45,7 @@ export const idbStorage = ({
         }
         return value;
       });
-    } catch (error: unknown) {      
+    } catch (error: unknown) {
       return error;
     }
   },
@@ -62,7 +62,7 @@ export const idbStorage = ({
           return value;
         });
       });
-    } catch (error: unknown) {      
+    } catch (error: unknown) {
       return error;
     }
   },
@@ -86,7 +86,7 @@ export const idbStorage = ({
     } catch (error) {
       return error;
     }
-  }
-});
+  },
+};
 
 export default idbStorage;

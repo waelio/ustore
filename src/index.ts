@@ -1,5 +1,5 @@
 import configStorage, { Config } from "../src/storages/configStorage";
-import {cookieStorage} from "../src/storages/cookieStorage";
+import { cookieStorage } from "../src/storages/cookieStorage";
 import gunStorage from "../src/storages/gunStorage";
 import idbStorage from "../src/storages/idbStorage";
 import memoryStorage from "../src/storages/memoryStorage";

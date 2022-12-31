@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import {  IUStoreClassInterface } from "../.d";
+import { IUStoreClassInterface } from "../.d";
 
 export const app = createApp({});
 export { createApp };
@@ -25,7 +25,7 @@ export class IUStoreClass implements IUStoreClassInterface {
   constructor(plugin?: object, options?: any) {
     const _ = this;
     if (plugin) {
-      this.plugin = plugin
+      this.plugin = plugin;
     }
     this._server = (options?.server as object)
       ? (this._server = options.server)
@@ -33,58 +33,58 @@ export class IUStoreClass implements IUStoreClassInterface {
     this._client = (options?.client as object)
       ? options.client
       : {
-        init: false,
-        app: {
-          businessName: "MyTest App",
-          businessDomain: "www.testapp.com",
-          businessAddress: "Test 123, Test TS 12345",
-          businessEmail: "test@test.com",
-          businessImage:
-            "https://pbs.twimg.com/media/B6dQuW5IIAIgHCO?format=jpg&name=medium",
-          businessDescription:
-            "Nostrud reprehenderit voluptate sit irure laboris sunt irure fugiat sit tempor.",
-        },
-        settings: {
-          locale: "en-us",
-          darkMode: true,
-        },
-        theming: {
-          $primary: "#9c27b0",
-          $primaryLightColor: "#d05ce3",
-          $primaryTextColor: "#ffffff",
-          $secondary: "#7c4dff",
-          $secondaryLightColor: "#b47cff",
-          $secondaryDarkColor: "#3f1dcb",
-          $secondaryTextColor: "#ffffff",
-          $accent: "#9C27B0",
-          $dark: "#6a0080",
-        },
-        Credentials: {
-          google: {
-            clientId: "",
-            clientPassword: "",
+          init: false,
+          app: {
+            businessName: "MyTest App",
+            businessDomain: "www.testapp.com",
+            businessAddress: "Test 123, Test TS 12345",
+            businessEmail: "test@test.com",
+            businessImage:
+              "https://pbs.twimg.com/media/B6dQuW5IIAIgHCO?format=jpg&name=medium",
+            businessDescription:
+              "Nostrud reprehenderit voluptate sit irure laboris sunt irure fugiat sit tempor.",
           },
-          facebook: {
-            clientId: "",
-            clientPassword: "",
+          settings: {
+            locale: "en-us",
+            darkMode: true,
           },
-          apple: {
-            clientId: "",
-            clientPassword: "",
+          theming: {
+            $primary: "#9c27b0",
+            $primaryLightColor: "#d05ce3",
+            $primaryTextColor: "#ffffff",
+            $secondary: "#7c4dff",
+            $secondaryLightColor: "#b47cff",
+            $secondaryDarkColor: "#3f1dcb",
+            $secondaryTextColor: "#ffffff",
+            $accent: "#9C27B0",
+            $dark: "#6a0080",
           },
-          amazon: {
-            clientId: "",
-            clientPassword: "",
+          Credentials: {
+            google: {
+              clientId: "",
+              clientPassword: "",
+            },
+            facebook: {
+              clientId: "",
+              clientPassword: "",
+            },
+            apple: {
+              clientId: "",
+              clientPassword: "",
+            },
+            amazon: {
+              clientId: "",
+              clientPassword: "",
+            },
           },
-        },
-      };
+        };
     this._dev = (options?.dev as object)
       ? options.dev
       : {
-        debug: false,
-        localeName: "locale",
-        modeName: "darkMode",
-      };
+          debug: false,
+          localeName: "locale",
+          modeName: "darkMode",
+        };
     this._prod = (options?.prod as object) ? options.prod : {};
     this._plugin = plugin || {};
     this._store = Object.assign(
