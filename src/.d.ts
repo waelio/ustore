@@ -1,7 +1,7 @@
 export interface StoreOptions {
   type?: string;
 }
-export enum StorePlugins {
+export enum eStorePlugins {
   local = "localStorage",
   session = "sessionStorage",
   cookie = "cookieStorage",
@@ -52,7 +52,8 @@ type ValueType = {};
 type OptionsFlags<Type> = {
   [Property in keyof Type]: Property;
 };
-export interface uStore {
+
+export interface IuStore {
   [x: string]: unknown;
   type?: string;
   _storage?: Storage;

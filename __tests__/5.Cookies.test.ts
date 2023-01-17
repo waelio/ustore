@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import { uStore, cookieStorage } from '../index';
+import { uStore, cookieStorage } from '../src/_stores/index';
 jest.mock('localforage')
 
 const payload = 'Test Payload1';

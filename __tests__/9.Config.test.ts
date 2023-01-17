@@ -1,5 +1,6 @@
 import { describe, expect, test } from '@jest/globals';
-import { uStore, configStorage } from '../index';
+import { configStorage } from '../src/_stores/configStorage';
+import { uStore } from '../src/_stores/index';
 jest.mock('localforage')
 
 const payload = 'Test Payload1';
@@ -12,6 +13,6 @@ describe('uStore Storage', () => {
   });
   configStorage.set(label, payload);
   test('configStorage set & get', () => {
-    expect(payload).toEqual(payload);
+    expect(configStorage.get(label)).toEqual(payload);
   });
 });

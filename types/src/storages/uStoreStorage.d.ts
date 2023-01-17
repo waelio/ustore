@@ -15,7 +15,7 @@ export type STATCSTORESTYPES = {
     PROD: Partial<IUStoreClassInterface>;
 };
 export declare class IUStoreClass implements IUStoreClassInterface {
-    [x: string]: {};
+    [x: string]: Partial<IUStoreClass> | any;
     _store: any;
     _storage?: any;
     constructor(plugin?: object, options?: any);
