@@ -42,8 +42,8 @@ export const piniaStorage = {
   set: (value: any) => {
     pn_storage.add(value);
   },
-  setItem: (key:string, value: any) => {
-    pn_storage.add({[key]:value});
+  setItem: (key: string, value: any) => {
+    pn_storage.add({ [key]: value });
   },
   remove: () => pn_storage.remove,
 };

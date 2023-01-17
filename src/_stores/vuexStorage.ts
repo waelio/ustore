@@ -46,7 +46,7 @@ app.use(vuexStore);
 
 export const vuexStorage = {
   get: () => vuexStore.getters.getMyValue,
-  getItem: (key: string) => vuexStore.getters.getMyValue[key],    
+  getItem: (key: string) => vuexStore.getters.getMyValue[key],
   set: (key: string, value: any) => {
     vuexStore.commit("setItem", { key, value });
   },

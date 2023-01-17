@@ -1,5 +1,5 @@
 import storeTwo from "store2";
-import { IUStoreClassInterface } from "../.d";;
+import { IUStoreClassInterface } from "../.d";
 const store = storeTwo.namespace("uStore:localStorage");
 
 export const localStorage: IUStoreClassInterface = {

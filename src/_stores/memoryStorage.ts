@@ -1,5 +1,5 @@
 import { UCORE } from "../core/index";
 
-let memoryStore = new UCORE()
+let memoryStore = new UCORE();
 
-export const memoryStorage = memoryStore
+export const memoryStorage = memoryStore;
