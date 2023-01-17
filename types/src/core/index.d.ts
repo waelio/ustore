@@ -1,4 +1,4 @@
-import { ref, computed, Ref } from 'vue';
+import { ref, computed, Ref } from "vue";
 export declare class UCORE {
     _STORE: Ref<any>;
     constructor(initial?: {});
@@ -10,5 +10,5 @@ export declare class UCORE {
     has(key: string): boolean;
     _buildNestedKey(nestedKey: string): any;
 }
-export { ref, computed, };
+export { ref, computed };
 //# sourceMappingURL=index.d.ts.map
