@@ -12,7 +12,7 @@
     "pinia",
     "gun"
   ],
-  "main": "./lib/src/cjs/storages/index.js",
+  "main": "./lib/src/cjs/_stores/index.js",
   "types": "./types/src/index.d.ts",
   "type": "module",
   "public": "true",
@@ -40,7 +40,7 @@
     ]
   ],
   "scripts": {
-    "start": "node ./lib/cjs/src/storages/index",
+    "start": "node ./lib/cjs/src/_stores/index",
     "test": "jest --config jestconfig.json",
     "build": "rm -rf lib && npm run build:esm && npm run build:cjs && npm run build:umd",
     "build:esm": "tsc",
@@ -62,7 +62,7 @@
     "types/*"
   ],
   "bin": {
-    "uStore": "./lib/src/storages/index.js"
+    "uStore": "./lib/src/_stores/index.js"
   },
   "author": {
     "name": "Wael Wahbeh",
