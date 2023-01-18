@@ -12,7 +12,7 @@
     "pinia",
     "gun"
   ],
-  "main": "./lib/src/cjs/_stores/index.js",
+  "main": "./lib/cjs/src/_stores/index.js",
   "types": "./types/src/index.d.ts",
   "type": "module",
   "public": "true",
