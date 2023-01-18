@@ -1,6 +1,5 @@
 import LocalForage from "localforage";
 const NAME = "idbStorage";
-jest.mock("localforage");
 
 let store: LocalForage;
 
