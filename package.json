@@ -19,6 +19,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "bin": {
+    "uStore": "./lib/cjs/src/_stores/index.js"
+  },
   "eslintConfig": {
     "env": {
       "browser": true,
@@ -61,9 +64,6 @@
     "lib/*",
     "types/*"
   ],
-  "bin": {
-    "uStore": "./lib/src/_stores/index.js"
-  },
   "author": {
     "name": "Wael Wahbeh",
     "email": "wahbehw@me.com",
