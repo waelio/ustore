@@ -1,8 +1,11 @@
 import LocalForage from "localforage";
+import { secureStorage } from "./index";
+import localforage from "localforage";
 const NAME = "idbStorage";
+let store;
 
 try {
-  LocalForage.config({
+  localforage.config({
     driver: LocalForage.INDEXEDDB,
     name: NAME,
     version: 1.0,
@@ -10,19 +13,19 @@ try {
     storeName: NAME,
     description: "uStore.idbStorage",
   });
+  store = localforage.createInstance({
+    name: NAME,
+  })
 } catch (error) {
-  LocalForage.dropInstance({
+  localforage.dropInstance({
     name: NAME,
   }).then(function () {
     console.log(`Dropped ${NAME} database`);
   });
+  store = secureStorage
 }
-let store: LocalForage = LocalForage;
-() => ({
-  store: LocalForage.createInstance({
-    name: NAME,
-  }),
-});
+
+
 export const idbStorage = {
   get: async (key: string) => {
     try {

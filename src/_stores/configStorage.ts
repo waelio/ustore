@@ -169,9 +169,9 @@ export class Config {
     try {
       overrides = filename; /**? */
 
-      console.log(
-        `FYI: data in \`./config/${info}.js\` file will override Server & Client equal data/values.`
-      );
+      // console.log(
+      //   `FYI: data in \`./config/${info}.js\` file will override Server & Client equal data/values.`
+      // );
     } catch (e) {
       overrides = {};
     }
