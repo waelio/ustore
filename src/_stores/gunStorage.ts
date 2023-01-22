@@ -1,19 +1,16 @@
 import { IuStore } from "../.d";
 import { _to } from "waelio-utils";
 
-import Gun from 'gun/gun'
-import Sea from 'gun/sea'  // eslint-disable-line no-unused-vars
-import Axe from 'gun/axe'
+import Gun from "gun/gun";
+import Sea from "gun/sea"; // eslint-disable-line no-unused-vars
+import Axe from "gun/axe";
 
 const options = {
   localStorage: true,
   radisk: true,
-  
-  peers: ["https://gunjs-mtl.herokuapp.com/gun", 'http://localhost:8765/gun']
-}
 
-
-
+  peers: ["https://gunjs-mtl.herokuapp.com/gun", "http://localhost:8765/gun"],
+};
 
 export const storeName = "uStoreGunDB";
 

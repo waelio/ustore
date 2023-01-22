@@ -15,16 +15,17 @@ try {
   });
   store = localforage.createInstance({
     name: NAME,
-  })
-} catch (error) {
-  localforage.dropInstance({
-    name: NAME,
-  }).then(function () {
-    console.log(`Dropped ${NAME} database`);
   });
-  store = secureStorage
+} catch (error) {
+  localforage
+    .dropInstance({
+      name: NAME,
+    })
+    .then(function () {
+      console.log(`Dropped ${NAME} database`);
+    });
+  store = secureStorage;
 }
-
 
 export const idbStorage = {
   get: async (key: string) => {
