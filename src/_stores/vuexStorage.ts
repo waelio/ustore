@@ -1,7 +1,9 @@
 import { createStore } from "vuex";
+import { createApp } from "vue";
+
 // import { IuStore } from "../.d";
 import { StorePlugins } from "../types";
-import { app } from "./uStoreStorage";
+const app = createApp({});
 
 export const vuexStore = createStore({
   state: () => ({
@@ -43,7 +45,7 @@ export const vuexStore = createStore({
   strict: true,
 });
 
-() => app.use(vuexStore);
+app.use(vuexStore);
 
 export const vuexStorage = {
   get: () => vuexStore.getters.getMyValue,
