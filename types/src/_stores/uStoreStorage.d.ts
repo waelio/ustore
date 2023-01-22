@@ -4,7 +4,11 @@ export { createApp };
 export declare const uStoreStorage: {
     config: import("./configStorage").Config;
     cookie: import("../").IUStoreClassInterface;
-    gun: Partial<import("../").IuStore>;
+    gun: {
+        get: (key: string, callBack?: Function | undefined) => Promise<unknown>;
+        set: (newKey: string, newValue: any) => Promise<unknown>;
+        remove: (key: string) => Promise<unknown>;
+    };
     idb: {
         get: (key: string) => Promise<unknown>;
         getItem: (key: string) => Promise<unknown>;

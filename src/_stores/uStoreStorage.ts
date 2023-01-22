@@ -11,7 +11,6 @@ import { localStorage } from "./localStorage";
 import { piniaStorage } from "./piniaStorage";
 import { vuexStorage } from "./vuexStorage";
 import { webqlStorage } from "./webqlStorage";
-import uStore from ".";
 
 export const app = createApp({});
 export { createApp };

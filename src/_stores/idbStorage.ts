@@ -1,7 +1,6 @@
 import LocalForage from "localforage";
 const NAME = "idbStorage";
 
-let store: LocalForage;
 
 try {
   LocalForage.config({
@@ -12,9 +11,6 @@ try {
     storeName: NAME,
     description: "uStore.idbStorage",
   });
-  store = LocalForage.createInstance({
-    name: NAME,
-  });
 } catch (error) {
   LocalForage.dropInstance({
     name: NAME,
@@ -22,12 +18,17 @@ try {
     console.log(`Dropped ${NAME} database`);
   });
 }
-
+let store: LocalForage = LocalForage;
+() => ({
+  store: LocalForage.createInstance({
+    name: NAME,
+  })
+})
 export const idbStorage = {
   get: async (key: string) => {
     try {
-      store.getItem(key, function (err: any, value) {
-        if (err) {
+      store.getItem(key, (err: any, value: unknown) => {
+        if (!!err) {
           return "Error getting item";
         }
         return value;

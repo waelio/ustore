@@ -1,11 +1,11 @@
-import { uStore, idbStorage } from '../src/_stores/index';;
+import { uStore, idbStorage } from '../index';
 
 jest.mock('localforage')
 
 const payload = 'Test Payload1';
 const label = 'test';
 
-test('uStore set & get', async() => {
+test('uStore set & get', async () => {
   expect(idbStorage).toBeTruthy()
   await uStore.idb.set(label, payload)
   await idbStorage.get(label)

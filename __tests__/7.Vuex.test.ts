@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import { uStore, vuexStorage } from '../src/_stores/index';
+import { uStore, vuexStorage } from '../index';
 jest.mock('localforage')
 
 const payload = 'Test Payload1';

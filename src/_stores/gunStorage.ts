@@ -11,7 +11,7 @@ type p = string | any;
 
 // initialize gun
 export const db = new Gun(options);
-export const gunStorage: Partial<IuStore> = {
+export const gunStorage = ({
   get: function (key: string, callBack?: Function) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -51,6 +51,6 @@ export const gunStorage: Partial<IuStore> = {
       }
     });
   },
-};
+});
 
 export default gunStorage;
