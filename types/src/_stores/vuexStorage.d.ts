@@ -1,3 +1,10 @@
+import { StorePlugins } from "../types";
+export declare const vuexStore: import("vuex").Store<{
+    raw: {
+        type: typeof StorePlugins;
+        value: {};
+    };
+}>;
 export declare const vuexStorage: {
     get: () => any;
     getItem: (key: string) => any;
