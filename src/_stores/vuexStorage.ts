@@ -43,9 +43,9 @@ export const vuexStore = createStore({
   strict: true,
 });
 
-()=> app.use(vuexStore);
+() => app.use(vuexStore);
 
-export const vuexStorage = ({
+export const vuexStorage = {
   get: () => vuexStore.getters.getMyValue,
   getItem: (key: string) => vuexStore.getters.getMyValue[key],
   set: (key: string, value: any) => {
@@ -59,6 +59,6 @@ export const vuexStorage = ({
     vuexStore.commit("removeItem", key);
     return true;
   },
-});
+};
 
 export default vuexStorage;
