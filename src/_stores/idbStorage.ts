@@ -1,7 +1,6 @@
 import LocalForage from "localforage";
 const NAME = "idbStorage";
 
-
 try {
   LocalForage.config({
     driver: LocalForage.INDEXEDDB,
@@ -22,8 +21,8 @@ let store: LocalForage = LocalForage;
 () => ({
   store: LocalForage.createInstance({
     name: NAME,
-  })
-})
+  }),
+});
 export const idbStorage = {
   get: async (key: string) => {
     try {
