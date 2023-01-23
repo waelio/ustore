@@ -12,22 +12,23 @@
     "pinia",
     "gun"
   ],
-  "main": "./lib/cjs/index.js",
+  "main": "./lib/index.js",
   "types": "./types/index.d.ts",
   "type": "module",
   "public": "true",
+  "exports": {
+    ".": {
+      "require": "./lib/cjs/index.js",
+      "import": "./lib/index.js"
+    }
+  },
   "publishConfig": {
     "access": "public"
   },
   "bin": {
     "uStore": "./lib/cjs/index.js"
   },
-  "eslintConfig": {
-    "env": {
-      "browser": true,
-      "node": true
-    }
-  },
+  "eslintConfig": {},
   "resolutions": {
     "vue-demi": "0.13.11"
   },

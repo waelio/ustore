@@ -9,10 +9,11 @@
     "noEmitOnError": true,
     "noImplicitAny": false,
     "noImplicitThis": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "declarationMap": true,
     "rootDir": ".",
     "outDir": "lib",
-    "moduleResolution": "Node",
     "esModuleInterop": true,
     "lib": [
       "dom",
@@ -37,6 +38,7 @@
     "src/**/*"
   ],
   "exclude": [
+    ".git",
     "ignore",
     "lib",
     "node_modules",
