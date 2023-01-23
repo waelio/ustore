@@ -12,7 +12,7 @@
     "pinia",
     "gun"
   ],
-  "main": "./lib/umd/index.js",
+  "main": "./lib/cjs/index.js",
   "types": "./types/index.d.ts",
   "type": "module",
   "public": "true",
@@ -20,7 +20,7 @@
     "access": "public"
   },
   "bin": {
-    "uStore": "./lib/umd/index.js"
+    "uStore": "./lib/cjs/index.js"
   },
   "eslintConfig": {
     "env": {
