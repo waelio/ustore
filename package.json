@@ -19,14 +19,11 @@
   "exports": {
     ".": {
       "require": "./lib/cjs/index.js",
-      "import": "./lib/index.js"
+      "import": "./index.js"
     }
   },
   "publishConfig": {
     "access": "public"
-  },
-  "bin": {
-    "uStore": "./index"
   },
   "eslintConfig": {},
   "resolutions": {
@@ -48,10 +45,11 @@
   "scripts": {
     "start": "node ./lib/umd/index.js",
     "test": "jest --config jestconfig.json",
-    "build": "rm -rf lib && npm run build:esm && npm run build:cjs && npm run build:umd && npm run lint && npm run format",
+    "remfolders": "rm -rf lib && rm -rf cjs && rm -rf umd",
+    "build": "npm run remfolders && npm run build:esm && npm run build:cjs && npm run build:umd && npm run lint && npm run format",
     "build:esm": "tsc",
     "build:cjs": "tsc --module CommonJS --outDir cjs",
-    "build:umd": "tsc --module umd --outDir lib/umd",
+    "build:umd": "tsc --module umd --outDir umd",
     "format": "prettier --write \".//src/**/*.ts\"",
     "lint": "npx eslint",
     "prepare": "npm run build",
@@ -62,10 +60,11 @@
   },
   "files": [
     "config/*",
-    "src/*",
-    "src/*",
-    "lib/*",
-    "types/*"
+    "cjs/**/*",
+    "lib/**/*",
+    "src/**/*",
+    "types/**/*",
+    "umd/**/*"
   ],
   "author": {
     "name": "Wael Wahbeh",
