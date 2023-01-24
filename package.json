@@ -19,14 +19,14 @@
   "exports": {
     ".": {
       "require": "./lib/cjs/index.js",
-      "import": "./lib/umd/index.js"
+      "import": "./lib/index.js"
     }
   },
   "publishConfig": {
     "access": "public"
   },
   "bin": {
-    "uStore": "./lib/umd/index.js"
+    "uStore": "./index"
   },
   "eslintConfig": {},
   "resolutions": {

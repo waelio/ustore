@@ -35,7 +35,8 @@
   "include": [
     "./index.ts",
     "./config",
-    "src/**/*"
+    "./src/_stores/*",
+    "./src/core/index"
   ],
   "exclude": [
     ".git",
