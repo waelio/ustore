@@ -18,7 +18,7 @@
   "public": "true",
   "exports": {
     ".": {
-      "require": "./lib/cjs/index.js",
+      "require": "./cjs/index.js",
       "import": "./index.js"
     }
   },
