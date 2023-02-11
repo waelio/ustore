@@ -1,17 +1,19 @@
 // @ts-ignore @ts-expect-error
 import { describe, expect, test } from '@jest/globals';
 import { uStore, piniaStorage } from '../index';
-jest.mock('localforage')
+
 const payload = "Test Payload1";
 const label = "test";
 
 describe('Pinia Storage', () => {
-  uStore.pinia.setItem(label, payload);
   test('pinia set & get', () => {
-    expect(uStore.pinia.getItem(label)).toBeTruthy();
+    uStore.pinia.set(payload);
+    expect(uStore.pinia.get()).toBeTruthy();
+    expect(uStore.pinia.get()).toEqual(payload)
   });
-  piniaStorage.setItem(label, payload);
   test('piniaStorage set & get', () => {
-    expect(piniaStorage.getItem(label)).toBeTruthy();
+    piniaStorage.set(payload);
+    expect(piniaStorage.get()).toBeTruthy();
+    expect(uStore.pinia.get()).toEqual(payload)
   });
 });

@@ -1,7 +1,7 @@
 import { describe, expect, test } from '@jest/globals';
 import { memoryStorage } from '../index'
-import { uStore } from '../src/_stores/index';
-jest.mock('localforage')
+import { uStore } from '../src/index';
+
 
 const payload = 'Test Payload1';
 const label = 'test';
@@ -15,6 +15,6 @@ describe('Memory Storage', () => {
   memoryStorage.setItem(label, payload);
 
   test('memoryStorage set & get', () => {
-    expect(memoryStorage.get(label)).toEqual({ 'test': payload });
+    expect(memoryStorage.get(label)).toEqual(payload);
   });
 });

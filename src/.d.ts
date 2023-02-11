@@ -1,7 +1,7 @@
 export interface StoreOptions {
   type?: string;
 }
-export enum eStorePlugins {
+export enum StorePlugins {
   local = "localStorage",
   session = "sessionStorage",
   cookie = "cookieStorage",
@@ -9,20 +9,15 @@ export enum eStorePlugins {
   vuex = "vuexStorage",
   pinia = "piniaStorage",
   gun = "gunStorage",
-  idb = "idbStorage",
-  wsql = "wsqlStorage",
-}
-export interface IGet {
-  (): () => string | object | string[] | object[];
 }
 export interface GetItem {
   (key: string): string | object | string[] | object[] | boolean;
 }
 export interface GetAll {
-  (): object;
+  (key: string): object;
 }
 export interface HasItem {
-  (key: string): boolean | string;
+  (key: string): boolean | any;
 }
 export interface SetItem {
   (key: string, value: string | object | string[] | object[]):
@@ -35,40 +30,33 @@ export interface SetItem {
 export interface RemoveItem {
   (key: string): void | any;
 }
-export interface IUStoreClassInterface {
-  type?: IUStoreClassInterface;
+export interface UStoreClass {
+  type?: string;
   _storage?: Storage;
   get: GetItem;
+  getItem: GetItem;
   set: SetItem;
   setItem: SetItem;
-  getItem: GetItem;
-  getAll: GetAll;
-  hasItem: HasItem;
-  removeItem: RemoveItem;
   remove: RemoveItem;
+  removeItem: RemoveItem;
   has: HasItem;
+  hasItem: HasItem;
 }
 type ValueType = {};
 type OptionsFlags<Type> = {
   [Property in keyof Type]: Property;
 };
-
-export interface IuStore {
+export interface uStore {
   [x: string]: unknown;
   type?: string;
   _storage?: Storage;
-  getItem: GetItem;
   getAll?: object;
   get: GetItem;
+  getItem: GetItem;
   set: SetItem;
-  remove?: RemoveItem;
+  setItem: SetItem;
+  remove: RemoveItem;
+  removeItem: RemoveItem;
   has: HasItem;
-  hasItem?: HasItem;
-}
-
-declare module "pinia" {
-  export interface MapStoresCustomization {
-    // set it to the same value as above
-    suffix: "";
-  }
+  hasItem: HasItem;
 }

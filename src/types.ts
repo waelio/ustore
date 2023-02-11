@@ -28,3 +28,11 @@ export interface SetItem {
 export interface RemoveItem {
   (key: string): void | any;
 }
+export interface UStoreClass {
+  type?: string;
+  _storage?: Storage;
+  getItem?: GetItem;
+  get: GetItem;
+  set: SetItem;
+  remove?: RemoveItem;
+}

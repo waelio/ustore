@@ -4,7 +4,8 @@ export declare class UCORE {
     constructor(initial?: {});
     get(key?: string): any;
     getItem(key: string): any;
-    setItem(k: string, v: string | number | object | any[] | boolean): any;
+    setItem(k: string, val: string | number | object | any[] | boolean): any;
+    removeItem(k: string): any;
     set value(v: string);
     get value(): string;
     has(key: string): boolean;

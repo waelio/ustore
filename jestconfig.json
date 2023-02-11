@@ -5,10 +5,11 @@
   "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(ts?|js?)$",
   "testEnvironment": "jsdom",
   "moduleFileExtensions": [
-    "ts",    
-    "js",    
+    "ts",
+    "tsx",
+    "js",
+    "jsx",
     "json",
-    "node",
-    "mjs"
+    "node"
   ]
 }

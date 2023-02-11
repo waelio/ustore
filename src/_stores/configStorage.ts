@@ -1,37 +1,36 @@
-import { IUStoreClassInterface } from "../.d";
-import { server, client, dev, prod } from "../../config/index";
+/* eslint-disable @typescript-eslint/ban-types */
+import { UStoreClass } from "../.d";
+// const require = createRequire(import.meta.url);
 
+export const isProcess = (): unknown | boolean => {
+  try {
+    return process["browser"] as unknown;
+  } catch (error) {
+    return false;
+  }
+};
 export class Config {
   [x: string]: {};
-  _store: Partial<IUStoreClassInterface>;
-  constructor(plugin?: Partial<IUStoreClassInterface>, options?: any) {
-    const _ = this;
+  _store: Partial<UStoreClass>;
+  constructor() {
     this.setEnvironment();
-    this._server = (options?.server as object)
-      ? options.server
-      : _.getServerVars();
-    this._client = (options?.client as object) ? options.client : client;
-    this._dev = (options?.dev as object) ? options.dev : _.getUrgentOverrides();
-    this._prod = (options?.prod as object) ? options.prod : prod;
-    this._plugin = plugin || {};
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const _ = this;
+    this._server = _.getServerVars(); /**?*/
+    this._client = _.getClientVars(); /*?*/
+    this._dev = _.getUrgentOverrides(); /*?*/
 
     this._store = Object.assign(
+      {},
       { ..._._client },
       { ..._._server },
       { ..._._dev },
       { client: _._client },
       { server: _._server },
-      { dev: _._dev },
-      { prod: _._prod },
-      {}
+      { dev: _._dev }
     );
   }
-  /**
-   * get Environment (client or server)
-   */
-  getENV() {
-    return this._env;
-  }
+
   /**
    *
    * @param key
@@ -126,7 +125,7 @@ export class Config {
    * Internal inistializalion
    */
   setEnvironment() {
-    if (typeof process !== "undefined" && process["browser"]) {
+    if (!!process && process["browser"]) {
       this._env = "client";
     } else {
       this._env = "server";
@@ -141,36 +140,40 @@ export class Config {
 
     if (this._env === "server") {
       try {
-        serverVars = server;
+        const serverPath = "../../config/server.ts";
+        serverVars = require(serverPath);
       } catch (e: unknown) {
-        if (
-          typeof process !== "undefined" &&
-          process.env.NODE_ENV === "development"
-        ) {
+        if (!!process && process.env.NODE_ENV === "development") {
           console.warn("Could not find a server.js config in `./config`.");
         }
       }
     }
-    return serverVars; /*?*/
+    return serverVars;
+  }
+  /**
+   * Internal inistializalion
+   */
+  getClientVars() {
+    try {
+      const client = require("../../config/client");
+      return client; /*? */
+    } catch (e) {
+      if (!!process && process.env.NODE_ENV === "development") {
+        console.warn("Didn't find a client config in `./config`.");
+      }
+    }
   }
   /**
    * Internal inistializalion
    */
   getUrgentOverrides() {
     let overrides: {};
-    const filename =
-      typeof process !== "undefined" && process.env.NODE_ENV === "production"
-        ? prod
-        : dev;
-    const info =
-      typeof process !== "undefined" && process.env.NODE_ENV === "production"
-        ? "prod"
-        : "dev";
+    const filename = process.env.NODE_ENV === "production" ? "prod" : "dev";
     try {
-      overrides = filename; /**? */
+      overrides = require(`../../config/${filename}`); /**? */
 
       // console.log(
-      //   `FYI: data in \`./config/${info}.js\` file will override Server & Client equal data/values.`
+      //   `FYI: data in \`./config/${filename}.js\` file will override Server & Client equal data/values.`
       // );
     } catch (e) {
       overrides = {};
@@ -199,7 +202,7 @@ export class Config {
   }
 }
 
-export const configStorage = new Config();
 export type ConfigStorage = typeof configStorage;
+export const configStorage = new Config();
 
 export default configStorage as ConfigStorage;

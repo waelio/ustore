@@ -1,11 +1,19 @@
-// import type { IuStore } from "../.d";
+// import type { uStore } from "../.d";
+ import { _reParseString } from "waelio-utils";
+import { setMapStoreSuffix } from 'pinia'
 import { createPinia, defineStore } from "pinia";
 import { createApp } from "vue";
-import { _reParseString } from "waelio-utils";
-
 export const app = createApp({});
 const pinia = createPinia();
 app.use(pinia);
+declare module 'pinia' {
+  export interface MapStoresCustomization {
+    suffix: ''
+  }
+}
+setMapStoreSuffix('')
+
+
 export type _State = {
   raw: any;
 };
@@ -38,12 +46,8 @@ const pn_storage = useStore();
 
 export const piniaStorage = {
   get: () => pn_storage.get,
-  getItem: (key: string) => pn_storage.get[key],
   set: (value: any) => {
     pn_storage.add(value);
-  },
-  setItem: (key: string, value: any) => {
-    pn_storage.add({ [key]: value });
   },
   remove: () => pn_storage.remove,
 };

@@ -1,6 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
 import { uStore, vuexStorage } from '../index';
-jest.mock('localforage')
 
 const payload = 'Test Payload1';
 const label = 'test';
@@ -12,6 +11,6 @@ describe('Vuex Storage', () => {
   // });
   vuexStorage.set(label, payload);
   test('vuexStorage set & get', () => {
-    expect(vuexStorage.getItem(label)).toEqual(payload);
+    expect(vuexStorage.get()).toEqual(payload);
   });
 });

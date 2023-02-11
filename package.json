@@ -12,60 +12,44 @@
     "pinia",
     "gun"
   ],
-  "main": "./lib/index.js",
+  "main": "./lib/src/index.js",
   "types": "./types/index.d.ts",
-  "type": "module",
   "public": "true",
-  "exports": {
-    ".": {
-      "require": "./cjs/index.js",
-      "import": "./index.js"
-    }
-  },
   "publishConfig": {
     "access": "public"
   },
-  "eslintConfig": {},
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    }
+  },
   "resolutions": {
     "vue-demi": "0.13.11"
   },
-  "jest": {
-    "transform": {
-      "^.+\\.[t|j]sx?$": "babel-jest"
-    }
-  },
-  "transform": [
-    [
-      "babelify",
-      {
-        "comments": false
-      }
-    ]
-  ],
   "scripts": {
-    "start": "node ./lib/umd/index.js",
     "test": "jest --config jestconfig.json",
-    "remfolders": "rm -rf lib && rm -rf cjs && rm -rf umd",
-    "build": "npm run remfolders && npm run build:esm && npm run build:cjs && npm run build:umd && npm run lint && npm run format",
+    "build": "rm -rf lib && npm run build:esm && npm run build:cjs && npm run build:umd",
     "build:esm": "tsc",
-    "build:cjs": "tsc --module CommonJS --outDir cjs",
-    "build:umd": "tsc --module umd --outDir umd",
+    "build:cjs": "tsc --module CommonJS --outDir lib/cjs",
+    "build:umd": "tsc --module umd --outDir lib/umd",
     "format": "prettier --write \".//src/**/*.ts\"",
     "lint": "npx eslint",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run lint",
+    "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
   "files": [
     "config/*",
-    "cjs/**/*",
-    "lib/**/*",
     "src/**/*",
-    "types/**/*",
-    "umd/**/*"
+    "lib/**/*",
+    "types/**/*"
   ],
+  "bin": {
+    "uStore": "./lib/src/index.js"
+  },
   "author": {
     "name": "Wael Wahbeh",
     "email": "wahbehw@me.com",
@@ -80,42 +64,28 @@
     "url": "https://github.com/waelio/uStore/issues"
   },
   "devDependencies": {
-    "@babel/cli": "^7.20.7",
-    "@babel/core": "^7.20.12",
-    "@jest/globals": "^29.3.1",
-    "@types/jest": "^29.2.6",
-    "@types/node": "^18.11.18",
-    "@typescript-eslint/eslint-plugin": "^5.48.2",
-    "@typescript-eslint/parser": "^5.48.2",
-    "babel-cli": "^6.26.0",
-    "eslint": "^8.32.0",
-    "jest": "^29.3.1",
-    "jest-environment-jsdom": "^29.3.1",
-    "ordered-uuid": "^1.1.0",
-    "prettier": "^2.8.3",
-    "require": "^2.4.20",
-    "ts-jest": "^29.0.5",
+    "@jest/globals": "^29.3.0",
+    "@types/jest": "^29.2.2",
+    "@types/node": "^18.11.9",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "eslint": "^8.27.0",
+    "jest": "^29.3.0",
+    "jest-environment-jsdom": "^29.3.0",
+    "prettier": "^2.7.1",
+    "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.4"
+    "typescript": "^4.8.4"
   },
   "dependencies": {
     "babel-plugin-transform-require-context": "^0.1.1",
     "browserify": "^17.0.0",
     "gun": "0.2020.1238",
-    "localforage": "^1.10.0",
     "pinia": "2.0.23",
     "store2": "^2.14.2",
-    "vue": "3.2.44",
+    "vue": "3.2.47",
     "vue-demi": "0.13.11",
     "vuex": "4.1.0",
     "waelio-utils": "5.0.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "braces@<2.3.1": ">=2.3.1",
-      "uglify-js@<2.4.24": ">=2.4.24",
-      "uglify-js@<2.6.0": ">=2.6.0",
-      "glob-parent@<5.1.2": ">=5.1.2"
-    }
   }
 }

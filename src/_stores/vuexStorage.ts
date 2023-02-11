@@ -1,66 +1,76 @@
-import { createStore } from "vuex";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// import { uStore, UStoreClass } from '../.d';
 import { createApp } from "vue";
+import { createStore } from "vuex";
+export const app = createApp({});
 
-// import { IuStore } from "../.d";
-import { StorePlugins } from "../types";
-const app = createApp({});
-
-export const vuexStore = createStore({
+//  interface _possibleStateValues {
+//   [key: string]: string;
+// }
+// interface _state {
+//   [key: string]: string;
+// }
+// interface _actions {
+//   set: (contetx?: unknown, value?: unknown) => void;
+// }
+// export interface _getters {
+//   getMyValue: (state: _possibleStateValues) => _possibleStateValues;
+// }
+// type VuexStore = {
+//   [x: string]: unknown;
+//   state: _state;
+//   actions?: _actions;
+//   getters: _getters;
+// };
+const vuexStore = createStore({
   state: () => ({
-    raw: {
-      type: StorePlugins,
-      value: {},
-    },
+    myValue: "",
   }),
-  getters: {
-    getMyValue: (state) => state.raw.value,
-    store: (state) => state.raw.value,
-    type: (state) => state.raw.type,
-    getAll: (state) => state.raw.value,
-    getItem: (state) => (key: string) => state.raw.value[key],
-  },
   mutations: {
-    addItem(state, payload) {
-      const raw = state.raw.value;
-      if (typeof payload === "object") {
-        raw[payload.key] = payload.value;
-      } else if (typeof payload === "string") {
-        raw[payload] = payload;
+    setMyValue(state: any, value: string | { [key: string]: string }): void {
+      if (typeof value === "string") {
+        state.myValue = value;
+      } else if (typeof value === "object") {
+        Object.keys(value).forEach((key: string) => {
+          state.myValue = value[key];
+        });
       }
-      state.raw.value = raw;
     },
-    setItem(state, payload) {
-      const raw = state.raw.value;
-      if (typeof payload === "object") {
-        raw[payload.key] = payload.value;
-      } else if (typeof payload === "string") {
-        raw[payload] = payload;
-      }
-      state.raw.value = raw;
+  },
+  actions: {
+    set(context, value) {
+      context.commit("setMyValue", value);
     },
-    removeItem(state, key: string) {
-      delete state.raw.value[key];
-    },
+  },
+  getters: {
+    getMyValue: (state: any) => state.myValue,
   },
   strict: true,
 });
 
-app.use(vuexStore);
-
-export const vuexStorage = {
+export const vuexStorage = ({
   get: () => vuexStore.getters.getMyValue,
-  getItem: (key: string) => vuexStore.getters.getMyValue[key],
+  has: () => !!vuexStore.getters.getMyValue,
+  add: (key: string, value: any) => {
+    const payload = new Object();
+    payload[key] = value;
+    return vuexStore.commit("setMyValue", payload);
+  },
   set: (key: string, value: any) => {
-    vuexStore.commit("setItem", { key, value });
+    const payload = new Object();
+    payload[key] = value;
+    return vuexStore.commit("setMyValue", payload);
   },
   setItem: (key: string, value: any) => {
-    vuexStore.commit("setItem", { key, value });
+    let payload = new Object();
+    payload[key] = value;
+    return vuexStore.commit("setMyValue", payload);
   },
-  has: (key: string) => vuexStore.getters.getItem(key),
-  removeItem: (key: string) => {
-    vuexStore.commit("removeItem", key);
-    return true;
+  removeItem: (key: string) => {    
+    const payload = new Object();
+    payload[key] = null;
+    return vuexStore.commit("setMyValue", payload);
   },
-};
+});
 
 export default vuexStorage;

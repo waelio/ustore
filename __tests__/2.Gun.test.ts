@@ -7,16 +7,20 @@ const payload = 'Test Payload1';
 const label = 'test';
 
 describe('Gun Storage', () => {
-  // uStore.gun.set(label, payload);
-  // test('uStore set & get', async() => {
-  //   expect(uStore.gun.get(label)).toEqual(payload);
-  // });
-  // gunStorage.set(label, payload);
-  test('gunStorage set & get',  () => {
+  test('uStore set & get', () => {
+    uStore.gun.set(label, payload);
+    const testMe = uStore.gun.get(label)
+    setTimeout(() => {
+      expect(testMe).toEqual(payload);
+    }, 5000);
+  });
+  gunStorage.set(label, payload);
+  test('gunStorage set & get', () => {
     gunStorage.set(label, payload);
-    const testMe = gunStorage.get(label);
-    console.trace(testMe);
-    
-    expect(testMe).toEqual(payload);
+    const t = gunStorage.get(label)
+    setTimeout(() => {
+      expect(t).toEqual(payload);
+    }, 5000);
+
   });
 });

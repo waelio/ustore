@@ -27,7 +27,7 @@ export class UCORE {
     }
     return this._STORE.value[key];
   }
-  setItem(k: string, v: string | number | object | any[] | boolean) {
+  setItem(k: string, val: string | number | object | any[] | boolean) {
     var self = this;
     let ls = self._STORE.value;
     if (k.match(/:/)) {
@@ -38,7 +38,31 @@ export class UCORE {
 
       if ((keys.length = 2)) {
         try {
-          ls[keys[0]] = { [keys[0]]: { [keys[1]]: v } };
+          ls[keys[0]] = { [keys[0]]: { [keys[1]]: val } };
+          self._STORE.value = { ...ls };
+          return ls[keys[0]];
+        } catch (error) {
+          return "undefined";
+        }
+      }
+    }
+    ls = { ...{ [k]: val } };
+    self._STORE.value = { ...ls };
+
+    return this.getItem(k);
+  }
+  removeItem(k: string) {
+    if(!k) throw new Error("Key is needed");
+    
+    var self = this;
+    let ls = self._STORE.value;
+    if (k.match(/:/)) {
+      const keys = k.split(":");
+      if (keys.length > 2) throw new Error("cannot nest more that one layer");
+
+      if ((keys.length = 2)) {
+        try {
+          delete ls[keys[0]]
           self._STORE.value = { ...ls };
           return ls[keys[0]];
         } catch (error) {
@@ -47,10 +71,11 @@ export class UCORE {
       }
     }
     // @ts-ignore
-    ls = { [k]: v };
+    ls = { [k]: null };
+    delete ls[k]
     self._STORE.value = { ...ls };
 
-    return this.getItem(k);
+    return !!(this.getItem(k) === 'null');
   }
   public set value(v: string) {
     this._STORE.value = JSON.stringify(v[0] === "{") ? JSON.stringify(v) : v;

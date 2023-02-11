@@ -1,27 +1,33 @@
 import { _encrypt, _decrypt } from "waelio-utils";
-import { IuStore } from "../.d";
-import { memoryStorage } from "./memoryStorage";
-let memoryStore = memoryStorage;
+import { uStore } from "../.d";
+const memoryStore = {};
 
-const secureStorage: IuStore = {
+const secureStorage: uStore = {
   get: function () {
     return memoryStore;
   },
   getItem: function (key: string) {
-    //@ts-ignore
-    return memoryStore[key]
-      ? _decrypt(memoryStore[key])
-      : (_decrypt(key) as unknown as string);
+    return _decrypt(memoryStore[key]);
   },
   set: function (key, value) {
     memoryStore[key] = _encrypt(value);
     return { [key]: memoryStore[key] };
   },
+  setItem: function (key, value) {
+    memoryStore[key] = _encrypt(value);
+    return { [key]: memoryStore[key] };
+  },
   has(key: string): string | boolean {
-    //@ts-ignore
+    return memoryStore[key] ?? false;
+  },
+  hasItem(key: string): string | boolean {
     return memoryStore[key] ?? false;
   },
   remove(key: string) {
+    delete memoryStore[key];
+    return this.has(key);
+  },
+  removeItem(key: string) {
     delete memoryStore[key];
     return this.has(key);
   },

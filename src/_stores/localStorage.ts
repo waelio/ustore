@@ -1,33 +1,60 @@
 import storeTwo from "store2";
-import { IUStoreClassInterface } from "../.d";
-const store = storeTwo.namespace("uStore:localStorage");
+import { UStoreClass } from "../.d";
+const local = storeTwo.namespace("uStore");
 
-export const localStorage: IUStoreClassInterface = {
+export const localStorage: UStoreClass = {
   get: (key: string) => {
     try {
-      return store.get(key);
+      return local.get(key);
+    } catch (error: unknown) {
+      return error || null;
+    }
+  },
+  getItem: (key: string) => {
+    try {
+      return local.get(key);
+    } catch (error: unknown) {
+      return error || null;
+    }
+  },
+  has: (key: string) => {
+    try {
+      return Boolean(local.get(key));
+    } catch (error: unknown) {
+      return error || null;
+    }
+  },
+  hasItem: (key: string) => {
+    try {
+      return Boolean(local.get(key));
     } catch (error: unknown) {
       return error || null;
     }
   },
   set: (key: string, value: unknown) => {
     try {
-      return store.set(key, value);
+      return local.set(key, value);
     } catch (error: unknown) {
       return error || null;
     }
   },
-  //@ts-ignore
-  has: (key: string): Boolean => {
+  setItem: (key: string, value: unknown) => {
     try {
-      return Boolean(store.has(key));
+      return local.set(key, value);
     } catch (error: unknown) {
-      return false;
+      return error || null;
     }
   },
   remove: (key: string) => {
     try {
-      return store.remove(key);
+      return local.remove(key);
+    } catch (error: unknown) {
+      return error || null;
+    }
+  },
+  removeItem: (key: string) => {
+    try {
+      return local.remove(key);
     } catch (error: unknown) {
       return error || null;
     }
