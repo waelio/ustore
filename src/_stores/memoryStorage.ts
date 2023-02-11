@@ -1,7 +1,7 @@
 import { UStoreClass } from "../.d";
 import { UCORE } from "../core/index";
 
-let memoryStore = new UCORE()
+let memoryStore = new UCORE();
 
 export const memoryStorage: UStoreClass = {
   get: (key: string) => {
@@ -18,23 +18,23 @@ export const memoryStorage: UStoreClass = {
   },
   set: (key: string, value: any) => {
     try {
-      return memoryStore.setItem(key, value)
+      return memoryStore.setItem(key, value);
     } catch (error) {
-      return error
-    }      
+      return error;
+    }
   },
   setItem: (key: string, value: any) => {
     try {
-      return memoryStore.setItem(key, value)
+      return memoryStore.setItem(key, value);
     } catch (error) {
-      return error
+      return error;
     }
   },
   remove: (key: string) => {
-    return memoryStore.removeItem(key)    
+    return memoryStore.removeItem(key);
   },
   removeItem: (key: string) => {
-    return memoryStore.removeItem(key)
+    return memoryStore.removeItem(key);
   },
 };
 export default memoryStorage;

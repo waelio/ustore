@@ -52,8 +52,8 @@ export class UCORE {
     return this.getItem(k);
   }
   removeItem(k: string) {
-    if(!k) throw new Error("Key is needed");
-    
+    if (!k) throw new Error("Key is needed");
+
     var self = this;
     let ls = self._STORE.value;
     if (k.match(/:/)) {
@@ -62,7 +62,7 @@ export class UCORE {
 
       if ((keys.length = 2)) {
         try {
-          delete ls[keys[0]]
+          delete ls[keys[0]];
           self._STORE.value = { ...ls };
           return ls[keys[0]];
         } catch (error) {
@@ -72,10 +72,10 @@ export class UCORE {
     }
     // @ts-ignore
     ls = { [k]: null };
-    delete ls[k]
+    delete ls[k];
     self._STORE.value = { ...ls };
 
-    return !!(this.getItem(k) === 'null');
+    return !!(this.getItem(k) === "null");
   }
   public set value(v: string) {
     this._STORE.value = JSON.stringify(v[0] === "{") ? JSON.stringify(v) : v;

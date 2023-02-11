@@ -18,8 +18,8 @@ export const cookieStorage: UStoreClass = {
       return !isReady
         ? memoryStore[key]
         : window.document.cookie
-          .split(";")
-          .find((item: string) => item.split("=")[0] === key);
+            .split(";")
+            .find((item: string) => item.split("=")[0] === key);
     } catch (error: unknown) {
       return error || null;
     }
@@ -28,9 +28,11 @@ export const cookieStorage: UStoreClass = {
     try {
       return !isReady
         ? memoryStore[key]
-        : window.document.cookie
-          .split(";")
-          .find((item: string) => item.split("=")[0] === key) as unknown as boolean;
+        : (window.document.cookie
+            .split(";")
+            .find(
+              (item: string) => item.split("=")[0] === key
+            ) as unknown as boolean);
     } catch (error: unknown) {
       return error || null;
     }
@@ -39,9 +41,11 @@ export const cookieStorage: UStoreClass = {
     try {
       return !isReady
         ? memoryStore[key]
-        : window.document.cookie
-          .split(";")
-          .find((item: string) => item.split("=")[0] === key) as unknown as boolean;
+        : (window.document.cookie
+            .split(";")
+            .find(
+              (item: string) => item.split("=")[0] === key
+            ) as unknown as boolean);
     } catch (error: unknown) {
       return error || null;
     }

@@ -11,7 +11,7 @@ type p = string | any;
 
 // initialize gun
 export const db = new Gun(options);
-export const gunStorage: UStoreClass = ({
+export const gunStorage: UStoreClass = {
   get: async (key: string) => {
     return new Promise((resolve, reject) => {
       try {
@@ -92,4 +92,4 @@ export const gunStorage: UStoreClass = ({
       }
     });
   },
-});
+};

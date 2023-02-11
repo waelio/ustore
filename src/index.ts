@@ -20,7 +20,7 @@ export type TypeUstore = {
   vuex: typeof vuexStorage;
 };
 
-export const uStore: TypeUstore = ({
+export const uStore: TypeUstore = {
   config: configStorage,
   cookie: cookieStorage,
   gun: gunStorage,
@@ -30,7 +30,7 @@ export const uStore: TypeUstore = ({
   secure: secureStorage,
   session: sessionStorage,
   vuex: vuexStorage,
-});
+};
 
 export default uStore;
 
