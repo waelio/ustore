@@ -24,8 +24,11 @@ export { piniaStorage };
 export { gunStorage };
 export { secureStorage };
 export { configStorage };
+// app = createApp({})
 export const app = createApp({});
-const pinia = createPinia();
+// pinia = createPinia()
+export const pinia = createPinia();
+export { defineStore }
 app.use(pinia);
 
 if (typeof window !== 'undefined') {

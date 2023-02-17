@@ -1,7 +1,7 @@
 export declare const app: import("vue").App<Element>;
-declare module 'pinia' {
+declare module "pinia" {
     interface MapStoresCustomization {
-        suffix: '';
+        suffix: "";
     }
 }
 export type _State = {

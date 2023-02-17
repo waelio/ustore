@@ -34,7 +34,9 @@
   "transformIgnorePatterns": "true",
   "include": [
     "index",
-    "src/**/*"
+    "src/**/*",
+    "/types/**/*",
+    "/config/**/*"
   ],
   "exclude": [
     "lib",
