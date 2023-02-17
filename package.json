@@ -18,6 +18,12 @@
   "publishConfig": {
     "access": "public"
   },
+  "exports": {
+    ".": {
+      "require": "./lib/cjs/index.js",
+      "import": "./lib/umd/src/index.js"
+    }
+  },
   "eslintConfig": {
     "env": {
       "browser": true,
@@ -48,7 +54,7 @@
     "types/**/*"
   ],
   "bin": {
-    "uStore": "./lib/src/index.js"
+    "uStore": "./lib/cjs/src/index.js"
   },
   "author": {
     "name": "Wael Wahbeh",
@@ -81,6 +87,7 @@
     "babel-plugin-transform-require-context": "^0.1.1",
     "browserify": "^17.0.0",
     "gun": "0.2020.1238",
+    "localforage": "^1.10.0",
     "pinia": "2.0.23",
     "store2": "^2.14.2",
     "vue": "3.2.47",

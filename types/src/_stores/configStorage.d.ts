@@ -20,7 +20,8 @@ export declare class Config {
     buildNestedKey(nestedKey: string): Partial<UStoreClass>;
 }
 export type ConfigStorage = typeof configStorage;
-export declare const configStorage: Config;
+declare const configStorage: Config;
+export { configStorage };
 declare const _default: Config;
 export default _default;
 //# sourceMappingURL=configStorage.d.ts.map

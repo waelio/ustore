@@ -1,5 +1,7 @@
 import { test } from '@jest/globals';
 import { uStore, gunStorage } from '../index';
+jest.mock('localforage')
+
 /**
  * Still testing this pickle ;)
  */

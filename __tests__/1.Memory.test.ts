@@ -2,6 +2,8 @@ import { describe, expect, test } from '@jest/globals';
 import { memoryStorage } from '../index'
 import { uStore } from '../src/index';
 
+jest.mock('localforage')
+
 
 const payload = 'Test Payload1';
 const label = 'test';

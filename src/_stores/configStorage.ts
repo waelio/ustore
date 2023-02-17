@@ -203,11 +203,7 @@ export class Config {
 }
 
 export type ConfigStorage = typeof configStorage;
-export const configStorage = new Config();
+const configStorage = new Config();
+export { configStorage  } 
 
 export default configStorage as ConfigStorage;
-const cs = configStorage.client.name;
-cs; //
-
-configStorage.get("dev"); /*? */
-/*? */

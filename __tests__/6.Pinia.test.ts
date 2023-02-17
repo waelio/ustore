@@ -1,6 +1,7 @@
 // @ts-ignore @ts-expect-error
 import { describe, expect, test } from '@jest/globals';
 import { uStore, piniaStorage } from '../index';
+jest.mock('localforage')
 
 const payload = "Test Payload1";
 const label = "test";
