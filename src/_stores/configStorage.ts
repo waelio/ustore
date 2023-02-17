@@ -204,6 +204,6 @@ export class Config {
 
 export type ConfigStorage = typeof configStorage;
 const configStorage = new Config();
-export { configStorage  } 
+export { configStorage };
 
 export default configStorage as ConfigStorage;

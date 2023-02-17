@@ -27,7 +27,7 @@ try {
   store = secureStorage;
 }
 
-export { store }
+export { store };
 
 export const idbStorage = {
   get: async (key: string) => {
@@ -94,4 +94,4 @@ export const idbStorage = {
   },
 };
 
-export default idbStorage
+export default idbStorage;

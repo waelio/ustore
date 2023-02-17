@@ -7,5 +7,5 @@ export { piniaStorage } from "./piniaStorage";
 export { gunStorage } from "./gunStorage";
 export { secureStorage } from "./secureStorage";
 export { configStorage } from "./configStorage";
-export { idbStorage } from './idbStorage'
-export { webqlStorage} from './webqlStorage'
+export { idbStorage } from "./idbStorage";
+export { webqlStorage } from "./webqlStorage";

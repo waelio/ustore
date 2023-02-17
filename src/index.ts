@@ -10,30 +10,30 @@ import { configStorage } from "./_stores/configStorage";
 import { idbStorage } from "./_stores/idbStorage";
 import { webqlStorage } from "./_stores/webqlStorage";
 
-  export type Tconfig= typeof configStorage;
-  export type Tcookie= typeof cookieStorage;
-  export type Tgun= typeof gunStorage;
-  export type Tlocal= typeof localStorage;
-  export type Tmemory= typeof memoryStorage;
-  export type Tpinia= typeof piniaStorage;
-  export type Tsecure= typeof secureStorage;
-  export type Tsession= typeof sessionStorage;
-  export type Tvuex= typeof vuexStorage;
-  export type Tidb = typeof idbStorage
-  export type Twebql = typeof webqlStorage
+export type Tconfig = typeof configStorage;
+export type Tcookie = typeof cookieStorage;
+export type Tgun = typeof gunStorage;
+export type Tlocal = typeof localStorage;
+export type Tmemory = typeof memoryStorage;
+export type Tpinia = typeof piniaStorage;
+export type Tsecure = typeof secureStorage;
+export type Tsession = typeof sessionStorage;
+export type Tvuex = typeof vuexStorage;
+export type Tidb = typeof idbStorage;
+export type Twebql = typeof webqlStorage;
 
 export type TypeUstore = {
-  config: Tconfig
-  cookie: Tcookie
-  gun: Tgun
-  local: Tlocal
-  memory: Tmemory
-  pinia: Tpinia
-  secure: Tsecure
-  session: Tsession
-  vuex: Tvuex
-  idb: Tidb
-  webql: Twebql
+  config: Tconfig;
+  cookie: Tcookie;
+  gun: Tgun;
+  local: Tlocal;
+  memory: Tmemory;
+  pinia: Tpinia;
+  secure: Tsecure;
+  session: Tsession;
+  vuex: Tvuex;
+  idb: Tidb;
+  webql: Twebql;
 };
 
 export const uStore: TypeUstore = {
@@ -47,7 +47,7 @@ export const uStore: TypeUstore = {
   session: sessionStorage,
   vuex: vuexStorage,
   idb: idbStorage,
-  webql: webqlStorage
+  webql: webqlStorage,
 };
 
 export default uStore;
@@ -61,8 +61,8 @@ export { piniaStorage };
 export { gunStorage };
 export { secureStorage };
 export { configStorage };
-export { idbStorage }
-export { webqlStorage }
+export { idbStorage };
+export { webqlStorage };
 
 if (typeof window !== "undefined") {
   window["uStore"] = uStore;
