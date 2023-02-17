@@ -21,7 +21,7 @@
   "exports": {
     ".": {
       "require": "./lib/cjs/index.js",
-      "import": "./lib/umd/src/index.js"
+      "import": "./lib/src/index.js"
     }
   },
   "eslintConfig": {
