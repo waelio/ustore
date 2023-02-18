@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { UStoreClass } from '../.d';
+import { UStoreClass } from "../.d";
 // const require = createRequire(import.meta.url);
 
 export const isProcess = (): unknown | boolean => {
   try {
-    return process['browser'] as unknown;
+    return process["browser"] as unknown;
   } catch (error) {
     return false;
   }
@@ -38,7 +38,7 @@ export class Config {
    */
   set(key: string, value: unknown) {
     if (key.match(/:/)) {
-      const keys = key.split(':');
+      const keys = key.split(":");
       let storeKey = this._store;
 
       keys.forEach(function (k, i) {
@@ -88,21 +88,21 @@ export class Config {
    * get all client store
    */
   client() {
-    return this.getItem('client');
+    return this.getItem("client");
   }
 
   /**
    * get all dev store
    */
   dev() {
-    return this.getItem('dev');
+    return this.getItem("dev");
   }
 
   /**
    * get all server store
    */
   server() {
-    return this.getItem('server');
+    return this.getItem("server");
   }
 
   /**
@@ -125,10 +125,10 @@ export class Config {
    * Internal inistializalion
    */
   setEnvironment() {
-    if (!!process && process['browser']) {
-      this._env = 'client';
+    if (!!process && process["browser"]) {
+      this._env = "client";
     } else {
-      this._env = 'server';
+      this._env = "server";
     }
   }
 
@@ -138,12 +138,12 @@ export class Config {
   getServerVars() {
     let serverVars = {};
 
-    if (this._env === 'server') {
+    if (this._env === "server") {
       try {
-        serverVars = require('../config/server');
+        serverVars = require("../config/server");
       } catch (e: unknown) {
-        if (!!process && process.env.NODE_ENV === 'development') {
-          console.warn('Could not find a server.js config in `./config`.');
+        if (!!process && process.env.NODE_ENV === "development") {
+          console.warn("Could not find a server.js config in `./config`.");
         }
       }
     }
@@ -155,58 +155,58 @@ export class Config {
   getClientVars() {
     let client = {};
     try {
-      const payload = require('../config/client');
+      const payload = require("../config/client");
       client = { ...payload };
     } catch (e) {
-      if (!!process && process.env.NODE_ENV === 'development') {
+      if (!!process && process.env.NODE_ENV === "development") {
         console.warn("Didn't find a client config in `./config`.");
         client = {
           ...{
             init: false,
             app: {
-              businessName: 'MyTest App',
-              businessDomain: 'www.testapp.com',
-              businessAddress: 'Test 123, Test TS 12345',
-              businessEmail: 'test@test.com',
+              businessName: "MyTest App",
+              businessDomain: "www.testapp.com",
+              businessAddress: "Test 123, Test TS 12345",
+              businessEmail: "test@test.com",
               businessImage:
-                'https://pbs.twimg.com/media/B6dQuW5IIAIgHCO?format=jpg&name=medium',
+                "https://pbs.twimg.com/media/B6dQuW5IIAIgHCO?format=jpg&name=medium",
               businessDescription:
-                'Nostrud reprehenderit voluptate sit irure laboris sunt irure fugiat sit tempor.'
+                "Nostrud reprehenderit voluptate sit irure laboris sunt irure fugiat sit tempor.",
             },
             settings: {
-              locale: 'en-us',
-              darkMode: true
+              locale: "en-us",
+              darkMode: true,
             },
             theming: {
-              $primary: '#9c27b0',
-              $primaryLightColor: '#d05ce3',
-              $primaryTextColor: '#ffffff',
-              $secondary: '#7c4dff',
-              $secondaryLightColor: '#b47cff',
-              $secondaryDarkColor: '#3f1dcb',
-              $secondaryTextColor: '#ffffff',
-              $accent: '#9C27B0',
-              $dark: '#6a0080'
+              $primary: "#9c27b0",
+              $primaryLightColor: "#d05ce3",
+              $primaryTextColor: "#ffffff",
+              $secondary: "#7c4dff",
+              $secondaryLightColor: "#b47cff",
+              $secondaryDarkColor: "#3f1dcb",
+              $secondaryTextColor: "#ffffff",
+              $accent: "#9C27B0",
+              $dark: "#6a0080",
             },
             Credentials: {
               google: {
-                clientId: '',
-                clientPassword: ''
+                clientId: "",
+                clientPassword: "",
               },
               facebook: {
-                clientId: '',
-                clientPassword: ''
+                clientId: "",
+                clientPassword: "",
               },
               apple: {
-                clientId: '',
-                clientPassword: ''
+                clientId: "",
+                clientPassword: "",
               },
               amazon: {
-                clientId: '',
-                clientPassword: ''
-              }
-            }
-          }
+                clientId: "",
+                clientPassword: "",
+              },
+            },
+          },
         };
       }
     }
@@ -217,7 +217,7 @@ export class Config {
    */
   getUrgentOverrides() {
     let overrides: {};
-    const filename = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
+    const filename = process.env.NODE_ENV === "production" ? "prod" : "dev";
     try {
       overrides = require(`../config/${filename}`); /**? */
 
@@ -236,7 +236,7 @@ export class Config {
    * @param nestedKey
    */
   buildNestedKey(nestedKey: string) {
-    const keys = nestedKey.split(':');
+    const keys = nestedKey.split(":");
     let storeKey = this._store;
 
     keys.forEach(function (k: string) {
