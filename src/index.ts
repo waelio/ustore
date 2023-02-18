@@ -5,7 +5,7 @@ import { memoryStorage } from "./_stores/memoryStorage";
 import { vuexStorage } from "./_stores/vuexStorage";
 import { piniaStorage } from "./_stores/piniaStorage";
 import { gunStorage } from "./_stores/gunStorage";
-import { secureStorage } from "./_stores";
+import { secureStorage } from "./_stores/secureStorage";
 import { configStorage } from "./_stores/configStorage";
 import { idbStorage } from "./_stores/idbStorage";
 import { webqlStorage } from "./_stores/webqlStorage";
