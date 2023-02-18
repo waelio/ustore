@@ -20,7 +20,7 @@
   },
   "exports": {
     ".": {
-      "require": "./lib/cjs/index.js",
+      "require": "./lib/cjs/src/index.js",
       "import": "./lib/src/index.js"
     }
   },
@@ -48,13 +48,12 @@
     "postversion": "git push && git push --tags"
   },
   "files": [
-    "config/*",
     "src/**/*",
     "lib/**/*",
     "types/**/*"
   ],
   "bin": {
-    "uStore": "./lib/cjs/src/index.js"
+    "uStore": "./lib/umd/src/index.js"
   },
   "author": {
     "name": "Wael Wahbeh",
