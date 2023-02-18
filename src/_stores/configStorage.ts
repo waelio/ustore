@@ -155,7 +155,7 @@ export class Config {
   getClientVars() {
     let client = {};
     try {
-      const payload = require("../config/client");
+      const payload = require("../config/client").default;
       client = { ...payload };
     } catch (e) {
       if (!!process && process.env.NODE_ENV === "development") {
