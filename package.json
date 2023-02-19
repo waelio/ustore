@@ -24,20 +24,26 @@
       "import": "./lib/src/index.js"
     }
   },
+  "files": [
+    "src/**/*",
+    "lib/**/*",
+    "types/**/*",
+    "index",
+    "readme"
+  ],
   "eslintConfig": {
     "env": {
       "browser": true,
       "node": true
     }
   },
-  "resolutions": {
-    "vue-demi": "0.13.11"
-  },
   "scripts": {
     "test": "jest --config jestconfig.json",
-    "build": "rm -rf lib && npm run build:esm && npm run build:cjs && npm run build:umd",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module CommonJS --outDir lib/cjs",
+    "cleanup": "rm -rf lib && rm -rf lib",
+    "copyfiles":"cp -R src lib/ && cp index.ts lib/index.ts",
+    "build": "pnpm cleanup && pnpm build:esm && pnpm build:cjs && pnpm build:umd && pnpm copyfiles && pnpm format && pnpm lint",    
+    "build:esm": "tsc --module esnext --outDir lib/esm",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
     "build:umd": "tsc --module umd --outDir lib/umd",
     "format": "prettier --write \".//src/**/*.ts\"",
     "lint": "npx eslint",
@@ -47,13 +53,8 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
-  "files": [
-    "src/**/*",
-    "lib/**/*",
-    "types/**/*"
-  ],
   "bin": {
-    "uStore": "./lib/umd/src/index.js"
+    "uStore": "./lib/esm/src/index.js"
   },
   "author": {
     "name": "Wael Wahbeh",
@@ -84,11 +85,11 @@
   },
   "dependencies": {
     "babel-plugin-transform-require-context": "^0.1.1",
-    "browserify": "^17.0.0",
-    "gun": "0.2020.1238",
+    "browserify": "17.0.0",
+    "gun": "0.2020.1239",
     "localforage": "^1.10.0",
-    "pinia": "2.0.23",
-    "store2": "^2.14.2",
+    "pinia": "2.0.30",
+    "store2": "2.14.2",
     "vue": "3.2.47",
     "vue-demi": "0.13.11",
     "vuex": "4.1.0",
