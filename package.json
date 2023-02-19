@@ -1,6 +1,6 @@
 {
   "name": "@waelio/ustore",
-  "version": "0.0.93",
+  "version": "0.0.94",
   "description": "Universal Storage",
   "homepage": "https://github.com/waelio/uStore#readme",
   "keywords": [
@@ -40,8 +40,8 @@
   "scripts": {
     "test": "jest --config jestconfig.json",
     "cleanup": "rm -rf lib && rm -rf lib",
-    "copyfiles":"cp -R src lib/ && cp index.ts lib/index.ts",
-    "build": "pnpm cleanup && pnpm build:esm && pnpm build:cjs && pnpm build:umd && pnpm copyfiles && pnpm format && pnpm lint",    
+    "copyfiles": "cp -R src lib/ && cp index.ts lib/index.ts",
+    "build": "pnpm cleanup && pnpm build:esm && pnpm build:cjs && pnpm build:umd && pnpm copyfiles && pnpm format && pnpm lint",
     "build:esm": "tsc --module esnext --outDir lib/esm",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
     "build:umd": "tsc --module umd --outDir lib/umd",
