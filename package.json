@@ -12,8 +12,8 @@
     "pinia",
     "gun"
   ],
-  "main": "./lib/src/index.js",
-  "types": "./types/index.d.ts",
+  "main": "./lib/umd/src/index.js",
+  "types": "./types/src/index.d.ts",
   "public": "true",
   "publishConfig": {
     "access": "public"
@@ -21,7 +21,7 @@
   "exports": {
     ".": {
       "require": "./lib/cjs/src/index.js",
-      "import": "./lib/src/index.js"
+      "import": "./lib/umd/src/index.js"
     }
   },
   "files": [
