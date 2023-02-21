@@ -12,7 +12,7 @@
     "pinia",
     "gun"
   ],
-  "main": "./lib/umd/src/index.js",
+  "main": "./lib/esm/src/index.js",
   "types": "./types/src/index.d.ts",
   "public": "true",
   "publishConfig": {
@@ -21,14 +21,14 @@
   "exports": {
     ".": {
       "require": "./lib/cjs/src/index.js",
-      "import": "./lib/umd/src/index.js"
+      "import": "./lib/esm/src/index.js"
     }
   },
   "files": [
     "src/**/*",
     "lib/**/*",
     "types/**/*",
-    "index",
+    "index.*",
     "readme"
   ],
   "eslintConfig": {
