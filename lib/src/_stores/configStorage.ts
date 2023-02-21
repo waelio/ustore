@@ -29,9 +29,8 @@ export class Config {
       { server: _._server },
       { dev: _._dev }
     );
-   
   }
-  
+
   /**
    *
    * @param key
