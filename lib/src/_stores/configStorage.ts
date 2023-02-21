@@ -15,8 +15,8 @@ export class Config {
   constructor() {
     this.setEnvironment();
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const _ = this;
-    this._server = _.getServerVars(); /**?*/
+    const _ = this; /*?*/
+    this._server = _.getServerVars(); /*?*/
     this._client = _.getClientVars(); /*?*/
     this._dev = _.getUrgentOverrides(); /*?*/
 
@@ -29,8 +29,9 @@ export class Config {
       { server: _._server },
       { dev: _._dev }
     );
+   
   }
-
+  
   /**
    *
    * @param key
@@ -140,7 +141,7 @@ export class Config {
 
     if (this._env === "server") {
       try {
-        serverVars = require("../config/server");
+        serverVars = require("../config/server").default;
       } catch (e: unknown) {
         if (!!process && process.env.NODE_ENV === "development") {
           console.warn("Could not find a server.js config in `./config`.");
@@ -219,7 +220,7 @@ export class Config {
     let overrides: {};
     const filename = process.env.NODE_ENV === "production" ? "prod" : "dev";
     try {
-      overrides = require(`../config/${filename}`); /**? */
+      overrides = require(`../config/${filename}`).default; /**? */
 
       // console.log(
       //   `FYI: data in \`./config/${filename}.js\` file will override Server & Client equal data/values.`
