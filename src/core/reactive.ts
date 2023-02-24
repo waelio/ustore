@@ -1,5 +1,5 @@
 let data = { index: "name", value: "uStoreR" };
-let target = null;
+let target:null|Function = null;
 
 export class Dep {
   subscripers: any[];
@@ -35,3 +35,12 @@ Object.keys(data).forEach((key) => {
     },
   });
 });
+// const dep = new Dep()
+// let v = 10;
+// target = () => x = v
+// let x = 0;
+// v; /*?*/
+// v=4; /*?*/
+// dep.depend()
+// v; /*?*/
+// x; /*?*/
