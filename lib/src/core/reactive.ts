@@ -1,5 +1,5 @@
 let data = { index: "name", value: "uStoreR" };
-let target:null|Function = null;
+let target: null | Function = null;
 
 export class Dep {
   subscripers: any[];

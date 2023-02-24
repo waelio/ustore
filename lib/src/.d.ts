@@ -11,13 +11,18 @@ export enum StorePlugins {
   gun = "gunStorage",
 }
 export type SecureOptions = {
-  salt: string
-}
+  salt: string;
+};
 export interface GetItem {
   (key: string): string | object | string[] | object[] | boolean;
 }
 export interface GetItemSecure {
-  (key: string, options?: SecureOptions): string | object | string[] | object[] | boolean;
+  (key: string, options?: SecureOptions):
+    | string
+    | object
+    | string[]
+    | object[]
+    | boolean;
 }
 export interface GetAll {
   (key: string): object;
@@ -34,12 +39,11 @@ export interface SetItem {
     | [];
 }
 export interface SetItemSecure {
-  (key: string, value: string | object | string[] | object[], options?: SecureOptions):
-    | void
-    | string
-    | Promise<unknown>
-    | unknown
-    | [];
+  (
+    key: string,
+    value: string | object | string[] | object[],
+    options?: SecureOptions
+  ): void | string | Promise<unknown> | unknown | [];
 }
 export interface RemoveItem {
   (key: string): void | any;
