@@ -3,7 +3,7 @@ import { uStoreSecure } from "../.d";
 const memoryStore = {};
 type TOPTIONS = { salt: string };
 
-const secureStorage: uStoreSecure = {
+const secureStorage: uStoreSecure = ({
   get: function () {
     return memoryStore;
   },
@@ -35,8 +35,8 @@ const secureStorage: uStoreSecure = {
   removeItem(key: string) {
     delete memoryStore[key];
     return this.has(key);
-  },
-};
+  }
+});
 
 const descriptor = Object.create(memoryStore);
 descriptor.value = "readonly";
