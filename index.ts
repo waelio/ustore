@@ -26,8 +26,8 @@ export { piniaStorage };
 export { gunStorage };
 export { secureStorage };
 export { configStorage };
-export {idbStorage}
-export {webqlStorage}
+export { idbStorage }
+export { webqlStorage }
 
 // app = createApp({})
 export const app = createApp({});

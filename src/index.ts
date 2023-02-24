@@ -1,3 +1,5 @@
+require('module-alias/register')
+
 import { localStorage } from "./_stores/localStorage";
 import { sessionStorage } from "./_stores/sessionStorage";
 import { cookieStorage } from "./_stores/cookieStorage";

@@ -1,6 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-types */
+require('module-alias/register')
+
 import { UStoreClass } from "../.d";
 // const require = createRequire(import.meta.url);
+import CONFIG from '../config'
 
 export const isProcess = (): unknown | boolean => {
   try {
@@ -140,11 +142,9 @@ export class Config {
 
     if (this._env === "server") {
       try {
-        serverVars = require("../config/server").default;
-      } catch (e: unknown) {
-        if (!!process && process.env.NODE_ENV === "development") {
-          console.warn("Could not find a server.js config in `./config`.");
-        }
+        serverVars = CONFIG().server;
+      } catch (e: unknown) {        
+          console.log("Could not find a server.js config in `./config`." )       
       }
     }
     return serverVars;
@@ -155,60 +155,10 @@ export class Config {
   getClientVars() {
     let client = {};
     try {
-      const payload = require("../config/client").default;
+      const payload = CONFIG().client
       client = { ...payload };
     } catch (e) {
-      if (!!process && process.env.NODE_ENV === "development") {
-        console.warn("Didn't find a client config in `./config`.");
-        client = {
-          ...{
-            init: false,
-            app: {
-              businessName: "MyTest App",
-              businessDomain: "www.testapp.com",
-              businessAddress: "Test 123, Test TS 12345",
-              businessEmail: "test@test.com",
-              businessImage:
-                "https://pbs.twimg.com/media/B6dQuW5IIAIgHCO?format=jpg&name=medium",
-              businessDescription:
-                "Nostrud reprehenderit voluptate sit irure laboris sunt irure fugiat sit tempor.",
-            },
-            settings: {
-              locale: "en-us",
-              darkMode: true,
-            },
-            theming: {
-              $primary: "#9c27b0",
-              $primaryLightColor: "#d05ce3",
-              $primaryTextColor: "#ffffff",
-              $secondary: "#7c4dff",
-              $secondaryLightColor: "#b47cff",
-              $secondaryDarkColor: "#3f1dcb",
-              $secondaryTextColor: "#ffffff",
-              $accent: "#9C27B0",
-              $dark: "#6a0080",
-            },
-            Credentials: {
-              google: {
-                clientId: "",
-                clientPassword: "",
-              },
-              facebook: {
-                clientId: "",
-                clientPassword: "",
-              },
-              apple: {
-                clientId: "",
-                clientPassword: "",
-              },
-              amazon: {
-                clientId: "",
-                clientPassword: "",
-              },
-            },
-          },
-        };
-      }
+      console.log("Didn't find a client config in `./config`." )     
     }
     return client;
   }
@@ -219,15 +169,10 @@ export class Config {
     let overrides: {};
     const filename = process.env.NODE_ENV === "production" ? "prod" : "dev";
     try {
-      overrides = require(`../config/${filename}`).default; /**? */
-
-      // console.log(
-      //   `FYI: data in \`./config/${filename}.js\` file will override Server & Client equal data/values.`
-      // );
+      overrides = CONFIG()[filename];
     } catch (e) {
       overrides = {};
     }
-
     return overrides;
   }
 

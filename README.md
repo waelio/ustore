@@ -241,7 +241,6 @@ describe('uStore Storage', () => {
 Not implemented yet
 
 ```js
-/*
 import { uStore, idbStorage } from '@waelio/ustore';
 
 describe('Idb storage', () => {
@@ -255,7 +254,7 @@ describe('Idb storage', () => {
   test('idbStorage set & get', () => {
     expect(idbStorage.getItem(label)).toEqual(payload);
   });
-});*/
+});
 ```
 
 [Back to TOP](#)
@@ -265,7 +264,7 @@ describe('Idb storage', () => {
 Not implemented yet
 
 ```js
-/**
+
 import { uStore, webqlStorage } from '@waelio/ustore';
 
 describe('webqlStorage storage', () => {
@@ -280,7 +279,7 @@ describe('webqlStorage storage', () => {
     expect(webqlStorage.getItem(label)).toEqual(payload);
   });
 });
-*/
+
 ```
 
 [Back to TOP](#)

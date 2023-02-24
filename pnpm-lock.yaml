@@ -1,8 +1,5 @@
 lockfileVersion: 5.4
 
-overrides:
-  vue-demi: 0.13.11
-
 specifiers:
   '@jest/globals': ^29.3.0
   '@types/jest': ^29.2.2
@@ -10,15 +7,16 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.42.1
   '@typescript-eslint/parser': ^5.42.1
   babel-plugin-transform-require-context: ^0.1.1
-  browserify: ^17.0.0
+  browserify: 17.0.0
   eslint: ^8.27.0
-  gun: 0.2020.1238
+  gun: 0.2020.1239
   jest: ^29.3.0
   jest-environment-jsdom: ^29.3.0
   localforage: ^1.10.0
-  pinia: 2.0.23
+  module-alias: ^2.2.2
+  pinia: 2.0.30
   prettier: ^2.7.1
-  store2: ^2.14.2
+  store2: 2.14.2
   ts-jest: ^29.0.3
   ts-node: ^10.9.1
   typescript: ^4.8.4
@@ -30,9 +28,9 @@ specifiers:
 dependencies:
   babel-plugin-transform-require-context: 0.1.1
   browserify: 17.0.0
-  gun: 0.2020.1238
+  gun: 0.2020.1239
   localforage: 1.10.0
-  pinia: 2.0.23_hmuptsblhheur2tugfgucj7gc4
+  pinia: 2.0.30_hmuptsblhheur2tugfgucj7gc4
   store2: 2.14.2
   vue: 3.2.47
   vue-demi: 0.13.11_vue@3.2.47
@@ -48,6 +46,7 @@ devDependencies:
   eslint: 8.34.0
   jest: 29.4.2_ucpl6toqp57nqodtp3vxxi6g5a
   jest-environment-jsdom: 29.4.2
+  module-alias: 2.2.2
   prettier: 2.8.4
   ts-jest: 29.0.5_zgilbyuumz7xbrerspmrtjuxsi
   ts-node: 10.9.1_4bewfcp2iebiwuold25d6rgcsy
@@ -2375,8 +2374,8 @@ packages:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
     dev: true
 
-  /gun/0.2020.1238:
-    resolution: {integrity: sha512-8rKaAN74o3RTc2/a3CZca3Rx6rWnYpB1nS7mCtWH+LC7wvt2tzPR1yfRCq61haoR/Vtbl45qdq8iyoz9lAY8mg==}
+  /gun/0.2020.1239:
+    resolution: {integrity: sha512-e4BsRL4P6oLT1m7G+0H8VhhdfFEHhcPc5tOnmgTO6q9ZQrT+Q0B5XKrpAV3NcuLq3SpnOevlz6+Ul5CVaavcXQ==}
     engines: {node: '>=0.8.4'}
     dependencies:
       ws: 7.5.9
@@ -3408,6 +3407,10 @@ packages:
     resolution: {integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==}
     dev: false
 
+  /module-alias/2.2.2:
+    resolution: {integrity: sha512-A/78XjoX2EmNvppVWEhM2oGk3x4lLxnkEA4jTbaK97QKSDjkIoOsKQlfylt/d3kKKi596Qy3NP5XrXJ6fZIC9Q==}
+    dev: true
+
   /module-deps/6.2.3:
     resolution: {integrity: sha512-fg7OZaQBcL4/L+AK5f4iVqf9OMbCclXfy/znXRxTVhJSeW5AIlS9AwheYwDaXM3lVW7OBeaeUEY3gbaC6cLlSA==}
     engines: {node: '>= 0.8.0'}
@@ -3643,8 +3646,8 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
-  /pinia/2.0.23_hmuptsblhheur2tugfgucj7gc4:
-    resolution: {integrity: sha512-N15hFf4o5STrxpNrib1IEb1GOArvPYf1zPvQVRGOO1G1d74Ak0J0lVyalX/SmrzdT4Q0nlEFjbURsmBmIGUR5Q==}
+  /pinia/2.0.30_hmuptsblhheur2tugfgucj7gc4:
+    resolution: {integrity: sha512-q6DUmxWwe/mQgg+55QQjykpKC+aGeGdaJV3niminl19V08dE+LRTvSEuqi6/NLSGCKHI49KGL6tMNEOssFiMyA==}
     peerDependencies:
       '@vue/composition-api': ^1.4.0
       typescript: '>=4.4.4'
