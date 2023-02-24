@@ -10,8 +10,14 @@ export enum StorePlugins {
   pinia = "piniaStorage",
   gun = "gunStorage",
 }
+export type SecureOptions = {
+  salt: string
+}
 export interface GetItem {
   (key: string): string | object | string[] | object[] | boolean;
+}
+export interface GetItemSecure {
+  (key: string, options?: SecureOptions): string | object | string[] | object[] | boolean;
 }
 export interface GetAll {
   (key: string): object;
@@ -21,6 +27,14 @@ export interface HasItem {
 }
 export interface SetItem {
   (key: string, value: string | object | string[] | object[]):
+    | void
+    | string
+    | Promise<unknown>
+    | unknown
+    | [];
+}
+export interface SetItemSecure {
+  (key: string, value: string | object | string[] | object[], options?: SecureOptions):
     | void
     | string
     | Promise<unknown>
@@ -55,6 +69,20 @@ export interface uStore {
   getItem: GetItem;
   set: SetItem;
   setItem: SetItem;
+  remove: RemoveItem;
+  removeItem: RemoveItem;
+  has: HasItem;
+  hasItem: HasItem;
+}
+export interface uStoreSecure {
+  [x: string]: any;
+  type?: string;
+  _storage?: Storage;
+  getAll?: object;
+  get: GetItem;
+  getItem: GetItemSecure;
+  set: SetItemSecure;
+  setItem: SetItemSecure;
   remove: RemoveItem;
   removeItem: RemoveItem;
   has: HasItem;
