@@ -1,20 +1,25 @@
 import { _encrypt, _decrypt } from "waelio-utils";
 import { uStore } from "../.d";
 const memoryStore = {};
+type TOPTIONS = { salt: string }
 
 const secureStorage: uStore = {
   get: function () {
     return memoryStore;
   },
-  getItem: function (key: string) {
-    return _decrypt(memoryStore[key]);
+  // @ts-ignore
+  getItem: function (key: string, options: TOPTIONS) {
+
+    return options && options.salt ? _decrypt(memoryStore[key], options.salt) : _decrypt(memoryStore[key]);
   },
-  set: function (key, value) {
-    memoryStore[key] = _encrypt(value);
+  // @ts-ignore
+  set: function (key: string, value: string[], options: TOPTIONS) {
+    memoryStore[key] = options && options.salt ? _encrypt(value, options.salt) : _encrypt(value);
     return { [key]: memoryStore[key] };
   },
-  setItem: function (key, value) {
-    memoryStore[key] = _encrypt(value);
+  // @ts-ignore
+  setItem: function (key: string, value: string[], options: TOPTIONS) {
+    memoryStore[key] = options && options.salt ? _encrypt(value, options.salt) : _encrypt(value);
     return { [key]: memoryStore[key] };
   },
   has(key: string): string | boolean {
@@ -33,7 +38,7 @@ const secureStorage: uStore = {
   },
 };
 
-const descriptor = Object.create({});
+const descriptor = Object.create(memoryStore);
 descriptor.value = "readonly";
 
 Object.defineProperty(secureStorage, "myStore", descriptor);
