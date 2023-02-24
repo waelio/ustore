@@ -1,7 +1,4 @@
-require("module-alias/register");
-
 import { UStoreClass } from "../.d";
-// const require = createRequire(import.meta.url);
 import CONFIG from "../config";
 
 export const isProcess = (): unknown | boolean => {
