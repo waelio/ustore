@@ -4,13 +4,13 @@ import Gun from "gun/gun";
 
 const peers: string[] = ["https://gunjs-mtl.herokuapp.com/gun"];
 const log = { off: true };
-const options = JSON.stringify( Object.assign( peers, log))
+const options = JSON.stringify(Object.assign(peers, log));
 
 export const storeName = "uStoreGunDB";
 
 type p = string | any;
 // @ts-ignore
-Gun.log.off = false
+Gun.log.off = false;
 // initialize gun
 export const db = new Gun(options);
 export const gunStorage: UStoreClass = {
