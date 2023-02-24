@@ -1,4 +1,4 @@
-require('module-alias/register')
+require("module-alias/register");
 
 import { localStorage } from "./localStorage";
 import { sessionStorage } from "./sessionStorage";

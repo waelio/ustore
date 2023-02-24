@@ -1,8 +1,8 @@
-require('module-alias/register')
+require("module-alias/register");
 
 import { UStoreClass } from "../.d";
 // const require = createRequire(import.meta.url);
-import CONFIG from '../config'
+import CONFIG from "../config";
 
 export const isProcess = (): unknown | boolean => {
   try {
@@ -143,8 +143,8 @@ export class Config {
     if (this._env === "server") {
       try {
         serverVars = CONFIG().server;
-      } catch (e: unknown) {        
-          console.log("Could not find a server.js config in `./config`." )       
+      } catch (e: unknown) {
+        console.log("Could not find a server.js config in `./config`.");
       }
     }
     return serverVars;
@@ -155,10 +155,10 @@ export class Config {
   getClientVars() {
     let client = {};
     try {
-      const payload = CONFIG().client
+      const payload = CONFIG().client;
       client = { ...payload };
     } catch (e) {
-      console.log("Didn't find a client config in `./config`." )     
+      console.log("Didn't find a client config in `./config`.");
     }
     return client;
   }
