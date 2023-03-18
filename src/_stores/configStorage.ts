@@ -3,7 +3,9 @@ import CONFIG from "../config";
 
 export const isProcess = (): unknown | boolean => {
   try {
-    return (typeof process !== undefined && process['browser']) ? process["browser"] as unknown : false;
+    return typeof process !== undefined && process["browser"]
+      ? (process["browser"] as unknown)
+      : false;
   } catch (error) {
     return false;
   }
@@ -164,7 +166,11 @@ export class Config {
    */
   getUrgentOverrides() {
     let overrides: {};
-    const filename = isProcess() && ["production", 'prod'].includes(process.env.NODE_ENV as string) ? "prod" : "dev";
+    const filename =
+      isProcess() &&
+      ["production", "prod"].includes(process.env.NODE_ENV as string)
+        ? "prod"
+        : "dev";
     try {
       overrides = CONFIG()[filename];
     } catch (e) {

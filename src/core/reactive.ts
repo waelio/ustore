@@ -1,7 +1,6 @@
 let data = { index: "name", value: "uStoreR" };
 let target: null | Function = null;
 
-
 export class Dep {
   subscripers: any[];
   constructor() {
@@ -10,7 +9,7 @@ export class Dep {
   depend() {
     if (target && !this.subscripers.includes(target)) {
       this.subscripers.push(target);
-      this.notify()
+      this.notify();
     }
   }
   notify() {

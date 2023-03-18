@@ -9,6 +9,7 @@ import { gunStorage } from "./gunStorage";
 import { configStorage } from "./configStorage";
 import { idbStorage } from "./idbStorage";
 import { webqlStorage } from "./webqlStorage";
+import { signalStorage } from "./signalStorage";
 export type Tlocal = typeof localStorage;
 export type Tsession = typeof sessionStorage;
 export type Tcookie = typeof cookieStorage;
@@ -20,6 +21,7 @@ export type Tsecure = typeof secureStorage;
 export type Tvuex = typeof vuexStorage;
 export type Tidb = typeof idbStorage;
 export type Twebql = typeof webqlStorage;
+export type Tsignal = typeof signalStorage;
 export type TypeUstore = {
     config: Tconfig;
     cookie: Tcookie;
@@ -32,8 +34,42 @@ export type TypeUstore = {
     vuex: Tvuex;
     idb: Tidb;
     webql: Twebql;
+    signal: Tsignal;
 };
-export declare const uStore: TypeUstore;
+export declare const uStore: {
+    config: import("./configStorage").Config;
+    cookie: import("../").UStoreClass;
+    gun: import("../").UStoreClass;
+    local: import("../").UStoreClass;
+    memory: import("../").UStoreClass;
+    pinia: {
+        get: () => any;
+        set: (value: any) => void;
+        remove: () => (state: any) => void;
+    };
+    secure: import("../").uStoreSecure;
+    session: import("../").UStoreClass;
+    vuex: {
+        get: () => any;
+        has: () => boolean;
+        add: (key: string, value: any) => void;
+        set: (key: string, value: any) => void;
+        setItem: (key: string, value: any) => void;
+        removeItem: (key: string) => void;
+    };
+    idb: {
+        get: (key: string) => Promise<unknown>;
+        getItem: (key: string) => Promise<unknown>;
+        set: (key: any, value: any) => Promise<any>;
+        setItem: (key: any, value: any) => Promise<any>;
+        has: (key: string) => Promise<boolean>;
+        hasItem: (key: string) => Promise<boolean>;
+        remove: (key: string) => Promise<unknown>;
+        removeItem: (key: string) => Promise<unknown>;
+    };
+    webql: import("../").UStoreClass;
+    signal: import("../types").UStoreClassFunc;
+};
 export { localStorage };
 export { sessionStorage };
 export { cookieStorage };
@@ -45,4 +81,5 @@ export { secureStorage };
 export { configStorage };
 export { idbStorage };
 export { webqlStorage };
+export { signalStorage };
 //# sourceMappingURL=index.d.ts.map

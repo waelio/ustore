@@ -1,5 +1,5 @@
-import * as memoryDriver from 'localforage-driver-memory';
-import * as localforage from 'localforage';
+import * as memoryDriver from "localforage-driver-memory";
+import * as localforage from "localforage";
 const NAME = "idbStorage";
 let store: LocalForage;
 
@@ -18,12 +18,12 @@ try {
   localforage.defineDriver(memoryDriver);
   localforage.setDriver(memoryDriver._driver);
 } catch (error) {
-  store = localforage
+  store = localforage;
 }
 
 export { store };
 
-export const idbStorage = ({
+export const idbStorage = {
   get: async (key: string) => {
     try {
       return store.ready().then(() => {
@@ -33,7 +33,7 @@ export const idbStorage = ({
           }
           return value;
         });
-      })
+      });
     } catch (error: unknown) {
       return error;
     }
@@ -47,7 +47,7 @@ export const idbStorage = ({
           }
           return value;
         });
-      })
+      });
     } catch (error: unknown) {
       return error;
     }
@@ -65,9 +65,8 @@ export const idbStorage = ({
             }
             return value;
           });
-        })
-      })
-
+        });
+      });
     } catch (error: unknown) {
       return error;
     }
@@ -85,9 +84,8 @@ export const idbStorage = ({
             }
             return value;
           });
-        })
-      })
-
+        });
+      });
     } catch (error: unknown) {
       return error;
     }
@@ -109,27 +107,31 @@ export const idbStorage = ({
     }
   },
   remove: async (key: string) => {
-    return store.ready().then(async () => {
-      store.removeItem(key);
-      console.log("Key is cleared!");
-      const value = await store.getItem(key);
-      return value;
-    }).
-      catch((error: any) => {
-        return error;
+    return store
+      .ready()
+      .then(async () => {
+        store.removeItem(key);
+        console.log("Key is cleared!");
+        const value = await store.getItem(key);
+        return value;
       })
+      .catch((error: any) => {
+        return error;
+      });
   },
   removeItem: async (key: string) => {
-    return store.ready().then(async () => {
-      store.removeItem(key);
-      console.log("Key is cleared!");
-      const value = await store.getItem(key);
-      return value;
-    }).
-      catch((error: any) => {
-        return error;
+    return store
+      .ready()
+      .then(async () => {
+        store.removeItem(key);
+        console.log("Key is cleared!");
+        const value = await store.getItem(key);
+        return value;
       })
+      .catch((error: any) => {
+        return error;
+      });
   },
-});
+};
 
 export default idbStorage;

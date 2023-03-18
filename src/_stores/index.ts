@@ -36,10 +36,10 @@ export type TypeUstore = {
   vuex: Tvuex;
   idb: Tidb;
   webql: Twebql;
-  signal: Tsignal
+  signal: Tsignal;
 };
 
-export const  uStore = ({
+export const uStore = {
   config: configStorage,
   cookie: cookieStorage,
   gun: gunStorage,
@@ -51,8 +51,8 @@ export const  uStore = ({
   vuex: vuexStorage,
   idb: idbStorage,
   webql: webqlStorage,
-  signal: signalStorage
-});
+  signal: signalStorage,
+};
 
 export { localStorage };
 export { sessionStorage };
@@ -65,4 +65,4 @@ export { secureStorage };
 export { configStorage };
 export { idbStorage };
 export { webqlStorage };
-export { signalStorage }
+export { signalStorage };
