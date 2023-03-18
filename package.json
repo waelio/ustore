@@ -97,11 +97,16 @@
     "browserify": "17.0.0",
     "gun": "0.2020.1239",
     "localforage": "^1.10.0",
+    "localforage-driver-memory": "^1.0.5",
     "pinia": "2.0.30",
+    "solid-js": "^1.6.12",
     "store2": "2.14.2",
     "vue": "3.2.47",
     "vue-demi": "0.13.11",
     "vuex": "4.1.0",
     "waelio-utils": "5.0.1"
+  },
+  "alias": {
+    "pinia": "/node_modules/pinia/dist/pinia.mjs"
   }
 }

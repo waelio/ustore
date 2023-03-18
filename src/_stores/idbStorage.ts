@@ -1,12 +1,11 @@
-import LocalForage from "localforage";
-import { secureStorage } from "./index";
-import localforage from "localforage";
+import * as memoryDriver from 'localforage-driver-memory';
+import * as localforage from 'localforage';
 const NAME = "idbStorage";
-var store;
+let store: LocalForage;
 
 try {
   localforage.config({
-    driver: LocalForage.INDEXEDDB,
+    driver: localforage.INDEXEDDB,
     name: NAME,
     version: 1.0,
     size: 4980736,
@@ -16,82 +15,121 @@ try {
   store = localforage.createInstance({
     name: NAME,
   });
+  localforage.defineDriver(memoryDriver);
+  localforage.setDriver(memoryDriver._driver);
 } catch (error) {
-  localforage
-    .dropInstance({
-      name: NAME,
-    })
-    .then(function () {
-      console.log(`Dropped ${NAME} database`);
-    });
-  store = secureStorage;
+  store = localforage
 }
 
 export { store };
 
-export const idbStorage = {
+export const idbStorage = ({
   get: async (key: string) => {
     try {
-      store.getItem(key, (err: any, value: unknown) => {
-        if (!!err) {
-          return "Error getting item";
-        }
-        return value;
-      });
+      return store.ready().then(() => {
+        store.getItem(key, (err: any, value: any) => {
+          if (!!err) {
+            return "Error getting item";
+          }
+          return value;
+        });
+      })
     } catch (error: unknown) {
       return error;
     }
   },
   getItem: async (key: string) => {
     try {
-      store.getItem(key, function (err: any, value) {
-        if (err) {
-          return "Error getting item";
-        }
-        return value;
-      });
+      return store.ready().then(() => {
+        return store.getItem(key, (err: any, value: unknown) => {
+          if (!!err) {
+            return "Error getting item";
+          }
+          return value;
+        });
+      })
     } catch (error: unknown) {
       return error;
     }
   },
   set: async (key: any, value: any): Promise<any> => {
     try {
-      store.setItem(key, value, function (err: unknown) {
-        if (err) {
-          return "Error getting item";
-        }
-        store.getItem(key, function (err: any, value) {
+      store.ready().then(() => {
+        return store.setItem(key, value, function (err: unknown) {
           if (err) {
             return "Error getting item";
           }
-          return value;
-        });
-      });
+          store.getItem(key, (err: any, value: any) => {
+            if (err) {
+              return "Error getting item";
+            }
+            return value;
+          });
+        })
+      })
+
     } catch (error: unknown) {
       return error;
     }
   },
-  //@ts-ignore
-  has: function (key: string): boolean {
+  setItem: async (key: any, value: any): Promise<any> => {
     try {
-      return Boolean(store.getItem(key));
-    } catch (_) {
-      alert(_);
+      store.ready().then(() => {
+        return store.setItem(key, value, function (err: unknown) {
+          if (err) {
+            return "Error getting item";
+          }
+          store.getItem(key, (err: any, value: any) => {
+            if (err) {
+              return "Error getting item";
+            }
+            return value;
+          });
+        })
+      })
+
+    } catch (error: unknown) {
+      return error;
+    }
+  },
+  has: async (key: string): Promise<boolean> => {
+    try {
+      await store.ready();
+      return await (store.getItem(key) as Promise<boolean>);
+    } catch (_err) {
+      return false;
+    }
+  },
+  hasItem: async (key: string): Promise<boolean> => {
+    try {
+      await store.ready();
+      return await (store.getItem(key) as Promise<boolean>);
+    } catch (_err) {
       return false;
     }
   },
   remove: async (key: string) => {
-    try {
-      store.removeItem(key).then(function () {
-        console.log("Key is cleared!");
-        store.getItem(key).then(function (value) {
-          return value;
-        });
-      });
-    } catch (error) {
-      return error;
-    }
+    return store.ready().then(async () => {
+      store.removeItem(key);
+      console.log("Key is cleared!");
+      const value = await store.getItem(key);
+      return value;
+    }).
+      catch((error: any) => {
+        return error;
+      })
   },
-};
+  removeItem: async (key: string) => {
+    return store.ready().then(async () => {
+      store.removeItem(key);
+      console.log("Key is cleared!");
+      const value = await store.getItem(key);
+      return value;
+    }).
+      catch((error: any) => {
+        return error;
+      })
+  },
+});
 
 export default idbStorage;

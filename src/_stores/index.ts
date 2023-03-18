@@ -9,6 +9,7 @@ import { gunStorage } from "./gunStorage";
 import { configStorage } from "./configStorage";
 import { idbStorage } from "./idbStorage";
 import { webqlStorage } from "./webqlStorage";
+import { signalStorage } from "./signalStorage";
 
 export type Tlocal = typeof localStorage;
 export type Tsession = typeof sessionStorage;
@@ -21,6 +22,7 @@ export type Tsecure = typeof secureStorage;
 export type Tvuex = typeof vuexStorage;
 export type Tidb = typeof idbStorage;
 export type Twebql = typeof webqlStorage;
+export type Tsignal = typeof signalStorage;
 
 export type TypeUstore = {
   config: Tconfig;
@@ -34,9 +36,10 @@ export type TypeUstore = {
   vuex: Tvuex;
   idb: Tidb;
   webql: Twebql;
+  signal: Tsignal
 };
 
-export const uStore: TypeUstore = {
+export const  uStore = ({
   config: configStorage,
   cookie: cookieStorage,
   gun: gunStorage,
@@ -48,7 +51,8 @@ export const uStore: TypeUstore = {
   vuex: vuexStorage,
   idb: idbStorage,
   webql: webqlStorage,
-};
+  signal: signalStorage
+});
 
 export { localStorage };
 export { sessionStorage };
@@ -61,3 +65,4 @@ export { secureStorage };
 export { configStorage };
 export { idbStorage };
 export { webqlStorage };
+export { signalStorage }

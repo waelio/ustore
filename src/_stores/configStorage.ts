@@ -3,7 +3,7 @@ import CONFIG from "../config";
 
 export const isProcess = (): unknown | boolean => {
   try {
-    return process["browser"] as unknown;
+    return (typeof process !== undefined && process['browser']) ? process["browser"] as unknown : false;
   } catch (error) {
     return false;
   }
@@ -124,7 +124,7 @@ export class Config {
    * Internal inistializalion
    */
   setEnvironment() {
-    if (!!process && process["browser"]) {
+    if (isProcess() && process["browser"]) {
       this._env = "client";
     } else {
       this._env = "server";
@@ -164,7 +164,7 @@ export class Config {
    */
   getUrgentOverrides() {
     let overrides: {};
-    const filename = process.env.NODE_ENV === "production" ? "prod" : "dev";
+    const filename = isProcess() && ["production", 'prod'].includes(process.env.NODE_ENV as string) ? "prod" : "dev";
     try {
       overrides = CONFIG()[filename];
     } catch (e) {

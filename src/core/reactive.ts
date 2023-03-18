@@ -1,6 +1,7 @@
 let data = { index: "name", value: "uStoreR" };
 let target: null | Function = null;
 
+
 export class Dep {
   subscripers: any[];
   constructor() {
@@ -9,6 +10,7 @@ export class Dep {
   depend() {
     if (target && !this.subscripers.includes(target)) {
       this.subscripers.push(target);
+      this.notify()
     }
   }
   notify() {
@@ -35,12 +37,3 @@ Object.keys(data).forEach((key) => {
     },
   });
 });
-// const dep = new Dep()
-// let v = 10;
-// target = () => x = v
-// let x = 0;
-// v; /*?*/
-// v=4; /*?*/
-// dep.depend()
-// v; /*?*/
-// x; /*?*/

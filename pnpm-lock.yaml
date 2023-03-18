@@ -13,9 +13,11 @@ specifiers:
   jest: ^29.3.0
   jest-environment-jsdom: ^29.3.0
   localforage: ^1.10.0
+  localforage-driver-memory: ^1.0.5
   module-alias: ^2.2.2
   pinia: 2.0.30
   prettier: ^2.7.1
+  solid-js: ^1.6.12
   store2: 2.14.2
   ts-jest: ^29.0.3
   ts-node: ^10.9.1
@@ -30,7 +32,9 @@ dependencies:
   browserify: 17.0.0
   gun: 0.2020.1239
   localforage: 1.10.0
+  localforage-driver-memory: 1.0.5_localforage@1.10.0
   pinia: 2.0.30_hmuptsblhheur2tugfgucj7gc4
+  solid-js: 1.6.12
   store2: 2.14.2
   vue: 3.2.47
   vue-demi: 0.13.11_vue@3.2.47
@@ -1794,6 +1798,10 @@ packages:
     resolution: {integrity: sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==}
     dev: false
 
+  /csstype/3.1.1:
+    resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
+    dev: false
+
   /dash-ast/1.0.0:
     resolution: {integrity: sha512-Vy4dx7gquTeMcQR/hDkYLGUnwVil6vk4FOOct+djUnHOUWt+zJPJAaRIXaAFkPXtJjvlY7o3rfRu0/3hpnwoUA==}
     dev: false
@@ -3268,6 +3276,24 @@ packages:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
     dev: true
 
+  /localforage-driver-commons/1.0.3_tslib@1.14.1:
+    resolution: {integrity: sha512-K9PiNNXcyX98lQVyCADjv+QKxFD71y0DtVUhqMjwCkFY/d/g7GdJLPN9U92M7RUvfkL8mzPhC+mWEKo9tur5oQ==}
+    peerDependencies:
+      tslib: ^1.6.0
+    dependencies:
+      tslib: 1.14.1
+    dev: false
+
+  /localforage-driver-memory/1.0.5_localforage@1.10.0:
+    resolution: {integrity: sha512-m4v478ixdT3hA7gKv+pAxDIWgMKiUV2GuYem5jnpOBQFVJbrHU7jmNlrj8a0MfD9qff3i48E3Yfip5Eu1AN6Qg==}
+    peerDependencies:
+      localforage: ^1.5.0
+    dependencies:
+      localforage: 1.10.0
+      localforage-driver-commons: 1.0.3_tslib@1.14.1
+      tslib: 1.14.1
+    dev: false
+
   /localforage/1.10.0:
     resolution: {integrity: sha512-14/H1aX7hzBBmmh7sGPd+AOMkkIrHM3Z1PAyGgZigA1H1p5O5ANnMyWzvpAETtG68/dC4pC0ncy3+PPGzXZHPg==}
     dependencies:
@@ -3978,6 +4004,12 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /solid-js/1.6.12:
+    resolution: {integrity: sha512-JFqRobfG3q5r1l4RYVOAukk6+FWtHpXGIjgh/GEsHKweN/kK+iHOtzUALE6+P5t/jIcSNeGiVitX8gmJg+cYvQ==}
+    dependencies:
+      csstype: 3.1.1
+    dev: false
+
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
@@ -4270,7 +4302,6 @@ packages:
 
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
-    dev: true
 
   /tslib/2.5.0:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}

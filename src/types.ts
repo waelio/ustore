@@ -6,6 +6,7 @@ export enum StoreTypes {
   vuex = "vuexStorage",
   pinia = "piniaStorage",
   gun = "gunStorage",
+  solid = "solidStorage"
 }
 export interface StoreOptions {
   type?: string;
@@ -18,8 +19,12 @@ export enum StorePlugins {
   vuex = "vuexStorage",
   pinia = "piniaStorage",
   gun = "gunStorage",
+  solid = "solidStorage"
 }
 export interface GetItem {
+  (key: string): string | object | string[] | object[] | null | boolean;
+}
+export interface HasItem {
   (key: string): string | object | string[] | object[] | null | boolean;
 }
 export interface SetItem {
@@ -35,4 +40,16 @@ export interface UStoreClass {
   get: GetItem;
   set: SetItem;
   remove?: RemoveItem;
+}
+
+export interface UStoreClassFunc {     
+  get: GetItem;
+  getItem: GetItem;
+  set: SetItem;
+  setItem: SetItem;
+  has: HasItem;
+  hasItem: HasItem
+  remove: RemoveItem;
+  removeItem: RemoveItem;
+  
 }
