@@ -1,4 +1,4 @@
-import { UStoreClassFunc } from '../types';
+import { UStoreClassFunc } from "../types";
 type possibleValues = string | number | object | Boolean | Function | null;
 export declare function getSignal(T: possibleValues): {
     payload: import("solid-js").Accessor<possibleValues>;
