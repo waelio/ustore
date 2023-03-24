@@ -22,7 +22,7 @@ try {
   localforage.setDriver(memoryDriver._driver);
   store = localforage;
 } catch (_error) {
-  store = localforage
+  store = localforage;
 }
 export { store };
 
@@ -67,48 +67,45 @@ export const webqlStorage: UStoreClass = {
   },
   set: async (key: any, value: any): Promise<any> => {
     try {
-      return store.ready()
-        .then(() => {
-          store.setItem(key, value, function (err: unknown) {
+      return store.ready().then(() => {
+        store.setItem(key, value, function (err: unknown) {
+          if (err) {
+            return "Error getting item";
+          }
+          store.getItem(key, (err: any, value: any) => {
             if (err) {
               return "Error getting item";
             }
-            store.getItem(key, (err: any, value: any) => {
-              if (err) {
-                return "Error getting item";
-              }
-              return value;
-            });
+            return value;
           });
         });
+      });
     } catch (error: unknown) {
       return error;
     }
   },
   setItem: async (key: any, value: any): Promise<any> => {
     try {
-      return store.ready()
-        .then(() => {
-          return store.setItem(key, value, function (err: unknown) {
+      return store.ready().then(() => {
+        return store.setItem(key, value, function (err: unknown) {
+          if (err) {
+            return "Error getting item";
+          }
+          store.getItem(key, (err: any, value: any) => {
             if (err) {
               return "Error getting item";
             }
-            store.getItem(key, (err: any, value: any) => {
-              if (err) {
-                return "Error getting item";
-              }
-              return value;
-            });
+            return value;
           });
         });
+      });
     } catch (error: unknown) {
       return error;
     }
   },
   has: (key: string): boolean => {
     try {
-      return Boolean(store.ready()
-        .then(() => store.getItem(key)));
+      return Boolean(store.ready().then(() => store.getItem(key)));
     } catch (_) {
       alert(_);
       return false;
@@ -116,8 +113,7 @@ export const webqlStorage: UStoreClass = {
   },
   hasItem: (key: string): boolean => {
     try {
-      return Boolean(store.ready()
-        .then(() => store.getItem(key)));
+      return Boolean(store.ready().then(() => store.getItem(key)));
     } catch (_) {
       alert(_);
       return false;
@@ -125,28 +121,26 @@ export const webqlStorage: UStoreClass = {
   },
   remove: async (key: string) => {
     try {
-      return store.ready()
-        .then(async () => {
-          await store.removeItem(key);
-          console.log("Key is cleared!");
-          return store.getItem(key).then((value: any) => {
-            return value;
-          });
+      return store.ready().then(async () => {
+        await store.removeItem(key);
+        console.log("Key is cleared!");
+        return store.getItem(key).then((value: any) => {
+          return value;
         });
+      });
     } catch (error) {
       return error;
     }
   },
   removeItem: async (key: string) => {
     try {
-      return store.ready()
-        .then(async () => {
-          await store.removeItem(key);
-          console.log("Key is cleared!");
-          return store.getItem(key).then((value: any) => {
-            return value;
-          });
+      return store.ready().then(async () => {
+        await store.removeItem(key);
+        console.log("Key is cleared!");
+        return store.getItem(key).then((value: any) => {
+          return value;
         });
+      });
     } catch (error) {
       return error;
     }
