@@ -57,17 +57,8 @@ export declare const uStore: {
         setItem: (key: string, value: any) => void;
         removeItem: (key: string) => void;
     };
-    idb: {
-        get: (key: string) => Promise<unknown>;
-        getItem: (key: string) => Promise<unknown>;
-        set: (key: any, value: any) => Promise<any>;
-        setItem: (key: any, value: any) => Promise<any>;
-        has: (key: string) => Promise<boolean>;
-        hasItem: (key: string) => Promise<boolean>;
-        remove: (key: string) => Promise<unknown>;
-        removeItem: (key: string) => Promise<unknown>;
-    };
-    webql: import("../").UStoreClass;
+    idb: any;
+    webql: any;
     signal: import("../types").UStoreClassFunc;
 };
 export { localStorage };

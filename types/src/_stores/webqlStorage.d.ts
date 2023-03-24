@@ -1,4 +1,5 @@
-import { UStoreClass } from "../.d";
-export declare const webqlStorage: UStoreClass;
-export default webqlStorage;
+declare let store: any;
+export { store as webqlStorage };
+declare const _default: any;
+export default _default;
 //# sourceMappingURL=webqlStorage.d.ts.map

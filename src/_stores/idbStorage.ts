@@ -5,10 +5,7 @@ let store: any;
 let idbStorage: any;
 if (localforage.supports(localforage.INDEXEDDB)) {
   localforage.config({
-    driver: [
-      localforage.INDEXEDDB,
-      localforage.LOCALSTORAGE
-    ],
+    driver: [localforage.INDEXEDDB, localforage.LOCALSTORAGE],
     name: NAME,
     version: 1.0,
     size: 4980736,
@@ -19,7 +16,7 @@ if (localforage.supports(localforage.INDEXEDDB)) {
     name: NAME,
   });
 
-  store = localforage
+  store = localforage;
 
   idbStorage = {
     get: async (key: string) => {
@@ -131,10 +128,8 @@ if (localforage.supports(localforage.INDEXEDDB)) {
         });
     },
   };
-
-
 } else {
-  store = memoryStorage
+  store = memoryStorage;
 }
 export { store as idbStorage };
 export default idbStorage = store;
