@@ -7,8 +7,8 @@ import { vuexStorage } from "./vuexStorage";
 import { piniaStorage } from "./piniaStorage";
 import { gunStorage } from "./gunStorage";
 import { configStorage } from "./configStorage";
-import { idbStorage } from "./idbStorage";
-import { webqlStorage } from "./webqlStorage";
+// import { idbStorage } from "./idbStorage";
+// import { webqlStorage } from "./webqlStorage";
 import { signalStorage } from "./signalStorage";
 
 export type Tlocal = typeof localStorage;
@@ -20,8 +20,8 @@ export type Tgun = typeof gunStorage;
 export type Tpinia = typeof piniaStorage;
 export type Tsecure = typeof secureStorage;
 export type Tvuex = typeof vuexStorage;
-export type Tidb = typeof idbStorage;
-export type Twebql = typeof webqlStorage;
+// export type Tidb = typeof idbStorage;
+// export type Twebql = typeof webqlStorage;
 export type Tsignal = typeof signalStorage;
 
 export type TypeUstore = {
@@ -34,8 +34,8 @@ export type TypeUstore = {
   secure: Tsecure;
   session: Tsession;
   vuex: Tvuex;
-  idb: Tidb;
-  webql: Twebql;
+  // idb?: Tidb;
+  // webql?: Twebql;
   signal: Tsignal;
 };
 
@@ -49,8 +49,8 @@ export const uStore = {
   secure: secureStorage,
   session: sessionStorage,
   vuex: vuexStorage,
-  idb: idbStorage,
-  webql: webqlStorage,
+  // idb: idbStorage,
+  // webql: webqlStorage,
   signal: signalStorage,
 };
 
@@ -63,6 +63,6 @@ export { piniaStorage };
 export { gunStorage };
 export { secureStorage };
 export { configStorage };
-export { idbStorage };
-export { webqlStorage };
+// export { idbStorage };
+// export { webqlStorage };
 export { signalStorage };
