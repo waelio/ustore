@@ -4,7 +4,7 @@ import { UStoreClass } from "../.d";
 
 const NAME = "idbStorage";
 
-let store:any;
+let store: any;
 
 try {
   localforage.config({
