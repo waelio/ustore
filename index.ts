@@ -7,8 +7,8 @@ import { piniaStorage } from './src/_stores/piniaStorage';
 import { gunStorage } from './src/_stores/gunStorage';
 import { secureStorage } from './src/_stores/secureStorage';
 import { configStorage } from './src/_stores/configStorage';
-import { idbStorage } from "./src/_stores/idbStorage";
-import { webqlStorage } from "./src/_stores/webqlStorage";
+// import { idbStorage } from "./src/_stores/idbStorage";
+// import { webqlStorage } from "./src/_stores/webqlStorage";
 import { signalStorage } from "./src/_stores/signalStorage";
 import { createPinia, defineStore } from "pinia";
 import { createApp } from "vue";
@@ -27,8 +27,8 @@ export { piniaStorage };
 export { gunStorage };
 export { secureStorage };
 export { configStorage };
-export { idbStorage }
-export { webqlStorage }
+// export { idbStorage }
+// export { webqlStorage }
 export { signalStorage }
 
 // app = createApp({})
