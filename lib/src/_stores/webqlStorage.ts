@@ -1,9 +1,11 @@
 import * as localforage from "localforage";
 import * as memoryDriver from "localforage-driver-memory";
-
 import { UStoreClass } from "../.d";
+
 const NAME = "webqlStorage";
-let store;
+
+let store: LocalForage;
+
 try {
   localforage.config({
     driver: localforage.WEBSQL,
@@ -11,7 +13,7 @@ try {
     version: 1.0,
     size: 4980736,
     storeName: NAME,
-    description: "uStore.webqlStorage",
+    description: `uStore.${NAME}`,
   });
   store = localforage.createInstance({
     name: NAME,
@@ -19,14 +21,17 @@ try {
   localforage.defineDriver(memoryDriver);
   localforage.setDriver(memoryDriver._driver);
   store = localforage;
-} catch (error) {}
+} catch (_error) {
+  store = localforage;
+}
+export { store };
 
 export const webqlStorage: UStoreClass = {
   get: async (key: string) => {
     try {
       return store
         .ready()
-        .then(() => {
+        .then(async () => {
           store.getItem(key, (err: any, value: unknown) => {
             if (!!err) {
               return "Error getting item";
