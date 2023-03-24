@@ -1,5 +1,5 @@
-import * as localforage from 'localforage';
-import * as memoryDriver from 'localforage-driver-memory';
+import * as localforage from "localforage";
+import * as memoryDriver from "localforage-driver-memory";
 
 import { UStoreClass } from "../.d";
 const NAME = "webqlStorage";
@@ -18,39 +18,44 @@ try {
   });
   localforage.defineDriver(memoryDriver);
   localforage.setDriver(memoryDriver._driver);
-  store = localforage
-} catch (error) {
-}
+  store = localforage;
+} catch (error) {}
 
 export const webqlStorage: UStoreClass = {
   get: async (key: string) => {
     try {
-      return store.ready().then(() => {
-        store.getItem(key, (err: any, value: unknown) => {
-          if (!!err) {
-            return "Error getting item";
-          }
-          return value;
+      return store
+        .ready()
+        .then(() => {
+          store.getItem(key, (err: any, value: unknown) => {
+            if (!!err) {
+              return "Error getting item";
+            }
+            return value;
+          });
+        })
+        .catch((err: any) => {
+          return err;
         });
-      }).catch((err: any) => {
-        return err
-      })
     } catch (error: unknown) {
       return error;
     }
   },
   getItem: async (key: string) => {
     try {
-      return store.ready().then(() => {
-        store.getItem(key, (err: any, value: unknown) => {
-          if (!!err) {
-            return "Error getting item";
-          }
-          return value;
+      return store
+        .ready()
+        .then(() => {
+          store.getItem(key, (err: any, value: unknown) => {
+            if (!!err) {
+              return "Error getting item";
+            }
+            return value;
+          });
+        })
+        .catch((err: any) => {
+          return err;
         });
-      }).catch((err: any) => {
-        return err
-      })
     } catch (error: unknown) {
       return error;
     }
@@ -68,9 +73,8 @@ export const webqlStorage: UStoreClass = {
             }
             return value;
           });
-        })
-      })
-
+        });
+      });
     } catch (error: unknown) {
       return error;
     }
@@ -88,9 +92,8 @@ export const webqlStorage: UStoreClass = {
             }
             return value;
           });
-        })
-      })
-
+        });
+      });
     } catch (error: unknown) {
       return error;
     }
@@ -119,7 +122,7 @@ export const webqlStorage: UStoreClass = {
         return store.getItem(key).then((value: any) => {
           return value;
         });
-      })
+      });
     } catch (error) {
       return error;
     }
@@ -132,11 +135,11 @@ export const webqlStorage: UStoreClass = {
         return store.getItem(key).then((value: any) => {
           return value;
         });
-      })
+      });
     } catch (error) {
       return error;
     }
   },
-}
+};
 
 export default webqlStorage;

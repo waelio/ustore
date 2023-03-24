@@ -1,1 +1,1 @@
-{"version":3,"file":"webqlStorage.d.ts","sourceRoot":"","sources":["../../../src/_stores/webqlStorage.ts"],"names":[],"mappings":"AAGA,OAAO,EAAE,WAAW,EAAE,MAAM,OAAO,CAAC;AAqBpC,eAAO,MAAM,YAAY,EAAE,WAmH1B,CAAA;AAED,eAAe,YAAY,CAAC"}
+{"version":3,"file":"webqlStorage.d.ts","sourceRoot":"","sources":["../../../src/_stores/webqlStorage.ts"],"names":[],"mappings":"AAGA,OAAO,EAAE,WAAW,EAAE,MAAM,OAAO,CAAC;AAoBpC,eAAO,MAAM,YAAY,EAAE,WAuH1B,CAAC;AAEF,eAAe,YAAY,CAAC"}
