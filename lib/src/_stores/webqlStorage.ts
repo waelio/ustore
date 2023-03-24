@@ -6,10 +6,7 @@ let store: any;
 let webqlStorage: any;
 if (localforage.supports(localforage.INDEXEDDB)) {
   localforage.config({
-    driver: [
-      localforage.WEBSQL,
-      localforage.LOCALSTORAGE
-    ],
+    driver: [localforage.WEBSQL, localforage.LOCALSTORAGE],
     name: NAME,
     version: 1.0,
     size: 4980736,
@@ -141,8 +138,8 @@ if (localforage.supports(localforage.INDEXEDDB)) {
     },
   };
 } else {
-  store = memoryStorage
+  store = memoryStorage;
 }
 
-export { store as webqlStorage};
-export default webqlStorage = store;;
+export { store as webqlStorage };
+export default webqlStorage = store;
