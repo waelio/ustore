@@ -1,6 +1,8 @@
 import * as memoryDriver from "localforage-driver-memory";
 import * as localforage from "localforage";
+
 const NAME = "idbStorage";
+
 let store: LocalForage;
 
 try {
