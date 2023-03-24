@@ -4,7 +4,7 @@ import { UStoreClass } from "../.d";
 
 const NAME = "webqlStorage";
 
-let store: LocalForage;
+let store: any;
 
 try {
   localforage.config({

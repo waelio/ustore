@@ -1,5 +1,5 @@
 import { UStoreClass } from "../.d";
-declare let store: LocalForage;
+declare let store: any;
 export { store };
 export declare const idbStorage: UStoreClass;
 export default idbStorage;
