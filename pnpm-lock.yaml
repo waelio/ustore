@@ -20,9 +20,6 @@ dependencies:
   localforage-driver-memory:
     specifier: ^1.0.5
     version: 1.0.5(localforage@1.10.0)
-  pinia:
-    specifier: 2.0.30
-    version: 2.0.30(typescript@4.9.5)(vue@3.2.47)
   solid-js:
     specifier: ^1.7.6
     version: 1.7.6
@@ -3708,24 +3705,6 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
-  /pinia@2.0.30(typescript@4.9.5)(vue@3.2.47):
-    resolution: {integrity: sha512-q6DUmxWwe/mQgg+55QQjykpKC+aGeGdaJV3niminl19V08dE+LRTvSEuqi6/NLSGCKHI49KGL6tMNEOssFiMyA==}
-    peerDependencies:
-      '@vue/composition-api': ^1.4.0
-      typescript: '>=4.4.4'
-      vue: ^2.6.14 || ^3.2.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-      typescript:
-        optional: true
-    dependencies:
-      '@vue/devtools-api': 6.5.0
-      typescript: 4.9.5
-      vue: 3.2.47
-      vue-demi: 0.14.5(vue@3.2.47)
-    dev: false
-
   /pirates@4.0.5:
     resolution: {integrity: sha512-8V9+HQPupnaXMA23c5hvl69zXvTwTzyAYasnkb0Tts4XvO4CliqONMOnvlq26rkhLC3nWDFBJf73LU1e1VZLaQ==}
     engines: {node: '>= 6'}
@@ -4400,6 +4379,7 @@ packages:
     resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: true
 
   /umd@3.0.3:
     resolution: {integrity: sha512-4IcGSufhFshvLNcMCV80UnQVlZ5pMOC8mvNPForqwA4+lzYQuetTESLDQkeLmihq8bRcnpbQa48Wb8Lh16/xow==}
@@ -4488,21 +4468,6 @@ packages:
 
   /vm-browserify@1.1.2:
     resolution: {integrity: sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==}
-    dev: false
-
-  /vue-demi@0.14.5(vue@3.2.47):
-    resolution: {integrity: sha512-o9NUVpl/YlsGJ7t+xuqJKx8EBGf1quRhCiT6D/J0pfwmk9zUwYkC7yrF4SZCe6fETvSM3UNL2edcbYrSyc4QHA==}
-    engines: {node: '>=12'}
-    hasBin: true
-    requiresBuild: true
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-    dependencies:
-      vue: 3.2.47
     dev: false
 
   /vue@3.2.47:

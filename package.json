@@ -98,7 +98,6 @@
     "gun": "0.2020.1239",
     "localforage": "^1.10.0",
     "localforage-driver-memory": "^1.0.5",
-    "pinia": "2.0.30",
     "solid-js": "^1.7.6",
     "store2": "2.14.2",
     "vue": "3.2.47",

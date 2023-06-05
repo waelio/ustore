@@ -36,11 +36,7 @@ export declare const uStore: {
     gun: import("../").UStoreClass;
     local: import("../").UStoreClass;
     memory: import("../").UStoreClass;
-    pinia: {
-        get: () => any;
-        set: (value: any) => void;
-        remove: () => (state: any) => void;
-    };
+    pinia: import("../").UStoreClass;
     secure: import("../").uStoreSecure;
     session: import("../").UStoreClass;
     vuex: {
