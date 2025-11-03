@@ -1,127 +1,47 @@
-import { createSignal } from "solid-js";
-import { isObject } from "waelio-utils";
 import { UStoreClassFunc } from "../types";
-type possibleValues = string | number | object | Boolean | Function | null;
 
-export function getSignal(T: possibleValues) {
-  if (T && isObject(T)) {
-    const [payload, setPayload] = createSignal(T, { equals: false });
-    return {
-      payload: payload,
-      setPayload: setPayload,
-    };
-  }
-  const [payload, setPayload] = createSignal(T, { equals: false });
-  return {
-    payload: payload,
-    setPayload: setPayload,
-  };
-}
+type PossibleValues = string | number | object | boolean | null | undefined;
+
+const state: Record<string, PossibleValues> = {};
 
 export const signalStorage: UStoreClassFunc = {
-  get: (key: string): string | null => {
-    if (!key) return "Please set a key";
-    try {
-      const { payload } = getSignal(key);
-      return payload() as any;
-    } catch (error) {
-      console.log(error);
-      return error as string;
-    }
+  get: (key: string) => {
+    if (!key) return null;
+    return (state[key] as any) ?? null;
   },
-  getItem: (key: string): string => {
-    if (!key) return "Please set a key";
-    try {
-      const { payload } = getSignal(key);
-      return payload() as string;
-    } catch (error) {
-      console.log(error);
-      return error as string;
-    }
+  getItem: (key: string) => {
+    if (!key) return null;
+    return (state[key] as any) ?? null;
   },
-  set: (key: string, value: possibleValues) => {
-    if (!key) return "Please set a key";
-    const { payload, setPayload } = getSignal({ [key]: value });
-    try {
-      setPayload((current) => {
-        if (current && isObject(current)) {
-          current[key] = value;
-          return current;
-        }
-        current = value;
-        return payload;
-      });
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+  set: (key: string, value: PossibleValues) => {
+    if (!key) return undefined;
+    state[key] = value;
+    return (value as any)?.[key];
   },
-  setItem: (key: string, value: possibleValues) => {
-    if (!key) return "Please set a key";
-    const { payload, setPayload } = getSignal({ [key]: value });
-    try {
-      setPayload((current) => {
-        if (current && isObject(current)) {
-          current[key] = value;
-          return current;
-        }
-        current = value;
-        return payload;
-      });
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+  setItem: (key: string, value: PossibleValues) => {
+    if (!key) return undefined;
+    state[key] = value;
+    return (value as any)?.[key];
   },
-  has: (key: string): boolean => {
-    const { payload } = getSignal(key);
-    try {
-      return !!payload();
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+  has: (key: string) => {
+    if (!key) return false;
+    return Object.prototype.hasOwnProperty.call(state, key);
   },
-  hasItem: (key: string): boolean => {
-    const { payload } = getSignal(key);
-    try {
-      return !!payload();
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+  hasItem: (key: string) => {
+    if (!key) return false;
+    return Object.prototype.hasOwnProperty.call(state, key);
   },
   remove: (key: string) => {
-    const { setPayload } = getSignal(key);
-    try {
-      return setPayload((current) => {
-        if (current && isObject(current)) {
-          current[key] = null;
-          return current;
-        }
-        current = null;
-        return current;
-      });
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+    if (!key) return false;
+    const exists = Object.prototype.hasOwnProperty.call(state, key);
+    if (exists) delete state[key];
+    return !Object.prototype.hasOwnProperty.call(state, key);
   },
   removeItem: (key: string) => {
-    const { setPayload } = getSignal(key);
-    try {
-      return setPayload((current) => {
-        if (current && isObject(current)) {
-          current[key] = null;
-          return current;
-        }
-        current = null;
-        return current;
-      });
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+    if (!key) return false;
+    const exists = Object.prototype.hasOwnProperty.call(state, key);
+    if (exists) delete state[key];
+    return !Object.prototype.hasOwnProperty.call(state, key);
   },
 };
 

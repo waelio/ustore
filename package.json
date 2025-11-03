@@ -1,6 +1,6 @@
 {
   "name": "@waelio/ustore",
-  "version": "0.0.114",
+  "version": "0.0.115",
   "description": "Universal Storage",
   "homepage": "https://github.com/waelio/uStore#readme",
   "keywords": [
@@ -13,7 +13,7 @@
     "gun"
   ],
   "main": "./lib/esm/src/index.js",
-  "types": "./types/src/index.d.ts",
+  "types": "./types/index.d.ts",
   "public": "true",
   "publishConfig": {
     "access": "public"
@@ -93,9 +93,11 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "@keyv/mongo": "^3.0.1",
     "babel-plugin-transform-require-context": "^0.1.1",
     "browserify": "17.0.0",
     "gun": "0.2020.1239",
+    "keyv": "^5.2.1",
     "localforage": "^1.10.0",
     "localforage-driver-memory": "^1.0.5",
     "solid-js": "^1.7.6",

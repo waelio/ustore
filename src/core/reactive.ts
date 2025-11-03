@@ -36,3 +36,18 @@ Object.keys(data).forEach((key) => {
     },
   });
 });
+
+export const reactiveData = data as { [k: string]: any };
+export function effect(fn: Function) {
+  target = fn;
+  // Access a property to register dependency and trigger initial notify
+  void data.index;
+  target = null;
+}
+export function effectOn(key: string, fn: Function) {
+  target = fn;
+  // Access the requested key to register dependency and trigger initial notify
+  void (data as any)[key];
+  target = null;
+}
+export default reactiveData;

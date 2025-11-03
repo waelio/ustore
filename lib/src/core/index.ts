@@ -2,103 +2,99 @@ import { ref, unref, computed, Ref } from "vue";
 
 export class UCORE {
   _STORE: Ref<any> = ref(null);
-  constructor(initial = {}) {
-    if (initial) {
-      this._STORE.value = JSON.stringify(initial[0] === "{")
-        ? JSON.stringify(initial)
-        : initial;
+
+  constructor(initial: Record<string, any> = {}) {
+    if (initial && typeof initial === "object") {
+      this._STORE.value = initial;
+    } else {
+      throw new Error("Initial value must be an object");
     }
   }
-  get(key: string = "undefined") {
+
+  get(key?: string): any {
     const ls = this._STORE.value;
-    if (typeof key !== "undefined") return ls;
+    if (!key) return ls;
     try {
       return ls[key];
     } catch (error) {
       return undefined;
     }
   }
-  getItem(key: string) {
-    if (key.match(/:/)) {
+
+  getItem(key: string): any {
+    if (key.includes(":")) {
       const keys = key.split(":");
       const storeKey = this._buildNestedKey(keys[0]);
-
-      return storeKey[keys[0]][keys[1]];
+      return storeKey ? storeKey[keys[1]] : undefined;
     }
     return this._STORE.value[key];
   }
-  setItem(k: string, val: string | number | object | any[] | boolean) {
-    var self = this;
-    let ls = self._STORE.value;
-    if (k.match(/:/)) {
+
+  setItem(k: string, val: any): any {
+    let ls = this._STORE.value;
+    if (k.includes(":")) {
       const keys = k.split(":");
-      if (keys.length > 2) throw new Error("cannot nest more that one layer");
+      if (keys.length !== 2) throw new Error("Cannot nest more than one layer");
 
-      keys.length; /*?*/
-
-      if ((keys.length = 2)) {
-        try {
-          ls[keys[0]] = { [keys[0]]: { [keys[1]]: val } };
-          self._STORE.value = { ...ls };
-          return ls[keys[0]];
-        } catch (error) {
-          return "undefined";
-        }
+      if (!ls[keys[0]]) {
+        ls[keys[0]] = {};
       }
+      ls[keys[0]][keys[1]] = val;
+    } else {
+      ls[k] = val;
     }
-    ls = { ...{ [k]: val } };
-    self._STORE.value = { ...ls };
-
+    this._STORE.value = { ...ls };
     return this.getItem(k);
   }
-  removeItem(k: string) {
+
+  removeItem(k: string): boolean {
     if (!k) throw new Error("Key is needed");
 
-    var self = this;
-    let ls = self._STORE.value;
-    if (k.match(/:/)) {
+    let ls = this._STORE.value;
+    if (k.includes(":")) {
       const keys = k.split(":");
-      if (keys.length > 2) throw new Error("cannot nest more that one layer");
+      if (keys.length !== 2) throw new Error("Cannot nest more than one layer");
 
-      if ((keys.length = 2)) {
-        try {
+      if (ls[keys[0]]) {
+        delete ls[keys[0]][keys[1]];
+        if (Object.keys(ls[keys[0]]).length === 0) {
           delete ls[keys[0]];
-          self._STORE.value = { ...ls };
-          return ls[keys[0]];
-        } catch (error) {
-          return "undefined";
         }
       }
+    } else {
+      delete ls[k];
     }
-    // @ts-ignore
-    ls = { [k]: null };
-    delete ls[k];
-    self._STORE.value = { ...ls };
-
-    return !!(this.getItem(k) === "null");
-  }
-  public set value(v: string) {
-    this._STORE.value = JSON.stringify(v[0] === "{") ? JSON.stringify(v) : v;
+    this._STORE.value = { ...ls };
+    return !this.getItem(k);
   }
 
-  public get value(): string {
+  public set value(v: any) {
+    if (typeof v === "object") {
+      this._STORE.value = v;
+    } else {
+      throw new Error("Value must be an object");
+    }
+  }
+
+  public get value(): any {
     return unref(this._STORE.value);
   }
-  has(key: string) {
-    return Boolean(this.getItem(key));
+
+  has(key: string): boolean {
+    return this.getItem(key) !== undefined;
   }
 
-  _buildNestedKey(nestedKey: string) {
+  private _buildNestedKey(nestedKey: string): any {
     const keys = nestedKey.split(":");
     let storeKey = this._STORE.value;
 
-    keys.forEach(function (k: string) {
-      try {
+    for (const k of keys) {
+      if (storeKey && storeKey[k] !== undefined) {
         storeKey = storeKey[k];
-      } catch (e) {
+      } else {
         return undefined;
       }
-    });
+    }
 
     return storeKey;
   }

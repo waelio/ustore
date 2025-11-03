@@ -1,0 +1,1 @@
+{"version":3,"file":"signalStorage.d.ts","sourceRoot":"","sources":["../../../src/_stores/signalStorage.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,eAAe,EAAE,MAAM,UAAU,CAAC;AAC3C,KAAK,cAAc,GAAG,MAAM,GAAG,MAAM,GAAG,MAAM,GAAG,OAAO,GAAG,QAAQ,GAAG,IAAI,CAAC;AAE3E,wBAAgB,SAAS,CAAC,CAAC,EAAE,cAAc;;;EAa1C;AAED,eAAO,MAAM,aAAa,EAAE,eAyG3B,CAAC;AAEF,eAAe,aAAa,CAAC"}
