@@ -297,3 +297,24 @@ describe('webqlStorage storage', () => {
 <hr/>
 
 [Back to TOP](#)
+
+## Releasing and publishing
+
+This repo ships via GitHub Actions. To cut a release and publish to npm:
+
+- Ensure a repository secret named NPM_TOKEN is configured with publish access to the @waelio scope.
+- Bump the version in package.json and commit your changes.
+- Push a semver tag to trigger the release workflow, for example v0.0.116.
+
+The Release workflow will build, test, and publish to npm if tests pass. You can also publish locally if needed:
+
+```bash
+# optional: build and test locally first
+pnpm build
+pnpm test
+
+# requires being logged in to npm (npm whoami)
+npm publish --access public
+```
+
+CI runs on every push and pull request to master/main and tests on Node 18 and 20.
