@@ -12,7 +12,8 @@
     "pinia",
     "gun"
   ],
-  "main": "./lib/esm/src/index.js",
+  "main": "./lib/cjs/src/index.js",
+  "module": "./lib/esm/src/index.js",
   "types": "./types/index.d.ts",
   "public": "true",
   "publishConfig": {
@@ -60,9 +61,6 @@
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
-  },
-  "bin": {
-    "uStore": "./lib/esm/src/index.js"
   },
   "author": {
     "name": "Wael Wahbeh",
