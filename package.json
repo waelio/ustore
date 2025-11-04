@@ -108,7 +108,7 @@
     "localforage": "^1.10.0",
     "localforage-driver-memory": "^1.0.5",
     "solid-js": "^1.7.6",
-    "store2": "2.14.2",
+    "store2": "2.14.4",
     "vue": "3.2.47",
     "vuex": "4.1.0",
     "waelio-utils": "5.0.1"
