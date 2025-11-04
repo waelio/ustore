@@ -1,6 +1,6 @@
 {
   "name": "@waelio/ustore",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Universal Storage",
   "homepage": "https://github.com/waelio/uStore#readme",
   "keywords": [
@@ -22,6 +22,10 @@
   "exports": {
     ".": {
       "types": "./types/index.d.ts",
+      "node": {
+        "import": "./lib/esm-node/src/index.node.js",
+        "require": "./lib/cjs/src/index.js"
+      },
       "import": "./lib/esm/src/index.js",
       "require": "./lib/cjs/src/index.js",
       "default": "./lib/esm/src/index.js"
@@ -52,11 +56,13 @@
     "test": "jest --config jestconfig.json",
     "cleanup": "rm -rf lib && rm -rf lib",
     "copyfiles": "cp -R src lib/ && cp index.ts lib/index.ts",
-    "build": "pnpm cleanup && pnpm build:esm && pnpm build:cjs && pnpm build:umd && pnpm postbuild:esm && pnpm copyfiles && pnpm format && pnpm lint",
+    "build": "pnpm cleanup && pnpm build:esm && pnpm build:esm-node && pnpm build:cjs && pnpm build:umd && pnpm postbuild:esm && pnpm postbuild:esmnode && pnpm copyfiles && pnpm format && pnpm lint",
     "build:esm": "tsc --module esnext --outDir lib/esm",
+    "build:esm-node": "tsc --module esnext --outDir lib/esm-node",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
     "build:umd": "tsc --module umd --outDir lib/umd",
-    "postbuild:esm": "mkdir -p lib/esm/src && echo '{\"type\": \"module\"}' > lib/esm/src/package.json",
+    "postbuild:esm": "mkdir -p lib/esm/src && echo '{\"type\": \"module\"}' > lib/esm/src/package.json && node scripts/fix-esm-extensions.js",
+    "postbuild:esmnode": "mkdir -p lib/esm-node/src && echo '{\"type\": \"module\"}' > lib/esm-node/src/package.json && TARGET_DIR=lib/esm-node/src node scripts/fix-esm-extensions.js",
     "format": "prettier --write \".//src/**/*.ts\"",
     "lint": "npx eslint",
     "prepare": "npm run build",
