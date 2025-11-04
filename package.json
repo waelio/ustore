@@ -1,6 +1,6 @@
 {
   "name": "@waelio/ustore",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Universal Storage",
   "homepage": "https://github.com/waelio/uStore#readme",
   "keywords": [
@@ -21,8 +21,10 @@
   },
   "exports": {
     ".": {
+      "types": "./types/index.d.ts",
+      "import": "./lib/esm/src/index.js",
       "require": "./lib/cjs/src/index.js",
-      "import": "./lib/esm/src/index.js"
+      "default": "./lib/esm/src/index.js"
     }
   },
   "_moduleAliases": {
