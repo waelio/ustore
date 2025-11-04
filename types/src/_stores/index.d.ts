@@ -41,10 +41,13 @@ export declare const uStore: {
     session: import("../").UStoreClass;
     vuex: {
         get: () => any;
+        getItem: () => any;
         has: () => boolean;
+        hasItem: () => boolean;
         add: (key: string, value: any) => void;
         set: (key: string, value: any) => void;
         setItem: (key: string, value: any) => void;
+        remove: (key: string) => void;
         removeItem: (key: string) => void;
     };
     signal: import("../types").UStoreClassFunc;

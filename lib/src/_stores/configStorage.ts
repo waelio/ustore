@@ -1,199 +1,133 @@
-import { UStoreClass } from "../.d";
 import CONFIG from "../config";
 
-export const isProcess = (): unknown | boolean => {
+// Define constants for environment types
+const ENV_CLIENT = "client";
+const ENV_SERVER = "server";
+
+export const isProcess = (): boolean => {
   try {
-    return typeof process !== undefined && process["browser"]
-      ? (process["browser"] as unknown)
-      : false;
-  } catch (error) {
-    return false;
+    return typeof window === "undefined";
+  } catch {
+    return true;
   }
 };
+
 export class Config {
-  [x: string]: {};
-  _store: Partial<UStoreClass>;
+  [x: string]: unknown;
+  private _store: Record<string, unknown>;
+  private _env: string = ENV_SERVER;
+
   constructor() {
     this.setEnvironment();
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const _ = this; /*?*/
-    this._server = _.getServerVars(); /*?*/
-    this._client = _.getClientVars(); /*?*/
-    this._dev = _.getUrgentOverrides(); /*?*/
-
-    this._store = Object.assign(
-      {},
-      { ..._._client },
-      { ..._._server },
-      { ..._._dev },
-      { client: _._client },
-      { server: _._server },
-      { dev: _._dev }
-    );
+    this._store = {
+      ...this.getClientVars(),
+      ...this.getServerVars(),
+      ...this.getUrgentOverrides(),
+      client: this.getClientVars(),
+      server: this.getServerVars(),
+      dev: this.getUrgentOverrides(),
+    } as Record<string, unknown>;
   }
 
-  /**
-   *
-   * @param key
-   * @param value
-   */
-  set(key: string, value: unknown) {
-    if (key.match(/:/)) {
+  set(key: string, value: unknown): void {
+    if (key.includes(":")) {
       const keys = key.split(":");
-      let storeKey = this._store;
+      let storeKey = this._store as Record<string, any>;
 
-      keys.forEach(function (k, i) {
-        if (keys.length === i + 1) {
+      keys.forEach((k, i) => {
+        if (i === keys.length - 1) {
           storeKey[k] = value;
+        } else {
+          storeKey[k] = storeKey[k] || {};
         }
-
-        if (storeKey[k] === undefined) {
-          storeKey[k] = {};
-        }
-
-        storeKey = storeKey[k];
+        storeKey = storeKey[k] as Record<string, any>;
       });
     } else {
       this._store[key] = value;
     }
   }
-  /**
-   * Get all store values
-   */
-  getAll() {
+
+  getAll(): Record<string, unknown> {
     return this._store;
   }
 
-  /**
-   * Gte a single value
-   * @param key
-   */
-  getItem(key: string) {
+  getItem(key: string): unknown {
     return this._store[key];
   }
-  /**
-   * Get key from nestedKey :
-   * @param key
-   */
-  get(key: string) {
-    if (key.match(/:/)) {
-      const storeKey = this.buildNestedKey(key);
-      return storeKey;
+
+  get(key: string): unknown {
+    if (key.includes(":")) {
+      return this.buildNestedKey(key);
     }
-
-    // Return regular key
     return this._store[key];
   }
 
-  /**
-   * get all client store
-   */
-  client() {
-    return this.getItem("client");
+  client(): unknown {
+    return this.getItem(ENV_CLIENT);
   }
 
-  /**
-   * get all dev store
-   */
-  dev() {
+  dev(): unknown {
     return this.getItem("dev");
   }
 
-  /**
-   * get all server store
-   */
-  server() {
-    return this.getItem("server");
+  server(): unknown {
+    return this.getItem(ENV_SERVER);
   }
 
-  /**
-   * got all values from store
-   */
-  store() {
+  store(): Record<string, unknown> {
     return this._store;
   }
 
-  /**
-   * Check if a key exists
-   * @param key
-   * @return Boolean
-   */
-  has(key: string) {
+  has(key: string): boolean {
     return Boolean(this.get(key));
   }
 
-  /**
-   * Internal inistializalion
-   */
-  setEnvironment() {
-    if (isProcess() && process["browser"]) {
-      this._env = "client";
-    } else {
-      this._env = "server";
-    }
+  private setEnvironment(): void {
+    this._env = typeof window !== "undefined" ? ENV_CLIENT : ENV_SERVER;
   }
 
-  /**
-   * Internal inistializalion
-   */
-  getServerVars() {
-    let serverVars = {};
-
-    if (this._env === "server") {
+  private getServerVars(): Record<string, unknown> {
+    if (this._env === ENV_SERVER) {
       try {
-        serverVars = CONFIG().server;
-      } catch (e: unknown) {
-        console.log("Could not find a server.js config in `./config`.");
+        return CONFIG().server || {};
+      } catch {
+        console.warn("Could not find a server.js config in `./config`.");
       }
     }
-    return serverVars;
+    return {};
   }
-  /**
-   * Internal inistializalion
-   */
-  getClientVars() {
-    let client = {};
+
+  private getClientVars(): Record<string, unknown> {
     try {
-      const payload = CONFIG().client;
-      client = { ...payload };
-    } catch (e) {
-      console.log("Didn't find a client config in `./config`.");
+      return CONFIG().client || {};
+    } catch {
+      console.warn("Didn't find a client config in `./config`.");
     }
-    return client;
+    return {};
   }
-  /**
-   * Internal inistializalion
-   */
-  getUrgentOverrides() {
-    let overrides: {};
+
+  private getUrgentOverrides(): Record<string, unknown> {
     const filename =
-      isProcess() &&
-      ["production", "prod"].includes(process.env.NODE_ENV as string)
+      isProcess() && ["production", "prod"].includes(process.env.NODE_ENV || "")
         ? "prod"
         : "dev";
     try {
-      overrides = CONFIG()[filename];
-    } catch (e) {
-      overrides = {};
+      return CONFIG()[filename] || {};
+    } catch {
+      return {};
     }
-    return overrides;
   }
 
-  /**
-   * Build nested pairs
-   * @param nestedKey
-   */
-  buildNestedKey(nestedKey: string) {
+  private buildNestedKey(nestedKey: string): unknown {
     const keys = nestedKey.split(":");
-    let storeKey = this._store;
+    let storeKey: any = this._store;
 
-    keys.forEach(function (k: string) {
-      try {
-        storeKey = storeKey[k];
-      } catch (e) {
+    for (const k of keys) {
+      if (storeKey[k] === undefined) {
         return undefined;
       }
-    });
+      storeKey = storeKey[k];
+    }
 
     return storeKey;
   }
@@ -202,5 +136,4 @@ export class Config {
 export type ConfigStorage = typeof configStorage;
 const configStorage = new Config();
 export { configStorage };
-
 export default configStorage as ConfigStorage;

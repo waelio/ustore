@@ -21,10 +21,9 @@
     ],
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
-    "declarationDir": "./types",
-    "charset": "utf8",
-    "strict": true,
-    "pretty": true,
+"declarationDir": "./types",
+"strict": true,
+"pretty": true,
     "removeComments": true,
     "sourceMap": true,
     "typeRoots": [

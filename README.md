@@ -4,7 +4,7 @@
 
 Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
 
-[![Join the chat at https://discord.gg/tBZ2Fmdb7E](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/tBZ2Fmdb7E) [![NPM version](https://img.shields.io/npm/v/@waelio/ustore.svg?style=flat&color=red&label=NPM)](https://www.npmjs.com/package/@waelio/ustore) [![NPM monthly downloads](https://img.shields.io/npm/dm/@waelio/ustore.svg?style=flat)](https://npmjs.org/package/@waelio/ustore) [![NPM total downloads](https://img.shields.io/npm/dt/@waelio/ustore.svg?style=flat&color=purple&label=Downloads)](https://npmjs.org/package/@waelio/ustore)[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/waelio?locale.x=en_US)
+[![Join the chat at https://discord.gg/tBZ2Fmdb7E](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/tBZ2Fmdb7E) [![CI](https://github.com/waelio/ustore/actions/workflows/ci.yml/badge.svg)](https://github.com/waelio/ustore/actions/workflows/ci.yml) [![NPM version](https://img.shields.io/npm/v/@waelio/ustore.svg?style=flat&color=red&label=NPM)](https://www.npmjs.com/package/@waelio/ustore) [![NPM monthly downloads](https://img.shields.io/npm/dm/@waelio/ustore.svg?style=flat)](https://npmjs.org/package/@waelio/ustore) [![NPM total downloads](https://img.shields.io/npm/dt/@waelio/ustore.svg?style=flat&color=purple&label=Downloads)](https://npmjs.org/package/@waelio/ustore) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/waelio?locale.x=en_US)
 
 <hr />
 
@@ -41,17 +41,17 @@ Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
 Window local Storage,<a href="#references"><i> see docs below</i></a>
 
 ```js
-import { uStore, localStorage } from '@waelio/ustore';
+import { uStore, localStorage } from "@waelio/ustore";
 
-describe('Local storage', () => {
-  const payload = 'Test Payload1';
-  const label = 'test';
+describe("Local storage", () => {
+  const payload = "Test Payload1";
+  const label = "test";
   uStore.local.set(label, payload);
-  test('uStore set & get', () => {
+  test("uStore set & get", () => {
     expect(uStore.local.get(label)).toEqual(payload);
   });
   localStorage.set(label, payload);
-  test('localStorage set & get', () => {
+  test("localStorage set & get", () => {
     expect(localStorage.get(label)).toEqual(payload);
   });
 });
@@ -64,17 +64,17 @@ describe('Local storage', () => {
 Window session Storage,<a href="#references"><i> see docs below</i></a>
 
 ```js
-import { uStore, sessionStorage } from '@waelio/ustore';
+import { uStore, sessionStorage } from "@waelio/ustore";
 
-describe('Session storage', () => {
-  const payload = 'Test Payload1';
-  const label = 'test';
+describe("Session storage", () => {
+  const payload = "Test Payload1";
+  const label = "test";
   uStore.session.set(label, payload);
-  test('uStore set & get', () => {
+  test("uStore set & get", () => {
     expect(uStore.session.get(label)).toEqual(payload);
   });
   sessionStorage.set(label, payload);
-  test('sessionStorage set & get', () => {
+  test("sessionStorage set & get", () => {
     expect(sessionStorage.get(label)).toEqual(payload);
   });
 });
@@ -87,17 +87,17 @@ describe('Session storage', () => {
 Document Cookies,<a href="#references"><i> see docs below</i></a>
 
 ```js
-import { uStore, cookieStorage } from '@waelio/ustore';
+import { uStore, cookieStorage } from "@waelio/ustore";
 
-describe('Cookie storage', () => {
-  const payload = 'Test Payload1';
-  const label = 'test';
+describe("Cookie storage", () => {
+  const payload = "Test Payload1";
+  const label = "test";
   uStore.cookie.set(label, payload);
-  test('uStore set & get', () => {
+  test("uStore set & get", () => {
     expect(uStore.cookie.get(label)).toEqual(`${label}=${payload}`);
   });
   cookieStorage.set(label, payload);
-  test('cookieStorage set & get', () => {
+  test("cookieStorage set & get", () => {
     expect(cookieStorage.get(label)).toEqual(`${label}=${payload}`);
   });
 });
@@ -110,17 +110,17 @@ describe('Cookie storage', () => {
 Vue state management,<a href="#references"><i> see docs below</i></a>
 
 ```js
-import { uStore, vuexStorage } from '@waelio/ustore';
+import { uStore, vuexStorage } from "@waelio/ustore";
 
-describe('Vuex storage', () => {
-  const payload = 'Test Payload1';
-  const label = 'test';
+describe("Vuex storage", () => {
+  const payload = "Test Payload1";
+  const label = "test";
   uStore.vuex.set(label, payload);
-  test('uStore set & get', () => {
+  test("uStore set & get", () => {
     expect(uStore.vuex.get()).toEqual(payload);
   });
   vuexStorage.set(label, payload);
-  test('vuexStorage set & get', () => {
+  test("vuexStorage set & get", () => {
     expect(vuexStorage.get()).toEqual(payload);
   });
 });
@@ -133,17 +133,17 @@ describe('Vuex storage', () => {
 Pinia State Management,<a href="#references"><i> see docs below</i></a>
 
 ```js
-import { uStore, piniaStorage } from '@waelio/ustore';
+import { uStore, piniaStorage } from "@waelio/ustore";
 
-describe('Pinia storage', () => {
-  const payload = 'Test Payload1';
-  const label = 'test';
+describe("Pinia storage", () => {
+  const payload = "Test Payload1";
+  const label = "test";
   uStore.pinia.set(payload);
-  test('pinia set & get', () => {
+  test("pinia set & get", () => {
     expect(uStore.pinia.get()).toEqual(payload);
   });
   piniaStorage.set(payload);
-  test('piniaStorage set & get', () => {
+  test("piniaStorage set & get", () => {
     expect(piniaStorage.get()).toEqual(payload);
   });
 });
@@ -156,11 +156,11 @@ describe('Pinia storage', () => {
 Gun DB, ,<a href="#references"><i> see docs below</i></a>
 
 ```js
-import { uStore } from '@waelio/ustore';
+import { uStore } from "@waelio/ustore";
 
 // Did not pass testing yet
-uStore.gun.set('testName', 'test Payload');
-uStore.gun.get('testName') === 'test Payload';
+uStore.gun.set("testName", "test Payload");
+uStore.gun.get("testName") === "test Payload";
 ```
 
 [Back to TOP](#)
@@ -170,18 +170,18 @@ uStore.gun.get('testName') === 'test Payload';
 In memory storage
 
 ```js
-import { uStore, memoryStorage } from '@waelio/ustore';
+import { uStore, memoryStorage } from "@waelio/ustore";
 
-describe('Memory storage', () => {
-  const payload = 'Test Payload1';
-  const label = 'test';
+describe("Memory storage", () => {
+  const payload = "Test Payload1";
+  const label = "test";
   uStore.memory.set(label, payload);
 
-  test('uStore set & get', () => {
+  test("uStore set & get", () => {
     expect(uStore.memory.get(label)).toEqual(payload);
   });
   memoryStorage.set(label, payload);
-  test('memoryStorage set & get', () => {
+  test("memoryStorage set & get", () => {
     expect(memoryStorage.get(label)).toEqual(payload);
   });
 });
@@ -194,17 +194,17 @@ describe('Memory storage', () => {
 Enctypted and Decrypted storage
 
 ```js
-import { uStore, secureStorage } from '@waelio/ustore';
+import { uStore, secureStorage } from "@waelio/ustore";
 
-describe('Secure storage', () => {
-  const payload = 'Test Payload1';
-  const label = 'test';
+describe("Secure storage", () => {
+  const payload = "Test Payload1";
+  const label = "test";
   uStore.secure.set(label, payload);
-  test('uStore set & get', () => {
+  test("uStore set & get", () => {
     expect(uStore.secure.getItem(label)).toEqual(payload);
   });
   secureStorage.set(label, payload);
-  test('secureStorage set & get', () => {
+  test("secureStorage set & get", () => {
     expect(secureStorage.getItem(label)).toEqual(payload);
   });
 });
@@ -217,18 +217,18 @@ describe('Secure storage', () => {
 Config is home-brewed solution, more documentations coming soon.
 
 ```js
-import { uStore, configStorage } from '@waelio/ustore';
+import { uStore, configStorage } from "@waelio/ustore";
 
-const payload = 'Test Payload1';
-const label = 'test';
+const payload = "Test Payload1";
+const label = "test";
 
-describe('uStore Storage', () => {
+describe("uStore Storage", () => {
   uStore.config.set(label, payload);
-  test('uStore set & get', () => {
+  test("uStore set & get", () => {
     expect(uStore.config.getItem(label)).toEqual(payload);
   });
   configStorage.set(label, payload);
-  test('configStorage set & get', () => {
+  test("configStorage set & get", () => {
     expect(configStorage.getItem(label)).toEqual(payload);
   });
 });
@@ -241,17 +241,17 @@ describe('uStore Storage', () => {
 Not implemented yet
 
 ```js
-import { uStore, idbStorage } from '@waelio/ustore';
+import { uStore, idbStorage } from "@waelio/ustore";
 
-describe('Idb storage', () => {
-  const payload = 'Test Payload1';
-  const label = 'test';
+describe("Idb storage", () => {
+  const payload = "Test Payload1";
+  const label = "test";
   uStore.idb.set(label, payload);
-  test('uStore set & get', () => {
+  test("uStore set & get", () => {
     expect(uStore.idb.getItem(label)).toEqual(payload);
   });
   idbStorage.set(label, payload);
-  test('idbStorage set & get', () => {
+  test("idbStorage set & get", () => {
     expect(idbStorage.getItem(label)).toEqual(payload);
   });
 });
@@ -264,22 +264,20 @@ describe('Idb storage', () => {
 Not implemented yet
 
 ```js
+import { uStore, webqlStorage } from "@waelio/ustore";
 
-import { uStore, webqlStorage } from '@waelio/ustore';
-
-describe('webqlStorage storage', () => {
-  const payload = 'Test Payload1';
-  const label = 'test';
+describe("webqlStorage storage", () => {
+  const payload = "Test Payload1";
+  const label = "test";
   uStore.webql.set(label, payload);
-  test('uStore set & get', () => {
+  test("uStore set & get", () => {
     expect(uStore.webql.getItem(label)).toEqual(payload);
   });
   webqlStorage.set(label, payload);
-  test('webqlStorage set & get', () => {
+  test("webqlStorage set & get", () => {
     expect(webqlStorage.getItem(label)).toEqual(payload);
   });
 });
-
 ```
 
 [Back to TOP](#)
@@ -297,3 +295,24 @@ describe('webqlStorage storage', () => {
 <hr/>
 
 [Back to TOP](#)
+
+## Releasing and publishing
+
+This repo ships via GitHub Actions. To cut a release and publish to npm:
+
+- Ensure a repository secret named NPM_TOKEN is configured with publish access to the @waelio scope.
+- Bump the version in package.json and commit your changes.
+- Push a semver tag to trigger the release workflow, for example v0.0.116.
+
+The Release workflow will build, test, and publish to npm if tests pass. You can also publish locally if needed:
+
+```bash
+# optional: build and test locally first
+pnpm build
+pnpm test
+
+# requires being logged in to npm (npm whoami)
+npm publish --access public
+```
+
+CI runs on every push and pull request to master/main and tests on Node 18 and 20.

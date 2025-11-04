@@ -1,6 +1,6 @@
 {
   "name": "@waelio/ustore",
-  "version": "0.0.114",
+  "version": "1.0.3",
   "description": "Universal Storage",
   "homepage": "https://github.com/waelio/uStore#readme",
   "keywords": [
@@ -12,16 +12,19 @@
     "pinia",
     "gun"
   ],
-  "main": "./lib/esm/src/index.js",
-  "types": "./types/src/index.d.ts",
+  "main": "./lib/cjs/src/index.js",
+  "module": "./lib/esm/src/index.js",
+  "types": "./types/index.d.ts",
   "public": "true",
   "publishConfig": {
     "access": "public"
   },
   "exports": {
     ".": {
+      "types": "./types/index.d.ts",
+      "import": "./lib/esm/src/index.js",
       "require": "./lib/cjs/src/index.js",
-      "import": "./lib/esm/src/index.js"
+      "default": "./lib/esm/src/index.js"
     }
   },
   "_moduleAliases": {
@@ -49,10 +52,11 @@
     "test": "jest --config jestconfig.json",
     "cleanup": "rm -rf lib && rm -rf lib",
     "copyfiles": "cp -R src lib/ && cp index.ts lib/index.ts",
-    "build": "pnpm cleanup && pnpm build:esm && pnpm build:cjs && pnpm build:umd && pnpm copyfiles && pnpm format && pnpm lint",
+    "build": "pnpm cleanup && pnpm build:esm && pnpm build:cjs && pnpm build:umd && pnpm postbuild:esm && pnpm copyfiles && pnpm format && pnpm lint",
     "build:esm": "tsc --module esnext --outDir lib/esm",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
     "build:umd": "tsc --module umd --outDir lib/umd",
+    "postbuild:esm": "mkdir -p lib/esm/src && echo '{\"type\": \"module\"}' > lib/esm/src/package.json",
     "format": "prettier --write \".//src/**/*.ts\"",
     "lint": "npx eslint",
     "prepare": "npm run build",
@@ -60,9 +64,6 @@
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
-  },
-  "bin": {
-    "uStore": "./lib/esm/src/index.js"
   },
   "author": {
     "name": "Wael Wahbeh",
@@ -93,9 +94,11 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "@keyv/mongo": "^3.0.1",
     "babel-plugin-transform-require-context": "^0.1.1",
     "browserify": "17.0.0",
     "gun": "0.2020.1239",
+    "keyv": "^5.2.1",
     "localforage": "^1.10.0",
     "localforage-driver-memory": "^1.0.5",
     "solid-js": "^1.7.6",

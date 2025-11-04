@@ -1,7 +1,3 @@
-import client from "./client";
-import dev from "./dev";
-import prod from "./prod";
-import server from "./server";
 declare const CONFIG: () => {
     server: {};
     client: {
@@ -55,6 +51,6 @@ declare const CONFIG: () => {
     };
     prod: {};
 };
-export { server, client, dev, prod, CONFIG };
+export { CONFIG };
 export default CONFIG;
 //# sourceMappingURL=index.d.ts.map

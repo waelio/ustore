@@ -4,3 +4,4 @@ radata
 /radata
 *.tmp
 .tmp
+*.tgz
