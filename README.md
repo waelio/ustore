@@ -376,3 +376,18 @@ npm publish --access public
 ```
 
 CI runs on every push and pull request to master/main and tests on Node 18 and 20.
+
+## GitHub Packages (optional)
+
+Install from GitHub Packages instead of npmjs:
+
+1. Create an .npmrc with:
+
+@waelio:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:\_authToken=YOUR_GITHUB_TOKEN
+
+2. Install:
+
+```bash
+npm i @waelio/ustore
+```
