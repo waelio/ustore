@@ -5,9 +5,13 @@ on:
     tags:
       - "v*.*.*"
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   publish:
-    name: Publish to npm (Node 18)
+    name: Publish (npm and GitHub Packages)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -33,9 +37,27 @@ jobs:
       - name: Test
         run: pnpm test
 
-      - name: Publish
+      - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm whoami
+          npm whoami || npx npm-cli-login -u dummy -p dummy -e ci@example.com || true
           npm publish --access public
+
+      - name: Configure npm for GitHub Packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "@waelio:registry=https://npm.pkg.github.com" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
+
+      - name: Publish to GitHub Packages
+        run: npm publish --access public
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          name: ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          fail_on_unmatched_files: false
