@@ -23,21 +23,21 @@ Note about Gun adapter in Node ESM: `uStore.gun` is intentionally unavailable in
 Example (Node ESM):
 
 ```js
-import { uStore, gunStorage } from '@waelio/ustore'
+import { uStore, gunStorage } from "@waelio/ustore";
 
-uStore.local.set('key', 'value')
+uStore.local.set("key", "value");
 
 // uStore.gun will throw in Node ESM. Use gunStorage directly:
-gunStorage.set('room', { hello: 'world' })
+gunStorage.set("room", { hello: "world" });
 ```
 
 Example (CommonJS):
 
 ```js
-const { uStore } = require('@waelio/ustore')
+const { uStore } = require("@waelio/ustore");
 
-uStore.local.set('key', 'value')
-uStore.gun.set('room', { hello: 'world' })
+uStore.local.set("key", "value");
+uStore.gun.set("room", { hello: "world" });
 ```
 
 <hr />
