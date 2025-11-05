@@ -1,0 +1,47 @@
+name: Cleanup failed workflow runs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete failed/cancelled/timed_out runs
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const per_page = 100;
+            let page = 1;
+            let deleted = 0;
+            while (true) {
+              const { data } = await github.rest.actions.listWorkflowRunsForRepo({
+                owner,
+                repo,
+                per_page,
+                page,
+                status: 'completed'
+              });
+              const runs = data.workflow_runs || [];
+              if (runs.length === 0) break;
+              for (const run of runs) {
+                if (['failure','cancelled','timed_out'].includes(run.conclusion)) {
+                  try {
+                    await github.rest.actions.deleteWorkflowRun({ owner, repo, run_id: run.id });
+                    deleted++;
+                  } catch (e) {
+                    core.warning(`Failed to delete run ${run.id}: ${e.message}`);
+                  }
+                }
+              }
+              page++;
+            }
+            core.notice(`Deleted ${deleted} failed/cancelled/timed_out workflow runs.`);
