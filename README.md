@@ -19,19 +19,19 @@ npm install @waelio/ustore
 Use (ESM):
 
 ```js
-import { uStore } from '@waelio/ustore'
+import { uStore } from "@waelio/ustore";
 
-uStore.local.set('greeting', 'hello')
-console.log(uStore.local.get('greeting')) // "hello"
+uStore.local.set("greeting", "hello");
+console.log(uStore.local.get("greeting")); // "hello"
 ```
 
 Use (CommonJS):
 
 ```js
-const { uStore } = require('@waelio/ustore')
+const { uStore } = require("@waelio/ustore");
 
-uStore.local.set('greeting', 'hello')
-console.log(uStore.local.get('greeting')) // "hello"
+uStore.local.set("greeting", "hello");
+console.log(uStore.local.get("greeting")); // "hello"
 ```
 
 ## Node ESM usage
