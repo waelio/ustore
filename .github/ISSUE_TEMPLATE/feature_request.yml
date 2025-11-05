@@ -1,0 +1,46 @@
+name: Feature request
+description: Suggest an idea for ustore
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Is your feature request related to a problem? Please describe.
+      placeholder: A clear and concise description of what the problem is.
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the solution you'd like.
+      placeholder: What should ustore do?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+
+  - type: checkboxes
+    id: storages
+    attributes:
+      label: Related to these adapters
+      options:
+        - label: local
+        - label: session
+        - label: cookie
+        - label: memory
+        - label: vuex
+        - label: pinia
+        - label: gun
+        - label: secure
+        - label: config
+        - label: idb
+        - label: webql
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context

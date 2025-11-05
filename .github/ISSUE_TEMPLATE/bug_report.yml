@@ -1,0 +1,74 @@
+name: Bug report
+description: Report a problem to help us improve
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+      placeholder: What happened? What did you expect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Provide minimal steps or a link to a repo demonstrating the issue.
+      placeholder: 1) setup ... 2) run ... 3) observe ...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: ustore version
+      placeholder: e.g. 1.0.5
+    validations:
+      required: true
+
+  - type: input
+    id: node
+    attributes:
+      label: Node version
+      placeholder: e.g. 18.20.8 or 20.x
+
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Runtime / bundler
+      options:
+        - Node ESM
+        - Node CommonJS
+        - Vite
+        - Webpack
+        - Other
+
+  - type: checkboxes
+    id: storages
+    attributes:
+      label: Affected storage adapters
+      options:
+        - label: local
+        - label: session
+        - label: cookie
+        - label: memory
+        - label: vuex
+        - label: pinia
+        - label: gun
+        - label: secure
+        - label: config
+        - label: idb
+        - label: webql
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / stack trace
+      render: shell
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context
