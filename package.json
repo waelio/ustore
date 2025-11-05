@@ -102,14 +102,14 @@
   "dependencies": {
     "@keyv/mongo": "^3.0.1",
     "babel-plugin-transform-require-context": "^0.1.1",
-    "browserify": "17.0.0",
-    "gun": "0.2020.1239",
+    "browserify": "17.0.1",
+    "gun": "0.2020.1241",
     "keyv": "^5.2.1",
     "localforage": "^1.10.0",
     "localforage-driver-memory": "^1.0.5",
     "solid-js": "^1.7.6",
-    "store2": "2.14.2",
-    "vue": "3.2.47",
+    "store2": "2.14.4",
+    "vue": "3.5.22",
     "vuex": "4.1.0",
     "waelio-utils": "5.0.1"
   },
