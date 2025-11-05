@@ -8,6 +8,40 @@ Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
 
 <hr />
 
+## Node ESM usage
+
+The package ships conditional exports for native Node ESM, CommonJS, and bundlers:
+
+- ESM (Node 18+/20+): `import { uStore } from '@waelio/ustore'`
+- CommonJS: `const { uStore } = require('@waelio/ustore')`
+
+Note about Gun adapter in Node ESM: `uStore.gun` is intentionally unavailable in the native Node ESM entry to avoid eager import pitfalls. Use one of the following instead:
+
+- Import the adapter directly: `import { gunStorage } from '@waelio/ustore'`
+- Or use CommonJS to access `uStore.gun`: `const { uStore } = require('@waelio/ustore')`
+
+Example (Node ESM):
+
+```js
+import { uStore, gunStorage } from '@waelio/ustore'
+
+uStore.local.set('key', 'value')
+
+// uStore.gun will throw in Node ESM. Use gunStorage directly:
+gunStorage.set('room', { hello: 'world' })
+```
+
+Example (CommonJS):
+
+```js
+const { uStore } = require('@waelio/ustore')
+
+uStore.local.set('key', 'value')
+uStore.gun.set('room', { hello: 'world' })
+```
+
+<hr />
+
 ## uStore project is a plugin I'v wanted for a while, the ability to have my own state-management in my projects.
 
 ### As this is a pilot, please feel free to join the discussion. All are welcomed.
