@@ -34,11 +34,22 @@ jobs:
         with:
           run_install: false
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Print tool versions
+        run: |
+          node -v
+          npm -v
+          pnpm -v
 
-      # - name: Lint (optional)
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      # Optional: Lint
+      # - name: Lint
       #   run: pnpm lint
+
+      # Optional: Build (tests do not require build; ts-jest compiles TS)
+      # - name: Build
+      #   run: pnpm build
 
       - name: Run tests
         run: pnpm test
