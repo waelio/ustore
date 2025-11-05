@@ -1,0 +1,45 @@
+name: Auto-merge Dependabot
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, labeled, ready_for_review]
+
+permissions:
+  contents: write
+  pull-requests: write
+  statuses: read
+
+jobs:
+  automerge:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dependabot metadata
+        id: meta
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Approve PR (required by branch protection)
+        uses: peter-evans/approve-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ github.event.pull_request.number }}
+          review-message: "Auto-approving Dependabot PR"
+
+      - name: Enable auto-merge for patch/minor
+        if: contains(['version-update:semver-minor','version-update:semver-patch'], steps.meta.outputs.update-type)
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ github.event.pull_request.number }}
+          merge-method: squash
+
+      - name: Attempt immediate merge when checks are green
+        if: contains(['version-update:semver-minor','version-update:semver-patch'], steps.meta.outputs.update-type)
+        uses: peter-evans/auto-merge@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request: ${{ github.event.pull_request.number }}
+          merge-method: squash
+          delete-branch: true
