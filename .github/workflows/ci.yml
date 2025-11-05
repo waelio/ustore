@@ -28,6 +28,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: "pnpm"
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -39,6 +40,10 @@ jobs:
           node -v
           npm -v
           pnpm -v
+
+      - name: List lockfiles present
+        run: |
+          ls -la | grep -E "(pnpm-lock.yaml|package-lock.json|yarn.lock|npm-shrinkwrap.json)" || true
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
