@@ -37,12 +37,21 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Read package version
+        id: pkg
+        run: echo "version=$(jq -r .version package.json)" >> $GITHUB_OUTPUT
+
       - name: Publish to npm
+        continue-on-error: true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm whoami || npx npm-cli-login -u dummy -p dummy -e ci@example.com || true
-          npm publish --access public
+          if npm view @waelio/ustore@${{ steps.pkg.outputs.version }} version >/dev/null 2>&1; then
+            echo "Version ${{ steps.pkg.outputs.version }} already on npm. Skipping publish."
+          else
+            npm publish --access public
+          fi
 
       - name: Configure npm for GitHub Packages
         env:
@@ -52,7 +61,9 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
 
       - name: Publish to GitHub Packages
-        run: npm publish --access public
+        continue-on-error: true
+        run: |
+          npm publish --access public || echo "Skip if already exists"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
