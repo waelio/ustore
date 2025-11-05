@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.6] - 2025-11-05
+
+- Docs: Added Getting Started to README; clarified Node ESM usage note.
+- Badges: CI badge targets the `default` branch.
+- Community: Added issue templates (bug report, feature request) and seeded CHANGELOG.
+- CI: Confirmed npm-based workflow on `default` (Node 18/20), installs with `--ignore-scripts`.
+
 ## [1.0.5] - 2025-11-05
 
 - Native Node ESM support: conditional export route for Node (`node.import`) with esm-node build.
