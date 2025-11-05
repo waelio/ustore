@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [master, main]
+    branches: [default]
   pull_request:
-    branches: [master, main]
+    branches: [default]
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -45,11 +45,11 @@ jobs:
 
       # Optional: Lint
       # - name: Lint
-      #   run: pnpm lint
+      #   run: npm run lint
 
       # Optional: Build (tests do not require build; ts-jest compiles TS)
       # - name: Build
-      #   run: pnpm build
+      #   run: npm run build
 
       - name: Run tests
         run: npm test
