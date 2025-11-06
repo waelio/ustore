@@ -19,13 +19,16 @@ export class Config {
 
   constructor() {
     this.setEnvironment();
+    const clientVars = this.getClientVars();
+    const serverVars = this.getServerVars();
+    const overrides = this.getUrgentOverrides();
     this._store = {
-      ...this.getClientVars(),
-      ...this.getServerVars(),
-      ...this.getUrgentOverrides(),
-      client: this.getClientVars(),
-      server: this.getServerVars(),
-      dev: this.getUrgentOverrides(),
+      ...clientVars,
+      ...serverVars,
+      ...overrides,
+      client: clientVars,
+      server: serverVars,
+      dev: overrides,
     } as Record<string, unknown>;
   }
 
@@ -79,7 +82,7 @@ export class Config {
   }
 
   has(key: string): boolean {
-    return Boolean(this.get(key));
+    return this.get(key) !== undefined;
   }
 
   private setEnvironment(): void {
