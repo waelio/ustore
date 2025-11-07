@@ -13,8 +13,9 @@ currently being supported with security updates.
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+To report a security vulnerability, please use one of the following methods:
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+- **GitHub Security Advisories:** [Submit a confidential security report](https://github.com/waelio/ustore/security/advisories).
+- **Email:** Send details to [security@waelio.com](mailto:security@waelio.com).
+
+We aim to respond to all security reports within 3 business days. After your report is received, we will investigate the issue and keep you updated on progress. If the vulnerability is confirmed, we will coordinate a fix and disclosure timeline with you. If the report is declined, we will provide a clear explanation.
