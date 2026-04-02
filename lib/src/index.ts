@@ -69,6 +69,9 @@ export { configStorage };
 // export { webqlStorage };
 export { signalStorage };
 
+export { createMessagingStore } from './messaging/index';
+export type { WMMessage, MessagingStore, MessagingStoreOptions } from './messaging/index';
+
 if (typeof window !== "undefined") {
   window["uStore"] = uStore;
 } else {
