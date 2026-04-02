@@ -42,6 +42,6 @@ export { gunStorage };
 export { secureStorage };
 export { configStorage };
 export { signalStorage };
-export { createMessagingStore } from './messaging/index';
-export type { WMMessage, MessagingStore, MessagingStoreOptions } from './messaging/index';
+export { createMessagingStore } from "./messaging/index";
+export type { WMMessage, MessagingStore, MessagingStoreOptions, } from "./messaging/index";
 //# sourceMappingURL=index.d.ts.map

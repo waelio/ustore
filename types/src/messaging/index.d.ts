@@ -1,6 +1,6 @@
 export interface WMMessage {
     _id: string;
-    type: 'route' | 'broadcast' | 'room-message';
+    type: "route" | "broadcast" | "room-message";
     payload: unknown;
     senderId: string;
     recipientId: string | null;
