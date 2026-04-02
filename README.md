@@ -78,7 +78,7 @@ uStore.gun.set("room", { hello: "world" });
 
 <hr />
 
-#### Crurrent stores:
+#### Current stores:
 
 <ol>
 <li>local: <a href="#local">local</a></li>
@@ -90,6 +90,7 @@ uStore.gun.set("room", { hello: "world" });
 <li>memory: <a href="#memory">memory</a></li>
 <li>secure: <a href="#secure">secure</a></li>
 <li>config: <a href="#config">config</a></li>
+<li>signal: <a href="#signal">signal</a></li>
 <li>idb: <a href="#idb">index Db -pending</a></li>
 <li>webql: <a href="#webql">wb sql -pending</a></li>
 </ol>
@@ -296,6 +297,26 @@ describe("uStore Storage", () => {
 
 [Back to TOP](#)
 
+# signal
+
+In-memory reactive state store. Values are kept for the lifetime of the page/process and can be observed with `signalStorage`.
+
+```js
+import { uStore, signalStorage } from "@waelio/ustore";
+
+// via uStore
+uStore.signal.set("count", 0);
+console.log(uStore.signal.get("count")); // 0
+
+// direct import
+signalStorage.set("theme", "dark");
+console.log(signalStorage.get("theme")); // "dark"
+console.log(signalStorage.has("theme")); // true
+signalStorage.remove("theme");
+```
+
+[Back to TOP](#)
+
 # idb
 
 Not implemented yet
@@ -342,7 +363,125 @@ describe("webqlStorage storage", () => {
 
 [Back to TOP](#)
 
-#
+---
+
+# createMessagingStore
+
+`createMessagingStore` is a client-side bridge between `@waelio/ustore` and [`@waelio/messaging`](https://github.com/waelio/waelio-messaging) (a FeathersJS + Socket.io real-time server). It wires incoming socket events to three uStore adapters automatically:
+
+| Adapter          | Role                                                                 |
+| ---------------- | -------------------------------------------------------------------- |
+| `localStorage`   | Persists message history across page refreshes                       |
+| `sessionStorage` | Stores the assigned `userId` and `displayName` for the session       |
+| `signalStorage`  | Reactive in-memory state: unread count, user list, typing indicators |
+
+## Installation
+
+```bash
+npm install @waelio/ustore socket.io-client
+```
+
+## Basic usage
+
+```js
+import { io } from "socket.io-client";
+import { createMessagingStore } from "@waelio/ustore";
+
+const socket = io("https://waelio-messaging.onrender.com");
+const store = createMessagingStore(socket);
+
+// Subscribe to incoming messages
+const unsub = store.onMessage((msg) => {
+  console.log("new message from", msg.senderId, ":", msg.payload);
+});
+
+// Send a direct message
+store.send("userId-abc", "hello!");
+
+// Broadcast to all connected users
+store.broadcast({ text: "hello everyone" });
+
+// Clean up when done
+store.destroy();
+```
+
+## Options
+
+```ts
+createMessagingStore(socket, {
+  historyLimit: 200, // max messages kept in localStorage cache (default: 200)
+  storagePrefix: "wm", // prefix for all storage keys (default: "wm")
+});
+```
+
+## API
+
+### Identity
+
+```js
+store.userId; // string | null — socket ID assigned by server
+store.setDisplayName("Alice");
+store.getDisplayName(); // "Alice"
+```
+
+### Messaging
+
+```js
+store.send("userId-abc", payload); // direct message
+store.broadcast(payload); // message to all users
+store.joinRoom("userId-bob"); // create / join a private room
+store.sendRoomMessage(payload); // send inside the current room
+```
+
+### History
+
+```js
+// Fetch from server + merge with local cache (deduped, sorted by timestamp)
+const messages = await store.loadHistory();
+
+// Read the local cache without hitting the server
+const cached = store.getCachedHistory();
+
+// Wipe the local cache
+store.clearHistory();
+```
+
+### Reactive state
+
+```js
+store.getUnread(); // number of messages received since last reset
+store.resetUnread(); // reset counter to 0
+store.getUsers(); // string[] of connected user IDs
+store.isConnected(); // boolean
+```
+
+### Subscriptions
+
+All subscribe methods return an **unsubscribe function**.
+
+```js
+const unsub1 = store.onMessage((msg) => {
+  /* WMMessage */
+});
+const unsub2 = store.onUserList((users) => {
+  /* string[] */
+});
+const unsub3 = store.onTyping((userId, isTyping) => {
+  /* boolean */
+});
+
+unsub1(); // stop receiving message events
+```
+
+### Lifecycle
+
+```js
+store.destroy(); // removes all socket listeners and clears subscriber lists
+```
+
+[Back to TOP](#)
+
+---
 
 # References
 

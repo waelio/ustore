@@ -31,6 +31,9 @@ export { configStorage };
 // export { webqlStorage }
 export { signalStorage }
 
+export { createMessagingStore } from './src/messaging/index';
+export type { WMMessage, MessagingStore, MessagingStoreOptions } from './src/messaging/index';
+
 // app = createApp({})
 // export const app = createApp({});
 
