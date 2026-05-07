@@ -1,591 +1,363 @@
-# A universal store cross-frameworks
+# uStore
 
-### @waelio/ustore
+Universal storage abstraction for browser, reactive, Vue, and server-side runtimes.
 
-Visit the source code [ustore](https://github.com/waelio/ustore) on gitHub.
+[![Join the chat at https://discord.gg/tBZ2Fmdb7E](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/tBZ2Fmdb7E)
+[![CI](https://github.com/waelio/ustore/actions/workflows/ci.yml/badge.svg?branch=default)](https://github.com/waelio/ustore/actions/workflows/ci.yml?query=branch%3Adefault)
+[![NPM version](https://img.shields.io/npm/v/@waelio/ustore.svg?style=flat&color=red&label=NPM)](https://www.npmjs.com/package/@waelio/ustore)
+[![NPM monthly downloads](https://img.shields.io/npm/dm/@waelio/ustore.svg?style=flat)](https://npmjs.org/package/@waelio/ustore)
+[![NPM total downloads](https://img.shields.io/npm/dt/@waelio/ustore.svg?style=flat&color=purple&label=Downloads)](https://npmjs.org/package/@waelio/ustore)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/waelio?locale.x=en_US)
 
-[![Join the chat at https://discord.gg/tBZ2Fmdb7E](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/tBZ2Fmdb7E) [![CI](https://github.com/waelio/ustore/actions/workflows/ci.yml/badge.svg?branch=default)](https://github.com/waelio/ustore/actions/workflows/ci.yml?query=branch%3Adefault) [![NPM version](https://img.shields.io/npm/v/@waelio/ustore.svg?style=flat&color=red&label=NPM)](https://www.npmjs.com/package/@waelio/ustore) [![NPM monthly downloads](https://img.shields.io/npm/dm/@waelio/ustore.svg?style=flat)](https://npmjs.org/package/@waelio/ustore) [![NPM total downloads](https://img.shields.io/npm/dt/@waelio/ustore.svg?style=flat&color=purple&label=Downloads)](https://npmjs.org/package/@waelio/ustore) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/waelio?locale.x=en_US)
+uStore provides one small CRUD-style API across multiple storage backends so you can move between browser state, in-memory state, Vue integrations, and server storage without rewriting the same set/get/remove glue.
 
-<hr />
+## Why uStore
 
-## Getting started
+- One consistent interface across multiple adapters
+- Works with `uStore.<adapter>` and direct named exports
+- Browser-friendly adapters with server-safe fallbacks where applicable
+- Includes reactive state, encrypted memory, config-backed storage, and server-side Keyv storage
+- Ships a messaging bridge that composes multiple adapters together
 
-Install:
+## Installation
 
 ```bash
 npm install @waelio/ustore
 ```
 
-Use (ESM):
+## Quick start
 
-```js
+```ts
 import { uStore } from "@waelio/ustore";
 
 uStore.local.set("greeting", "hello");
-console.log(uStore.local.get("greeting")); // "hello"
+const greeting = uStore.local.get("greeting");
+const exists = uStore.local.has("greeting");
+
+console.log(greeting); // "hello"
+console.log(exists); // true
+
+uStore.local.remove("greeting");
 ```
 
-Use (CommonJS):
+`uStore` is also attached to `window.uStore` in browsers and `globalThis.uStore` in non-browser runtimes.
 
-```js
-const { uStore } = require("@waelio/ustore");
+## Package entry points
 
-uStore.local.set("greeting", "hello");
-console.log(uStore.local.get("greeting")); // "hello"
+### Root package: `@waelio/ustore`
+
+Available exports include:
+
+- `uStore`
+- `localStorage`
+- `sessionStorage`
+- `cookieStorage`
+- `memoryStorage`
+- `piniaStorage`
+- `vuexStorage`
+- `gunStorage`
+- `secureStorage`
+- `configStorage`
+- `signalStorage`
+- `createMessagingStore`
+
+### Server package: `@waelio/ustore/server`
+
+Use the dedicated server entry for async Keyv-backed storage:
+
+- `serverStorage`
+- `createServerStorage`
+- `createMongoServerStorage`
+
+## Available adapters
+
+| Adapter | Access pattern | Runtime | Notes |
+| --- | --- | --- | --- |
+| `local` | `uStore.local`, `localStorage` | Browser / SSR-friendly | Uses `store2` under the hood. |
+| `session` | `uStore.session`, `sessionStorage` | Browser / SSR-friendly | Session-scoped storage via `store2`. |
+| `cookie` | `uStore.cookie`, `cookieStorage` | Browser / Node fallback | `get()` returns the raw `key=value` cookie entry. |
+| `memory` | `uStore.memory`, `memoryStorage` | Universal | Keyed in-memory storage. |
+| `pinia` | `uStore.pinia`, `piniaStorage` | Universal | Current implementation behaves like keyed in-memory storage. |
+| `vuex` | `uStore.vuex`, `vuexStorage` | Universal | Stores the latest committed value; `get()` / `has()` do not need a key. |
+| `secure` | `uStore.secure`, `secureStorage` | Universal | In-memory encrypted values using `waelio-utils`. |
+| `config` | `uStore.config`, `configStorage` | Universal | Supports colon-separated nested keys like `client:apiUrl`. |
+| `signal` | `uStore.signal`, `signalStorage` | Universal | Reactive in-memory state store. |
+| `gun` | `uStore.gun`, `gunStorage` | Browser / CommonJS / direct import | Experimental, network-backed, and chain-oriented. |
+| `server` | `serverStorage`, `createServerStorage` | Node / server | Async Keyv-backed storage from `@waelio/ustore/server`. |
+
+## Browser storage examples
+
+### Local storage
+
+```ts
+import { localStorage, uStore } from "@waelio/ustore";
+
+uStore.local.set("profile", { name: "Wael" });
+const fromUStore = uStore.local.get("profile");
+
+localStorage.set("theme", "dark");
+const fromNamedExport = localStorage.get("theme");
+
+console.log(fromUStore); // { name: "Wael" }
+console.log(fromNamedExport); // "dark"
 ```
 
-## Node ESM usage
+### Session storage
 
-The package ships conditional exports for native Node ESM, CommonJS, and bundlers:
+```ts
+import { sessionStorage, uStore } from "@waelio/ustore";
 
-- ESM (Node 18+/20+): `import { uStore } from '@waelio/ustore'`
-- CommonJS: `const { uStore } = require('@waelio/ustore')`
+uStore.session.set("draft", { title: "hello" });
+console.log(uStore.session.get("draft")); // { title: "hello" }
 
-Note about Gun adapter in Node ESM: `uStore.gun` is intentionally unavailable in the native Node ESM entry to avoid eager import pitfalls. Use one of the following instead:
-
-- Import the adapter directly: `import { gunStorage } from '@waelio/ustore'`
-- Or use CommonJS to access `uStore.gun`: `const { uStore } = require('@waelio/ustore')`
-
-Example (Node ESM):
-
-```js
-import { uStore, gunStorage } from "@waelio/ustore";
-
-uStore.local.set("key", "value");
-
-// uStore.gun will throw in Node ESM. Use gunStorage directly:
-gunStorage.set("room", { hello: "world" });
+sessionStorage.set("token", "abc123");
+console.log(sessionStorage.has("token")); // true
+sessionStorage.remove("token");
 ```
 
-Example (CommonJS):
+### Cookie storage
 
-```js
-const { uStore } = require("@waelio/ustore");
+```ts
+import { cookieStorage, uStore } from "@waelio/ustore";
 
-uStore.local.set("key", "value");
-uStore.gun.set("room", { hello: "world" });
+uStore.cookie.set("theme", "dark");
+console.log(uStore.cookie.get("theme")); // "theme=dark"
+
+cookieStorage.set("locale", "en-US");
+console.log(cookieStorage.has("locale")); // true
+cookieStorage.remove("locale");
 ```
 
-## Server-side storage (Node)
+Use simple strings for cookies when possible. Complex values are string-coerced by cookie semantics.
 
-For server runtimes, use the dedicated Node subpath:
+## In-memory and reactive examples
 
-```bash
-npm install @waelio/ustore
+### Memory storage
+
+```ts
+import { memoryStorage, uStore } from "@waelio/ustore";
+
+uStore.memory.set("count", 42);
+console.log(uStore.memory.get("count")); // 42
+
+memoryStorage.setItem("feature", { enabled: true });
+console.log(memoryStorage.getItem("feature")); // { enabled: true }
+memoryStorage.removeItem("feature");
 ```
+
+### Signal storage
+
+```ts
+import { signalStorage, uStore } from "@waelio/ustore";
+
+uStore.signal.set("online", true);
+console.log(uStore.signal.get("online")); // true
+
+signalStorage.set("users", ["alice", "bob"]);
+console.log(signalStorage.has("users")); // true
+signalStorage.remove("users");
+```
+
+### Secure storage
+
+```ts
+import { secureStorage, uStore } from "@waelio/ustore";
+
+uStore.secure.set("secret", "hello world");
+console.log(uStore.secure.getItem("secret")); // "hello world"
+
+secureStorage.set("token", "signed-value", { salt: "demo-salt" });
+console.log(secureStorage.getItem("token", { salt: "demo-salt" }));
+```
+
+### Config storage
+
+```ts
+import { configStorage, uStore } from "@waelio/ustore";
+
+uStore.config.set("client:apiUrl", "https://api.example.com");
+console.log(uStore.config.get("client:apiUrl")); // "https://api.example.com"
+
+configStorage.set("featureFlags", { dashboard: true });
+console.log(configStorage.get("featureFlags")); // { dashboard: true }
+console.log(configStorage.client()); // client config bucket
+console.log(configStorage.server()); // server config bucket
+console.log(configStorage.dev()); // dev/prod override bucket
+```
+
+## Vue adapters
+
+### Pinia adapter
+
+```ts
+import { piniaStorage, uStore } from "@waelio/ustore";
+
+uStore.pinia.set("theme", "dark");
+console.log(uStore.pinia.get("theme")); // "dark"
+
+piniaStorage.setItem("language", "en");
+console.log(piniaStorage.hasItem("language")); // true
+piniaStorage.removeItem("language");
+```
+
+At the moment, the Pinia adapter behaves like a keyed in-memory store, which makes it predictable in tests and SSR environments.
+
+### Vuex adapter
+
+```ts
+import { vuexStorage, uStore } from "@waelio/ustore";
+
+uStore.vuex.set("status", "ready");
+console.log(uStore.vuex.get()); // "ready"
+console.log(uStore.vuex.has()); // true
+uStore.vuex.remove("status");
+
+vuexStorage.setItem("message", { text: "hello" });
+console.log(vuexStorage.getItem()); // { text: "hello" }
+```
+
+The current Vuex adapter stores the latest committed value in a single slot, so `get()` and `has()` do not require a key.
+
+## Gun adapter
+
+```ts
+import { gunStorage } from "@waelio/ustore";
+
+await gunStorage.set("room", { hello: "world" });
+const roomRef = await gunStorage.get("room");
+
+console.log(roomRef);
+```
+
+The Gun adapter is still experimental. Reads are chain-oriented and depend on your Gun peer configuration rather than behaving like a purely synchronous JSON store.
+
+### Native Node ESM note
+
+In the native Node ESM entry, `uStore.gun` intentionally throws to avoid eager-import issues. Use one of these options instead:
+
+- import `gunStorage` directly from `@waelio/ustore`
+- use CommonJS if you need `uStore.gun`
+
+## Server-side storage
+
+Use the server subpath when you want async storage backed by `Keyv`.
 
 ```ts
 import { createServerStorage } from "@waelio/ustore/server";
 
 const store = createServerStorage({ namespace: "sessions" });
 
-await store.set("session:waelio", { role: "owner", authenticated: true });
-console.log(await store.get("session:waelio"));
-// { role: 'owner', authenticated: true }
-```
-
-The default server storage uses an in-memory `Keyv` store, which is great for
-tests and single-process servers. For persistent server-side storage, provide a
-custom `Keyv` instance or store adapter.
-
-```ts
-import Keyv from "keyv";
-import { createServerStorage } from "@waelio/ustore/server";
-
-const store = createServerStorage({
-  keyv: new Keyv({ namespace: "waelio-auth", store: new Map() }),
+await store.set("session:waelio", {
+  role: "owner",
+  authenticated: true,
 });
+
+console.log(await store.get("session:waelio"));
+console.log(await store.has("session:waelio"));
+
+await store.remove("session:waelio");
 ```
 
-MongoDB is also supported out of the box through the bundled Keyv adapter:
+### Mongo-backed server storage
 
 ```ts
 import { createMongoServerStorage } from "@waelio/ustore/server";
 
-const store = createMongoServerStorage(process.env.MONGO_URL!, {
+const store = createMongoServerStorage("mongodb://127.0.0.1:27017/ustore", {
   namespace: "waelio-auth",
 });
+
+await store.set("user:1", { role: "admin" });
+console.log(await store.getItem("user:1"));
 ```
 
-<hr />
+## Messaging bridge
 
-## uStore project is a plugin I'v wanted for a while, the ability to have my own state-management in my projects.
-
-### As this is a pilot, please feel free to join the discussion. All are welcomed.
-
-<hr />
-
-### For more examples, please vitit [testing-ustore](https://github.com/waelio/testing-ustore) for help.
-
-<hr />
-
-#### Current stores:
-
-<ol>
-<li>local: <a href="#local">local</a></li>
-<li>session: <a href="#session">session</a></li>
-<li>cookie: <a href="#cookie">cookie</a></li>
-<li>vuex: <a href="#vuex">vuex</a></li>
-<li>pinia: <a href="#pinia">pinia</a></li>
-<li>gun: <a href="#gun">gun</a></li>
-<li>memory: <a href="#memory">memory</a></li>
-<li>secure: <a href="#secure">secure</a></li>
-<li>server: <a href="#server">server</a></li>
-<li>config: <a href="#config">config</a></li>
-<li>signal: <a href="#signal">signal</a></li>
-<li>idb: <a href="#idb">index Db -pending</a></li>
-<li>webql: <a href="#webql">wb sql -pending</a></li>
-</ol>
-
-<hr>
-
-# local
-
-Window local Storage,<a href="#references"><i> see docs below</i></a>
-
-```js
-import { uStore, localStorage } from "@waelio/ustore";
-
-describe("Local storage", () => {
-  const payload = "Test Payload1";
-  const label = "test";
-  uStore.local.set(label, payload);
-  test("uStore set & get", () => {
-    expect(uStore.local.get(label)).toEqual(payload);
-  });
-  localStorage.set(label, payload);
-  test("localStorage set & get", () => {
-    expect(localStorage.get(label)).toEqual(payload);
-  });
-});
-```
-
-[Back to TOP](#)
-
-# session
-
-Window session Storage,<a href="#references"><i> see docs below</i></a>
-
-```js
-import { uStore, sessionStorage } from "@waelio/ustore";
-
-describe("Session storage", () => {
-  const payload = "Test Payload1";
-  const label = "test";
-  uStore.session.set(label, payload);
-  test("uStore set & get", () => {
-    expect(uStore.session.get(label)).toEqual(payload);
-  });
-  sessionStorage.set(label, payload);
-  test("sessionStorage set & get", () => {
-    expect(sessionStorage.get(label)).toEqual(payload);
-  });
-});
-```
-
-[Back to TOP](#)
-
-# cookie
-
-Document Cookies,<a href="#references"><i> see docs below</i></a>
-
-```js
-import { uStore, cookieStorage } from "@waelio/ustore";
-
-describe("Cookie storage", () => {
-  const payload = "Test Payload1";
-  const label = "test";
-  uStore.cookie.set(label, payload);
-  test("uStore set & get", () => {
-    expect(uStore.cookie.get(label)).toEqual(`${label}=${payload}`);
-  });
-  cookieStorage.set(label, payload);
-  test("cookieStorage set & get", () => {
-    expect(cookieStorage.get(label)).toEqual(`${label}=${payload}`);
-  });
-});
-```
-
-[Back to TOP](#)
-
-# vuex
-
-Vue state management,<a href="#references"><i> see docs below</i></a>
-
-```js
-import { uStore, vuexStorage } from "@waelio/ustore";
-
-describe("Vuex storage", () => {
-  const payload = "Test Payload1";
-  const label = "test";
-  uStore.vuex.set(label, payload);
-  test("uStore set & get", () => {
-    expect(uStore.vuex.get()).toEqual(payload);
-  });
-  vuexStorage.set(label, payload);
-  test("vuexStorage set & get", () => {
-    expect(vuexStorage.get()).toEqual(payload);
-  });
-});
-```
-
-[Back to TOP](#)
-
-# pinia
-
-Pinia State Management,<a href="#references"><i> see docs below</i></a>
-
-```js
-import { uStore, piniaStorage } from "@waelio/ustore";
-
-describe("Pinia storage", () => {
-  const payload = "Test Payload1";
-  const label = "test";
-  uStore.pinia.set(payload);
-  test("pinia set & get", () => {
-    expect(uStore.pinia.get()).toEqual(payload);
-  });
-  piniaStorage.set(payload);
-  test("piniaStorage set & get", () => {
-    expect(piniaStorage.get()).toEqual(payload);
-  });
-});
-```
-
-[Back to TOP](#)
-
-# gun
-
-Gun DB, ,<a href="#references"><i> see docs below</i></a>
-
-```js
-import { uStore } from "@waelio/ustore";
-
-// Did not pass testing yet
-uStore.gun.set("testName", "test Payload");
-uStore.gun.get("testName") === "test Payload";
-```
-
-[Back to TOP](#)
-
-# memory
-
-In memory storage
-
-```js
-import { uStore, memoryStorage } from "@waelio/ustore";
-
-describe("Memory storage", () => {
-  const payload = "Test Payload1";
-  const label = "test";
-  uStore.memory.set(label, payload);
-
-  test("uStore set & get", () => {
-    expect(uStore.memory.get(label)).toEqual(payload);
-  });
-  memoryStorage.set(label, payload);
-  test("memoryStorage set & get", () => {
-    expect(memoryStorage.get(label)).toEqual(payload);
-  });
-});
-```
-
-[Back to TOP](#)
-
-# secure
-
-Enctypted and Decrypted storage
-
-```js
-import { uStore, secureStorage } from "@waelio/ustore";
-
-describe("Secure storage", () => {
-  const payload = "Test Payload1";
-  const label = "test";
-  uStore.secure.set(label, payload);
-  test("uStore set & get", () => {
-    expect(uStore.secure.getItem(label)).toEqual(payload);
-  });
-  secureStorage.set(label, payload);
-  test("secureStorage set & get", () => {
-    expect(secureStorage.getItem(label)).toEqual(payload);
-  });
-});
-```
-
-[Back to TOP](#)
-
-# server
-
-Node/server-side storage powered by `Keyv`.
+`createMessagingStore` is a client-side bridge between `@waelio/ustore` and a Socket.io-compatible messaging backend.
 
 ```ts
-import { createServerStorage } from "@waelio/ustore/server";
-
-const store = createServerStorage({ namespace: "server-demo" });
-
-await store.set("auth:token", "signed-value");
-console.log(await store.getItem("auth:token")); // "signed-value"
-console.log(await store.has("auth:token")); // true
-await store.remove("auth:token");
-```
-
-[Back to TOP](#)
-
-# config
-
-Config is home-brewed solution, more documentations coming soon.
-
-```js
-import { uStore, configStorage } from "@waelio/ustore";
-
-const payload = "Test Payload1";
-const label = "test";
-
-describe("uStore Storage", () => {
-  uStore.config.set(label, payload);
-  test("uStore set & get", () => {
-    expect(uStore.config.getItem(label)).toEqual(payload);
-  });
-  configStorage.set(label, payload);
-  test("configStorage set & get", () => {
-    expect(configStorage.getItem(label)).toEqual(payload);
-  });
-});
-```
-
-[Back to TOP](#)
-
-# signal
-
-In-memory reactive state store. Values are kept for the lifetime of the page/process and can be observed with `signalStorage`.
-
-```js
-import { uStore, signalStorage } from "@waelio/ustore";
-
-// via uStore
-uStore.signal.set("count", 0);
-console.log(uStore.signal.get("count")); // 0
-
-// direct import
-signalStorage.set("theme", "dark");
-console.log(signalStorage.get("theme")); // "dark"
-console.log(signalStorage.has("theme")); // true
-signalStorage.remove("theme");
-```
-
-[Back to TOP](#)
-
-# idb
-
-Not implemented yet
-
-```js
-import { uStore, idbStorage } from "@waelio/ustore";
-
-describe("Idb storage", () => {
-  const payload = "Test Payload1";
-  const label = "test";
-  uStore.idb.set(label, payload);
-  test("uStore set & get", () => {
-    expect(uStore.idb.getItem(label)).toEqual(payload);
-  });
-  idbStorage.set(label, payload);
-  test("idbStorage set & get", () => {
-    expect(idbStorage.getItem(label)).toEqual(payload);
-  });
-});
-```
-
-[Back to TOP](#)
-
-# webql
-
-Not implemented yet
-
-```js
-import { uStore, webqlStorage } from "@waelio/ustore";
-
-describe("webqlStorage storage", () => {
-  const payload = "Test Payload1";
-  const label = "test";
-  uStore.webql.set(label, payload);
-  test("uStore set & get", () => {
-    expect(uStore.webql.getItem(label)).toEqual(payload);
-  });
-  webqlStorage.set(label, payload);
-  test("webqlStorage set & get", () => {
-    expect(webqlStorage.getItem(label)).toEqual(payload);
-  });
-});
-```
-
-[Back to TOP](#)
-
----
-
-# createMessagingStore
-
-`createMessagingStore` is a client-side bridge between `@waelio/ustore` and [`@waelio/messaging`](https://github.com/waelio/waelio-messaging) (a FeathersJS + Socket.io real-time server). It wires incoming socket events to three uStore adapters automatically:
-
-| Adapter          | Role                                                                 |
-| ---------------- | -------------------------------------------------------------------- |
-| `localStorage`   | Persists message history across page refreshes                       |
-| `sessionStorage` | Stores the assigned `userId` and `displayName` for the session       |
-| `signalStorage`  | Reactive in-memory state: unread count, user list, typing indicators |
-
-## Installation
-
-```bash
-npm install @waelio/ustore socket.io-client
-```
-
-## Basic usage
-
-```js
 import { io } from "socket.io-client";
 import { createMessagingStore } from "@waelio/ustore";
 
 const socket = io("https://waelio-messaging.onrender.com");
-const store = createMessagingStore(socket);
-
-// Subscribe to incoming messages
-const unsub = store.onMessage((msg) => {
-  console.log("new message from", msg.senderId, ":", msg.payload);
+const store = createMessagingStore(socket, {
+  historyLimit: 200,
+  storagePrefix: "wm",
 });
 
-// Send a direct message
-store.send("userId-abc", "hello!");
+const unsubscribe = store.onMessage((message) => {
+  console.log("incoming", message.senderId, message.payload);
+});
 
-// Broadcast to all connected users
+store.send("userId-abc", "hello!");
 store.broadcast({ text: "hello everyone" });
 
-// Clean up when done
+const history = await store.loadHistory();
+console.log(history.length);
+console.log(store.getUnread());
+
+unsubscribe();
 store.destroy();
 ```
 
-## Options
+The messaging bridge uses:
 
-```ts
-createMessagingStore(socket, {
-  historyLimit: 200, // max messages kept in localStorage cache (default: 200)
-  storagePrefix: "wm", // prefix for all storage keys (default: "wm")
-});
+- `localStorage` for cached history
+- `sessionStorage` for session identity
+- `signalStorage` for reactive state like unread count and connected users
+
+## End-to-end coverage
+
+The end-to-end suite lives in `__tests__/e2e.test.ts` and currently exercises:
+
+- `localStorage`
+- `sessionStorage`
+- `cookieStorage`
+- `memoryStorage`
+- `piniaStorage`
+- `vuexStorage`
+- `secureStorage`
+- `configStorage`
+- `signalStorage`
+- `createServerStorage`
+- cross-adapter isolation
+- method alias consistency (`get` / `getItem`, `set` / `setItem`, and so on)
+
+There are also dedicated test files for the messaging bridge, server namespace behavior, and Node runtime behavior.
+
+## Development
+
+```bash
+pnpm test -- e2e.test.ts
+pnpm test
+pnpm build
 ```
 
-## API
+## Planned adapters
 
-### Identity
-
-```js
-store.userId; // string | null — socket ID assigned by server
-store.setDisplayName("Alice");
-store.getDisplayName(); // "Alice"
-```
-
-### Messaging
-
-```js
-store.send("userId-abc", payload); // direct message
-store.broadcast(payload); // message to all users
-store.joinRoom("userId-bob"); // create / join a private room
-store.sendRoomMessage(payload); // send inside the current room
-```
-
-### History
-
-```js
-// Fetch from server + merge with local cache (deduped, sorted by timestamp)
-const messages = await store.loadHistory();
-
-// Read the local cache without hitting the server
-const cached = store.getCachedHistory();
-
-// Wipe the local cache
-store.clearHistory();
-```
-
-### Reactive state
-
-```js
-store.getUnread(); // number of messages received since last reset
-store.resetUnread(); // reset counter to 0
-store.getUsers(); // string[] of connected user IDs
-store.isConnected(); // boolean
-```
-
-### Subscriptions
-
-All subscribe methods return an **unsubscribe function**.
-
-```js
-const unsub1 = store.onMessage((msg) => {
-  /* WMMessage */
-});
-const unsub2 = store.onUserList((users) => {
-  /* string[] */
-});
-const unsub3 = store.onTyping((userId, isTyping) => {
-  /* boolean */
-});
-
-unsub1(); // stop receiving message events
-```
-
-### Lifecycle
-
-```js
-store.destroy(); // removes all socket listeners and clears subscriber lists
-```
-
-[Back to TOP](#)
-
----
-
-# References
-
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">Window Local storage</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage" target="_blank">Window Session Storage</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie" target="_blank">Document Cookie storage</a></li>
-<li><a href="https://vuex.vuejs.org/" target="_blank">Vuex state management</a></li>
-<li><a href="https://pinia.vuejs.org/" target="_blank">Pinia state management</a></li>
-<li><a href="https://gun.eco/" target="_blank">Gun DB</a></li>
-<hr/>
-
-[Back to TOP](#)
+`idbStorage` and `webqlStorage` are still planned and are not currently exported from the package.
 
 ## Releasing and publishing
 
-This repo ships via GitHub Actions. To cut a release and publish to npm:
+The release workflow builds, tests, and publishes to npm when you push a semver tag.
 
-- Ensure a repository secret named NPM_TOKEN is configured with publish access to the @waelio scope.
-- Bump the version in package.json and commit your changes.
-- Push a semver tag to trigger the release workflow, for example v0.0.116.
+1. Bump the version in `package.json`.
+2. Commit the change.
+3. Push a tag such as `v1.0.11`.
 
-The Release workflow will build, test, and publish to npm if tests pass. You can also publish locally if needed:
+You can also publish locally after a successful build and test run:
 
 ```bash
-# optional: build and test locally first
 pnpm build
 pnpm test
-
-# requires being logged in to npm (npm whoami)
 npm publish --access public
 ```
 
-CI runs on every push and pull request to master/main and tests on Node 18 and 20.
+## References
 
-## GitHub Packages (optional)
-
-Install from GitHub Packages instead of npmjs:
-
-1. Create an .npmrc with:
-
-@waelio:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:\_authToken=YOUR_GITHUB_TOKEN
-
-2. Install:
-
-```bash
-npm i @waelio/ustore
-```
+- [MDN: Window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+- [MDN: Window.sessionStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage)
+- [MDN: Document.cookie](https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie)
+- [Vuex documentation](https://vuex.vuejs.org/)
+- [Pinia documentation](https://pinia.vuejs.org/)
+- [Gun documentation](https://gun.eco/)

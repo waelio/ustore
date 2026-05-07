@@ -9,6 +9,8 @@ import {
   serverStorage,
 } from "../src/server";
 
+jest.mock("@keyv/mongo", () => jest.fn(() => new Map()));
+
 describe("serverStorage", () => {
   test("default server storage supports async get/set/remove", async () => {
     const key = "server:default";

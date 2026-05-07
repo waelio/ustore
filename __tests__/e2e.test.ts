@@ -1,10 +1,11 @@
 /**
  * End-to-end tests for uStore
  *
- * Tests the full CRUD lifecycle (set → has → get → remove → has) for every
- * enabled storage adapter, exercising both the `uStore.<type>` access pattern
- * and the direct named export. Multiple payload types are validated for each
- * adapter to confirm type fidelity.
+ * Tests the full CRUD lifecycle (set → has → get → remove → has) for the
+ * supported in-process adapters, exercising both the `uStore.<type>` access
+ * pattern and the direct named export. Multiple payload types are validated
+ * for each adapter to confirm type fidelity. Network-backed adapters such as
+ * Gun keep their own focused tests.
  */
 
 import { describe, expect, test, beforeEach } from '@jest/globals';
@@ -14,12 +15,16 @@ import {
     sessionStorage,
     cookieStorage,
     memoryStorage,
+    piniaStorage,
+    vuexStorage,
     secureStorage,
     configStorage,
     signalStorage,
 } from '../index';
+import { createServerStorage } from '../src/server';
 
 jest.mock('localforage');
+jest.mock('@keyv/mongo', () => jest.fn(() => new Map()));
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 
@@ -129,6 +134,56 @@ describe('e2e: memoryStorage', () => {
         expect(memoryStorage.get(KEY)).toEqual(value);
         memoryStorage.remove(KEY);
         expect(memoryStorage.has(KEY)).toBe(false);
+    });
+});
+
+// ─── piniaStorage ─────────────────────────────────────────────────────────────
+
+describe('e2e: piniaStorage', () => {
+    beforeEach(() => {
+        uStore.pinia.remove(KEY);
+        piniaStorage.remove(KEY);
+    });
+
+    test.each(PAYLOADS)('uStore.pinia %s payload', (_label, value) => {
+        uStore.pinia.set(KEY, value);
+        expect(uStore.pinia.has(KEY)).toBe(true);
+        expect(uStore.pinia.get(KEY)).toEqual(value);
+        uStore.pinia.remove(KEY);
+        expect(uStore.pinia.has(KEY)).toBe(false);
+    });
+
+    test.each(PAYLOADS)('piniaStorage direct %s payload', (_label, value) => {
+        piniaStorage.set(KEY, value);
+        expect(piniaStorage.has(KEY)).toBe(true);
+        expect(piniaStorage.get(KEY)).toEqual(value);
+        piniaStorage.remove(KEY);
+        expect(piniaStorage.has(KEY)).toBe(false);
+    });
+});
+
+// ─── vuexStorage ──────────────────────────────────────────────────────────────
+
+describe('e2e: vuexStorage', () => {
+    beforeEach(() => {
+        uStore.vuex.remove(KEY);
+        vuexStorage.remove(KEY);
+    });
+
+    test.each(PAYLOADS)('uStore.vuex %s payload', (_label, value) => {
+        uStore.vuex.set(KEY, value);
+        expect(uStore.vuex.has()).toBe(true);
+        expect(uStore.vuex.get()).toEqual(value);
+        uStore.vuex.remove(KEY);
+        expect(uStore.vuex.has()).toBe(false);
+    });
+
+    test.each(PAYLOADS)('vuexStorage direct %s payload', (_label, value) => {
+        vuexStorage.set(KEY, value);
+        expect(vuexStorage.has()).toBe(true);
+        expect(vuexStorage.get()).toEqual(value);
+        vuexStorage.remove(KEY);
+        expect(vuexStorage.has()).toBe(false);
     });
 });
 
@@ -278,5 +333,37 @@ describe('e2e: method alias consistency', () => {
         signalStorage.setItem(ALIAS_KEY, 'b');
         signalStorage.removeItem(ALIAS_KEY);
         expect(signalStorage.hasItem(ALIAS_KEY)).toBe(false);
+    });
+});
+
+describe('e2e: serverStorage', () => {
+    test('createServerStorage supports async CRUD lifecycle', async () => {
+        const store = createServerStorage({
+            namespace: 'e2e-server-crud',
+            store: new Map(),
+        });
+
+        await store.remove(KEY);
+        await store.set(KEY, OBJ_VAL);
+
+        expect(await store.has(KEY)).toBe(true);
+        expect(await store.get(KEY)).toEqual(OBJ_VAL);
+
+        await store.remove(KEY);
+        expect(await store.has(KEY)).toBe(false);
+    });
+
+    test('serverStorage aliases and clear stay consistent', async () => {
+        const store = createServerStorage({
+            namespace: 'e2e-server-aliases',
+            store: new Map(),
+        });
+
+        await store.setItem(KEY, STR_VAL);
+        expect(await store.getItem(KEY)).toEqual(STR_VAL);
+        expect(await store.hasItem(KEY)).toBe(true);
+
+        await store.clear();
+        expect(await store.has(KEY)).toBe(false);
     });
 });
