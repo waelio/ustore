@@ -14,31 +14,18 @@
     "target": "ES2020",
     "module": "ESNext",
 
-    "esModuleInterop": true, /* Enables intero between CommonJS and ES */
-    "lib": [
-      "dom",
-      "es6"
-    ],
+    "esModuleInterop": true /* Enables intero between CommonJS and ES */,
+    "lib": ["dom", "es6"],
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
-"declarationDir": "./types",
-"strict": true,
-"pretty": true,
+    "declarationDir": "./types",
+    "strict": true,
+    "pretty": true,
     "removeComments": true,
     "sourceMap": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "typeRoots": ["node_modules/@types"]
   },
   "transformIgnorePatterns": "true",
-  "include": [
-    "index",
-    "src/**/*",
-    "/types/**/*",
-    "/config/**/*"
-  ],
-  "exclude": [
-    "lib",
-    "node_modules"
-  ]
+  "include": ["index", "src/**/*", "/types/**/*", "/config/**/*"],
+  "exclude": ["lib", "node_modules"]
 }

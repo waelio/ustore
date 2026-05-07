@@ -66,6 +66,47 @@ uStore.local.set("key", "value");
 uStore.gun.set("room", { hello: "world" });
 ```
 
+## Server-side storage (Node)
+
+For server runtimes, use the dedicated Node subpath:
+
+```bash
+npm install @waelio/ustore
+```
+
+```ts
+import { createServerStorage } from "@waelio/ustore/server";
+
+const store = createServerStorage({ namespace: "sessions" });
+
+await store.set("session:waelio", { role: "owner", authenticated: true });
+console.log(await store.get("session:waelio"));
+// { role: 'owner', authenticated: true }
+```
+
+The default server storage uses an in-memory `Keyv` store, which is great for
+tests and single-process servers. For persistent server-side storage, provide a
+custom `Keyv` instance or store adapter.
+
+```ts
+import Keyv from "keyv";
+import { createServerStorage } from "@waelio/ustore/server";
+
+const store = createServerStorage({
+  keyv: new Keyv({ namespace: "waelio-auth", store: new Map() }),
+});
+```
+
+MongoDB is also supported out of the box through the bundled Keyv adapter:
+
+```ts
+import { createMongoServerStorage } from "@waelio/ustore/server";
+
+const store = createMongoServerStorage(process.env.MONGO_URL!, {
+  namespace: "waelio-auth",
+});
+```
+
 <hr />
 
 ## uStore project is a plugin I'v wanted for a while, the ability to have my own state-management in my projects.
@@ -89,6 +130,7 @@ uStore.gun.set("room", { hello: "world" });
 <li>gun: <a href="#gun">gun</a></li>
 <li>memory: <a href="#memory">memory</a></li>
 <li>secure: <a href="#secure">secure</a></li>
+<li>server: <a href="#server">server</a></li>
 <li>config: <a href="#config">config</a></li>
 <li>signal: <a href="#signal">signal</a></li>
 <li>idb: <a href="#idb">index Db -pending</a></li>
@@ -269,6 +311,23 @@ describe("Secure storage", () => {
     expect(secureStorage.getItem(label)).toEqual(payload);
   });
 });
+```
+
+[Back to TOP](#)
+
+# server
+
+Node/server-side storage powered by `Keyv`.
+
+```ts
+import { createServerStorage } from "@waelio/ustore/server";
+
+const store = createServerStorage({ namespace: "server-demo" });
+
+await store.set("auth:token", "signed-value");
+console.log(await store.getItem("auth:token")); // "signed-value"
+console.log(await store.has("auth:token")); // true
+await store.remove("auth:token");
 ```
 
 [Back to TOP](#)
