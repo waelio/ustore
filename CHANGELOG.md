@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.13] - 2026-05-08
+
+- Docs: rewrote `README.md` from scratch for clearer installation, adapter coverage, server usage, runtime notes, and messaging examples.
+- Packaging: no runtime code changes; release is documentation-focused.
+
 ## [1.0.12] - 2026-05-08
 
 - Metadata: normalized `homepage` and `bugs.url` to the canonical `waelio/ustore` repository path.
