@@ -2,7 +2,7 @@
   "name": "@waelio/ustore",
   "version": "1.0.11",
   "description": "Universal Storage",
-  "homepage": "https://github.com/waelio/uStore#readme",
+  "homepage": "https://github.com/waelio/ustore#readme",
   "keywords": [
     "Store",
     "localStorage",
@@ -92,7 +92,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/waelio/uStore/issues"
+    "url": "https://github.com/waelio/ustore/issues"
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
