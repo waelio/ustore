@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.12] - 2026-05-08
+
+- Metadata: normalized `homepage` and `bugs.url` to the canonical `waelio/ustore` repository path.
+- Packaging: no runtime code changes; release is metadata-only.
+
 ## [1.0.6] - 2025-11-05
 
 - Docs: Added Getting Started to README; clarified Node ESM usage note.
