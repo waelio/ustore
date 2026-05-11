@@ -397,3 +397,6 @@ npm publish --access public
 - [Vuex documentation](https://vuex.vuejs.org/)
 - [Pinia documentation](https://pinia.vuejs.org/)
 - [Gun documentation](https://gun.eco/)
+
+- [https://waelio.com/packages/@waelio/ustore](https://waelio.com/packages/@waelio/ustore)
+
