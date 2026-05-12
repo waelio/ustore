@@ -9,7 +9,10 @@ export declare enum StoreTypes {
     solid = "solidStorage",
     idb = "idbStorage",
     webql = "webqlStorage",
-    rxjs = "rxjsStorage"
+    rxjs = "rxjsStorage",
+    secure = "secureStorage",
+    config = "configStorage",
+    signal = "signalStorage"
 }
 export interface StoreOptions {
     type?: string;
@@ -25,7 +28,10 @@ export declare enum StorePlugins {
     solid = "solidStorage",
     idb = "idbStorage",
     webql = "webqlStorage",
-    rxjs = "rxjsStorage"
+    rxjs = "rxjsStorage",
+    secure = "secureStorage",
+    config = "configStorage",
+    signal = "signalStorage"
 }
 export interface GetItem {
     (key: string): string | object | string[] | object[] | null | boolean;

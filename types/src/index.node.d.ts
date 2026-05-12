@@ -47,6 +47,7 @@ export { sessionStorage };
 export { cookieStorage };
 export { memoryStorage };
 export { vuexStorage };
+export { piniaStorage };
 export { gunStorage };
 export { secureStorage };
 export { configStorage };
