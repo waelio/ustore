@@ -7,9 +7,10 @@ import { piniaStorage } from "./_stores/piniaStorage";
 import { gunStorage } from "./_stores/gunStorage";
 import { secureStorage } from "./_stores/secureStorage";
 import { configStorage } from "./_stores/configStorage";
-// import { idbStorage } from "./_stores/idbStorage";
-// import { webqlStorage } from "./_stores/webqlStorage";
+import { idbStorage } from "./_stores/idbStorage";
+import { webqlStorage } from "./_stores/webqlStorage";
 import { signalStorage } from "./_stores/signalStorage";
+import { rxjsStorage } from "./_stores/rxjsStorage";
 
 export type Tconfig = typeof configStorage;
 export type Tcookie = typeof cookieStorage;
@@ -20,9 +21,10 @@ export type Tpinia = typeof piniaStorage;
 export type Tsecure = typeof secureStorage;
 export type Tsession = typeof sessionStorage;
 export type Tvuex = typeof vuexStorage;
-// export type Tidb = typeof idbStorage;
-// export type Twebql = typeof webqlStorage;
+export type Tidb = typeof idbStorage;
+export type Twebql = typeof webqlStorage;
 export type Tsignal = typeof signalStorage;
+export type Trxjs = typeof rxjsStorage;
 
 export type TypeUstore = {
   config: Tconfig;
@@ -34,9 +36,10 @@ export type TypeUstore = {
   secure: Tsecure;
   session: Tsession;
   vuex: Tvuex;
-  // idb?: Tidb;
-  // webql?: Twebql;
+  idb?: Tidb;
+  webql?: Twebql;
   signal: Tsignal;
+  rxjs: Trxjs;
 };
 
 export const uStore: TypeUstore = {
@@ -49,9 +52,10 @@ export const uStore: TypeUstore = {
   secure: secureStorage,
   session: sessionStorage,
   vuex: vuexStorage,
-  // idb: idbStorage,
-  // webql: webqlStorage,
+  idb: idbStorage,
+  webql: webqlStorage,
   signal: signalStorage,
+  rxjs: rxjsStorage,
 };
 
 export default uStore;
@@ -65,9 +69,10 @@ export { piniaStorage };
 export { gunStorage };
 export { secureStorage };
 export { configStorage };
-// export { idbStorage };
-// export { webqlStorage };
+export { idbStorage };
+export { webqlStorage };
 export { signalStorage };
+export { rxjsStorage };
 
 export { createMessagingStore } from "./messaging/index";
 export type {

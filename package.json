@@ -121,7 +121,8 @@
     "store2": "2.14.4",
     "vue": "3.2.47",
     "vuex": "4.1.0",
-    "waelio-utils": "5.0.1"
+    "waelio-utils": "5.0.1",
+    "rxjs": "^7.8.1"
   },
   "overrides": {
     "@vue/reactivity": "3.2.47",

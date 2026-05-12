@@ -7,6 +7,7 @@ export enum StoreTypes {
   pinia = "piniaStorage",
   gun = "gunStorage",
   solid = "solidStorage",
+  rxjs = "rxjsStorage",
 }
 export interface StoreOptions {
   type?: string;
@@ -20,6 +21,7 @@ export enum StorePlugins {
   pinia = "piniaStorage",
   gun = "gunStorage",
   solid = "solidStorage",
+  rxjs = "rxjsStorage",
 }
 export interface GetItem {
   (key: string): string | object | string[] | object[] | null | boolean;

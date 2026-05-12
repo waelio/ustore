@@ -8,6 +8,7 @@ import { gunStorage } from "./_stores/gunStorage"; // avoid eager import for nod
 import { secureStorage } from "./_stores/secureStorage";
 import { configStorage } from "./_stores/configStorage";
 import { signalStorage } from "./_stores/signalStorage";
+import { rxjsStorage } from "./_stores/rxjsStorage";
 
 export type Tconfig = typeof configStorage;
 export type Tcookie = typeof cookieStorage;
@@ -18,6 +19,7 @@ export type Tsecure = typeof secureStorage;
 export type Tsession = typeof sessionStorage;
 export type Tvuex = typeof vuexStorage;
 export type Tsignal = typeof signalStorage;
+export type Trxjs = typeof rxjsStorage;
 
 export type TypeUstoreNode = {
   config: Tconfig;
@@ -30,6 +32,7 @@ export type TypeUstoreNode = {
   session: Tsession;
   vuex: Tvuex;
   signal: Tsignal;
+  rxjs: Trxjs;
 };
 
 // Provide a safe placeholder for gun to avoid import-time failures in Node ESM
@@ -61,6 +64,7 @@ export const uStore: TypeUstoreNode & { gun: any } = {
   session: sessionStorage,
   vuex: vuexStorage,
   signal: signalStorage,
+  rxjs: rxjsStorage,
 };
 
 export default uStore;
@@ -74,6 +78,7 @@ export { gunStorage };
 export { secureStorage };
 export { configStorage };
 export { signalStorage };
+export { rxjsStorage };
 
 if (typeof window !== "undefined") {
   (window as any)["uStore"] = uStore;
