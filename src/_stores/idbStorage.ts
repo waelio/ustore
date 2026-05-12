@@ -3,7 +3,10 @@ import memoryStorage from "./memoryStorage";
 const NAME = "idbStorage";
 let store: any;
 let idbStorage: any;
-if (typeof localforage.supports === "function" && localforage.supports(localforage.INDEXEDDB)) {
+if (
+  typeof localforage.supports === "function" &&
+  localforage.supports(localforage.INDEXEDDB)
+) {
   localforage.config({
     driver: [localforage.INDEXEDDB, localforage.LOCALSTORAGE],
     name: NAME,

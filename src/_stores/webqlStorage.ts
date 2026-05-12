@@ -4,7 +4,10 @@ import memoryStorage from "./memoryStorage";
 const NAME = "webqlStorage";
 let store: any;
 let webqlStorage: any;
-if (typeof localforage.supports === "function" && localforage.supports(localforage.INDEXEDDB)) {
+if (
+  typeof localforage.supports === "function" &&
+  localforage.supports(localforage.INDEXEDDB)
+) {
   localforage.config({
     driver: [localforage.WEBSQL, localforage.LOCALSTORAGE],
     name: NAME,
