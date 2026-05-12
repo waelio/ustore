@@ -11,8 +11,8 @@ import { idbStorage } from "./src/_stores/idbStorage";
 import { webqlStorage } from "./src/_stores/webqlStorage";
 import { signalStorage } from "./src/_stores/signalStorage";
 import { rxjsStorage } from "./src/_stores/rxjsStorage";
-import { createPinia, defineStore } from "pinia";
-import { createApp } from "vue";
+// import { createPinia, defineStore } from "pinia";
+// import { createApp } from "vue";
 
 import uStore from './src';
 
