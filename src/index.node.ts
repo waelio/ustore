@@ -7,6 +7,8 @@ import { piniaStorage } from "./_stores/piniaStorage";
 import { gunStorage } from "./_stores/gunStorage"; // avoid eager import for node ESM
 import { secureStorage } from "./_stores/secureStorage";
 import { configStorage } from "./_stores/configStorage";
+import { idbStorage } from "./_stores/idbStorage";
+import { webqlStorage } from "./_stores/webqlStorage";
 import { signalStorage } from "./_stores/signalStorage";
 import { rxjsStorage } from "./_stores/rxjsStorage";
 
@@ -18,6 +20,8 @@ export type Tpinia = typeof piniaStorage;
 export type Tsecure = typeof secureStorage;
 export type Tsession = typeof sessionStorage;
 export type Tvuex = typeof vuexStorage;
+export type Tidb = typeof idbStorage;
+export type Twebql = typeof webqlStorage;
 export type Tsignal = typeof signalStorage;
 export type Trxjs = typeof rxjsStorage;
 
@@ -31,6 +35,8 @@ export type TypeUstoreNode = {
   secure: Tsecure;
   session: Tsession;
   vuex: Tvuex;
+  idb?: Tidb;
+  webql?: Twebql;
   signal: Tsignal;
   rxjs: Trxjs;
 };
@@ -63,6 +69,8 @@ export const uStore: TypeUstoreNode & { gun: any } = {
   secure: secureStorage,
   session: sessionStorage,
   vuex: vuexStorage,
+  idb: idbStorage,
+  webql: webqlStorage,
   signal: signalStorage,
   rxjs: rxjsStorage,
 };
@@ -77,6 +85,8 @@ export { vuexStorage };
 export { gunStorage };
 export { secureStorage };
 export { configStorage };
+export { idbStorage };
+export { webqlStorage };
 export { signalStorage };
 export { rxjsStorage };
 

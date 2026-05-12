@@ -1,6 +1,5 @@
-import { ref, computed, Ref } from "vue";
 export declare class UCORE {
-    _STORE: Ref<any>;
+    _STORE: any;
     constructor(initial?: Record<string, any>);
     get(key?: string): any;
     getItem(key: string): any;
@@ -11,5 +10,4 @@ export declare class UCORE {
     has(key: string): boolean;
     private _buildNestedKey;
 }
-export { ref, computed };
 //# sourceMappingURL=index.d.ts.map

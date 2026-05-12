@@ -7,7 +7,10 @@ import { piniaStorage } from "./_stores/piniaStorage";
 import { gunStorage } from "./_stores/gunStorage";
 import { secureStorage } from "./_stores/secureStorage";
 import { configStorage } from "./_stores/configStorage";
+import { idbStorage } from "./_stores/idbStorage";
+import { webqlStorage } from "./_stores/webqlStorage";
 import { signalStorage } from "./_stores/signalStorage";
+import { rxjsStorage } from "./_stores/rxjsStorage";
 export type Tconfig = typeof configStorage;
 export type Tcookie = typeof cookieStorage;
 export type Tlocal = typeof localStorage;
@@ -16,7 +19,10 @@ export type Tpinia = typeof piniaStorage;
 export type Tsecure = typeof secureStorage;
 export type Tsession = typeof sessionStorage;
 export type Tvuex = typeof vuexStorage;
+export type Tidb = typeof idbStorage;
+export type Twebql = typeof webqlStorage;
 export type Tsignal = typeof signalStorage;
+export type Trxjs = typeof rxjsStorage;
 export type TypeUstoreNode = {
     config: Tconfig;
     cookie: Tcookie;
@@ -27,7 +33,10 @@ export type TypeUstoreNode = {
     secure: Tsecure;
     session: Tsession;
     vuex: Tvuex;
+    idb?: Tidb;
+    webql?: Twebql;
     signal: Tsignal;
+    rxjs: Trxjs;
 };
 export declare const uStore: TypeUstoreNode & {
     gun: any;
@@ -41,5 +50,8 @@ export { vuexStorage };
 export { gunStorage };
 export { secureStorage };
 export { configStorage };
+export { idbStorage };
+export { webqlStorage };
 export { signalStorage };
+export { rxjsStorage };
 //# sourceMappingURL=index.node.d.ts.map

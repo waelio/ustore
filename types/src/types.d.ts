@@ -6,7 +6,10 @@ export declare enum StoreTypes {
     vuex = "vuexStorage",
     pinia = "piniaStorage",
     gun = "gunStorage",
-    solid = "solidStorage"
+    solid = "solidStorage",
+    idb = "idbStorage",
+    webql = "webqlStorage",
+    rxjs = "rxjsStorage"
 }
 export interface StoreOptions {
     type?: string;
@@ -19,7 +22,10 @@ export declare enum StorePlugins {
     vuex = "vuexStorage",
     pinia = "piniaStorage",
     gun = "gunStorage",
-    solid = "solidStorage"
+    solid = "solidStorage",
+    idb = "idbStorage",
+    webql = "webqlStorage",
+    rxjs = "rxjsStorage"
 }
 export interface GetItem {
     (key: string): string | object | string[] | object[] | null | boolean;

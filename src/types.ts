@@ -7,6 +7,8 @@ export enum StoreTypes {
   pinia = "piniaStorage",
   gun = "gunStorage",
   solid = "solidStorage",
+  idb = "idbStorage",
+  webql = "webqlStorage",
   rxjs = "rxjsStorage",
 }
 export interface StoreOptions {
@@ -21,6 +23,8 @@ export enum StorePlugins {
   pinia = "piniaStorage",
   gun = "gunStorage",
   solid = "solidStorage",
+  idb = "idbStorage",
+  webql = "webqlStorage",
   rxjs = "rxjsStorage",
 }
 export interface GetItem {

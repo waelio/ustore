@@ -52,7 +52,7 @@ export const uStore = {
   secure: secureStorage,
   session: sessionStorage,
   vuex: vuexStorage,
-  idb: idStorage,
+  idb: idbStorage,
   webql: webqlStorage,
   signal: signalStorage,
   rxjs: rxjsStorage,
