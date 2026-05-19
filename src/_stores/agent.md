@@ -360,3 +360,43 @@ import { createMessagingStore } from "@waelio/ustore";
 const chat = createMessagingStore(socket, { historyLimit: 100 });
 chat.send("userId", "hello");
 ```
+
+---
+
+## 14 — MCP Integration (Model Context Protocol)
+
+uStore is part of the broader **Waelio ecosystem**, which uses MCP to connect AI agents with local tooling.
+
+### Global MCP config
+
+Located at `/Users/waelio/.gemini/antigravity/mcp_config.json`.
+
+### Registered MCP Servers
+
+| Server | Transport | Purpose |
+|---|---|---|
+| `github` | `npx @modelcontextprotocol/server-github` | GitHub API — repos, issues, PRs, file ops |
+| `waelioBuilder` | `npx tsx /Users/waelio/Code/GitHub/waelio/builder/src/mcp-server.ts` | Project scaffolding + local AI code generation |
+
+### Builder MCP Tools
+
+The `waelioBuilder` server (backed by Ollama) exposes:
+
+| Tool | Description |
+|---|---|
+| `scaffold_project` | Scaffolds new projects from blueprint names into the builder's `projects/` directory |
+| `generate_code` | Generates code via local Ollama model from a natural-language description |
+| `review_code` | Reviews code and suggests improvements via local Ollama |
+
+**Environment variables:**
+- `OLLAMA_URL` → `http://127.0.0.1:11434`
+- `OLLAMA_MODEL` → `llama3:70b` (configurable, default fallback `qwen3:8b`)
+
+### How uStore fits in
+
+- **`signalStorage`** — powers reactive connection state, unread counts, and user presence across MCP-connected clients.
+- **`localStorage` / `sessionStorage`** — caches message history and session identity for the messaging bridge.
+- **`configStorage`** — stores per-environment config (`client:apiUrl`, `server:port`) consumed by scaffolded projects.
+- **`serverStorage`** (Keyv) — server-side session and auth state for builder backends.
+
+The `createMessagingStore` bridge can relay messages between MCP tool invocations and connected Socket.io clients, enabling real-time feedback from scaffold/generate operations.
