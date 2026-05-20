@@ -1,5 +1,4 @@
-declare let store: any;
-export { store as webqlStorage };
-declare const _default: any;
-export default _default;
+declare let webqlStorage: any;
+export { webqlStorage };
+export default webqlStorage;
 //# sourceMappingURL=webqlStorage.d.ts.map
