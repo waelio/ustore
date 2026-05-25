@@ -15,7 +15,6 @@
   "main": "./lib/cjs/src/index.js",
   "module": "./lib/esm/src/index.js",
   "types": "./types/index.d.ts",
-  "public": "true",
   "publishConfig": {
     "access": "public"
   },
@@ -54,7 +53,7 @@
     "lib/**/*",
     "types/**/*",
     "index.*",
-    "readme"
+    "README.md"
   ],
   "eslintConfig": {
     "env": {
