@@ -1,3 +1,4 @@
+import type { WaelioSocket } from "@waelio/sockets";
 export interface WMMessage {
     _id: string;
     type: "route" | "broadcast" | "room-message";
@@ -20,6 +21,8 @@ export interface MessagingStore {
     broadcast(payload: unknown): void;
     joinRoom(partnerId: string): void;
     sendRoomMessage(payload: unknown): void;
+    startTyping(): void;
+    stopTyping(): void;
     loadHistory(): Promise<WMMessage[]>;
     getCachedHistory(): WMMessage[];
     clearHistory(): void;
@@ -32,5 +35,5 @@ export interface MessagingStore {
     onTyping(cb: (userId: string, isTyping: boolean) => void): () => void;
     destroy(): void;
 }
-export declare function createMessagingStore(socket: any, options?: MessagingStoreOptions): MessagingStore;
+export declare function createMessagingStore(socket: WaelioSocket, options?: MessagingStoreOptions): MessagingStore;
 //# sourceMappingURL=index.d.ts.map
