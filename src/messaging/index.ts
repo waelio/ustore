@@ -3,7 +3,7 @@
  *
  * Client-side bridge between @waelio/ustore and @waelio/messaging.
  *
- * Accepts a socket.io-client instance connected to a waelio-messaging server
+ * Accepts a WaelioSocket instance connected to a waelio-messaging server
  * and wires its events to uStore adapters:
  *
  *   localStorage   → persists message history across page refreshes
@@ -11,16 +11,17 @@
  *   signalStorage  → reactive in-memory state (unread count, user list, typing)
  *
  * Usage:
- *   import { io } from 'socket.io-client';
+ *   import { createSocket } from '@waelio/sockets';
  *   import { createMessagingStore } from '@waelio/ustore/messaging';
  *
- *   const socket = io('https://waelio-messaging.onrender.com');
+ *   const socket = createSocket('wss://waelio-messaging.onrender.com');
  *   const store  = createMessagingStore(socket);
  *
  *   store.onMessage((msg) => console.log(msg));
  *   store.send('userId-123', 'hello!');
  */
 
+import type { WaelioSocket } from "@waelio/sockets";
 import { localStorage } from "../_stores/localStorage";
 import { sessionStorage } from "../_stores/sessionStorage";
 import { signalStorage } from "../_stores/signalStorage";
@@ -63,11 +64,15 @@ export interface MessagingStore {
   joinRoom(partnerId: string): void;
   /** Send a message inside the current room (requires joinRoom first). */
   sendRoomMessage(payload: unknown): void;
+  /** Signal that the local user started typing. */
+  startTyping(): void;
+  /** Signal that the local user stopped typing. */
+  stopTyping(): void;
 
   // ── History ────────────────────────────────────────────────────────────────
   /**
-   * Fetch server-side history and merge it into the local cache.
-   * Resolves with the merged, timestamp-sorted array.
+   * Request server-side history. Resolves when the server responds.
+   * Merges with local cache and returns the combined, sorted array.
    */
   loadHistory(): Promise<WMMessage[]>;
   /** Return the locally cached messages without hitting the server. */
@@ -86,13 +91,9 @@ export interface MessagingStore {
   isConnected(): boolean;
 
   // ── Event subscriptions ────────────────────────────────────────────────────
-  /**
-   * Subscribe to incoming messages. Returns an unsubscribe function.
-   */
+  /** Subscribe to incoming messages. Returns an unsubscribe function. */
   onMessage(cb: (msg: WMMessage) => void): () => void;
-  /**
-   * Subscribe to user-list updates. Returns an unsubscribe function.
-   */
+  /** Subscribe to user-list updates. Returns an unsubscribe function. */
   onUserList(cb: (users: string[]) => void): () => void;
   /**
    * Subscribe to typing events. `isTyping` is true when started, false when stopped.
@@ -115,13 +116,13 @@ const signalKey = (prefix: string, k: string) => `${prefix}_state_${k}`;
 // ─── Factory ───────────────────────────────────────────────────────────────────
 
 /**
- * Wire a socket.io-client socket to uStore adapters.
+ * Wire a WaelioSocket to uStore adapters.
  *
- * @param socket   A connected (or connecting) socket.io-client instance.
+ * @param socket   A connected (or connecting) WaelioSocket instance from @waelio/sockets.
  * @param options  Optional configuration.
  */
 export function createMessagingStore(
-  socket: any,
+  socket: WaelioSocket,
   options: MessagingStoreOptions = {}
 ): MessagingStore {
   const { historyLimit = 200, storagePrefix = "wm" } = options;
@@ -131,6 +132,9 @@ export function createMessagingStore(
     (sessionStorage.get(SESSION_USER_ID_KEY) as string) || null;
   let connected = false;
   let roomId: string | null = null;
+
+  // Pending history resolve callbacks
+  const historyResolvers: Array<(msgs: WMMessage[]) => void> = [];
 
   const messageListeners: Array<(msg: WMMessage) => void> = [];
   const userListListeners: Array<(users: string[]) => void> = [];
@@ -169,7 +173,9 @@ export function createMessagingStore(
 
   // ── Socket event handlers ──────────────────────────────────────────────────
 
-  function handleRegister({ id }: { id: string }) {
+  function handleRegister(msg: any) {
+    const id: string = msg?.id;
+    if (!id) return;
     userId = id;
     sessionStorage.set(SESSION_USER_ID_KEY, id);
     connected = true;
@@ -177,28 +183,69 @@ export function createMessagingStore(
     setState("unread", 0);
   }
 
-  function handleUserList({ users }: { users: string[] }) {
+  function handleUserList(msg: any) {
+    const users: string[] = Array.isArray(msg?.users) ? msg.users : [];
     setState("users", users);
     userListListeners.forEach((cb) => cb(users));
   }
 
-  function handleMessageCreated(msg: WMMessage) {
-    appendToCache(msg);
+  function handleMessage(msg: any) {
+    // Native WS server sends { type: 'message', from, payload, ... }
+    const wmMsg: WMMessage = {
+      _id: msg?.id ?? crypto.randomUUID(),
+      type: msg?.isBroadcast ? "broadcast" : msg?.roomId ? "room-message" : "route",
+      payload: msg?.payload,
+      senderId: msg?.from ?? "unknown",
+      recipientId: msg?.to ?? null,
+      roomId: msg?.roomId ?? null,
+      isBroadcast: !!msg?.isBroadcast,
+      timestamp: msg?.ts ? new Date(msg.ts).toISOString() : new Date().toISOString(),
+    };
+    appendToCache(wmMsg);
     const current = (getState("unread") as number) ?? 0;
     setState("unread", current + 1);
-    messageListeners.forEach((cb) => cb(msg));
+    messageListeners.forEach((cb) => cb(wmMsg));
   }
 
-  function handleUserTyping({ id }: { id: string }) {
-    typingListeners.forEach((cb) => cb(id, true));
+  function handleHistory(msg: any) {
+    const serverMsgs: WMMessage[] = Array.isArray(msg?.history)
+      ? msg.history
+      : Array.isArray(msg?.messages)
+      ? msg.messages
+      : [];
+
+    const cached = getCachedHistory();
+    const cachedIds = new Set(cached.map((m) => m._id));
+    const merged = [...cached];
+
+    serverMsgs.forEach((m) => {
+      if (!cachedIds.has(m._id)) merged.push(m);
+    });
+
+    merged.sort(
+      (a, b) =>
+        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+    );
+
+    const limited = merged.slice(-historyLimit);
+    localStorage.set(currentHistoryKey(), limited);
+
+    // Resolve any pending loadHistory() promises
+    historyResolvers.splice(0).forEach((resolve) => resolve(limited));
   }
 
-  function handleUserStoppedTyping({ id }: { id: string }) {
-    typingListeners.forEach((cb) => cb(id, false));
+  function handleUserTyping(msg: any) {
+    const id: string = msg?.id ?? "";
+    if (id) typingListeners.forEach((cb) => cb(id, true));
   }
 
-  function handleRoomCreated({ roomId: rid }: { roomId: string }) {
-    roomId = rid;
+  function handleUserStoppedTyping(msg: any) {
+    const id: string = msg?.id ?? "";
+    if (id) typingListeners.forEach((cb) => cb(id, false));
+  }
+
+  function handleRoomJoined(msg: any) {
+    roomId = msg?.roomId ?? null;
   }
 
   function handleDisconnect() {
@@ -206,14 +253,19 @@ export function createMessagingStore(
     setState("connected", false);
   }
 
-  // Attach all listeners
+  // Attach all listeners using native WaelioSocket .on()
   socket.on("register-success", handleRegister);
+  socket.on("server:id", handleRegister);         // @waelio/messaging server uses register-success; MessagingHub uses server:id
   socket.on("user-list", handleUserList);
-  socket.on("messages created", handleMessageCreated);
+  socket.on("message", handleMessage);             // MessagingHub sends type:'message'
+  socket.on("chat:message", handleMessage);        // socket-server.ts sends type:'chat:message'
+  socket.on("message-history", handleHistory);
+  socket.on("history", handleHistory);
   socket.on("user-typing", handleUserTyping);
   socket.on("user-stopped-typing", handleUserStoppedTyping);
-  socket.on("rooms created", handleRoomCreated);
-  socket.on("disconnect", handleDisconnect);
+  socket.on("joined-room", handleRoomJoined);
+
+  socket.onClose(handleDisconnect);
 
   // ── Public API ─────────────────────────────────────────────────────────────
 
@@ -231,43 +283,34 @@ export function createMessagingStore(
     },
 
     send(to: string, payload: unknown) {
-      socket.emit("messages::create", { type: "route", to, payload });
+      socket.send({ type: "route", to, payload });
     },
 
     broadcast(payload: unknown) {
-      socket.emit("messages::create", { type: "broadcast", payload });
+      socket.send({ type: "broadcast", payload });
     },
 
     joinRoom(partnerId: string) {
-      socket.emit("rooms::create", { with: partnerId });
+      socket.send({ type: "join-room", with: partnerId });
     },
 
     sendRoomMessage(payload: unknown) {
       if (!roomId) throw new Error("Not in a room — call joinRoom() first.");
-      socket.emit("messages::create", { type: "room-message", payload });
+      socket.send({ type: "room-message", payload });
+    },
+
+    startTyping() {
+      socket.send({ type: "start-typing" });
+    },
+
+    stopTyping() {
+      socket.send({ type: "stop-typing" });
     },
 
     loadHistory(): Promise<WMMessage[]> {
       return new Promise((resolve) => {
-        socket.emit("messages::find", {}, (msgs: WMMessage[]) => {
-          // Merge server history with local cache, deduplicated by _id
-          const cached = getCachedHistory();
-          const cachedIds = new Set(cached.map((m) => m._id));
-          const merged = [...cached];
-
-          msgs.forEach((m) => {
-            if (!cachedIds.has(m._id)) merged.push(m);
-          });
-
-          merged.sort(
-            (a, b) =>
-              new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-          );
-
-          const limited = merged.slice(-historyLimit);
-          localStorage.set(currentHistoryKey(), limited);
-          resolve(limited);
-        });
+        historyResolvers.push(resolve);
+        socket.send({ type: "get-history" });
       });
     },
 
@@ -319,12 +362,15 @@ export function createMessagingStore(
 
     destroy() {
       socket.off("register-success", handleRegister);
+      socket.off("server:id", handleRegister);
       socket.off("user-list", handleUserList);
-      socket.off("messages created", handleMessageCreated);
+      socket.off("message", handleMessage);
+      socket.off("chat:message", handleMessage);
+      socket.off("message-history", handleHistory);
+      socket.off("history", handleHistory);
       socket.off("user-typing", handleUserTyping);
       socket.off("user-stopped-typing", handleUserStoppedTyping);
-      socket.off("rooms created", handleRoomCreated);
-      socket.off("disconnect", handleDisconnect);
+      socket.off("joined-room", handleRoomJoined);
       messageListeners.length = 0;
       userListListeners.length = 0;
       typingListeners.length = 0;

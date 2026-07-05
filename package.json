@@ -1,6 +1,6 @@
 {
   "name": "@waelio/ustore",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Universal Storage",
   "homepage": "https://github.com/waelio/ustore#readme",
   "keywords": [
@@ -109,18 +109,19 @@
   },
   "dependencies": {
     "@keyv/mongo": "^3.0.1",
+    "@waelio/sockets": "^1.0.0",
     "babel-plugin-transform-require-context": "^0.1.1",
     "browserify": "17.0.1",
     "gun": "0.2020.1241",
     "keyv": "^5.2.1",
     "localforage": "^1.10.0",
     "localforage-driver-memory": "^1.0.5",
+    "rxjs": "^7.8.1",
     "solid-js": "^1.7.6",
     "store2": "2.14.4",
     "vue": "3.2.47",
     "vuex": "4.1.0",
-    "waelio-utils": "5.0.1",
-    "rxjs": "^7.8.1"
+    "waelio-utils": "5.0.1"
   },
   "overrides": {
     "@vue/reactivity": "3.2.47",
