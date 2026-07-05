@@ -193,13 +193,19 @@ export function createMessagingStore(
     // Native WS server sends { type: 'message', from, payload, ... }
     const wmMsg: WMMessage = {
       _id: msg?.id ?? crypto.randomUUID(),
-      type: msg?.isBroadcast ? "broadcast" : msg?.roomId ? "room-message" : "route",
+      type: msg?.isBroadcast
+        ? "broadcast"
+        : msg?.roomId
+        ? "room-message"
+        : "route",
       payload: msg?.payload,
       senderId: msg?.from ?? "unknown",
       recipientId: msg?.to ?? null,
       roomId: msg?.roomId ?? null,
       isBroadcast: !!msg?.isBroadcast,
-      timestamp: msg?.ts ? new Date(msg.ts).toISOString() : new Date().toISOString(),
+      timestamp: msg?.ts
+        ? new Date(msg.ts).toISOString()
+        : new Date().toISOString(),
     };
     appendToCache(wmMsg);
     const current = (getState("unread") as number) ?? 0;
@@ -255,10 +261,10 @@ export function createMessagingStore(
 
   // Attach all listeners using native WaelioSocket .on()
   socket.on("register-success", handleRegister);
-  socket.on("server:id", handleRegister);         // @waelio/messaging server uses register-success; MessagingHub uses server:id
+  socket.on("server:id", handleRegister); // @waelio/messaging server uses register-success; MessagingHub uses server:id
   socket.on("user-list", handleUserList);
-  socket.on("message", handleMessage);             // MessagingHub sends type:'message'
-  socket.on("chat:message", handleMessage);        // socket-server.ts sends type:'chat:message'
+  socket.on("message", handleMessage); // MessagingHub sends type:'message'
+  socket.on("chat:message", handleMessage); // socket-server.ts sends type:'chat:message'
   socket.on("message-history", handleHistory);
   socket.on("history", handleHistory);
   socket.on("user-typing", handleUserTyping);
